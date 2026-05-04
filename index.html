@@ -2428,16 +2428,10 @@
  overflow: visible !important;
  text-overflow: clip !important;
  }
- .leave-stats-content > .leave-stats-card:first-child .leave-stat-label::after {
- content: "";
- }
  }
 
  /* === 修正：假別統計資訊預設收合，移除展開滑動感以改善手機效能 === */
- .leave-stats-panel > .section-header-toggle {
- cursor: pointer !important;
- user-select: none !important;
- }
+ .leave-stats-panel > .section-header-toggle { cursor: pointer !important; user-select: none !important; }
  .leave-stats-panel .leave-stats-content {
  display: none !important;
  max-height: none !important;
@@ -2457,22 +2451,15 @@
  transition: none !important;
  animation: none !important;
  }
- .leave-stats-panel .details-icon {
- transition: none !important;
- }
+ .leave-stats-panel .details-icon { transition: none !important; }
  .leave-stats-panel.leave-stats-expanded .details-icon {
  transform: none !important;
  color: #43D39E !important;
  text-shadow: 0 0 12px rgba(67, 211, 158, 0.45) !important;
  }
  @media (max-width: 760px) {
- .leave-stats-panel.leave-stats-expanded .leave-stats-content {
- padding-top: 12px !important;
- padding-bottom: 12px !important;
+ .leave-stats-panel.leave-stats-expanded .leave-stats-content { padding-top: 12px !important; padding-bottom: 12px !important; }
  }
- }
-
- 
 
  /* === 微調：三列系統模組識別色，藍色公告事件、綠色人員流程、橘色設備維護 === */
  .special-panel > .special-toggle,
@@ -2521,47 +2508,18 @@
  }
  .special-panel > .special-toggle .special-summary,
  .batch-panel > .special-toggle .special-summary,
- .overhaul-panel > .special-toggle .special-summary {
- position: relative;
- z-index: 1;
- color: #94a3b8 !important;
- text-shadow: none !important;
- }
- .special-panel > .special-toggle #specialToggleIcon,
- .batch-panel > .special-toggle #batchToggleIcon,
- .overhaul-panel > .special-toggle #overhaulToggleIcon {
- position: relative;
- z-index: 1;
- font-size: 24px !important;
- font-weight: 950 !important;
- }
+ .overhaul-panel > .special-toggle .special-summary { position: relative; z-index: 1; color: #94a3b8 !important; text-shadow: none !important; }
  .special-panel > .special-toggle #specialToggleIcon { color: #67e8f9 !important; text-shadow: 0 0 12px rgba(103, 232, 249, 0.62) !important; }
  .batch-panel > .special-toggle #batchToggleIcon { color: #6ee7b7 !important; text-shadow: 0 0 12px rgba(110, 231, 183, 0.62) !important; }
  .overhaul-panel > .special-toggle #overhaulToggleIcon { color: #fb923c !important; text-shadow: 0 0 12px rgba(251, 146, 60, 0.62) !important; }
  .special-panel { border-color: rgba(103, 232, 249, 0.28) !important; }
  .batch-panel { border-color: rgba(67, 211, 158, 0.28) !important; }
  .overhaul-panel { border-color: rgba(251, 146, 60, 0.30) !important; }
- @media (max-width: 760px) {
- .special-panel > .special-toggle > div:first-child > div:first-child,
- .batch-panel > .special-toggle > div:first-child > div:first-child,
- .overhaul-panel > .special-toggle > div:first-child > div:first-child {
- font-size: 17px !important;
- letter-spacing: 0.04em !important;
- }
- .special-panel > .special-toggle #specialToggleIcon,
- .batch-panel > .special-toggle #batchToggleIcon,
- .overhaul-panel > .special-toggle #overhaulToggleIcon { font-size: 24px !important; }
- }
-
- 
 
  /* === 微調：第二層功能識別色，紫色數據分析、玫瑰金財務結算；假別統計標題大小對齊大修設定並修正清晰度 === */
  details.core-stats-panel > summary.section-header-toggle,
  details.salary-panel > summary.section-header-toggle,
- .leave-stats-panel > .section-header-toggle {
- position: relative !important;
- overflow: hidden !important;
- }
+ .leave-stats-panel > .section-header-toggle { position: relative !important; overflow: hidden !important; }
  details.core-stats-panel > summary.section-header-toggle > div > div:first-child,
  details.salary-panel > summary.section-header-toggle #salaryTrialTitle {
  position: relative;
@@ -2578,14 +2536,6 @@
  text-shadow: 0 0 10px rgba(139, 92, 246, 0.58), 0 0 24px rgba(192, 132, 252, 0.28) !important;
  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.24));
  }
- details.core-stats-panel > summary.section-header-toggle {
- border-bottom-color: rgba(167, 139, 250, 0.24) !important;
- box-shadow: inset 0 0 18px rgba(139, 92, 246, 0.035) !important;
- }
- details.core-stats-panel > summary.section-header-toggle .details-icon {
- color: #c084fc !important;
- text-shadow: 0 0 12px rgba(192, 132, 252, 0.62) !important;
- }
  details.salary-panel > summary.section-header-toggle #salaryTrialTitle {
  background-image: linear-gradient(90deg, #fff7ed 0%, #f9a8d4 24%, #f6c453 58%, #e5e7eb 100%) !important;
  text-shadow: 0 0 12px rgba(249, 168, 212, 0.52), 0 0 26px rgba(246, 196, 83, 0.34), 0 0 34px rgba(229, 231, 235, 0.16) !important;
@@ -2595,10 +2545,6 @@
  border-bottom-color: rgba(249, 168, 212, 0.24) !important;
  background: linear-gradient(90deg, rgba(35, 16, 28, 0.72), rgba(17, 24, 39, 0.96), rgba(61, 39, 14, 0.48)) !important;
  box-shadow: inset 0 0 20px rgba(249, 168, 212, 0.035), inset 0 0 26px rgba(246, 196, 83, 0.025) !important;
- }
- details.salary-panel > summary.section-header-toggle .details-icon {
- color: #f9a8d4 !important;
- text-shadow: 0 0 12px rgba(249, 168, 212, 0.58), 0 0 20px rgba(246, 196, 83, 0.24) !important;
  }
  .leave-stats-panel > .section-header-toggle > div > div:first-child {
  position: relative !important;
@@ -2614,41 +2560,54 @@
  text-shadow: 0 0 5px rgba(125, 211, 252, 0.32) !important;
  filter: none !important;
  }
- @media (max-width: 760px) {
- details.core-stats-panel > summary.section-header-toggle > div > div:first-child,
- details.salary-panel > summary.section-header-toggle #salaryTrialTitle,
- .leave-stats-panel > .section-header-toggle > div > div:first-child {
- font-size: 17px !important;
- letter-spacing: 0.04em !important;
- }
- }
-
- 
 
  /* === 修正：手機版加班費明細區移除內縮方形感，改回與其他模組一致的圓弧標題列 === */
- details.salary-panel {
- padding: 0 !important;
- overflow: hidden !important;
- border-radius: 18px !important;
+ details.salary-panel { padding: 0 !important; overflow: hidden !important; border-radius: 18px !important; }
+ details.salary-panel > summary.section-header-toggle { border-radius: 18px !important; }
+ details.salary-panel[open] > summary.section-header-toggle { border-radius: 18px 18px 0 0 !important; }
+
+ /* === 排版調整：年度請假資訊獨立卡片，放在代班資訊與主月曆中間 === */
+ .annual-leave-info-panel {
+ margin-bottom: 16px;
+ padding: 0;
+ overflow: hidden;
+ border-color: rgba(77, 163, 255, 0.24) !important;
+ background: radial-gradient(circle at 12% 0%, rgba(245, 192, 74, 0.10), transparent 32%), radial-gradient(circle at 88% 8%, rgba(67, 211, 158, 0.10), transparent 30%), linear-gradient(180deg, #071018, #050b12) !important;
  }
- details.salary-panel > summary.section-header-toggle {
- border-radius: 18px !important;
+ .annual-leave-info-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 15px 18px;
+ border-bottom: 1px solid rgba(77, 163, 255, 0.22);
+ background: linear-gradient(90deg, rgba(11, 22, 34, 0.98), rgba(6, 78, 59, 0.26), rgba(7, 16, 24, 0.98));
  }
- details.salary-panel[open] > summary.section-header-toggle {
- border-radius: 18px 18px 0 0 !important;
+ .annual-leave-info-title {
+ color: #dbeafe;
+ font-size: clamp(17px, 2.2vw, 22px);
+ font-weight: 950;
+ letter-spacing: 0.10em;
+ text-shadow: 0 0 8px rgba(77, 163, 255, 0.28);
  }
+ .annual-leave-info-content { padding: 16px; }
+ .annual-leave-info-panel .leave-stats-year-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+ .leave-stats-panel .leave-stats-content { grid-template-columns: 1fr; }
+ .leave-stats-panel .leave-stats-card.monthly-leave-stats-card { margin: 0; }
  @media (max-width: 760px) {
- details.salary-panel {
- padding: 0 !important;
- border-radius: 18px !important;
- }
- details.salary-panel > summary.section-header-toggle {
- margin: 0 !important;
- border-radius: 18px !important;
- }
- details.salary-panel[open] > summary.section-header-toggle {
- border-radius: 18px 18px 0 0 !important;
- }
+ .special-panel > .special-toggle > div:first-child > div:first-child,
+ .batch-panel > .special-toggle > div:first-child > div:first-child,
+ .overhaul-panel > .special-toggle > div:first-child > div:first-child,
+ details.core-stats-panel > summary.section-header-toggle > div > div:first-child,
+ details.salary-panel > summary.section-header-toggle #salaryTrialTitle,
+ .leave-stats-panel > .section-header-toggle > div > div:first-child,
+ .annual-leave-info-title { font-size: 17px !important; letter-spacing: 0.04em !important; }
+ details.salary-panel { padding: 0 !important; border-radius: 18px !important; }
+ details.salary-panel > summary.section-header-toggle { margin: 0 !important; border-radius: 18px !important; }
+ details.salary-panel[open] > summary.section-header-toggle { border-radius: 18px 18px 0 0 !important; }
+ .annual-leave-info-content { padding: 12px !important; }
+ .annual-leave-info-panel .leave-stats-year-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+ .annual-leave-info-panel .leave-stats-year-box .leave-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+ .annual-leave-info-panel .leave-stats-year-box.accounting-year .leave-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
  }
 
  </style>
@@ -2715,6 +2674,33 @@
       <section class="panel substitute-top-panel">
         <div class="substitute-top-label">代班資訊</div>
         <div id="substituteInfoTop" class="substitute-top-value">-</div>
+      </section>
+      <section class="panel annual-leave-info-panel">
+        <div class="annual-leave-info-header">
+          <div>
+            <div id="annualLeaveInfoTitle" class="annual-leave-info-title">年度請假資訊</div>
+            <div id="annualLeaveInfoSummary" class="special-summary">本考勤年度與本會計年度累計請假資訊</div>
+          </div>
+        </div>
+        <div class="annual-leave-info-content">
+          <div class="leave-stats-year-grid annual-leave-stats-year-grid">
+            <div class="leave-stats-year-box">
+              <div id="leaveStatsAttendanceTitle" class="leave-stats-year-title">考勤年度</div>
+              <div class="leave-stats-grid">
+                <div class="leave-stat-item"><div class="leave-stat-label">特休(14天)</div><div id="leaveAttendanceSpecial" class="leave-stat-value empty">0HR</div></div>
+                <div class="leave-stat-item"><div class="leave-stat-label">身心(3天)</div><div id="leaveAttendanceMind" class="leave-stat-value empty">0HR</div></div>
+                <div class="leave-stat-item"><div class="leave-stat-label">家庭(7天)</div><div id="leaveAttendanceFamily" class="leave-stat-value empty">0HR</div></div>
+              </div>
+            </div>
+            <div class="leave-stats-year-box accounting-year">
+              <div id="leaveStatsAccountingTitle" class="leave-stats-year-title">會計年度</div>
+              <div class="leave-stats-grid">
+                <div class="leave-stat-item"><div class="leave-stat-label">事假(7.5HR)</div><div id="leaveAccountingPersonal" class="leave-stat-value empty">0HR</div></div>
+                <div class="leave-stat-item"><div class="leave-stat-label">病假(10天7.5HR)</div><div id="leaveAccountingSick" class="leave-stat-value empty">0HR</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <section class="panel calendar-panel">
         <div class="calendar-head">
@@ -2842,36 +2828,19 @@
         <div class="section-header-toggle">
           <div>
             <div>假別統計資訊</div>
-            <div id="leaveStatsSummary" class="special-summary">統計特休、身心調適假、病假、事假、家庭照顧假</div>
+            <div id="leaveStatsSummary" class="special-summary">統計本月特休、身心調適假、病假、事假、家庭照顧假</div>
           </div>
           <div class="details-icon">＋</div>
         </div>
         <div class="leave-stats-content">
-          <div class="leave-stats-card">
-            <div id="leaveStatsMonthTitle" class="leave-stats-title">本月假別累計統計資訊</div>
+          <div class="leave-stats-card monthly-leave-stats-card">
+            <div id="leaveStatsMonthTitle" class="leave-stats-title">本月假別統計資訊</div>
             <div class="leave-stats-grid">
               <div class="leave-stat-item"><div class="leave-stat-label">特休</div><div id="leaveMonthSpecial" class="leave-stat-value empty">0HR</div></div>
               <div class="leave-stat-item"><div class="leave-stat-label">身心</div><div id="leaveMonthMind" class="leave-stat-value empty">0HR</div></div>
               <div class="leave-stat-item"><div class="leave-stat-label">病假</div><div id="leaveMonthSick" class="leave-stat-value empty">0HR</div></div>
               <div class="leave-stat-item"><div class="leave-stat-label">事假</div><div id="leaveMonthPersonal" class="leave-stat-value empty">0HR</div></div>
               <div class="leave-stat-item"><div class="leave-stat-label">家庭</div><div id="leaveMonthFamily" class="leave-stat-value empty">0HR</div></div>
-            </div>
-          </div>
-          <div class="leave-stats-year-grid">
-            <div class="leave-stats-year-box">
-              <div id="leaveStatsAttendanceTitle" class="leave-stats-year-title">考勤年度</div>
-              <div class="leave-stats-grid">
-                <div class="leave-stat-item"><div class="leave-stat-label">特休(14天)</div><div id="leaveAttendanceSpecial" class="leave-stat-value empty">0HR</div></div>
-                <div class="leave-stat-item"><div class="leave-stat-label">身心(3天)</div><div id="leaveAttendanceMind" class="leave-stat-value empty">0HR</div></div>
-                <div class="leave-stat-item"><div class="leave-stat-label">家庭(7天)</div><div id="leaveAttendanceFamily" class="leave-stat-value empty">0HR</div></div>
-              </div>
-            </div>
-            <div class="leave-stats-year-box accounting-year">
-              <div id="leaveStatsAccountingTitle" class="leave-stats-year-title">會計年度</div>
-              <div class="leave-stats-grid">
-                <div class="leave-stat-item"><div class="leave-stat-label">事假(7.5HR)</div><div id="leaveAccountingPersonal" class="leave-stat-value empty">0HR</div></div>
-                <div class="leave-stat-item"><div class="leave-stat-label">病假(10天7.5HR)</div><div id="leaveAccountingSick" class="leave-stat-value empty">0HR</div></div>
-              </div>
             </div>
           </div>
         </div>
@@ -5851,13 +5820,17 @@
       const specialLeaveSubsidy = calcSpecialLeaveSubsidy(monthStats, attendanceYear, rocYear, month, shiftGroup);
       updateSpecialLeaveSubsidyDisplay(specialLeaveSubsidy);
       const monthTitle = document.getElementById("leaveStatsMonthTitle");
-      if (monthTitle) monthTitle.textContent = `${month}月假別累計統計資訊`;
+      if (monthTitle) monthTitle.textContent = `${month}月假別統計資訊`;
       const attendanceTitle = document.getElementById("leaveStatsAttendanceTitle");
       if (attendanceTitle) attendanceTitle.textContent = `${attendanceYear}年考勤年度`;
       const accountingTitle = document.getElementById("leaveStatsAccountingTitle");
       if (accountingTitle) accountingTitle.textContent = `${accountingYear}年會計年度`;
+      const annualTitle = document.getElementById("annualLeaveInfoTitle");
+      if (annualTitle) annualTitle.textContent = `${attendanceYear}年度請假資訊`;
+      const annualSummary = document.getElementById("annualLeaveInfoSummary");
+      if (annualSummary) annualSummary.textContent = `${attendanceYear}年考勤年度與${accountingYear}年會計年度累計`;
       const summary = document.getElementById("leaveStatsSummary");
-      if (summary) summary.textContent = `${month}月、本考勤年度與本會計年度累計統計`;
+      if (summary) summary.textContent = `${month}月假別統計`;
       setLeaveStatText("leaveMonthSpecial", monthStats.special);
       setLeaveStatText("leaveMonthMind", monthStats.mind);
       setLeaveStatText("leaveMonthSick", monthStats.sick);
