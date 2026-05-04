@@ -6326,6 +6326,8 @@
  let gBackupPendingAction = null;
  let gBackupBodyScrollY = 0;
  let gBackupBodyScrollLocked = false;
+ let gBackupTokenRefreshing = false;
+ let gBackupTokenRefreshTimer = null;
 
  function gBackupReady(callback) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", callback);
@@ -6363,6 +6365,13 @@
   gBackupLockBodyScroll();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
+  if (gBackupAccessToken) {
+   gBackupSetAuthIndicator("active");
+   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。");
+  } else if (gBackupHasRememberedAuth()) {
+   gBackupSetAuthIndicator("remembered");
+   gBackupSetMessage("G帳號保持登入中；按下 G 功能時才會自動重新連線，只有按「登出 G」才會離線。");
+  }
  }
  function gBackupCloseModal() {
   const modal = document.getElementById("gBackupRestoreModal");
@@ -6526,11 +6535,16 @@
   try { localStorage.removeItem(G_BACKUP_AUTH_REMEMBER_KEY); }
   catch (err) { console.warn("無法清除 Google 登入記憶", err); }
  }
- function gBackupSetAuthIndicator(isOn) {
+ function gBackupSetAuthIndicator(status) {
   const dot = document.getElementById("gBackupAuthDot");
   const text = document.getElementById("gBackupAuthText");
-  if (dot) dot.classList.toggle("is-on", Boolean(isOn));
-  if (text) text.textContent = isOn ? "已記住授權" : "尚未授權";
+  const mode = status === true ? "active" : status === "active" ? "active" : status === "remembered" ? "remembered" : "off";
+  if (dot) dot.classList.toggle("is-on", mode !== "off");
+  if (text) {
+   if (mode === "active") text.textContent = "G帳號已連線";
+   else if (mode === "remembered") text.textContent = "G帳號保持登入中";
+   else text.textContent = "尚未登入";
+  }
  }
  function gBackupRenderLoggedOutStatus() {
   gBackupSetText("gBackupDriveStatusState", "尚未檢查");
@@ -6540,6 +6554,26 @@
   const box = document.getElementById("gBackupDriveStatusBox");
   if (box) box.classList.remove("g-backup-status-danger", "g-backup-status-ok");
   gBackupSetAuthIndicator(false);
+ }
+ function gBackupClearTokenRefreshTimer() {
+  if (gBackupTokenRefreshTimer) {
+   clearTimeout(gBackupTokenRefreshTimer);
+   gBackupTokenRefreshTimer = null;
+  }
+ }
+ function gBackupRequestAccessTokenWithPrompt(promptValue) {
+  gBackupTokenRefreshing = true;
+  gBackupClearTokenRefreshTimer();
+  gBackupTokenRefreshTimer = setTimeout(function() {
+   if (!gBackupAccessToken) {
+    gBackupTokenRefreshing = false;
+    if (gBackupHasRememberedAuth()) {
+     gBackupSetAuthIndicator("remembered");
+     gBackupSetMessage("G帳號保持登入中；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會離線。");
+    }
+   }
+  }, 12000);
+  gBackupTokenClient.requestAccessToken({ prompt: promptValue });
  }
  function gBackupInitializeTokenClient() {
   if (gBackupTokenClient) return true;
@@ -6551,27 +6585,49 @@
    client_id: G_BACKUP_CLIENT_ID,
    scope: G_BACKUP_SCOPE,
    callback: function(response) {
+    gBackupClearTokenRefreshTimer();
+    gBackupTokenRefreshing = false;
     if (response && response.error) {
-     const isSilentAttempt = gBackupHasRememberedAuth();
-     gBackupSetMessage(isSilentAttempt ? "自動補取 Google 授權失敗，請按「登入 G」重新授權。" : "Google 登入失敗：" + response.error);
+     gBackupAccessToken = "";
+     if (gBackupHasRememberedAuth()) {
+      gBackupSetAuthIndicator("remembered");
+      gBackupSetMessage("G帳號保持登入中；本次重新連線未完成。請按「登入 G」重新連線，或按「登出 G」真正離線。錯誤：" + response.error);
+     } else {
+      gBackupSetAuthIndicator(false);
+      gBackupSetMessage("Google 登入失敗：" + response.error);
+     }
      gBackupPendingAction = null;
      return;
     }
     gBackupAccessToken = response && response.access_token ? response.access_token : "";
     if (!gBackupAccessToken) {
-     gBackupSetMessage("未取得 Google 存取權杖。");
+     if (gBackupHasRememberedAuth()) gBackupSetAuthIndicator("remembered");
+     gBackupSetMessage("未取得本次 Google 連線權杖；G帳號保持登入中。請按「登入 G」重新連線，或按「登出 G」真正離線。");
      gBackupPendingAction = null;
      return;
     }
     gBackupRememberAuth();
-    gBackupSetAuthIndicator(true);
-    gBackupSetMessage("Google 已授權，可進行手動備份／還原。");
+    gBackupSetAuthIndicator("active");
+    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。");
     const action = gBackupPendingAction;
     gBackupPendingAction = null;
     if (typeof action === "function") action();
    }
   });
   return true;
+ }
+ function gBackupTrySilentRefreshToken(action) {
+  if (gBackupAccessToken) {
+   if (typeof action === "function") action();
+   return;
+  }
+  if (!gBackupHasRememberedAuth()) return;
+  if (!gBackupInitializeTokenClient()) return;
+  if (typeof action === "function") gBackupPendingAction = action;
+  if (gBackupTokenRefreshing) return;
+  gBackupSetAuthIndicator("remembered");
+  gBackupSetMessage("G帳號保持登入中，正在執行本次自動重新連線...");
+  gBackupRequestAccessTokenWithPrompt("");
  }
  function gBackupRequireToken(action, forceConsent) {
   if (gBackupAccessToken) {
@@ -6581,7 +6637,14 @@
   if (!gBackupInitializeTokenClient()) return;
   gBackupPendingAction = action;
   const shouldAskConsent = Boolean(forceConsent) || !gBackupHasRememberedAuth();
-  gBackupTokenClient.requestAccessToken({ prompt: shouldAskConsent ? "consent" : "" });
+  if (shouldAskConsent) {
+   gBackupSetMessage("正在登入 Google...");
+   gBackupRequestAccessTokenWithPrompt("consent");
+  } else {
+   gBackupSetAuthIndicator("remembered");
+   gBackupSetMessage("G帳號保持登入中，正在執行本次自動重新連線...");
+   gBackupRequestAccessTokenWithPrompt("");
+  }
  }
  async function gBackupDriveRequest(url, options) {
   const finalOptions = options || {};
@@ -6747,16 +6810,16 @@
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
-  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator(true); gBackupSetMessage("曾登入 Google，使用 G 功能時會自動重新取得授權。"); }
+  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("G帳號保持登入中；按下 G 功能時才會自動重新連線。只有按「登出 G」才會離線。"); }
   else gBackupRenderLoggedOutStatus();
-  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("Google 已登入，可進行手動備份／還原。"); }, true); });
+  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。"); }, true); });
   if (logoutBtn) logoutBtn.addEventListener("click", function() {
    if (gBackupAccessToken && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gBackupAccessToken, function() {});
    gBackupAccessToken = "";
    gBackupPendingAction = null;
    gBackupClearRememberedAuth();
    gBackupRenderLoggedOutStatus();
-   gBackupSetMessage("已登出 Google，並清除本機登入記憶。");
+   gBackupSetMessage("已登出 Google，已清除本機登入記憶並離線。");
   });
   if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
   if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
