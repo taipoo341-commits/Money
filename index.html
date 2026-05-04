@@ -6365,7 +6365,10 @@
   gBackupLockBodyScroll();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
-  if (gBackupHasRememberedAuth() && !gBackupAccessToken) {
+  if (gBackupAccessToken) {
+   gBackupSetAuthIndicator("active");
+   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。");
+  } else if (gBackupHasRememberedAuth()) {
    gBackupSetAuthIndicator("remembered");
    gBackupSetMessage("G帳號保持登入中，正在自動重新連線 Google...");
    gBackupTrySilentRefreshToken();
@@ -6567,7 +6570,7 @@
     gBackupTokenRefreshing = false;
     if (gBackupHasRememberedAuth()) {
      gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("G帳號仍保持登入中；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會離線。");
+     gBackupSetMessage("G帳號保持登入中；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會離線。");
     }
    }
   }, 12000);
@@ -6589,7 +6592,7 @@
      gBackupAccessToken = "";
      if (gBackupHasRememberedAuth()) {
       gBackupSetAuthIndicator("remembered");
-      gBackupSetMessage("G帳號仍保持登入中；本次自動重新連線未完成。請按「登入 G」重新連線，或按「登出 G」真正離線。錯誤：" + response.error);
+      gBackupSetMessage("G帳號保持登入中；本次自動重新連線未完成。請按「登入 G」重新連線，或按「登出 G」真正離線。錯誤：" + response.error);
      } else {
       gBackupSetAuthIndicator(false);
       gBackupSetMessage("Google 登入失敗：" + response.error);
@@ -6600,7 +6603,7 @@
     gBackupAccessToken = response && response.access_token ? response.access_token : "";
     if (!gBackupAccessToken) {
      if (gBackupHasRememberedAuth()) gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("未取得本次 Google 連線權杖；G帳號仍保持登入中。請按「登入 G」重新連線，或按「登出 G」真正離線。");
+     gBackupSetMessage("未取得本次 Google 連線權杖；G帳號保持登入中。請按「登入 G」重新連線，或按「登出 G」真正離線。");
      gBackupPendingAction = null;
      return;
     }
@@ -6624,6 +6627,7 @@
   if (typeof action === "function") gBackupPendingAction = action;
   if (gBackupTokenRefreshing) return;
   gBackupSetAuthIndicator("remembered");
+  gBackupSetMessage("G帳號保持登入中，正在自動重新連線 Google...");
   gBackupRequestAccessTokenWithPrompt("");
  }
  function gBackupRequireToken(action, forceConsent) {
