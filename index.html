@@ -3038,6 +3038,7 @@
     <button id="gBackupLocalImportBtn" class="g-backup-action-btn g-backup-danger" type="button">匯入本機備份 JSON</button>
     <button id="gBackupCheckStatusBtn" class="g-backup-action-btn" type="button">檢查 G 備份狀態</button>
     <button id="gBackupDownloadDriveBtn" class="g-backup-action-btn" type="button">下載 G 備份 JSON</button>
+   <button id="gBackupDeleteDriveBtn" class="g-backup-action-btn g-backup-danger" type="button">刪除 G 備份</button>
    </div>
    <input id="gBackupLocalFileInput" class="g-backup-file-input" type="file" accept="application/json,.json" />
    <div id="gBackupDriveStatusBox" class="g-backup-drive-status" aria-live="polite">
@@ -6156,6 +6157,7 @@
  const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode"]);
  const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
  const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
+ const G_BACKUP_AUTH_REMEMBER_KEY = "personalOvertimeGoogleAuthRemembered";
  let gBackupTokenClient = null;
  let gBackupAccessToken = "";
  let gBackupPendingAction = null;
@@ -6256,6 +6258,24 @@
    else localStorage.setItem(key, String(clean[key]));
   });
  }
+ function gBackupHasRememberedAuth() {
+  try { return localStorage.getItem(G_BACKUP_AUTH_REMEMBER_KEY) === "1"; }
+  catch (err) { return false; }
+ }
+ function gBackupRememberAuth() {
+  try { localStorage.setItem(G_BACKUP_AUTH_REMEMBER_KEY, "1"); }
+  catch (err) { console.warn("無法儲存 Google 登入記憶", err); }
+ }
+ function gBackupClearRememberedAuth() {
+  try { localStorage.removeItem(G_BACKUP_AUTH_REMEMBER_KEY); }
+  catch (err) { console.warn("無法清除 Google 登入記憶", err); }
+ }
+ function gBackupRenderLoggedOutStatus() {
+  gBackupSetText("gBackupDriveStatusState", "尚未檢查");
+  gBackupSetText("gBackupDriveStatusName", "-");
+  gBackupSetText("gBackupDriveStatusModified", "-");
+  gBackupSetText("gBackupDriveStatusId", "-");
+ }
  function gBackupInitializeTokenClient() {
   if (gBackupTokenClient) return true;
   if (!window.google || !google.accounts || !google.accounts.oauth2) {
@@ -6267,7 +6287,8 @@
    scope: G_BACKUP_SCOPE,
    callback: function(response) {
     if (response && response.error) {
-     gBackupSetMessage("Google 登入失敗：" + response.error);
+     const isSilentAttempt = gBackupHasRememberedAuth();
+     gBackupSetMessage(isSilentAttempt ? "自動補取 Google 授權失敗，請按「登入 G」重新授權。" : "Google 登入失敗：" + response.error);
      gBackupPendingAction = null;
      return;
     }
@@ -6277,7 +6298,8 @@
      gBackupPendingAction = null;
      return;
     }
-    gBackupSetMessage("Google 已登入，可進行手動備份／還原。");
+    gBackupRememberAuth();
+    gBackupSetMessage("Google 已授權，可進行手動備份／還原。");
     const action = gBackupPendingAction;
     gBackupPendingAction = null;
     if (typeof action === "function") action();
@@ -6285,14 +6307,15 @@
   });
   return true;
  }
- function gBackupRequireToken(action) {
+ function gBackupRequireToken(action, forceConsent) {
   if (gBackupAccessToken) {
    action();
    return;
   }
   if (!gBackupInitializeTokenClient()) return;
   gBackupPendingAction = action;
-  gBackupTokenClient.requestAccessToken({ prompt: "consent" });
+  const shouldAskConsent = Boolean(forceConsent) || !gBackupHasRememberedAuth();
+  gBackupTokenClient.requestAccessToken({ prompt: shouldAskConsent ? "consent" : "" });
  }
  async function gBackupDriveRequest(url, options) {
   const finalOptions = options || {};
@@ -6394,6 +6417,31 @@
   window.alert("還原完成，將重新載入頁面");
   window.location.reload();
  }
+ async function gBackupDeleteDriveBackup() {
+  gBackupSetMessage("正在檢查是否有 Google 備份檔可刪除...");
+  const existing = await gBackupFindDriveFile();
+  gBackupRenderDriveStatus(existing);
+  if (!existing || !existing.id) {
+   gBackupSetMessage("目前沒有 G 備份檔可刪除。");
+   window.alert("目前沒有 G 備份檔可刪除");
+   return;
+  }
+  const firstConfirmText = "確定要刪除 Google Drive 上的 G 備份檔嗎？\n\n檔名：" + (existing.name || G_BACKUP_FILE_NAME) + "\n最後修改：" + gBackupFormatLocalTime(existing.modifiedTime) + "\n\n刪除後，Google Drive 雲端備份將無法從 G 還原。\n建議先按「下載 G 備份 JSON」留一份本機備份。";
+  if (!window.confirm(firstConfirmText)) {
+   gBackupSetMessage("已取消刪除 G 備份。");
+   return;
+  }
+  const secondConfirmText = "二次確認：真的要永久刪除 G 備份檔嗎？\n\n檔案將從 appDataFolder 永久刪除，無法從網頁還原。";
+  if (!window.confirm(secondConfirmText)) {
+   gBackupSetMessage("已取消刪除 G 備份。");
+   return;
+  }
+  gBackupSetMessage("正在刪除 Google Drive 備份檔...");
+  await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id), { method: "DELETE" });
+  gBackupRenderDriveStatus(null);
+  gBackupSetMessage("已刪除 G 備份檔，Google 備份狀態已更新。");
+  window.alert("已刪除 G 備份檔");
+ }
  function gBackupImportLocalFile(file) {
   if (!file) return;
   const confirmed = window.confirm("確定要匯入本機備份 JSON 嗎？\n匯入前會先下載一份目前本機備份 JSON。");
@@ -6426,21 +6474,28 @@
   const importBtn = document.getElementById("gBackupLocalImportBtn");
   const checkStatusBtn = document.getElementById("gBackupCheckStatusBtn");
   const downloadDriveBtn = document.getElementById("gBackupDownloadDriveBtn");
+  const deleteDriveBtn = document.getElementById("gBackupDeleteDriveBtn");
   const fileInput = document.getElementById("gBackupLocalFileInput");
   if (openBtn) openBtn.addEventListener("click", gBackupOpenModal);
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
-  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("Google 已登入，可進行手動備份／還原。"); }); });
+  if (gBackupHasRememberedAuth()) gBackupSetMessage("曾登入 Google，使用 G 功能時會自動重新取得授權。");
+  else gBackupRenderLoggedOutStatus();
+  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("Google 已登入，可進行手動備份／還原。"); }, true); });
   if (logoutBtn) logoutBtn.addEventListener("click", function() {
    if (gBackupAccessToken && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gBackupAccessToken, function() {});
    gBackupAccessToken = "";
-   gBackupSetMessage("已登出 Google。");
+   gBackupPendingAction = null;
+   gBackupClearRememberedAuth();
+   gBackupRenderLoggedOutStatus();
+   gBackupSetMessage("已登出 Google，並清除本機登入記憶。");
   });
   if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (checkStatusBtn) checkStatusBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupCheckDriveStatus(false).catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (downloadDriveBtn) downloadDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDownloadDriveBackup().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
+  if (deleteDriveBtn) deleteDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDeleteDriveBackup().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (downloadBtn) downloadBtn.addEventListener("click", function() { gBackupDownloadCurrent("overtime-local-backup"); gBackupSetMessage("已下載本機備份 JSON。"); });
   if (importBtn && fileInput) importBtn.addEventListener("click", function() { fileInput.value = ""; fileInput.click(); });
   if (fileInput) fileInput.addEventListener("change", function() { gBackupImportLocalFile(fileInput.files && fileInput.files[0]); });
