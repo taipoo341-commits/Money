@@ -2460,7 +2460,7 @@
  details.core-stats-panel > summary.section-header-toggle .details-icon,
  .leave-stats-panel > .section-header-toggle .details-icon,
  details.salary-panel > summary.section-header-toggle .details-icon {
- font-size: 32px !important;
+ font-size: 34px !important;
  line-height: 1 !important;
  font-weight: 850 !important;
  width: 42px !important;
@@ -2486,7 +2486,7 @@
  .overhaul-panel > .special-toggle #overhaulToggleIcon,
  details.core-stats-panel > summary.section-header-toggle .details-icon,
  .leave-stats-panel > .section-header-toggle .details-icon,
- details.salary-panel > summary.section-header-toggle .details-icon { font-size: 24px !important; width: 42px !important; min-width: 42px !important; }
+ details.salary-panel > summary.section-header-toggle .details-icon { font-size: 22px !important; width: 42px !important; min-width: 42px !important; }
  .leave-stats-panel.leave-stats-expanded .leave-stats-content { padding-top: 12px !important; padding-bottom: 12px !important; }
  details.salary-panel { padding: 0 !important; border-radius: 18px !important; }
  details.salary-panel > summary.section-header-toggle { margin: 0 !important; border-radius: 18px !important; }
@@ -2641,7 +2641,7 @@
         <button id="batchToggle" class="special-toggle" type="button">
           <div>
             <div>請假／受訓批次設定</div>
-            <div id="batchSummary" class="special-summary">可一次套用連續特休、受訓或常用假別</div>
+            <div id="batchSummary" class="special-summary">套用連續特休、受訓或常用假別</div>
           </div>
           <div id="batchToggleIcon">＋</div>
         </button>
@@ -2684,7 +2684,7 @@
       </section>
       <details class="panel core-stats-panel">
         <summary class="section-header-toggle">
-          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">點此展開值班總工時、交接班時數、國定時數、保養時數、12切</div></div>
+          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">值班總工時、交接班時數、國定時數、保養時數、12切</div></div>
           <div class="details-icon">＋</div>
         </summary>
         <div id="coreStatsContent" class="core-stats-content">
@@ -4770,7 +4770,7 @@
     }
     function updateBatchSummary() {
       const activeCount = batchRangeRecords.filter(item => Number(item.startDay) > 0 && Number(item.endDay) > 0).length;
-      const summary = activeCount > 0 ? `已設定 ${activeCount} 筆區間，可按套用寫入每日考勤` : "可一次套用連續特休、受訓或常用假別";
+      const summary = activeCount > 0 ? `已設定 ${activeCount} 筆區間，可按套用寫入每日考勤` : "套用連續特休、受訓或常用假別";
       const batchSummary = document.getElementById("batchSummary");
       const batchToggleIcon = document.getElementById("batchToggleIcon");
       const batchContent = document.getElementById("batchContent");
