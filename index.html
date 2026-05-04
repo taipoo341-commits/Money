@@ -2497,7 +2497,136 @@
  .annual-leave-info-panel .leave-stats-year-box.accounting-year .leave-stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
  }
 
- </style>
+ 
+/* G備份/還原：樣式開始 */
+.g-backup-panel {
+ margin-top: 18px;
+ padding: 16px;
+ border-color: rgba(66, 133, 244, 0.38) !important;
+ background: linear-gradient(90deg, rgba(15, 23, 42, 0.94), rgba(6, 78, 59, 0.20), rgba(30, 41, 59, 0.94)) !important;
+ box-shadow: 0 0 22px rgba(66, 133, 244, 0.12), 0 0 28px rgba(246, 196, 83, 0.08), inset 0 0 28px rgba(66, 133, 244, 0.035) !important;
+ text-align: center;
+}
+.g-backup-main-btn {
+ width: min(360px, 100%);
+ min-height: 48px;
+ border: 1px solid rgba(246, 196, 83, 0.64);
+ border-radius: 999px;
+ background: linear-gradient(90deg, rgba(66, 133, 244, 0.24), rgba(16, 185, 129, 0.20), rgba(246, 196, 83, 0.18));
+ color: #fff3b0;
+ font-size: 17px;
+ font-weight: 950;
+ letter-spacing: 0.14em;
+ cursor: pointer;
+ box-shadow: 0 0 18px rgba(246, 196, 83, 0.22), 0 0 18px rgba(66, 133, 244, 0.16), inset 0 0 16px rgba(16, 185, 129, 0.08);
+ text-shadow: 0 0 10px rgba(246, 196, 83, 0.52);
+}
+.g-backup-main-btn:hover,
+.g-backup-main-btn:focus-visible {
+ background: linear-gradient(90deg, rgba(66, 133, 244, 0.34), rgba(16, 185, 129, 0.28), rgba(246, 196, 83, 0.24));
+ outline: 1px solid rgba(253, 224, 71, 0.74);
+}
+.g-backup-modal {
+ position: fixed;
+ inset: 0;
+ display: none;
+ align-items: center;
+ justify-content: center;
+ z-index: 130000;
+ padding: 18px;
+ background: rgba(0, 0, 0, 0.72);
+ backdrop-filter: blur(3px);
+}
+.g-backup-modal.open { display: flex; }
+.g-backup-card {
+ width: min(500px, 100%);
+ border: 2px solid rgba(246, 196, 83, 0.72);
+ border-radius: 22px;
+ background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(3, 7, 18, 0.98));
+ box-shadow: 0 0 0 1px rgba(66, 133, 244, 0.24), 0 0 34px rgba(246, 196, 83, 0.20), 0 0 54px rgba(16, 185, 129, 0.13);
+ overflow: hidden;
+}
+.g-backup-header {
+ padding: 18px 18px 12px;
+ border-bottom: 1px solid rgba(246, 196, 83, 0.24);
+ background: linear-gradient(90deg, rgba(30, 64, 175, 0.38), rgba(6, 78, 59, 0.28), rgba(120, 84, 20, 0.30));
+}
+.g-backup-title {
+ color: #fde68a;
+ font-size: 22px;
+ font-weight: 950;
+ letter-spacing: 0.10em;
+ text-shadow: 0 0 12px rgba(251, 191, 36, 0.55);
+}
+.g-backup-subtitle {
+ margin-top: 7px;
+ color: #bae6fd;
+ font-size: 13px;
+ font-weight: 900;
+ line-height: 1.55;
+}
+.g-backup-body {
+ padding: 18px;
+ display: grid;
+ gap: 10px;
+}
+.g-backup-actions {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 10px;
+}
+.g-backup-action-btn {
+ min-height: 44px;
+ border-radius: 13px;
+ border: 1px solid rgba(103, 232, 249, 0.32);
+ background: rgba(14, 165, 233, 0.12);
+ color: #bae6fd;
+ font-size: 13px;
+ font-weight: 950;
+ cursor: pointer;
+ letter-spacing: 0.04em;
+}
+.g-backup-action-btn:hover,
+.g-backup-action-btn:focus-visible {
+ background: rgba(14, 165, 233, 0.24);
+ outline: 1px solid rgba(103, 232, 249, 0.48);
+}
+.g-backup-action-btn.g-backup-danger {
+ border-color: rgba(251, 191, 36, 0.64);
+ background: linear-gradient(90deg, rgba(220, 38, 38, 0.20), rgba(251, 191, 36, 0.16));
+ color: #fde68a;
+}
+.g-backup-message {
+ min-height: 24px;
+ color: #94a3b8;
+ font-size: 12px;
+ font-weight: 850;
+ line-height: 1.55;
+ text-align: center;
+}
+.g-backup-close {
+ margin-top: 2px;
+ width: 100%;
+ min-height: 38px;
+ border-radius: 12px;
+ border: 1px solid rgba(148, 163, 184, 0.28);
+ background: rgba(148, 163, 184, 0.10);
+ color: #e5e7eb;
+ font-size: 13px;
+ font-weight: 950;
+ cursor: pointer;
+}
+.g-backup-file-input { display: none !important; }
+@media (max-width: 760px) {
+ .g-backup-panel { margin-top: 14px !important; padding: 12px !important; }
+ .g-backup-main-btn { min-height: 44px !important; font-size: 15px !important; letter-spacing: 0.08em !important; }
+ .g-backup-actions { grid-template-columns: 1fr !important; }
+ .g-backup-title { font-size: 22px !important; }
+ .g-backup-action-btn { min-height: 46px !important; font-size: 14px !important; }
+}
+/* G備份/還原：樣式結束 */
+
+</style>
 </head>
 <body>
   <div class="app">
@@ -2827,7 +2956,14 @@
           </ol>
         </div>
       </details>
-      <footer class="designer-footer">
+      
+<!-- G備份/還原：頁面最下方入口開始 -->
+<section class="panel g-backup-panel" aria-label="Google Drive 備份與還原">
+ <button id="gBackupRestoreOpenBtn" class="g-backup-main-btn" type="button">G備份/還原</button>
+</section>
+<!-- G備份/還原：頁面最下方入口結束 -->
+
+<footer class="designer-footer">
         <div class="designer-inner">
           <span class="designer-label">System Designed By</span>
           <div class="designer-name">
@@ -2839,7 +2975,32 @@
       </footer>
     </div>
   </div>
-  <div id="codePickerPortal" class="code-picker-portal" aria-hidden="true"></div>
+  
+<!-- G備份/還原：浮動視窗開始 -->
+<div id="gBackupRestoreModal" class="g-backup-modal" aria-hidden="true">
+ <div class="g-backup-card" role="dialog" aria-modal="true" aria-labelledby="gBackupRestoreTitle">
+  <div class="g-backup-header">
+   <div id="gBackupRestoreTitle" class="g-backup-title">G備份/還原</div>
+   <div class="g-backup-subtitle">Google Drive 僅做手動跨裝置備份／還原，平常仍以本機localStorage 為主。</div>
+  </div>
+  <div class="g-backup-body">
+   <div class="g-backup-actions">
+    <button id="gBackupLoginBtn" class="g-backup-action-btn" type="button">登入 G</button>
+    <button id="gBackupLogoutBtn" class="g-backup-action-btn" type="button">登出 G</button>
+    <button id="gBackupUploadBtn" class="g-backup-action-btn" type="button">備份到 G </button>
+    <button id="gBackupRestoreBtn" class="g-backup-action-btn g-backup-danger" type="button">從 G 還原</button>
+    <button id="gBackupLocalDownloadBtn" class="g-backup-action-btn" type="button">下載本機備份 JSON</button>
+    <button id="gBackupLocalImportBtn" class="g-backup-action-btn g-backup-danger" type="button">匯入本機備份 JSON</button>
+   </div>
+   <input id="gBackupLocalFileInput" class="g-backup-file-input" type="file" accept="application/json,.json" />
+   <div id="gBackupStatusMessage" class="g-backup-message">尚未登入 Google。</div>
+   <button id="gBackupCloseBtn" class="g-backup-close" type="button">關閉</button>
+  </div>
+ </div>
+</div>
+<!-- G備份/還原：浮動視窗結束 -->
+
+<div id="codePickerPortal" class="code-picker-portal" aria-hidden="true"></div>
   <div id="batchCodePickerPortal" class="code-picker-portal batch-code-picker-portal" aria-hidden="true"></div>
   <div id="resetConfirmModal" class="reset-confirm-modal" aria-hidden="true">
     <div class="reset-confirm-card" role="dialog" aria-modal="true" aria-labelledby="resetConfirmTitle">
@@ -5930,5 +6091,243 @@
       }
     });
   </script>
+
+<!-- G備份/還原：腳本開始 -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+(function() {
+ const G_BACKUP_CLIENT_ID = "107200643244-6m7b52c3ho8nofgqf2m1v87eu60hssl8.apps.googleusercontent.com";
+ const G_BACKUP_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
+ const G_BACKUP_FILE_NAME = "overtime-backup.json";
+ const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode"]);
+ const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
+ const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
+ let gBackupTokenClient = null;
+ let gBackupAccessToken = "";
+ let gBackupPendingAction = null;
+
+ function gBackupReady(callback) {
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", callback);
+  else callback();
+ }
+ function gBackupSetMessage(message) {
+  const el = document.getElementById("gBackupStatusMessage");
+  if (el) el.textContent = message;
+ }
+ function gBackupOpenModal() {
+  const modal = document.getElementById("gBackupRestoreModal");
+  if (!modal) return;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+ }
+ function gBackupCloseModal() {
+  const modal = document.getElementById("gBackupRestoreModal");
+  if (!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+ }
+ function gBackupCollectObject() {
+  const data = {};
+  Object.keys(localStorage).forEach(function(key) {
+   if (key.indexOf("personalOvertimeState:") === 0 || G_BACKUP_ALLOWED_EXACT_KEYS.has(key)) {
+    data[key] = localStorage.getItem(key);
+   }
+  });
+  return {
+   backupName: G_BACKUP_FILE_NAME,
+   backupType: "personalOvertimeLocalStorageSubset",
+   version: 1,
+   savedAt: new Date().toISOString(),
+   keys: data
+  };
+ }
+ function gBackupDownloadText(fileName, text) {
+  const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+ }
+ function gBackupDownloadCurrent(prefix) {
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const fileName = (prefix || "overtime-local-backup") + "-" + stamp + ".json";
+  gBackupDownloadText(fileName, JSON.stringify(gBackupCollectObject(), null, 2));
+ }
+ function gBackupValidatePayload(payload) {
+  if (!payload || typeof payload !== "object") throw new Error("備份檔格式錯誤：不是 JSON 物件。");
+  const keys = payload.keys && typeof payload.keys === "object" ? payload.keys : payload;
+  const clean = {};
+  Object.keys(keys).forEach(function(key) {
+   if (key.indexOf("personalOvertimeState:") === 0 || G_BACKUP_ALLOWED_EXACT_KEYS.has(key)) clean[key] = keys[key];
+  });
+  if (Object.keys(clean).length === 0) throw new Error("備份檔內沒有可還原的指定 key。");
+  return clean;
+ }
+ function gBackupApplyPayload(payload) {
+  const clean = gBackupValidatePayload(payload);
+  Object.keys(clean).forEach(function(key) {
+   if (clean[key] === null || clean[key] === undefined) localStorage.removeItem(key);
+   else localStorage.setItem(key, String(clean[key]));
+  });
+ }
+ function gBackupInitializeTokenClient() {
+  if (gBackupTokenClient) return true;
+  if (!window.google || !google.accounts || !google.accounts.oauth2) {
+   gBackupSetMessage("Google 授權程式尚未載入完成，請稍後再試。");
+   return false;
+  }
+  gBackupTokenClient = google.accounts.oauth2.initTokenClient({
+   client_id: G_BACKUP_CLIENT_ID,
+   scope: G_BACKUP_SCOPE,
+   callback: function(response) {
+    if (response && response.error) {
+     gBackupSetMessage("Google 登入失敗：" + response.error);
+     gBackupPendingAction = null;
+     return;
+    }
+    gBackupAccessToken = response && response.access_token ? response.access_token : "";
+    if (!gBackupAccessToken) {
+     gBackupSetMessage("未取得 Google 存取權杖。");
+     gBackupPendingAction = null;
+     return;
+    }
+    gBackupSetMessage("Google 已登入，可進行手動備份／還原。");
+    const action = gBackupPendingAction;
+    gBackupPendingAction = null;
+    if (typeof action === "function") action();
+   }
+  });
+  return true;
+ }
+ function gBackupRequireToken(action) {
+  if (gBackupAccessToken) {
+   action();
+   return;
+  }
+  if (!gBackupInitializeTokenClient()) return;
+  gBackupPendingAction = action;
+  gBackupTokenClient.requestAccessToken({ prompt: "consent" });
+ }
+ async function gBackupDriveRequest(url, options) {
+  const finalOptions = options || {};
+  finalOptions.headers = finalOptions.headers || {};
+  finalOptions.headers.Authorization = "Bearer " + gBackupAccessToken;
+  const response = await fetch(url, finalOptions);
+  if (!response.ok) {
+   const text = await response.text();
+   throw new Error("Google Drive API 錯誤：" + response.status + " " + text);
+  }
+  return response;
+ }
+ async function gBackupFindDriveFile() {
+  const query = "name='" + G_BACKUP_FILE_NAME.replace(/'/g, "\\'") + "' and 'appDataFolder' in parents and trashed=false";
+  const url = "https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime)&q=" + encodeURIComponent(query);
+  const response = await gBackupDriveRequest(url, { method: "GET" });
+  const data = await response.json();
+  return data.files && data.files.length ? data.files[0] : null;
+ }
+ async function gBackupUploadToDrive() {
+  gBackupSetMessage("正在備份到 Google Drive...");
+  const bodyText = JSON.stringify(gBackupCollectObject(), null, 2);
+  const existing = await gBackupFindDriveFile();
+  if (existing && existing.id) {
+   await gBackupDriveRequest("https://www.googleapis.com/upload/drive/v3/files/" + encodeURIComponent(existing.id) + "?uploadType=media", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json;charset=utf-8" },
+    body: bodyText
+   });
+  } else {
+   const boundary = "gbackup_boundary_" + Date.now();
+   const metadata = { name: G_BACKUP_FILE_NAME, parents: ["appDataFolder"], mimeType: "application/json" };
+   const multipartBody = "--" + boundary + "\r\n" +
+    "Content-Type: application/json; charset=UTF-8\r\n\r\n" +
+    JSON.stringify(metadata) + "\r\n" +
+    "--" + boundary + "\r\n" +
+    "Content-Type: application/json; charset=UTF-8\r\n\r\n" +
+    bodyText + "\r\n" +
+    "--" + boundary + "--";
+   await gBackupDriveRequest("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name", {
+    method: "POST",
+    headers: { "Content-Type": "multipart/related; boundary=" + boundary },
+    body: multipartBody
+   });
+  }
+  gBackupSetMessage("備份完成：" + G_BACKUP_FILE_NAME);
+  window.alert("備份完成");
+ }
+ async function gBackupRestoreFromDrive() {
+  const confirmed = window.confirm("確定要從 Google Drive 還原嗎？\n還原前會先下載一份目前本機備份 JSON。");
+  if (!confirmed) return;
+  gBackupDownloadCurrent("還原前本機備份");
+  localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCollectObject()));
+  gBackupSetMessage("正在從 Google Drive 讀取備份...");
+  const existing = await gBackupFindDriveFile();
+  if (!existing || !existing.id) {
+   gBackupSetMessage("Google Drive appDataFolder 找不到 overtime-backup.json。");
+   window.alert("找不到 Google Drive 備份檔");
+   return;
+  }
+  const response = await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id) + "?alt=media", { method: "GET" });
+  const payload = await response.json();
+  gBackupApplyPayload(payload);
+  gBackupSetMessage("還原完成，頁面即將重新載入。");
+  window.alert("還原完成，將重新載入頁面");
+  window.location.reload();
+ }
+ function gBackupImportLocalFile(file) {
+  if (!file) return;
+  const confirmed = window.confirm("確定要匯入本機備份 JSON 嗎？\n匯入前會先下載一份目前本機備份 JSON。");
+  if (!confirmed) return;
+  gBackupDownloadCurrent("匯入前本機備份");
+  localStorage.setItem(G_BACKUP_BEFORE_IMPORT_KEY, JSON.stringify(gBackupCollectObject()));
+  const reader = new FileReader();
+  reader.onload = function() {
+   try {
+    const payload = JSON.parse(String(reader.result || "{}"));
+    gBackupApplyPayload(payload);
+    gBackupSetMessage("匯入完成，頁面即將重新載入。");
+    window.alert("匯入完成，將重新載入頁面");
+    window.location.reload();
+   } catch (err) {
+    gBackupSetMessage(err.message || "匯入失敗。");
+    window.alert(err.message || "匯入失敗");
+   }
+  };
+  reader.readAsText(file, "utf-8");
+ }
+ gBackupReady(function() {
+  const openBtn = document.getElementById("gBackupRestoreOpenBtn");
+  const closeBtn = document.getElementById("gBackupCloseBtn");
+  const loginBtn = document.getElementById("gBackupLoginBtn");
+  const logoutBtn = document.getElementById("gBackupLogoutBtn");
+  const uploadBtn = document.getElementById("gBackupUploadBtn");
+  const restoreBtn = document.getElementById("gBackupRestoreBtn");
+  const downloadBtn = document.getElementById("gBackupLocalDownloadBtn");
+  const importBtn = document.getElementById("gBackupLocalImportBtn");
+  const fileInput = document.getElementById("gBackupLocalFileInput");
+  if (openBtn) openBtn.addEventListener("click", gBackupOpenModal);
+  if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
+  const modal = document.getElementById("gBackupRestoreModal");
+  if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
+  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("Google 已登入，可進行手動備份／還原。"); }); });
+  if (logoutBtn) logoutBtn.addEventListener("click", function() {
+   if (gBackupAccessToken && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gBackupAccessToken, function() {});
+   gBackupAccessToken = "";
+   gBackupSetMessage("已登出 Google。");
+  });
+  if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
+  if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
+  if (downloadBtn) downloadBtn.addEventListener("click", function() { gBackupDownloadCurrent("overtime-local-backup"); gBackupSetMessage("已下載本機備份 JSON。"); });
+  if (importBtn && fileInput) importBtn.addEventListener("click", function() { fileInput.value = ""; fileInput.click(); });
+  if (fileInput) fileInput.addEventListener("change", function() { gBackupImportLocalFile(fileInput.files && fileInput.files[0]); });
+ });
+})();
+</script>
+<!-- G備份/還原：腳本結束 -->
+
 </body>
 </html>
