@@ -2624,6 +2624,51 @@
  .g-backup-title { font-size: 22px !important; }
  .g-backup-action-btn { min-height: 46px !important; font-size: 14px !important; }
 }
+
+.g-backup-drive-status {
+ margin-top: 2px;
+ border: 1px solid rgba(66, 133, 244, 0.28);
+ border-radius: 14px;
+ background: rgba(15, 23, 42, 0.52);
+ padding: 10px 12px;
+ color: #cbd5e1;
+ font-size: 12px;
+ line-height: 1.65;
+ text-align: left;
+ word-break: break-word;
+}
+.g-backup-drive-status-title {
+ color: #fde68a;
+ font-size: 12px;
+ font-weight: 950;
+ letter-spacing: 0.08em;
+ margin-bottom: 5px;
+ text-shadow: 0 0 9px rgba(246, 196, 83, 0.32);
+}
+.g-backup-drive-status-row {
+ display: grid;
+ grid-template-columns: 104px minmax(0, 1fr);
+ gap: 8px;
+ align-items: baseline;
+ border-top: 1px solid rgba(255, 255, 255, 0.06);
+ padding-top: 5px;
+ margin-top: 5px;
+}
+.g-backup-drive-status-label {
+ color: #93c5fd;
+ font-weight: 950;
+ white-space: nowrap;
+}
+.g-backup-drive-status-value {
+ color: #e5e7eb;
+ font-weight: 850;
+ min-width: 0;
+}
+@media (max-width: 760px) {
+ .g-backup-drive-status { font-size: 12px !important; }
+ .g-backup-drive-status-row { grid-template-columns: 88px minmax(0, 1fr) !important; gap: 6px !important; }
+}
+
 /* G備份/還原：樣式結束 */
 
 </style>
@@ -2991,8 +3036,17 @@
     <button id="gBackupRestoreBtn" class="g-backup-action-btn g-backup-danger" type="button">從 G 還原</button>
     <button id="gBackupLocalDownloadBtn" class="g-backup-action-btn" type="button">下載本機備份 JSON</button>
     <button id="gBackupLocalImportBtn" class="g-backup-action-btn g-backup-danger" type="button">匯入本機備份 JSON</button>
+    <button id="gBackupCheckStatusBtn" class="g-backup-action-btn" type="button">檢查 G 備份狀態</button>
+    <button id="gBackupDownloadDriveBtn" class="g-backup-action-btn" type="button">下載 G 備份 JSON</button>
    </div>
    <input id="gBackupLocalFileInput" class="g-backup-file-input" type="file" accept="application/json,.json" />
+   <div id="gBackupDriveStatusBox" class="g-backup-drive-status" aria-live="polite">
+    <div class="g-backup-drive-status-title">Google 備份狀態</div>
+    <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupDriveStatusState" class="g-backup-drive-status-value">尚未檢查</span></div>
+    <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">檔名</span><span id="gBackupDriveStatusName" class="g-backup-drive-status-value">-</span></div>
+    <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後修改</span><span id="gBackupDriveStatusModified" class="g-backup-drive-status-value">-</span></div>
+    <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">File ID</span><span id="gBackupDriveStatusId" class="g-backup-drive-status-value">-</span></div>
+   </div>
    <div id="gBackupStatusMessage" class="g-backup-message">尚未登入 Google。</div>
    <button id="gBackupCloseBtn" class="g-backup-close" type="button">關閉</button>
   </div>
@@ -6157,6 +6211,34 @@
   const fileName = (prefix || "overtime-local-backup") + "-" + stamp + ".json";
   gBackupDownloadText(fileName, JSON.stringify(gBackupCollectObject(), null, 2));
  }
+ function gBackupFormatLocalTime(isoText) {
+  if (!isoText) return "-";
+  const date = new Date(isoText);
+  if (Number.isNaN(date.getTime())) return String(isoText);
+  const pad = function(value) { return String(value).padStart(2, "0"); };
+  return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + " " + pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds());
+ }
+ function gBackupSetText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+ }
+ function gBackupRenderDriveStatus(file) {
+  if (file && file.id) {
+   gBackupSetText("gBackupDriveStatusState", "已找到 Google 備份");
+   gBackupSetText("gBackupDriveStatusName", file.name || G_BACKUP_FILE_NAME);
+   gBackupSetText("gBackupDriveStatusModified", gBackupFormatLocalTime(file.modifiedTime));
+   gBackupSetText("gBackupDriveStatusId", file.id);
+  } else {
+   gBackupSetText("gBackupDriveStatusState", "找不到 Google 備份");
+   gBackupSetText("gBackupDriveStatusName", "-");
+   gBackupSetText("gBackupDriveStatusModified", "-");
+   gBackupSetText("gBackupDriveStatusId", "-");
+  }
+ }
+ function gBackupMakeTimestampFileName(prefix) {
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+  return (prefix || "google-drive-backup") + "-" + stamp + ".json";
+ }
  function gBackupValidatePayload(payload) {
   if (!payload || typeof payload !== "object") throw new Error("備份檔格式錯誤：不是 JSON 物件。");
   const keys = payload.keys && typeof payload.keys === "object" ? payload.keys : payload;
@@ -6225,10 +6307,40 @@
  }
  async function gBackupFindDriveFile() {
   const query = "name='" + G_BACKUP_FILE_NAME.replace(/'/g, "\\'") + "' and 'appDataFolder' in parents and trashed=false";
-  const url = "https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime)&q=" + encodeURIComponent(query);
+  const url = "https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime,size,mimeType)&q=" + encodeURIComponent(query);
   const response = await gBackupDriveRequest(url, { method: "GET" });
   const data = await response.json();
   return data.files && data.files.length ? data.files[0] : null;
+ }
+ async function gBackupCheckDriveStatus(silent) {
+  if (!silent) gBackupSetMessage("正在檢查 Google 備份狀態...");
+  const existing = await gBackupFindDriveFile();
+  gBackupRenderDriveStatus(existing);
+  if (existing && existing.id) {
+   gBackupSetMessage("已找到 Google 備份：" + (existing.name || G_BACKUP_FILE_NAME) + "，最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
+  } else {
+   gBackupSetMessage("Google Drive appDataFolder 目前找不到 " + G_BACKUP_FILE_NAME + "。");
+  }
+  return existing;
+ }
+ async function gBackupDownloadDriveBackup() {
+  gBackupSetMessage("正在下載 Google 備份 JSON...");
+  const existing = await gBackupFindDriveFile();
+  gBackupRenderDriveStatus(existing);
+  if (!existing || !existing.id) {
+   gBackupSetMessage("Google Drive appDataFolder 找不到 " + G_BACKUP_FILE_NAME + "，無法下載。");
+   window.alert("找不到 Google Drive 備份檔");
+   return;
+  }
+  const response = await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id) + "?alt=media", { method: "GET" });
+  const text = await response.text();
+  try {
+   JSON.parse(text);
+  } catch (err) {
+   throw new Error("Google 備份檔內容不是有效 JSON，請先不要還原。詳細錯誤：" + (err.message || err));
+  }
+  gBackupDownloadText(gBackupMakeTimestampFileName("google-drive-backup"), text);
+  gBackupSetMessage("已下載 Google 備份 JSON。最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
  }
  async function gBackupUploadToDrive() {
   gBackupSetMessage("正在備份到 Google Drive...");
@@ -6256,7 +6368,9 @@
     body: multipartBody
    });
   }
-  gBackupSetMessage("備份完成：" + G_BACKUP_FILE_NAME);
+  const refreshed = await gBackupFindDriveFile();
+  gBackupRenderDriveStatus(refreshed);
+  gBackupSetMessage("備份完成：" + G_BACKUP_FILE_NAME + (refreshed && refreshed.modifiedTime ? "，最後修改：" + gBackupFormatLocalTime(refreshed.modifiedTime) : ""));
   window.alert("備份完成");
  }
  async function gBackupRestoreFromDrive() {
@@ -6267,10 +6381,12 @@
   gBackupSetMessage("正在從 Google Drive 讀取備份...");
   const existing = await gBackupFindDriveFile();
   if (!existing || !existing.id) {
+   gBackupRenderDriveStatus(null);
    gBackupSetMessage("Google Drive appDataFolder 找不到 overtime-backup.json。");
    window.alert("找不到 Google Drive 備份檔");
    return;
   }
+  gBackupRenderDriveStatus(existing);
   const response = await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id) + "?alt=media", { method: "GET" });
   const payload = await response.json();
   gBackupApplyPayload(payload);
@@ -6308,6 +6424,8 @@
   const restoreBtn = document.getElementById("gBackupRestoreBtn");
   const downloadBtn = document.getElementById("gBackupLocalDownloadBtn");
   const importBtn = document.getElementById("gBackupLocalImportBtn");
+  const checkStatusBtn = document.getElementById("gBackupCheckStatusBtn");
+  const downloadDriveBtn = document.getElementById("gBackupDownloadDriveBtn");
   const fileInput = document.getElementById("gBackupLocalFileInput");
   if (openBtn) openBtn.addEventListener("click", gBackupOpenModal);
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
@@ -6321,6 +6439,8 @@
   });
   if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
+  if (checkStatusBtn) checkStatusBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupCheckDriveStatus(false).catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
+  if (downloadDriveBtn) downloadDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDownloadDriveBackup().catch(function(err) { gBackupSetMessage(err.message); window.alert(err.message); }); }); });
   if (downloadBtn) downloadBtn.addEventListener("click", function() { gBackupDownloadCurrent("overtime-local-backup"); gBackupSetMessage("已下載本機備份 JSON。"); });
   if (importBtn && fileInput) importBtn.addEventListener("click", function() { fileInput.value = ""; fileInput.click(); });
   if (fileInput) fileInput.addEventListener("change", function() { gBackupImportLocalFile(fileInput.files && fileInput.files[0]); });
