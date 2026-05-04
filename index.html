@@ -2403,196 +2403,58 @@
 
   
 
- /* === 修正：手機版本月假別累計改為「特休9天6.5HR」單列顯示，避免跨欄重疊 === */
+ /* === 穩定版修正整合：手機本月假別同列、無滑動收合、模組識別色、圓角與年度請假資訊卡片 === */
  @media (max-width: 760px) {
- .leave-stats-content > .leave-stats-card:first-child .leave-stats-grid {
- grid-template-columns: 1fr !important;
- gap: 6px !important;
- }
- .leave-stats-content > .leave-stats-card:first-child .leave-stat-item {
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- gap: 0 !important;
- min-height: 42px !important;
- padding: 8px 10px !important;
- text-align: center !important;
- }
+ .leave-stats-content > .leave-stats-card:first-child .leave-stats-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+ .leave-stats-content > .leave-stats-card:first-child .leave-stat-item { display: flex !important; align-items: center !important; justify-content: center !important; gap: 0 !important; min-height: 42px !important; padding: 8px 10px !important; text-align: center !important; }
  .leave-stats-content > .leave-stats-card:first-child .leave-stat-label,
- .leave-stats-content > .leave-stats-card:first-child .leave-stat-value {
- display: inline !important;
- margin: 0 !important;
- font-size: clamp(18px, 5.3vw, 22px) !important;
- line-height: 1.05 !important;
- white-space: nowrap !important;
- overflow: visible !important;
- text-overflow: clip !important;
+ .leave-stats-content > .leave-stats-card:first-child .leave-stat-value { display: inline !important; margin: 0 !important; font-size: clamp(18px, 5.3vw, 22px) !important; line-height: 1.05 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
  }
- }
-
- /* === 修正：假別統計資訊預設收合，移除展開滑動感以改善手機效能 === */
  .leave-stats-panel > .section-header-toggle { cursor: pointer !important; user-select: none !important; }
- .leave-stats-panel .leave-stats-content {
- display: none !important;
- max-height: none !important;
- opacity: 1 !important;
- overflow: hidden !important;
- padding-top: 0 !important;
- padding-bottom: 0 !important;
- transition: none !important;
- animation: none !important;
- }
- .leave-stats-panel.leave-stats-expanded .leave-stats-content {
- display: grid !important;
- max-height: none !important;
- opacity: 1 !important;
- padding-top: 16px !important;
- padding-bottom: 16px !important;
- transition: none !important;
- animation: none !important;
- }
+ .leave-stats-panel .leave-stats-content { display: none !important; max-height: none !important; opacity: 1 !important; overflow: hidden !important; padding-top: 0 !important; padding-bottom: 0 !important; transition: none !important; animation: none !important; }
+ .leave-stats-panel.leave-stats-expanded .leave-stats-content { display: grid !important; max-height: none !important; opacity: 1 !important; padding-top: 16px !important; padding-bottom: 16px !important; transition: none !important; animation: none !important; }
  .leave-stats-panel .details-icon { transition: none !important; }
- .leave-stats-panel.leave-stats-expanded .details-icon {
- transform: none !important;
- color: #43D39E !important;
- text-shadow: 0 0 12px rgba(67, 211, 158, 0.45) !important;
- }
- @media (max-width: 760px) {
- .leave-stats-panel.leave-stats-expanded .leave-stats-content { padding-top: 12px !important; padding-bottom: 12px !important; }
- }
-
- /* === 微調：三列系統模組識別色，藍色公告事件、綠色人員流程、橘色設備維護 === */
+ .leave-stats-panel.leave-stats-expanded .details-icon { transform: none !important; color: #43D39E !important; text-shadow: 0 0 12px rgba(67, 211, 158, 0.45) !important; }
  .special-panel > .special-toggle,
  .batch-panel > .special-toggle,
- .overhaul-panel > .special-toggle {
- position: relative !important;
- overflow: hidden !important;
- background: linear-gradient(90deg, rgba(8, 14, 25, 0.98), rgba(10, 18, 28, 0.94), rgba(8, 14, 25, 0.98)) !important;
- }
+ .overhaul-panel > .special-toggle { position: relative !important; overflow: hidden !important; background: linear-gradient(90deg, rgba(8, 14, 25, 0.98), rgba(10, 18, 28, 0.94), rgba(8, 14, 25, 0.98)) !important; }
  .special-panel > .special-toggle::before,
  .batch-panel > .special-toggle::before,
- .overhaul-panel > .special-toggle::before {
- content: "";
- position: absolute;
- inset: 0;
- pointer-events: none;
- opacity: 0.55;
- background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.035), transparent);
- }
+ .overhaul-panel > .special-toggle::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.55; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.035), transparent); }
  .special-panel > .special-toggle > div:first-child > div:first-child,
  .batch-panel > .special-toggle > div:first-child > div:first-child,
- .overhaul-panel > .special-toggle > div:first-child > div:first-child {
- position: relative;
- z-index: 1;
- font-size: clamp(17px, 2.2vw, 22px) !important;
- font-weight: 950 !important;
- letter-spacing: 0.10em !important;
- -webkit-background-clip: text !important;
- background-clip: text !important;
- color: transparent !important;
- }
- .special-panel > .special-toggle > div:first-child > div:first-child {
- background-image: linear-gradient(90deg, #dff9ff 0%, #7dd3fc 34%, #22d3ee 68%, #67e8f9 100%) !important;
- text-shadow: 0 0 10px rgba(34, 211, 238, 0.58), 0 0 22px rgba(125, 211, 252, 0.28) !important;
- filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.22));
- }
- .batch-panel > .special-toggle > div:first-child > div:first-child {
- background-image: linear-gradient(90deg, #d1fae5 0%, #6ee7b7 30%, #10b981 66%, #43d39e 100%) !important;
- text-shadow: 0 0 10px rgba(16, 185, 129, 0.58), 0 0 24px rgba(67, 211, 158, 0.28) !important;
- filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.22));
- }
- .overhaul-panel > .special-toggle > div:first-child > div:first-child {
- background-image: linear-gradient(90deg, #ffedd5 0%, #fbbf24 30%, #fb923c 66%, #f97316 100%) !important;
- text-shadow: 0 0 10px rgba(251, 146, 60, 0.60), 0 0 24px rgba(251, 191, 36, 0.28) !important;
- filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.24));
- }
+ .overhaul-panel > .special-toggle > div:first-child > div:first-child { position: relative; z-index: 1; font-size: clamp(17px, 2.2vw, 22px) !important; font-weight: 950 !important; letter-spacing: 0.10em !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }
+ .special-panel > .special-toggle > div:first-child > div:first-child { background-image: linear-gradient(90deg, #dff9ff 0%, #7dd3fc 34%, #22d3ee 68%, #67e8f9 100%) !important; text-shadow: 0 0 10px rgba(34,211,238,.58), 0 0 22px rgba(125,211,252,.28) !important; filter: drop-shadow(0 0 8px rgba(34,211,238,.22)); }
+ .batch-panel > .special-toggle > div:first-child > div:first-child { background-image: linear-gradient(90deg, #d1fae5 0%, #6ee7b7 30%, #10b981 66%, #43d39e 100%) !important; text-shadow: 0 0 10px rgba(16,185,129,.58), 0 0 24px rgba(67,211,158,.28) !important; filter: drop-shadow(0 0 8px rgba(16,185,129,.22)); }
+ .overhaul-panel > .special-toggle > div:first-child > div:first-child { background-image: linear-gradient(90deg, #ffedd5 0%, #fbbf24 30%, #fb923c 66%, #f97316 100%) !important; text-shadow: 0 0 10px rgba(251,146,60,.60), 0 0 24px rgba(251,191,36,.28) !important; filter: drop-shadow(0 0 8px rgba(249,115,22,.24)); }
  .special-panel > .special-toggle .special-summary,
  .batch-panel > .special-toggle .special-summary,
  .overhaul-panel > .special-toggle .special-summary { position: relative; z-index: 1; color: #94a3b8 !important; text-shadow: none !important; }
- .special-panel > .special-toggle #specialToggleIcon { color: #67e8f9 !important; text-shadow: 0 0 12px rgba(103, 232, 249, 0.62) !important; }
- .batch-panel > .special-toggle #batchToggleIcon { color: #6ee7b7 !important; text-shadow: 0 0 12px rgba(110, 231, 183, 0.62) !important; }
- .overhaul-panel > .special-toggle #overhaulToggleIcon { color: #fb923c !important; text-shadow: 0 0 12px rgba(251, 146, 60, 0.62) !important; }
- .special-panel { border-color: rgba(103, 232, 249, 0.28) !important; }
- .batch-panel { border-color: rgba(67, 211, 158, 0.28) !important; }
- .overhaul-panel { border-color: rgba(251, 146, 60, 0.30) !important; }
-
- /* === 微調：第二層功能識別色，紫色數據分析、玫瑰金財務結算；假別統計標題大小對齊大修設定並修正清晰度 === */
+ .special-panel > .special-toggle #specialToggleIcon { color: #67e8f9 !important; text-shadow: 0 0 12px rgba(103,232,249,.62) !important; }
+ .batch-panel > .special-toggle #batchToggleIcon { color: #6ee7b7 !important; text-shadow: 0 0 12px rgba(110,231,183,.62) !important; }
+ .overhaul-panel > .special-toggle #overhaulToggleIcon { color: #fb923c !important; text-shadow: 0 0 12px rgba(251,146,60,.62) !important; }
+ .special-panel { border-color: rgba(103,232,249,.28) !important; }
+ .batch-panel { border-color: rgba(67,211,158,.28) !important; }
+ .overhaul-panel { border-color: rgba(251,146,60,.30) !important; }
  details.core-stats-panel > summary.section-header-toggle,
  details.salary-panel > summary.section-header-toggle,
  .leave-stats-panel > .section-header-toggle { position: relative !important; overflow: hidden !important; }
  details.core-stats-panel > summary.section-header-toggle > div > div:first-child,
- details.salary-panel > summary.section-header-toggle #salaryTrialTitle {
- position: relative;
- z-index: 1;
- font-size: clamp(17px, 2.2vw, 22px) !important;
- font-weight: 950 !important;
- letter-spacing: 0.10em !important;
- -webkit-background-clip: text !important;
- background-clip: text !important;
- color: transparent !important;
- }
- details.core-stats-panel > summary.section-header-toggle > div > div:first-child {
- background-image: linear-gradient(90deg, #e0e7ff 0%, #a78bfa 30%, #8b5cf6 64%, #c084fc 100%) !important;
- text-shadow: 0 0 10px rgba(139, 92, 246, 0.58), 0 0 24px rgba(192, 132, 252, 0.28) !important;
- filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.24));
- }
- details.salary-panel > summary.section-header-toggle #salaryTrialTitle {
- background-image: linear-gradient(90deg, #fff7ed 0%, #f9a8d4 24%, #f6c453 58%, #e5e7eb 100%) !important;
- text-shadow: 0 0 12px rgba(249, 168, 212, 0.52), 0 0 26px rgba(246, 196, 83, 0.34), 0 0 34px rgba(229, 231, 235, 0.16) !important;
- filter: drop-shadow(0 0 9px rgba(246, 196, 83, 0.28));
- }
- details.salary-panel > summary.section-header-toggle {
- border-bottom-color: rgba(249, 168, 212, 0.24) !important;
- background: linear-gradient(90deg, rgba(35, 16, 28, 0.72), rgba(17, 24, 39, 0.96), rgba(61, 39, 14, 0.48)) !important;
- box-shadow: inset 0 0 20px rgba(249, 168, 212, 0.035), inset 0 0 26px rgba(246, 196, 83, 0.025) !important;
- }
- .leave-stats-panel > .section-header-toggle > div > div:first-child {
- position: relative !important;
- z-index: 1 !important;
- font-size: clamp(17px, 2.2vw, 22px) !important;
- font-weight: 950 !important;
- letter-spacing: 0.10em !important;
- color: #dbeafe !important;
- -webkit-text-fill-color: #dbeafe !important;
- background-image: none !important;
- -webkit-background-clip: border-box !important;
- background-clip: border-box !important;
- text-shadow: 0 0 5px rgba(125, 211, 252, 0.32) !important;
- filter: none !important;
- }
-
- /* === 修正：手機版加班費明細區移除內縮方形感，改回與其他模組一致的圓弧標題列 === */
+ details.salary-panel > summary.section-header-toggle #salaryTrialTitle { position: relative; z-index: 1; font-size: clamp(17px,2.2vw,22px) !important; font-weight: 950 !important; letter-spacing: .10em !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }
+ details.core-stats-panel > summary.section-header-toggle > div > div:first-child { background-image: linear-gradient(90deg, #e0e7ff 0%, #a78bfa 30%, #8b5cf6 64%, #c084fc 100%) !important; text-shadow: 0 0 10px rgba(139,92,246,.58), 0 0 24px rgba(192,132,252,.28) !important; filter: drop-shadow(0 0 8px rgba(139,92,246,.24)); }
+ details.salary-panel > summary.section-header-toggle #salaryTrialTitle { background-image: linear-gradient(90deg, #fff7ed 0%, #f9a8d4 24%, #f6c453 58%, #e5e7eb 100%) !important; text-shadow: 0 0 12px rgba(249,168,212,.52), 0 0 26px rgba(246,196,83,.34), 0 0 34px rgba(229,231,235,.16) !important; filter: drop-shadow(0 0 9px rgba(246,196,83,.28)); }
+ details.salary-panel > summary.section-header-toggle { border-bottom-color: rgba(249,168,212,.24) !important; background: linear-gradient(90deg, rgba(35,16,28,.72), rgba(17,24,39,.96), rgba(61,39,14,.48)) !important; box-shadow: inset 0 0 20px rgba(249,168,212,.035), inset 0 0 26px rgba(246,196,83,.025) !important; }
+ .leave-stats-panel > .section-header-toggle > div > div:first-child,
+ .annual-leave-info-title { position: relative !important; z-index: 1 !important; font-size: clamp(17px,2.2vw,22px) !important; font-weight: 950 !important; letter-spacing: .10em !important; color: #dbeafe !important; -webkit-text-fill-color: #dbeafe !important; background-image: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important; text-shadow: 0 0 5px rgba(125,211,252,.32) !important; filter: none !important; }
  details.salary-panel { padding: 0 !important; overflow: hidden !important; border-radius: 18px !important; }
  details.salary-panel > summary.section-header-toggle { border-radius: 18px !important; }
  details.salary-panel[open] > summary.section-header-toggle { border-radius: 18px 18px 0 0 !important; }
-
- /* === 排版調整：年度請假資訊獨立卡片，放在代班資訊與主月曆中間 === */
- .annual-leave-info-panel {
- margin-bottom: 16px;
- padding: 0;
- overflow: hidden;
- border-color: rgba(77, 163, 255, 0.24) !important;
- background: radial-gradient(circle at 12% 0%, rgba(245, 192, 74, 0.10), transparent 32%), radial-gradient(circle at 88% 8%, rgba(67, 211, 158, 0.10), transparent 30%), linear-gradient(180deg, #071018, #050b12) !important;
- }
- .annual-leave-info-header {
- display: flex;
- align-items: center;
- justify-content: space-between;
- padding: 15px 18px;
- border-bottom: 1px solid rgba(77, 163, 255, 0.22);
- background: linear-gradient(90deg, rgba(11, 22, 34, 0.98), rgba(6, 78, 59, 0.26), rgba(7, 16, 24, 0.98));
- }
- .annual-leave-info-title {
- color: #dbeafe;
- font-size: clamp(17px, 2.2vw, 22px);
- font-weight: 950;
- letter-spacing: 0.10em;
- text-shadow: 0 0 8px rgba(77, 163, 255, 0.28);
- }
+ .annual-leave-info-panel { margin-bottom: 16px; padding: 0; overflow: hidden; border-color: rgba(77,163,255,.24) !important; background: radial-gradient(circle at 12% 0%, rgba(245,192,74,.10), transparent 32%), radial-gradient(circle at 88% 8%, rgba(67,211,158,.10), transparent 30%), linear-gradient(180deg, #071018, #050b12) !important; }
+ .annual-leave-info-header { display: flex; align-items: center; justify-content: space-between; padding: 15px 18px; border-bottom: 1px solid rgba(77,163,255,.22); background: linear-gradient(90deg, rgba(11,22,34,.98), rgba(6,78,59,.26), rgba(7,16,24,.98)); }
  .annual-leave-info-content { padding: 16px; }
- .annual-leave-info-panel .leave-stats-year-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+ .annual-leave-info-panel .leave-stats-year-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
  .leave-stats-panel .leave-stats-content { grid-template-columns: 1fr; }
- .leave-stats-panel .leave-stats-card.monthly-leave-stats-card { margin: 0; }
+ .leave-stats-panel .monthly-leave-stats-card { margin: 0; }
  @media (max-width: 760px) {
  .special-panel > .special-toggle > div:first-child > div:first-child,
  .batch-panel > .special-toggle > div:first-child > div:first-child,
@@ -2600,14 +2462,15 @@
  details.core-stats-panel > summary.section-header-toggle > div > div:first-child,
  details.salary-panel > summary.section-header-toggle #salaryTrialTitle,
  .leave-stats-panel > .section-header-toggle > div > div:first-child,
- .annual-leave-info-title { font-size: 17px !important; letter-spacing: 0.04em !important; }
+ .annual-leave-info-title { font-size: 17px !important; letter-spacing: .04em !important; }
+ .leave-stats-panel.leave-stats-expanded .leave-stats-content { padding-top: 12px !important; padding-bottom: 12px !important; }
  details.salary-panel { padding: 0 !important; border-radius: 18px !important; }
  details.salary-panel > summary.section-header-toggle { margin: 0 !important; border-radius: 18px !important; }
  details.salary-panel[open] > summary.section-header-toggle { border-radius: 18px 18px 0 0 !important; }
  .annual-leave-info-content { padding: 12px !important; }
  .annual-leave-info-panel .leave-stats-year-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
- .annual-leave-info-panel .leave-stats-year-box .leave-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
- .annual-leave-info-panel .leave-stats-year-box.accounting-year .leave-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+ .annual-leave-info-panel .leave-stats-year-box .leave-stats-grid { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+ .annual-leave-info-panel .leave-stats-year-box.accounting-year .leave-stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
  }
 
  </style>
@@ -2677,10 +2540,7 @@
       </section>
       <section class="panel annual-leave-info-panel">
         <div class="annual-leave-info-header">
-          <div>
-            <div id="annualLeaveInfoTitle" class="annual-leave-info-title">年度請假資訊</div>
-            <div id="annualLeaveInfoSummary" class="special-summary">本考勤年度與本會計年度累計請假資訊</div>
-          </div>
+          <div id="annualLeaveInfoTitle" class="annual-leave-info-title">年度請假資訊</div>
         </div>
         <div class="annual-leave-info-content">
           <div class="leave-stats-year-grid annual-leave-stats-year-grid">
@@ -2827,14 +2687,12 @@
       <section class="panel leave-stats-panel">
         <div class="section-header-toggle">
           <div>
-            <div>假別統計資訊</div>
-            <div id="leaveStatsSummary" class="special-summary">統計本月特休、身心調適假、病假、事假、家庭照顧假</div>
+            <div id="leaveStatsPanelTitle">本月假別統計資訊</div>            
           </div>
           <div class="details-icon">＋</div>
         </div>
         <div class="leave-stats-content">
           <div class="leave-stats-card monthly-leave-stats-card">
-            <div id="leaveStatsMonthTitle" class="leave-stats-title">本月假別統計資訊</div>
             <div class="leave-stats-grid">
               <div class="leave-stat-item"><div class="leave-stat-label">特休</div><div id="leaveMonthSpecial" class="leave-stat-value empty">0HR</div></div>
               <div class="leave-stat-item"><div class="leave-stat-label">身心</div><div id="leaveMonthMind" class="leave-stat-value empty">0HR</div></div>
@@ -5821,14 +5679,12 @@
       updateSpecialLeaveSubsidyDisplay(specialLeaveSubsidy);
       const monthTitle = document.getElementById("leaveStatsMonthTitle");
       if (monthTitle) monthTitle.textContent = `${month}月假別統計資訊`;
+      const leaveStatsPanelTitle = document.getElementById("leaveStatsPanelTitle");
+      if (leaveStatsPanelTitle) leaveStatsPanelTitle.textContent = `${month}月假別統計資訊`;
       const attendanceTitle = document.getElementById("leaveStatsAttendanceTitle");
       if (attendanceTitle) attendanceTitle.textContent = `${attendanceYear}年考勤年度`;
       const accountingTitle = document.getElementById("leaveStatsAccountingTitle");
       if (accountingTitle) accountingTitle.textContent = `${accountingYear}年會計年度`;
-      const annualTitle = document.getElementById("annualLeaveInfoTitle");
-      if (annualTitle) annualTitle.textContent = `${attendanceYear}年度請假資訊`;
-      const annualSummary = document.getElementById("annualLeaveInfoSummary");
-      if (annualSummary) annualSummary.textContent = `${attendanceYear}年考勤年度與${accountingYear}年會計年度累計`;
       const summary = document.getElementById("leaveStatsSummary");
       if (summary) summary.textContent = `${month}月假別統計`;
       setLeaveStatText("leaveMonthSpecial", monthStats.special);
