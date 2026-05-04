@@ -2673,7 +2673,8 @@
 
 
 /* === G備份/還原：Modern Tech Glassmorphism 重設計 === */
-.g-backup-modal { align-items: center !important; justify-content: center !important; padding: 18px !important; background: rgba(0,0,0,.74) !important; backdrop-filter: blur(7px) saturate(1.2) !important; }
+.g-backup-modal { align-items: center !important; justify-content: center !important; padding: 18px !important; background: rgba(0,0,0,.74) !important; backdrop-filter: blur(7px) saturate(1.2) !important; overscroll-behavior: contain !important; touch-action: none !important; }
+.g-backup-card, .g-backup-body { overscroll-behavior: contain !important; touch-action: auto !important; }
 .g-backup-card { width: min(560px, 100%) !important; max-height: min(88vh, 760px) !important; display: grid !important; grid-template-rows: auto minmax(0, 1fr) !important; border: 1px solid rgba(154,160,166,.22) !important; border-radius: 24px !important; background: linear-gradient(145deg, rgba(18,18,18,.92), rgba(30,30,38,.88)) !important; box-shadow: 0 24px 70px rgba(0,0,0,.68), inset 0 1px 0 rgba(255,255,255,.08), 0 0 38px rgba(66,133,244,.16) !important; overflow: hidden !important; }
 .g-backup-tech-header { padding: 18px 18px 14px !important; border-bottom: 1px solid rgba(154,160,166,.14) !important; background: radial-gradient(circle at 20% 0%, rgba(66,133,244,.22), transparent 34%), radial-gradient(circle at 85% 10%, rgba(52,168,83,.16), transparent 35%), rgba(18,18,18,.36) !important; }
 .g-backup-brand-row { display: flex !important; align-items: flex-start !important; justify-content: space-between !important; gap: 14px !important; }
@@ -6279,6 +6280,8 @@
  let gBackupTokenClient = null;
  let gBackupAccessToken = "";
  let gBackupPendingAction = null;
+ let gBackupBodyScrollY = 0;
+ let gBackupBodyScrollLocked = false;
 
  function gBackupReady(callback) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", callback);
@@ -6288,9 +6291,32 @@
   const el = document.getElementById("gBackupStatusMessage");
   if (el) el.textContent = message;
  }
+ function gBackupLockBodyScroll() {
+  if (gBackupBodyScrollLocked) return;
+  gBackupBodyScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${gBackupBodyScrollY}px`;
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.style.width = "100%";
+  document.body.style.overflow = "hidden";
+  gBackupBodyScrollLocked = true;
+ }
+ function gBackupUnlockBodyScroll() {
+  if (!gBackupBodyScrollLocked) return;
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
+  document.body.style.width = "";
+  document.body.style.overflow = "";
+  window.scrollTo(0, gBackupBodyScrollY || 0);
+  gBackupBodyScrollLocked = false;
+ }
  function gBackupOpenModal() {
   const modal = document.getElementById("gBackupRestoreModal");
   if (!modal) return;
+  gBackupLockBodyScroll();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
  }
@@ -6299,6 +6325,7 @@
   if (!modal) return;
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
+  gBackupUnlockBodyScroll();
  }
  function gBackupEnsureDialogModal() {
   let modal = document.getElementById("gBackupTechDialogModal");
