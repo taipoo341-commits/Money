@@ -2761,6 +2761,50 @@
  .g-tech-dialog-title { font-size: 22px; }
  .g-tech-dialog-actions { grid-template-columns: 1fr; }
 }
+
+/* === G備份/還原：手機版關閉按鈕固定可見修正 === */
+@supports (height: 100dvh) {
+ .g-backup-card { max-height: min(88dvh, 760px) !important; }
+}
+.g-backup-close {
+ position: sticky !important;
+ bottom: 0 !important;
+ z-index: 5 !important;
+ margin-top: 4px !important;
+ box-shadow: 0 -12px 24px rgba(0,0,0,.34), 0 0 18px rgba(66,133,244,.12) !important;
+}
+@media (max-width: 760px) {
+ .g-backup-modal {
+  align-items: stretch !important;
+  padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)) !important;
+ }
+ .g-backup-card {
+  width: 100% !important;
+  height: calc(100vh - 16px) !important;
+  max-height: calc(100vh - 16px) !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+ }
+ @supports (height: 100dvh) {
+  .g-backup-card {
+   height: calc(100dvh - 16px) !important;
+   max-height: calc(100dvh - 16px) !important;
+  }
+ }
+ .g-backup-body {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+ }
+ .g-backup-close {
+  min-height: 48px !important;
+  margin-top: 8px !important;
+  background: linear-gradient(135deg, rgba(66,133,244,.92), rgba(30,64,175,.92)) !important;
+  border-color: rgba(147,197,253,.72) !important;
+  color: #ffffff !important;
+ }
+}
+
 </style>
 </head>
 <body>
