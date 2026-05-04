@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>隱私權政策｜Money Google Drive Backup</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(66, 133, 244, 0.16), transparent 30%),
+        radial-gradient(circle at 86% 12%, rgba(52, 168, 83, 0.14), transparent 30%),
+        linear-gradient(135deg, #05070b 0%, #07130f 42%, #0d0f12 66%, #15100a 100%);
+      color: #e5e7eb;
+      font-family: "Segoe UI", "Microsoft JhengHei", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.8;
+    }
+
+    body {
+      padding: 24px;
+    }
+
+    .page {
+      width: min(920px, 100%);
+      margin: 0 auto;
+    }
+
+    .card {
+      border: 1px solid rgba(66, 133, 244, 0.28);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(66, 133, 244, 0.14), transparent 34%),
+        radial-gradient(circle at top right, rgba(52, 168, 83, 0.12), transparent 32%),
+        rgba(15, 23, 42, 0.92);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      background: linear-gradient(90deg, rgba(66, 133, 244, 0.18), rgba(52, 168, 83, 0.12), rgba(251, 188, 5, 0.10));
+    }
+
+    .eyebrow {
+      color: #93c5fd;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0 0;
+      color: #ffffff;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 950;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 18px rgba(66, 133, 244, 0.42);
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    h2 {
+      margin: 26px 0 10px;
+      color: #fbbf24;
+      font-size: 21px;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.24);
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    p,
+    li {
+      color: #d1d5db;
+      font-size: 15px;
+      font-weight: 760;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 24px;
+    }
+
+    .notice {
+      margin: 18px 0;
+      border: 1px solid rgba(66, 133, 244, 0.34);
+      border-radius: 16px;
+      background: rgba(66, 133, 244, 0.10);
+      color: #dbeafe;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .meta {
+      margin-top: 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      padding-top: 18px;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(147, 197, 253, 0.45);
+      background: rgba(66, 133, 244, 0.12);
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .btn:hover {
+      background: rgba(66, 133, 244, 0.24);
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 10px;
+      }
+
+      .header,
+      .content {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      p,
+      li {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <article class="card">
+      <header class="header">
+        <div class="eyebrow">Privacy Policy</div>
+        <h1>隱私權政策</h1>
+        <div class="subtitle">Money Google Drive Backup｜個人加班費與考勤輔助工具</div>
+      </header>
+
+      <section class="content">
+        <h2>一、政策目的</h2>
+        <p>
+          本隱私權政策說明 Money Google Drive Backup 如何處理使用者在使用本工具時產生的資料。
+          本工具是個人加班費、假別、工時與考勤資料的輔助計算網頁，主要資料儲存在使用者目前瀏覽器的 localStorage。
+        </p>
+
+        <div class="notice">
+          本工具不會主動讀取使用者 Google Drive 中的一般檔案；只有在使用者主動使用「G備份/還原」功能時，才會存取本工具專用的 Google Drive appDataFolder 備份檔。
+        </div>
+
+        <h2>二、本工具存取的 Google 資料</h2>
+        <p>
+          本工具使用 Google Drive API 的 appDataFolder 權限，授權範圍為：
+        </p>
+        <ul>
+          <li>https://www.googleapis.com/auth/drive.appdata</li>
+        </ul>
+        <p>
+          此權限僅用於本工具在使用者 Google Drive 應用程式資料夾中建立、讀取、更新、下載與刪除備份檔。
+          本工具的備份檔名稱為 overtime-backup.json。
+        </p>
+
+        <h2>三、本工具如何使用資料</h2>
+        <p>
+          本工具使用資料的目的如下：
+        </p>
+        <ul>
+          <li>儲存使用者自行輸入的班別、月份、假別、薪資、特殊日期、批次設定、大修設定與相關計算資料。</li>
+          <li>讓使用者可以在同一瀏覽器中保留本機資料。</li>
+          <li>讓使用者可以主動將本機資料備份到 Google Drive appDataFolder。</li>
+          <li>讓使用者可以主動從 Google Drive appDataFolder 還原本工具備份資料。</li>
+          <li>讓使用者可以主動下載本機 JSON 備份或 Google Drive JSON 備份。</li>
+          <li>讓使用者可以主動刪除 Google Drive appDataFolder 中的本工具備份檔。</li>
+        </ul>
+
+        <h2>四、本工具儲存的資料類型</h2>
+        <p>
+          本工具可能儲存下列由使用者自行輸入或操作產生的資料：
+        </p>
+        <ul>
+          <li>班別、民國年份、月份設定。</li>
+          <li>每日考勤代碼、假別、請假時數與複合式假別拆分資料。</li>
+          <li>薪資基礎資料與試算所需設定。</li>
+          <li>天災、選舉日、教育訓練、大修日期與代理設定。</li>
+          <li>批次設定、我的最愛代碼、週起始日偏好。</li>
+          <li>Google Drive appDataFolder 中的 overtime-backup.json 備份檔。</li>
+        </ul>
+
+        <h2>五、資料保存位置</h2>
+        <p>
+          本工具的主要資料保存位置為使用者瀏覽器的 localStorage。
+          只有使用者主動按下「備份到 G」時，資料才會被寫入使用者授權的 Google Drive appDataFolder。
+        </p>
+
+        <h2>六、資料分享與第三方揭露</h2>
+        <p>
+          本工具不會出售、出租或分享使用者資料給第三方。
+          Google Drive 備份僅儲存在使用者授權的 Google 帳戶 appDataFolder 中，並且僅供本工具備份與還原用途使用。
+        </p>
+
+        <h2>七、資料刪除方式</h2>
+        <p>
+          使用者可以透過以下方式刪除資料：
+        </p>
+        <ul>
+          <li>在瀏覽器中清除網站資料或 localStorage，以刪除本機資料。</li>
+          <li>在本工具中使用 RESET 功能，清除指定月份或年份資料。</li>
+          <li>在「G備份/還原」中按下「刪除 G 備份」，刪除 Google Drive appDataFolder 中的 overtime-backup.json。</li>
+          <li>在「G備份/還原」中按下「登出 G」，清除本機 Google 授權記憶。</li>
+        </ul>
+
+        <h2>八、資料安全</h2>
+        <p>
+          本工具不會長期保存 Google access token。
+          重新整理網頁後，access token 會消失；本工具只會保存「此瀏覽器曾經授權過 Google」的非敏感狀態，以便使用者下次操作 Google Drive 功能時重新取得授權。
+        </p>
+
+        <h2>九、兒童與未成年人</h2>
+        <p>
+          本工具設計用途為個人考勤與加班費試算輔助，不以兒童或未成年人為主要使用對象。
+        </p>
+
+        <h2>十、政策更新</h2>
+        <p>
+          本隱私權政策可能因功能調整、Google API 使用方式或資料處理方式變更而更新。
+          更新後的版本會發布於本頁面。
+        </p>
+
+        <h2>十一、聯絡方式</h2>
+        <p>
+          如對本隱私權政策或資料處理方式有疑問，請透過本工具發布頁面或 GitHub 專案頁提供的維護者聯絡方式提出。
+        </p>
+
+        <div class="meta">
+          最後更新日期：2026-05-04
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="./">返回主頁</a>
+          <a class="btn" href="./terms.html">查看服務條款</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
