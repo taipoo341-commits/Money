@@ -3415,7 +3415,6 @@
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupDriveStatusState" class="g-backup-drive-status-value">尚未檢查</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">檔名</span><span id="gBackupDriveStatusName" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後修改</span><span id="gBackupDriveStatusModified" class="g-backup-drive-status-value">-</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">File ID</span><span id="gBackupDriveStatusId" class="g-backup-drive-status-value">-</span></div>
     </div>
     <div id="gBackupLocalStatusBox" class="g-backup-drive-status g-backup-local-status" aria-live="polite">
      <div class="g-backup-drive-status-title">本機備份狀態</div>
@@ -6657,6 +6656,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const confirmText = options && options.confirmText ? options.confirmText : "確定";
   const cancelText = options && options.cancelText ? options.cancelText : "取消";
   const showCancel = Boolean(options && options.showCancel);
+  const confirmFirst = Boolean(options && options.confirmFirst);
+  const confirmButtonHtml = `<button class="g-tech-dialog-btn ${variant === "danger" ? "danger" : "primary"}" type="button" data-g-dialog-confirm="1">${escapeHtml(confirmText)}</button>`;
+  const cancelButtonHtml = showCancel ? `<button class="g-tech-dialog-btn" type="button" data-g-dialog-cancel="1">${escapeHtml(cancelText)}</button>` : "";
   modal.innerHTML = `
    <div class="g-tech-dialog-card ${variant}" role="dialog" aria-modal="true" aria-labelledby="gTechDialogTitle">
     <div class="g-tech-dialog-head">
@@ -6665,8 +6667,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     </div>
     <div class="g-tech-dialog-body">${escapeHtml(message)}${detail ? `<div class="g-tech-dialog-detail">${escapeHtml(detail)}</div>` : ""}</div>
     <div class="g-tech-dialog-actions ${showCancel ? "" : "single"}">
-     ${showCancel ? `<button class="g-tech-dialog-btn" type="button" data-g-dialog-cancel="1">${escapeHtml(cancelText)}</button>` : ""}
-     <button class="g-tech-dialog-btn ${variant === "danger" ? "danger" : "primary"}" type="button" data-g-dialog-confirm="1">${escapeHtml(confirmText)}</button>
+     ${showCancel && confirmFirst ? confirmButtonHtml : ""}
+     ${cancelButtonHtml}
+     ${!showCancel || !confirmFirst ? confirmButtonHtml : ""}
     </div>
    </div>`;
   modal.classList.add("open");
@@ -6690,6 +6693,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  function gBackupShowConfirm(title, message, detail, variant, confirmText, cancelText) {
   return gBackupShowDialog({ title: title, message: message, detail: detail, variant: variant || "info", confirmText: confirmText || "確定", cancelText: cancelText || "取消", showCancel: true });
+ }
+ function gBackupShowConfirmPrimaryLeft(title, message, detail, variant, confirmText, cancelText) {
+  return gBackupShowDialog({ title: title, message: message, detail: detail, variant: variant || "info", confirmText: confirmText || "確定", cancelText: cancelText || "取消", showCancel: true, confirmFirst: true });
  }
  function gBackupShowRestoreChoice() {
   const modal = gBackupEnsureDialogModal();
@@ -6863,18 +6869,16 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     box.classList.remove("g-backup-status-danger");
    }
    gBackupSetText("gBackupDriveStatusState", "已找到 Google 備份");
-   gBackupSetText("gBackupDriveStatusName", file.name || G_BACKUP_FILE_NAME);
+   gBackupSetText("gBackupDriveStatusName", gBackupMakeReadableBackupFileName());
    gBackupSetText("gBackupDriveStatusModified", gBackupFormatLocalTime(file.modifiedTime));
-   gBackupSetText("gBackupDriveStatusId", file.id);
   } else {
    if (box) {
     box.classList.add("g-backup-status-danger");
     box.classList.remove("g-backup-status-ok");
    }
    gBackupSetText("gBackupDriveStatusState", "找不到 Google 備份");
-   gBackupSetText("gBackupDriveStatusName", "-");
+   gBackupSetText("gBackupDriveStatusName", gBackupMakeReadableBackupFileName());
    gBackupSetText("gBackupDriveStatusModified", "-");
-   gBackupSetText("gBackupDriveStatusId", "-");
   }
  }
  function gBackupMakeTimestampFileName(prefix) {
@@ -6934,9 +6938,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  function gBackupRenderLoggedOutStatus() {
   gBackupSetText("gBackupDriveStatusState", "尚未檢查");
-  gBackupSetText("gBackupDriveStatusName", "-");
+  gBackupSetText("gBackupDriveStatusName", gBackupMakeReadableBackupFileName());
   gBackupSetText("gBackupDriveStatusModified", "-");
-  gBackupSetText("gBackupDriveStatusId", "-");
   const box = document.getElementById("gBackupDriveStatusBox");
   if (box) box.classList.remove("g-backup-status-danger", "g-backup-status-ok");
   gBackupSetAuthIndicator(false);
@@ -7055,9 +7058,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const existing = await gBackupFindDriveFile();
   gBackupRenderDriveStatus(existing);
   if (existing && existing.id) {
-   gBackupSetMessage("已找到 Google 備份：" + (existing.name || G_BACKUP_FILE_NAME) + "，最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
+   gBackupSetMessage("已找到 Google 備份：" + gBackupMakeReadableBackupFileName() + "，最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
   } else {
-   gBackupSetMessage("Google Drive appDataFolder 目前找不到 " + G_BACKUP_FILE_NAME + "。");
+   gBackupSetMessage("Google Drive appDataFolder 目前找不到 G 備份檔。");
   }
   return existing;
  }
@@ -7066,8 +7069,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const existing = await gBackupFindDriveFile();
   gBackupRenderDriveStatus(existing);
   if (!existing || !existing.id) {
-   gBackupSetMessage("Google Drive appDataFolder 找不到 " + G_BACKUP_FILE_NAME + "，無法下載。");
-   await gBackupShowNotice("找不到 G 備份", "Google Drive appDataFolder 找不到 overtime-backup.json。", "info");
+   gBackupSetMessage("Google Drive appDataFolder 找不到 G 備份檔，無法下載。");
+   await gBackupShowNotice("找不到 G 備份", "Google Drive appDataFolder 找不到 G 備份檔。", "info");
    return;
   }
   const response = await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id) + "?alt=media", { method: "GET" });
@@ -7110,7 +7113,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   }
   const refreshed = await gBackupFindDriveFile();
   gBackupRenderDriveStatus(refreshed);
-  gBackupSetMessage("備份完成：" + G_BACKUP_FILE_NAME + (refreshed && refreshed.modifiedTime ? "，最後修改：" + gBackupFormatLocalTime(refreshed.modifiedTime) : ""));
+  gBackupSetMessage("備份完成：" + gBackupMakeReadableBackupFileName() + (refreshed && refreshed.modifiedTime ? "，最後修改：" + gBackupFormatLocalTime(refreshed.modifiedTime) : ""));
   await gBackupShowNotice("備份完成", "Google Drive 備份已完成。", "success");
  }
  async function gBackupRestoreFromDrive(restoreMode) {
@@ -7127,8 +7130,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const existing = await gBackupFindDriveFile();
   if (!existing || !existing.id) {
    gBackupRenderDriveStatus(null);
-   gBackupSetMessage("Google Drive appDataFolder 找不到 overtime-backup.json。");
-   await gBackupShowNotice("找不到 G 備份", "Google Drive appDataFolder 找不到 overtime-backup.json。", "info");
+   gBackupSetMessage("Google Drive appDataFolder 找不到 G 備份檔。");
+   await gBackupShowNotice("找不到 G 備份", "Google Drive appDataFolder 找不到 G 備份檔。", "info");
    return;
   }
   gBackupRenderDriveStatus(existing);
@@ -7145,10 +7148,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   gBackupRenderDriveStatus(existing);
   if (!existing || !existing.id) {
    gBackupSetMessage("目前沒有 G 備份檔可刪除。");
-   await gBackupShowNotice("沒有可刪除的 G 備份", "目前 Google Drive appDataFolder 找不到 overtime-backup.json。", "info");
+   await gBackupShowNotice("沒有可刪除的 G 備份", "目前 Google Drive appDataFolder 找不到 G 備份檔。", "info");
    return;
   }
-  const firstDetail = "檔名：" + (existing.name || G_BACKUP_FILE_NAME) + "\n最後修改：" + gBackupFormatLocalTime(existing.modifiedTime);
+  const firstDetail = "檔名：" + gBackupMakeReadableBackupFileName() + "\n最後修改：" + gBackupFormatLocalTime(existing.modifiedTime);
   const firstConfirmed = await gBackupShowConfirm("刪除 G 備份", "確定要刪除 Google Drive 上的 G 備份檔嗎？\n刪除後，Google Drive 雲端備份將無法從 G 還原。", firstDetail + "\n建議先按「下載 G 備份 JSON」留一份本機備份。", "danger", "繼續刪除", "取消");
   if (!firstConfirmed) {
    gBackupSetMessage("已取消刪除 G 備份。");
@@ -7223,7 +7226,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
    gBackupSetMessage("已登出 Google，已清除本機授權記憶並離線。");
   });
   if (uploadBtn) uploadBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("備份到 G", "確定要備份目前本機資料到 Google Drive 嗎？", "此動作會將目前本機加班費計算紀錄寫入 Google Drive appDataFolder 的 G 備份檔。", "info", "確認備份", "取消");
+   const confirmed = await gBackupShowConfirmPrimaryLeft("備份到 G", "確定要備份目前本機資料到 Google Drive 嗎？", "此動作會將目前本機加班費計算紀錄寫入 Google Drive appDataFolder 的 G 備份檔。", "info", "確認備份", "取消");
    if (!confirmed) { gBackupSetMessage("已取消備份到 G。"); return; }
    gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); });
   });
@@ -7237,13 +7240,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   });
   if (checkStatusBtn) checkStatusBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupCheckDriveStatus(false).catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
   if (downloadDriveBtn) downloadDriveBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("下載 G 備份 JSON", "確定要下載 Google Drive 上的 G 備份 JSON 嗎？", "此動作只會下載一份雲端備份檔到本機，不會還原、不會覆蓋目前資料。", "info", "確認下載", "取消");
+   const confirmed = await gBackupShowConfirmPrimaryLeft("下載 G 備份 JSON", "確定要下載 Google Drive 上的 G 備份 JSON 嗎？", "此動作只會下載一份雲端備份檔到本機，不會還原、不會覆蓋目前資料。", "info", "確認下載", "取消");
    if (!confirmed) { gBackupSetMessage("已取消下載 G 備份 JSON。"); return; }
    gBackupRequireToken(function() { gBackupDownloadDriveBackup().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("G 備份下載失敗", err.message, "danger"); }); });
   });
   if (deleteDriveBtn) deleteDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDeleteDriveBackup().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("刪除 G 備份失敗", err.message, "danger"); }); }); });
   if (downloadBtn) downloadBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("下載本機備份 JSON", "確定要下載目前本機備份 JSON 嗎？", "此動作會把目前瀏覽器內的加班費計算紀錄下載成 JSON 檔，不會修改本機資料、不會操作 Google Drive。", "info", "確認下載", "取消");
+   const confirmed = await gBackupShowConfirmPrimaryLeft("下載本機備份 JSON", "確定要下載目前本機備份 JSON 嗎？", "此動作會把目前瀏覽器內的加班費計算紀錄下載成 JSON 檔，不會修改本機資料、不會操作 Google Drive。", "info", "確認下載", "取消");
    if (!confirmed) { gBackupSetMessage("已取消下載本機備份 JSON。"); return; }
    gBackupDownloadCurrent("overtime-local-backup");
    gBackupSetMessage("已下載本機備份 JSON。");
