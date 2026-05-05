@@ -2999,7 +2999,7 @@
  }
 }
 
-/* === G備份/還原：本機備份狀態區 === */
+/* === G備份/還原：本機備份下載紀錄區 === */
 .g-backup-local-status {
  margin-top: 10px !important;
  border-color: rgba(52, 211, 153, 0.24) !important;
@@ -3417,13 +3417,13 @@
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後修改</span><span id="gBackupDriveStatusModified" class="g-backup-drive-status-value">-</span></div>
     </div>
     <div id="gBackupLocalStatusBox" class="g-backup-drive-status g-backup-local-status" aria-live="polite">
-     <div class="g-backup-drive-status-title">本機備份狀態</div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupLocalStatusState" class="g-backup-drive-status-value">尚未下載本機備份</span></div>
+     <div class="g-backup-drive-status-title">本機備份下載紀錄</div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupLocalStatusState" class="g-backup-drive-status-value">尚未透過本工具下載備份</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後下載</span><span id="gBackupLocalStatusDownloaded" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議檔名</span><span id="gBackupLocalStatusFileName" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">月份紀錄</span><span id="gBackupLocalStatusMonthCount" class="g-backup-drive-status-value">0 筆</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議資料夾</span><span id="gBackupLocalStatusFolder" class="g-backup-drive-status-value">加班費計算備份檔</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">提醒</span><span id="gBackupLocalStatusHint" class="g-backup-drive-status-value">建議自行建立「加班費計算備份檔」資料夾，並將下載的 JSON 備份檔集中存放於該資料夾。</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">提醒</span><span id="gBackupLocalStatusHint" class="g-backup-drive-status-value">此區只記錄本工具曾經觸發的下載紀錄；建議自行建立「加班費計算備份檔」資料夾集中存放 JSON 備份檔。</span></div>
     </div>
     <div id="gBackupStatusMessage" class="g-backup-message">尚未登入 Google。</div>
    </section>
@@ -6840,7 +6840,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     folderName: G_BACKUP_RECOMMENDED_FOLDER_NAME
    }));
   } catch (err) {
-   console.warn("無法記錄本機備份狀態", err);
+   console.warn("無法記錄本機備份下載紀錄", err);
   }
   gBackupRenderLocalStatus();
  }
@@ -6854,12 +6854,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
    box.classList.toggle("g-backup-status-ok", hasDownloaded);
    box.classList.toggle("g-backup-status-danger", !hasDownloaded);
   }
-  gBackupSetText("gBackupLocalStatusState", hasDownloaded ? "已透過本工具下載本機備份" : "尚未透過本工具下載本機備份");
+  gBackupSetText("gBackupLocalStatusState", hasDownloaded ? "已透過本工具下載過備份" : "尚未透過本工具下載備份");
   gBackupSetText("gBackupLocalStatusDownloaded", hasDownloaded ? gBackupFormatLocalTime(status.downloadedAt) : "-");
   gBackupSetText("gBackupLocalStatusFileName", status && status.fileName ? status.fileName : suggestedFileName);
   gBackupSetText("gBackupLocalStatusMonthCount", monthCount + " 筆");
   gBackupSetText("gBackupLocalStatusFolder", G_BACKUP_RECOMMENDED_FOLDER_NAME);
-  gBackupSetText("gBackupLocalStatusHint", "建議自行建立「" + G_BACKUP_RECOMMENDED_FOLDER_NAME + "」資料夾，並將下載的 JSON 備份檔集中存放於該資料夾。");
+  gBackupSetText("gBackupLocalStatusHint", "此區只記錄本工具曾經觸發的下載紀錄；建議自行建立「" + G_BACKUP_RECOMMENDED_FOLDER_NAME + "」資料夾集中存放 JSON 備份檔。");
  }
  function gBackupRenderDriveStatus(file) {
   const box = document.getElementById("gBackupDriveStatusBox");
@@ -6909,7 +6909,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
    if (key.indexOf("personalOvertimeState:") === 0) keysToRemove.push(key);
   });
   keysToRemove.forEach(function(key) { localStorage.removeItem(key); });
-  gBackupSetMessage("已刪除本機加班費計算紀錄，頁面即將重新載入。");
+  try { localStorage.removeItem(G_BACKUP_LOCAL_STATUS_KEY); } catch (err) { console.warn("無法清除本機備份下載紀錄", err); }
+  gBackupRenderLocalStatus();
+  gBackupSetMessage("已刪除本機加班費計算紀錄，並已清除本機備份下載紀錄，頁面即將重新載入。");
   await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄。Google Drive 備份與 G 登入狀態不受影響。", "success");
   window.location.reload();
  }
@@ -6938,7 +6940,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  function gBackupRenderLoggedOutStatus() {
   gBackupSetText("gBackupDriveStatusState", "尚未檢查");
-  gBackupSetText("gBackupDriveStatusName", gBackupMakeReadableBackupFileName());
+  gBackupSetText("gBackupDriveStatusName", "-");
   gBackupSetText("gBackupDriveStatusModified", "-");
   const box = document.getElementById("gBackupDriveStatusBox");
   if (box) box.classList.remove("g-backup-status-danger", "g-backup-status-ok");
