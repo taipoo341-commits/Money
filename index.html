@@ -2522,14 +2522,16 @@
  text-shadow: 0 0 10px rgba(246, 196, 83, 0.52);
 }
 .g-backup-entry-actions {
- display: flex;
+ display: grid;
+ grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr);
  align-items: center;
  justify-content: center;
  gap: 10px;
- flex-wrap: wrap;
+ width: min(620px, 100%);
+ margin: 0 auto;
 }
 .local-storage-clear-btn {
- width: min(240px, 100%);
+ width: 100%;
  min-height: 48px;
  border: 1px solid rgba(251, 113, 133, 0.58);
  border-radius: 999px;
@@ -2537,11 +2539,13 @@
  color: #fecaca;
  font-size: 15px;
  font-weight: 950;
- letter-spacing: 0.10em;
+ letter-spacing: 0.08em;
  cursor: pointer;
  box-shadow: 0 0 16px rgba(251, 113, 133, 0.16), inset 0 0 14px rgba(244, 63, 94, 0.06);
  text-shadow: 0 0 9px rgba(251, 113, 133, 0.38);
+ white-space: nowrap;
 }
+.g-backup-entry-actions .g-backup-main-btn { width: 100%; }
 .local-storage-clear-btn:hover,
 .local-storage-clear-btn:focus-visible {
  background: linear-gradient(90deg, rgba(127, 29, 29, 0.34), rgba(244, 63, 94, 0.24), rgba(15, 23, 42, 0.42));
@@ -2788,6 +2792,82 @@
  .g-tech-dialog-actions { grid-template-columns: 1fr; }
 }
 
+/* === 人事資產層 HR Asset Layer：年度請假資訊 × 月假別統計資訊｜Moon Silver × Mint Cyan === */
+.annual-leave-info-panel {
+ border-color: rgba(226,232,240,.32) !important;
+ background:
+  radial-gradient(circle at 12% 4%, rgba(226,232,240,.13), transparent 30%),
+  radial-gradient(circle at 88% 8%, rgba(153,246,228,.09), transparent 28%),
+  linear-gradient(180deg, rgba(9,14,22,.98), rgba(3,9,16,.98)) !important;
+ box-shadow: 0 0 26px rgba(226,232,240,.055), inset 0 0 24px rgba(148,163,184,.035) !important;
+}
+.annual-leave-info-title {
+ color: transparent !important;
+ -webkit-text-fill-color: transparent !important;
+ background-image: linear-gradient(92deg, #cbd5e1 0%, #f8fafc 42%, #e5e7eb 67%, #94a3b8 100%) !important;
+ -webkit-background-clip: text !important;
+ background-clip: text !important;
+ font-weight: 950 !important;
+ letter-spacing: .18em !important;
+ text-shadow: 0 0 8px rgba(248,250,252,.30), 0 0 22px rgba(203,213,225,.16), 0 0 34px rgba(148,163,184,.10) !important;
+ filter: drop-shadow(0 0 8px rgba(226,232,240,.16)) !important;
+}
+.annual-leave-info-header {
+ border-bottom-color: rgba(226,232,240,.20) !important;
+ background: linear-gradient(90deg, rgba(30,41,59,.38), rgba(15,23,42,.76), rgba(20,83,45,.18)) !important;
+}
+.leave-stats-panel {
+ border-color: rgba(153,246,228,.24) !important;
+ background:
+  radial-gradient(circle at 10% 0%, rgba(153,246,228,.10), transparent 32%),
+  radial-gradient(circle at 88% 12%, rgba(209,250,229,.075), transparent 30%),
+  linear-gradient(180deg, rgba(3,17,22,.96), rgba(4,10,18,.98)) !important;
+ box-shadow: 0 0 24px rgba(45,212,191,.055), inset 0 0 22px rgba(153,246,228,.030) !important;
+}
+#leaveStatsPanelTitle,
+.leave-stats-panel > .section-header-toggle > div > div:first-child {
+ color: transparent !important;
+ -webkit-text-fill-color: transparent !important;
+ background-image: linear-gradient(92deg, #99f6e4 0%, #ccfbf1 43%, #f0fdfa 72%, #5eead4 100%) !important;
+ -webkit-background-clip: text !important;
+ background-clip: text !important;
+ font-weight: 950 !important;
+ letter-spacing: .14em !important;
+ text-shadow: 0 0 8px rgba(153,246,228,.34), 0 0 22px rgba(45,212,191,.18), 0 0 32px rgba(240,253,250,.10) !important;
+ filter: drop-shadow(0 0 8px rgba(94,234,212,.13)) !important;
+}
+.leave-stats-panel > .section-header-toggle {
+ border-bottom-color: rgba(153,246,228,.20) !important;
+ background: linear-gradient(90deg, rgba(6,78,59,.24), rgba(15,23,42,.82), rgba(20,184,166,.12)) !important;
+}
+@media (max-width: 760px) {
+ .g-backup-entry-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr) !important;
+  gap: 8px !important;
+  width: 100% !important;
+ }
+ .g-backup-entry-actions .g-backup-main-btn,
+ .g-backup-entry-actions .local-storage-clear-btn {
+  width: 100% !important;
+  min-height: 46px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  white-space: nowrap !important;
+ }
+ .g-backup-entry-actions .g-backup-main-btn {
+  font-size: clamp(14px, 4.25vw, 17px) !important;
+  letter-spacing: .08em !important;
+ }
+ .g-backup-entry-actions .local-storage-clear-btn {
+  font-size: clamp(13px, 3.8vw, 15px) !important;
+  letter-spacing: .04em !important;
+ }
+ .annual-leave-info-title { letter-spacing: .13em !important; }
+ #leaveStatsPanelTitle,
+ .leave-stats-panel > .section-header-toggle > div > div:first-child { letter-spacing: .10em !important; }
+}
+
 /* === G備份/還原：手機版關閉按鈕固定可見修正 === */
 @supports (height: 100dvh) {
  .g-backup-card { max-height: min(88dvh, 760px) !important; }
@@ -2800,7 +2880,6 @@
  box-shadow: 0 -12px 24px rgba(0,0,0,.34), 0 0 18px rgba(66,133,244,.12) !important;
 }
 @media (max-width: 760px) {
- .g-backup-entry-actions { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
  .g-backup-modal {
   align-items: stretch !important;
   padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)) !important;
