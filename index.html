@@ -2833,86 +2833,18 @@
 }
 
 
-/* === 主月曆代碼選單：開啟時固定主月曆，只允許選單內滑動 === */
-.code-picker-portal.open {
- overscroll-behavior: contain !important;
- touch-action: none !important;
+/* === G備份/還原：本機備份狀態區 === */
+.g-backup-local-status {
+ margin-top: 10px !important;
+ border-color: rgba(52, 211, 153, 0.24) !important;
+ background: linear-gradient(180deg, rgba(6, 78, 59, 0.18), rgba(12, 18, 28, 0.58)) !important;
 }
-.code-picker-portal-sheet,
-.code-picker-portal-scroll {
- overscroll-behavior: contain !important;
- touch-action: auto !important;
+.g-backup-local-status .g-backup-drive-status-title {
+ color: #a7f3d0 !important;
+ text-shadow: 0 0 10px rgba(52, 211, 153, 0.32) !important;
 }
-/* === G備份/還原：確認視窗選項一列顯示修正 === */
-.g-tech-dialog-actions {
- grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}
-.g-tech-dialog-actions.single {
- grid-template-columns: 1fr !important;
-}
-.g-tech-dialog-actions.g-tech-dialog-actions-three {
- grid-template-columns: minmax(0, 1.15fr) minmax(0, .72fr) minmax(0, 1.05fr) !important;
-}
-.g-tech-dialog-actions.g-tech-dialog-actions-three .g-tech-dialog-btn {
- min-width: 0 !important;
- padding-left: 6px !important;
- padding-right: 6px !important;
- font-size: clamp(11px, 3.2vw, 13px) !important;
- white-space: nowrap !important;
-}
-.g-backup-entry-actions {
- display: grid !important;
- grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr) !important;
- align-items: center !important;
- justify-content: center !important;
- gap: 10px !important;
- width: min(620px, 100%) !important;
- margin: 0 auto !important;
-}
-.g-backup-entry-actions .g-backup-main-btn,
-.g-backup-entry-actions .local-storage-clear-btn {
- width: 100% !important;
- white-space: nowrap !important;
-}
-@media (max-width: 760px) {
- .g-tech-dialog-actions {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
- }
- .g-tech-dialog-actions.single {
-  grid-template-columns: 1fr !important;
- }
- .g-tech-dialog-actions.g-tech-dialog-actions-three {
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .72fr) minmax(0, 1.05fr) !important;
-  gap: 6px !important;
- }
- .g-tech-dialog-actions.g-tech-dialog-actions-three .g-tech-dialog-btn {
-  min-height: 40px !important;
-  font-size: clamp(10px, 3.05vw, 12px) !important;
-  letter-spacing: 0 !important;
-  border-radius: 10px !important;
- }
- .g-backup-entry-actions {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr) !important;
-  gap: 8px !important;
-  width: 100% !important;
- }
- .g-backup-entry-actions .g-backup-main-btn,
- .g-backup-entry-actions .local-storage-clear-btn {
-  width: 100% !important;
-  min-height: 46px !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-  white-space: nowrap !important;
- }
- .g-backup-entry-actions .g-backup-main-btn {
-  font-size: clamp(14px, 4.25vw, 17px) !important;
-  letter-spacing: .08em !important;
- }
- .g-backup-entry-actions .local-storage-clear-btn {
-  font-size: clamp(13px, 3.8vw, 15px) !important;
-  letter-spacing: .04em !important;
- }
+.g-backup-local-status .g-backup-drive-status-label {
+ color: #6ee7b7 !important;
 }
 
 </style>
@@ -3319,6 +3251,15 @@
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後修改</span><span id="gBackupDriveStatusModified" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">File ID</span><span id="gBackupDriveStatusId" class="g-backup-drive-status-value">-</span></div>
     </div>
+    <div id="gBackupLocalStatusBox" class="g-backup-drive-status g-backup-local-status" aria-live="polite">
+     <div class="g-backup-drive-status-title">本機備份狀態</div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupLocalStatusState" class="g-backup-drive-status-value">尚未下載本機備份</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後下載</span><span id="gBackupLocalStatusDownloaded" class="g-backup-drive-status-value">-</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議檔名</span><span id="gBackupLocalStatusFileName" class="g-backup-drive-status-value">-</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">月份紀錄</span><span id="gBackupLocalStatusMonthCount" class="g-backup-drive-status-value">0 筆</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議資料夾</span><span id="gBackupLocalStatusFolder" class="g-backup-drive-status-value">加班費計算備份檔</span></div>
+     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">提醒</span><span id="gBackupLocalStatusHint" class="g-backup-drive-status-value">瀏覽器不允許網頁自動指定下載資料夾，請下載時自行選擇或移入建議資料夾。</span></div>
+    </div>
     <div id="gBackupStatusMessage" class="g-backup-message">尚未登入 Google。</div>
    </section>
    <section class="g-backup-danger-zone" aria-label="危險操作">
@@ -3472,9 +3413,7 @@
     let salaryBasePaySource = "carry";
     let pendingCodePickerReopen = null;
     let activeCodePickerPortalState = null;
-        let codePickerBodyScrollY = 0;
-    let codePickerBodyScrollLocked = false;
-const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
+    const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     let codeFavoriteSet = new Set();
     let activeStorageKey = "";
     function getCurrentStorageKey() {
@@ -4052,28 +3991,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       return portal;
     }
-    function codePickerLockBodyScroll() {
-      if (codePickerBodyScrollLocked) return;
-      codePickerBodyScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${codePickerBodyScrollY}px`;
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.width = "100%";
-      document.body.style.overflow = "hidden";
-      codePickerBodyScrollLocked = true;
-    }
-    function codePickerUnlockBodyScroll() {
-      if (!codePickerBodyScrollLocked) return;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo(0, codePickerBodyScrollY || 0);
-      codePickerBodyScrollLocked = false;
-    }
     function getDayInfoForCodePicker(day) {
       const days = buildDays();
       return days.find(item => Number(item.day) === Number(day)) || null;
@@ -4087,7 +4004,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       document.querySelectorAll(".day-card.code-picker-card-open").forEach(card => card.classList.remove("code-picker-card-open"));
       document.querySelectorAll(".code-picker.open").forEach(picker => picker.classList.remove("open"));
       activeCodePickerPortalState = null;
-      codePickerUnlockBodyScroll();
     }
     function closeAllCodePickers(exceptPicker) {
       document.querySelectorAll(".code-picker.open").forEach(picker => {
@@ -4125,7 +4041,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const dayInfo = getDayInfoForCodePicker(day);
       if (!dayInfo) return;
       const portal = ensureCodePickerPortal();
-      codePickerLockBodyScroll();
       const selectedCode = Number(dayInfo.actualCode);
       activeCodePickerPortalState = { day: Number(day), allOpen: Boolean(allOpen), selectedCode };
       portal.innerHTML = buildCodePickerPortalHtml(day, selectedCode, Boolean(allOpen));
@@ -6460,10 +6375,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
  const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
  const G_BACKUP_AUTH_REMEMBER_KEY = "personalOvertimeGoogleAuthRemembered";
+ const G_BACKUP_LOCAL_STATUS_KEY = "personalOvertimeLocalBackupStatus";
+ const G_BACKUP_RECOMMENDED_FOLDER_NAME = "加班費計算備份檔";
  let gBackupTokenClient = null;
  let gBackupAccessToken = "";
  let gBackupPendingAction = null;
- let gBackupPendingImportMode = "close";
  let gBackupBodyScrollY = 0;
  let gBackupBodyScrollLocked = false;
  let gBackupTokenRefreshing = false;
@@ -6505,6 +6421,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   gBackupLockBodyScroll();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
+  gBackupRenderLocalStatus();
   if (gBackupAccessToken) {
    gBackupSetAuthIndicator("active");
    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。");
@@ -6581,66 +6498,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  function gBackupShowConfirm(title, message, detail, variant, confirmText, cancelText) {
   return gBackupShowDialog({ title: title, message: message, detail: detail, variant: variant || "info", confirmText: confirmText || "確定", cancelText: cancelText || "取消", showCancel: true });
  }
- function gBackupShowRestoreChoice() {
-  const modal = gBackupEnsureDialogModal();
-  modal.innerHTML = `
-   <div class="g-tech-dialog-card danger" role="dialog" aria-modal="true" aria-labelledby="gRestoreChoiceTitle">
-    <div class="g-tech-dialog-head">
-     <div class="g-tech-dialog-icon">${gBackupDialogIcon("danger")}</div>
-     <div id="gRestoreChoiceTitle" class="g-tech-dialog-title">從 G 還原</div>
-    </div>
-    <div class="g-tech-dialog-body">確定要從 Google Drive 還原嗎？<div class="g-tech-dialog-detail">按「不下載直接還原」會直接進行還原；按「關閉」只關閉此提醒，不執行任何還原；按「下載後還原」會先下載一份目前本機備份 JSON。</div></div>
-    <div class="g-tech-dialog-actions g-tech-dialog-actions-three">
-     <button class="g-tech-dialog-btn danger" type="button" data-g-restore-choice="direct">不下載直接還原</button>
-     <button class="g-tech-dialog-btn" type="button" data-g-restore-choice="close">關閉</button>
-     <button class="g-tech-dialog-btn primary" type="button" data-g-restore-choice="download">下載後還原</button>
-    </div>
-   </div>`;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  return new Promise(function(resolve) {
-   const close = function(result) {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-    modal.innerHTML = "";
-    resolve(result);
-   };
-   modal.querySelectorAll("[data-g-restore-choice]").forEach(function(btn) {
-    btn.addEventListener("click", function() { close(btn.dataset.gRestoreChoice || "close"); });
-   });
-   modal.addEventListener("click", function(event) { if (event.target === modal) close("close"); }, { once: true });
-  });
- }
- function gBackupShowImportChoice() {
-  const modal = gBackupEnsureDialogModal();
-  modal.innerHTML = `
-   <div class="g-tech-dialog-card danger" role="dialog" aria-modal="true" aria-labelledby="gImportChoiceTitle">
-    <div class="g-tech-dialog-head">
-     <div class="g-tech-dialog-icon">${gBackupDialogIcon("danger")}</div>
-     <div id="gImportChoiceTitle" class="g-tech-dialog-title">匯入本機備份 JSON</div>
-    </div>
-    <div class="g-tech-dialog-body">確定要匯入本機備份 JSON 嗎？<div class="g-tech-dialog-detail">按「不下載直接匯入」會直接開啟選檔；按「關閉」只關閉此提醒，不開選檔、不匯入；按「下載後匯入」會先下載一份目前本機備份 JSON。</div></div>
-    <div class="g-tech-dialog-actions g-tech-dialog-actions-three">
-     <button class="g-tech-dialog-btn danger" type="button" data-g-import-choice="direct">不下載直接匯入</button>
-     <button class="g-tech-dialog-btn" type="button" data-g-import-choice="close">關閉</button>
-     <button class="g-tech-dialog-btn primary" type="button" data-g-import-choice="download">下載後匯入</button>
-    </div>
-   </div>`;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  return new Promise(function(resolve) {
-   const close = function(result) {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-    modal.innerHTML = "";
-    resolve(result);
-   };
-   modal.querySelectorAll("[data-g-import-choice]").forEach(function(btn) {
-    btn.addEventListener("click", function() { close(btn.dataset.gImportChoice || "close"); });
-   });
-   modal.addEventListener("click", function(event) { if (event.target === modal) close("close"); }, { once: true });
-  });
- }
  function gBackupFlushCurrentStateBeforeCollect() {
   try {
    if (typeof saveCurrentMonthState === "function") saveCurrentMonthState();
@@ -6680,8 +6537,19 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const pad = function(value) { return String(value).padStart(2, "0"); };
   return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + " 加班費計算備份檔.json";
  }
+ function gBackupRememberLocalDownload(fileName) {
+  try {
+   localStorage.setItem(G_BACKUP_LOCAL_STATUS_KEY, JSON.stringify({ fileName: fileName, downloadedAt: new Date().toISOString(), folderName: G_BACKUP_RECOMMENDED_FOLDER_NAME }));
+  } catch (err) {
+   console.warn("無法記錄本機備份狀態", err);
+  }
+  gBackupRenderLocalStatus();
+ }
  function gBackupDownloadCurrent(prefix) {
-  gBackupDownloadText(gBackupMakeReadableBackupFileName(), JSON.stringify(gBackupCollectObject(), null, 2));
+  const fileName = gBackupMakeReadableBackupFileName();
+  gBackupDownloadText(fileName, JSON.stringify(gBackupCollectObject(), null, 2));
+  gBackupRememberLocalDownload(fileName);
+  return fileName;
  }
  function gBackupFormatLocalTime(isoText) {
   if (!isoText) return "-";
@@ -6693,6 +6561,41 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  function gBackupSetText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
+ }
+ function gBackupGetLocalBackupStatus() {
+  try {
+   const raw = localStorage.getItem(G_BACKUP_LOCAL_STATUS_KEY);
+   return raw ? JSON.parse(raw) : null;
+  } catch (err) {
+   return null;
+  }
+ }
+ function gBackupCountLocalMonthRecords() {
+  let count = 0;
+  try {
+   Object.keys(localStorage).forEach(function(key) {
+    if (key.indexOf("personalOvertimeState:") === 0) count += 1;
+   });
+  } catch (err) {
+   count = 0;
+  }
+  return count;
+ }
+ function gBackupRenderLocalStatus() {
+  const box = document.getElementById("gBackupLocalStatusBox");
+  const status = gBackupGetLocalBackupStatus();
+  const monthCount = gBackupCountLocalMonthRecords();
+  const suggestedFileName = gBackupMakeReadableBackupFileName();
+  if (box) {
+   box.classList.toggle("g-backup-status-ok", Boolean(status && status.downloadedAt));
+   box.classList.toggle("g-backup-status-danger", !(status && status.downloadedAt));
+  }
+  gBackupSetText("gBackupLocalStatusState", status && status.downloadedAt ? "已透過本工具下載本機備份" : "尚未透過本工具下載本機備份");
+  gBackupSetText("gBackupLocalStatusDownloaded", status && status.downloadedAt ? gBackupFormatLocalTime(status.downloadedAt) : "-");
+  gBackupSetText("gBackupLocalStatusFileName", status && status.fileName ? status.fileName : suggestedFileName);
+  gBackupSetText("gBackupLocalStatusMonthCount", monthCount + " 筆");
+  gBackupSetText("gBackupLocalStatusFolder", G_BACKUP_RECOMMENDED_FOLDER_NAME);
+  gBackupSetText("gBackupLocalStatusHint", "建議自行建立「" + G_BACKUP_RECOMMENDED_FOLDER_NAME + "」資料夾，並將下載的 JSON 備份檔集中存放於該資料夾。");
  }
  function gBackupRenderDriveStatus(file) {
   const box = document.getElementById("gBackupDriveStatusBox");
@@ -6916,7 +6819,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   } catch (err) {
    throw new Error("Google 備份檔內容不是有效 JSON，請先不要還原。詳細錯誤：" + (err.message || err));
   }
-  gBackupDownloadText(gBackupMakeTimestampFileName("google-drive-backup"), text);
+  const downloadedFileName = gBackupMakeTimestampFileName("google-drive-backup");
+  gBackupDownloadText(downloadedFileName, text);
+  gBackupRememberLocalDownload(downloadedFileName);
   gBackupSetMessage("已下載 Google 備份 JSON。最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
  }
  async function gBackupUploadToDrive() {
@@ -6950,13 +6855,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   gBackupSetMessage("備份完成：" + G_BACKUP_FILE_NAME + (refreshed && refreshed.modifiedTime ? "，最後修改：" + gBackupFormatLocalTime(refreshed.modifiedTime) : ""));
   await gBackupShowNotice("備份完成", "Google Drive 備份已完成。", "success");
  }
- async function gBackupRestoreFromDrive(restoreMode) {
-  const mode = restoreMode || await gBackupShowRestoreChoice();
-  if (mode === "close") {
-   gBackupSetMessage("已關閉從 G 還原提醒，未執行還原。");
-   return;
-  }
-  if (mode === "download") {
+ async function gBackupRestoreFromDrive() {
+  const shouldDownloadBeforeRestore = await gBackupShowConfirm("從 G 還原", "確定要從 Google Drive 還原嗎？", "按「下載後還原」會先下載一份目前本機備份 JSON；按「不下載直接還原」會直接進行還原。", "danger", "下載後還原", "不下載直接還原");
+  if (shouldDownloadBeforeRestore) {
    gBackupDownloadCurrent("還原前本機備份");
    localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCollectObject()));
   }
@@ -7002,17 +6903,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   gBackupSetMessage("已刪除 G 備份檔，Google 備份狀態已更新。");
   await gBackupShowNotice("刪除完成", "已刪除 G 備份檔，Google 備份狀態已更新。", "success");
  }
- async function gBackupImportLocalFile(file, importMode) {
+ async function gBackupImportLocalFile(file) {
   if (!file) return;
-  const mode = importMode || await gBackupShowImportChoice();
-  if (mode === "close") {
-   gBackupSetMessage("已關閉匯入本機備份提醒，未執行匯入。");
-   return;
-  }
-  if (mode === "download") {
-   gBackupDownloadCurrent("匯入前本機備份");
-   localStorage.setItem(G_BACKUP_BEFORE_IMPORT_KEY, JSON.stringify(gBackupCollectObject()));
-  }
+  const confirmed = await gBackupShowConfirm("匯入本機備份", "確定要匯入本機備份 JSON 嗎？", "匯入前會先下載一份目前本機備份 JSON。", "danger", "確認匯入", "取消");
+  if (!confirmed) return;
+  gBackupDownloadCurrent("匯入前本機備份");
+  localStorage.setItem(G_BACKUP_BEFORE_IMPORT_KEY, JSON.stringify(gBackupCollectObject()));
   const reader = new FileReader();
   reader.onload = async function() {
    try {
@@ -7047,6 +6943,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
+  gBackupRenderLocalStatus();
   if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("G 已授權過，本次頁面待重新連線；按下 G 功能時會重新連線 Google。只有按「登出 G」才會清除授權記憶。"); }
   else gBackupRenderLoggedOutStatus();
   if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。"); }, true); });
@@ -7058,48 +6955,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
    gBackupRenderLoggedOutStatus();
    gBackupSetMessage("已登出 Google，已清除本機授權記憶並離線。");
   });
-  if (uploadBtn) uploadBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("備份到 G", "確定要備份目前本機資料到 Google Drive 嗎？", "此動作會將目前本機加班費計算紀錄寫入 Google Drive appDataFolder 的 G 備份檔。", "info", "確認備份", "取消");
-   if (!confirmed) { gBackupSetMessage("已取消備份到 G。"); return; }
-   gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); });
-  });
-  if (restoreBtn) restoreBtn.addEventListener("click", async function() {
-   const restoreMode = await gBackupShowRestoreChoice();
-   if (restoreMode === "close") {
-    gBackupSetMessage("已關閉從 G 還原提醒，未執行還原。");
-    return;
-   }
-   gBackupRequireToken(function() { gBackupRestoreFromDrive(restoreMode).catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); });
-  });
+  if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
+  if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
   if (checkStatusBtn) checkStatusBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupCheckDriveStatus(false).catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
-  if (downloadDriveBtn) downloadDriveBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("下載 G 備份 JSON", "確定要下載 Google Drive 上的 G 備份 JSON 嗎？", "此動作只會下載一份雲端備份檔到本機，不會還原、不會覆蓋目前資料。", "info", "確認下載", "取消");
-   if (!confirmed) { gBackupSetMessage("已取消下載 G 備份 JSON。"); return; }
-   gBackupRequireToken(function() { gBackupDownloadDriveBackup().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("G 備份下載失敗", err.message, "danger"); }); });
-  });
+  if (downloadDriveBtn) downloadDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDownloadDriveBackup().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("G 備份下載失敗", err.message, "danger"); }); }); });
   if (deleteDriveBtn) deleteDriveBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupDeleteDriveBackup().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("刪除 G 備份失敗", err.message, "danger"); }); }); });
-  if (downloadBtn) downloadBtn.addEventListener("click", async function() {
-   const confirmed = await gBackupShowConfirm("下載本機備份 JSON", "確定要下載目前本機備份 JSON 嗎？", "此動作會把目前瀏覽器內的加班費計算紀錄下載成 JSON 檔，不會修改本機資料、不會操作 Google Drive。", "info", "確認下載", "取消");
-   if (!confirmed) { gBackupSetMessage("已取消下載本機備份 JSON。"); return; }
-   gBackupDownloadCurrent("overtime-local-backup");
-   gBackupSetMessage("已下載本機備份 JSON。");
-  });
-  if (importBtn && fileInput) importBtn.addEventListener("click", async function() {
-   const importMode = await gBackupShowImportChoice();
-   if (importMode === "close") {
-    gBackupPendingImportMode = "close";
-    gBackupSetMessage("已關閉匯入本機備份提醒，未執行匯入。");
-    return;
-   }
-   gBackupPendingImportMode = importMode;
-   fileInput.value = "";
-   fileInput.click();
-  });
-  if (fileInput) fileInput.addEventListener("change", function() {
-   const mode = gBackupPendingImportMode || "close";
-   gBackupPendingImportMode = "close";
-   gBackupImportLocalFile(fileInput.files && fileInput.files[0], mode);
-  });
+  if (downloadBtn) downloadBtn.addEventListener("click", function() { gBackupDownloadCurrent("overtime-local-backup"); gBackupSetMessage("已下載本機備份 JSON。"); });
+  if (importBtn && fileInput) importBtn.addEventListener("click", function() { fileInput.value = ""; fileInput.click(); });
+  if (fileInput) fileInput.addEventListener("change", function() { gBackupImportLocalFile(fileInput.files && fileInput.files[0]); });
  });
 })();
 </script>
