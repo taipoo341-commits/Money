@@ -2916,18 +2916,87 @@
 }
 
 
-/* === G備份/還原：本機備份狀態區 === */
-.g-backup-local-status {
- margin-top: 10px !important;
- border-color: rgba(52, 211, 153, 0.24) !important;
- background: linear-gradient(180deg, rgba(6, 78, 59, 0.18), rgba(12, 18, 28, 0.58)) !important;
+/* === 人事資產層 HR Asset Layer：年度請假資訊 × 月假別統計資訊｜Moon Silver × Mint Cyan === */
+.annual-leave-info-panel {
+ border-color: rgba(226, 232, 240, 0.34) !important;
+ background:
+  radial-gradient(circle at 12% 4%, rgba(248, 250, 252, 0.13), transparent 30%),
+  radial-gradient(circle at 88% 8%, rgba(153, 246, 228, 0.08), transparent 28%),
+  linear-gradient(180deg, rgba(9, 14, 22, 0.98), rgba(3, 9, 16, 0.98)) !important;
+ box-shadow:
+  0 0 26px rgba(226, 232, 240, 0.06),
+  0 0 34px rgba(153, 246, 228, 0.035),
+  inset 0 0 24px rgba(148, 163, 184, 0.04) !important;
 }
-.g-backup-local-status .g-backup-drive-status-title {
- color: #a7f3d0 !important;
- text-shadow: 0 0 10px rgba(52, 211, 153, 0.32) !important;
+.annual-leave-info-header {
+ border-bottom-color: rgba(226, 232, 240, 0.22) !important;
+ background: linear-gradient(90deg, rgba(30, 41, 59, 0.42), rgba(15, 23, 42, 0.78), rgba(20, 83, 45, 0.18)) !important;
 }
-.g-backup-local-status .g-backup-drive-status-label {
- color: #6ee7b7 !important;
+.annual-leave-info-title {
+ color: transparent !important;
+ -webkit-text-fill-color: transparent !important;
+ background-image: linear-gradient(92deg, #cbd5e1 0%, #f8fafc 42%, #e5e7eb 67%, #94a3b8 100%) !important;
+ -webkit-background-clip: text !important;
+ background-clip: text !important;
+ font-weight: 950 !important;
+ letter-spacing: 0.18em !important;
+ text-shadow:
+  0 0 8px rgba(248, 250, 252, 0.30),
+  0 0 22px rgba(203, 213, 225, 0.16),
+  0 0 34px rgba(148, 163, 184, 0.10) !important;
+ filter: drop-shadow(0 0 8px rgba(226, 232, 240, 0.16)) !important;
+}
+.leave-stats-panel {
+ border-color: rgba(153, 246, 228, 0.26) !important;
+ background:
+  radial-gradient(circle at 10% 0%, rgba(153, 246, 228, 0.10), transparent 32%),
+  radial-gradient(circle at 88% 12%, rgba(209, 250, 229, 0.075), transparent 30%),
+  linear-gradient(180deg, rgba(3, 17, 22, 0.96), rgba(4, 10, 18, 0.98)) !important;
+ box-shadow:
+  0 0 24px rgba(45, 212, 191, 0.06),
+  0 0 30px rgba(240, 253, 250, 0.035),
+  inset 0 0 22px rgba(153, 246, 228, 0.03) !important;
+}
+.leave-stats-panel > .section-header-toggle {
+ border-bottom-color: rgba(153, 246, 228, 0.22) !important;
+ background: linear-gradient(90deg, rgba(6, 78, 59, 0.24), rgba(15, 23, 42, 0.82), rgba(20, 184, 166, 0.12)) !important;
+}
+#leaveStatsPanelTitle,
+.leave-stats-panel > .section-header-toggle > div > div:first-child {
+ color: transparent !important;
+ -webkit-text-fill-color: transparent !important;
+ background-image: linear-gradient(92deg, #99f6e4 0%, #ccfbf1 43%, #f0fdfa 72%, #5eead4 100%) !important;
+ -webkit-background-clip: text !important;
+ background-clip: text !important;
+ font-weight: 950 !important;
+ letter-spacing: 0.14em !important;
+ text-shadow:
+  0 0 8px rgba(153, 246, 228, 0.34),
+  0 0 22px rgba(45, 212, 191, 0.18),
+  0 0 32px rgba(240, 253, 250, 0.10) !important;
+ filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.13)) !important;
+}
+.leave-stats-panel > .section-header-toggle .details-icon {
+ color: #99f6e4 !important;
+ text-shadow: 0 0 10px rgba(153, 246, 228, 0.42), 0 0 18px rgba(45, 212, 191, 0.18) !important;
+}
+.annual-leave-info-panel .leave-stats-year-box {
+ border-color: rgba(226, 232, 240, 0.20) !important;
+ background: linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(8, 13, 22, 0.92)) !important;
+ box-shadow: inset 0 0 18px rgba(226, 232, 240, 0.035), 0 0 16px rgba(148, 163, 184, 0.04) !important;
+}
+.annual-leave-info-panel .leave-stats-year-title {
+ color: #e5e7eb !important;
+ text-shadow: 0 0 8px rgba(226, 232, 240, 0.22) !important;
+}
+@media (max-width: 760px) {
+ .annual-leave-info-title {
+  letter-spacing: 0.13em !important;
+ }
+ #leaveStatsPanelTitle,
+ .leave-stats-panel > .section-header-toggle > div > div:first-child {
+  letter-spacing: 0.10em !important;
+ }
 }
 
 </style>
@@ -3333,15 +3402,6 @@
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">檔名</span><span id="gBackupDriveStatusName" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後修改</span><span id="gBackupDriveStatusModified" class="g-backup-drive-status-value">-</span></div>
      <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">File ID</span><span id="gBackupDriveStatusId" class="g-backup-drive-status-value">-</span></div>
-    </div>
-    <div id="gBackupLocalStatusBox" class="g-backup-drive-status g-backup-local-status" aria-live="polite">
-     <div class="g-backup-drive-status-title">本機備份狀態</div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">狀態</span><span id="gBackupLocalStatusState" class="g-backup-drive-status-value">尚未下載本機備份</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">最後下載</span><span id="gBackupLocalStatusDownloaded" class="g-backup-drive-status-value">-</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議檔名</span><span id="gBackupLocalStatusFileName" class="g-backup-drive-status-value">-</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">月份紀錄</span><span id="gBackupLocalStatusMonthCount" class="g-backup-drive-status-value">0 筆</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">建議資料夾</span><span id="gBackupLocalStatusFolder" class="g-backup-drive-status-value">加班費計算備份檔</span></div>
-     <div class="g-backup-drive-status-row"><span class="g-backup-drive-status-label">提醒</span><span id="gBackupLocalStatusHint" class="g-backup-drive-status-value">建議自行建立「加班費計算備份檔」資料夾，並將下載的 JSON 備份檔集中存放於該資料夾。</span></div>
     </div>
     <div id="gBackupStatusMessage" class="g-backup-message">尚未登入 Google。</div>
    </section>
@@ -6484,8 +6544,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
  const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
  const G_BACKUP_AUTH_REMEMBER_KEY = "personalOvertimeGoogleAuthRemembered";
- const G_BACKUP_LOCAL_STATUS_KEY = "personalOvertimeLocalBackupStatus";
- const G_BACKUP_RECOMMENDED_FOLDER_NAME = "加班費計算備份檔";
  let gBackupTokenClient = null;
  let gBackupAccessToken = "";
  let gBackupPendingAction = null;
@@ -6531,7 +6589,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   gBackupLockBodyScroll();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
-  gBackupRenderLocalStatus();
   if (gBackupAccessToken) {
    gBackupSetAuthIndicator("active");
    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。");
@@ -6708,10 +6765,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + " 加班費計算備份檔.json";
  }
  function gBackupDownloadCurrent(prefix) {
-  const fileName = gBackupMakeReadableBackupFileName();
-  gBackupDownloadText(fileName, JSON.stringify(gBackupCollectObject(), null, 2));
-  gBackupRememberLocalDownload(fileName);
-  return fileName;
+  gBackupDownloadText(gBackupMakeReadableBackupFileName(), JSON.stringify(gBackupCollectObject(), null, 2));
  }
  function gBackupFormatLocalTime(isoText) {
   if (!isoText) return "-";
@@ -6723,54 +6777,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  function gBackupSetText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
- }
- function gBackupGetLocalBackupStatus() {
-  try {
-   const raw = localStorage.getItem(G_BACKUP_LOCAL_STATUS_KEY);
-   return raw ? JSON.parse(raw) : null;
-  } catch (err) {
-   return null;
-  }
- }
- function gBackupCountLocalMonthRecords() {
-  let count = 0;
-  try {
-   Object.keys(localStorage).forEach(function(key) {
-    if (key.indexOf("personalOvertimeState:") === 0) count += 1;
-   });
-  } catch (err) {
-   count = 0;
-  }
-  return count;
- }
- function gBackupRememberLocalDownload(fileName) {
-  try {
-   localStorage.setItem(G_BACKUP_LOCAL_STATUS_KEY, JSON.stringify({
-    fileName: fileName,
-    downloadedAt: new Date().toISOString(),
-    folderName: G_BACKUP_RECOMMENDED_FOLDER_NAME
-   }));
-  } catch (err) {
-   console.warn("無法記錄本機備份狀態", err);
-  }
-  gBackupRenderLocalStatus();
- }
- function gBackupRenderLocalStatus() {
-  const box = document.getElementById("gBackupLocalStatusBox");
-  const status = gBackupGetLocalBackupStatus();
-  const monthCount = gBackupCountLocalMonthRecords();
-  const suggestedFileName = typeof gBackupMakeReadableBackupFileName === "function" ? gBackupMakeReadableBackupFileName() : "yyyy-mm-dd 加班費計算備份檔.json";
-  const hasDownloaded = Boolean(status && status.downloadedAt);
-  if (box) {
-   box.classList.toggle("g-backup-status-ok", hasDownloaded);
-   box.classList.toggle("g-backup-status-danger", !hasDownloaded);
-  }
-  gBackupSetText("gBackupLocalStatusState", hasDownloaded ? "已透過本工具下載本機備份" : "尚未透過本工具下載本機備份");
-  gBackupSetText("gBackupLocalStatusDownloaded", hasDownloaded ? gBackupFormatLocalTime(status.downloadedAt) : "-");
-  gBackupSetText("gBackupLocalStatusFileName", status && status.fileName ? status.fileName : suggestedFileName);
-  gBackupSetText("gBackupLocalStatusMonthCount", monthCount + " 筆");
-  gBackupSetText("gBackupLocalStatusFolder", G_BACKUP_RECOMMENDED_FOLDER_NAME);
-  gBackupSetText("gBackupLocalStatusHint", "建議自行建立「" + G_BACKUP_RECOMMENDED_FOLDER_NAME + "」資料夾，並將下載的 JSON 備份檔集中存放於該資料夾。");
  }
  function gBackupRenderDriveStatus(file) {
   const box = document.getElementById("gBackupDriveStatusBox");
@@ -6994,9 +7000,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   } catch (err) {
    throw new Error("Google 備份檔內容不是有效 JSON，請先不要還原。詳細錯誤：" + (err.message || err));
   }
-  const downloadedFileName = gBackupMakeTimestampFileName("google-drive-backup");
-  gBackupDownloadText(downloadedFileName, text);
-  gBackupRememberLocalDownload(downloadedFileName);
+  gBackupDownloadText(gBackupMakeTimestampFileName("google-drive-backup"), text);
   gBackupSetMessage("已下載 Google 備份 JSON。最後修改：" + gBackupFormatLocalTime(existing.modifiedTime));
  }
  async function gBackupUploadToDrive() {
@@ -7127,7 +7131,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
-  gBackupRenderLocalStatus();
   if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("G 已授權過，本次頁面待重新連線；按下 G 功能時會重新連線 Google。只有按「登出 G」才會清除授權記憶。"); }
   else gBackupRenderLoggedOutStatus();
   if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。"); }, true); });
