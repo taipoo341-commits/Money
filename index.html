@@ -6367,11 +6367,13 @@
   modal.setAttribute("aria-hidden", "false");
   if (gBackupAccessToken) {
    gBackupSetAuthIndicator("active");
-   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。");
+   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。");
   } else if (gBackupHasRememberedAuth()) {
    gBackupSetAuthIndicator("remembered");
-   gBackupSetMessage("G帳號保持登入中，正在自動重新連線 Google...");
-   gBackupTrySilentRefreshToken();
+   gBackupSetMessage("已保留 G 登入記憶；按下 G 功能時會重新連線 Google，只有按「登出 G」才會清除登入記憶。");
+  } else {
+   gBackupSetAuthIndicator(false);
+   gBackupSetMessage("尚未登入 Google。請先查看功能，再依需要按「登入 G」或 G 功能按鈕授權。");
   }
  }
  function gBackupCloseModal() {
@@ -6439,7 +6441,15 @@
  function gBackupShowConfirm(title, message, detail, variant, confirmText, cancelText) {
   return gBackupShowDialog({ title: title, message: message, detail: detail, variant: variant || "info", confirmText: confirmText || "確定", cancelText: cancelText || "取消", showCancel: true });
  }
+ function gBackupFlushCurrentStateBeforeCollect() {
+  try {
+   if (typeof saveCurrentMonthState === "function") saveCurrentMonthState();
+  } catch (err) {
+   console.warn("G備份前寫入目前月份資料失敗", err);
+  }
+ }
  function gBackupCollectObject() {
+  gBackupFlushCurrentStateBeforeCollect();
   const data = {};
   Object.keys(localStorage).forEach(function(key) {
    if (key.indexOf("personalOvertimeState:") === 0 || G_BACKUP_ALLOWED_EXACT_KEYS.has(key)) {
@@ -6449,7 +6459,7 @@
   return {
    backupName: G_BACKUP_FILE_NAME,
    backupType: "personalOvertimeLocalStorageSubset",
-   version: 1,
+   version: 2,
    savedAt: new Date().toISOString(),
    keys: data
   };
@@ -6543,7 +6553,7 @@
   if (dot) dot.classList.toggle("is-on", mode !== "off");
   if (text) {
    if (mode === "active") text.textContent = "G帳號已連線";
-   else if (mode === "remembered") text.textContent = "G帳號保持登入中";
+   else if (mode === "remembered") text.textContent = "已保留 G 登入記憶";
    else text.textContent = "尚未登入";
   }
  }
@@ -6570,7 +6580,7 @@
     gBackupTokenRefreshing = false;
     if (gBackupHasRememberedAuth()) {
      gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("G帳號保持登入中；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會離線。");
+     gBackupSetMessage("已保留 G 登入記憶；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會清除登入記憶。");
     }
    }
   }, 12000);
@@ -6592,7 +6602,7 @@
      gBackupAccessToken = "";
      if (gBackupHasRememberedAuth()) {
       gBackupSetAuthIndicator("remembered");
-      gBackupSetMessage("G帳號保持登入中；本次自動重新連線未完成。請按「登入 G」重新連線，或按「登出 G」真正離線。錯誤：" + response.error);
+      gBackupSetMessage("已保留 G 登入記憶；本次重新連線未完成。請按「登入 G」重新連線，或按「登出 G」清除登入記憶。錯誤：" + response.error);
      } else {
       gBackupSetAuthIndicator(false);
       gBackupSetMessage("Google 登入失敗：" + response.error);
@@ -6603,13 +6613,13 @@
     gBackupAccessToken = response && response.access_token ? response.access_token : "";
     if (!gBackupAccessToken) {
      if (gBackupHasRememberedAuth()) gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("未取得本次 Google 連線權杖；G帳號保持登入中。請按「登入 G」重新連線，或按「登出 G」真正離線。");
+     gBackupSetMessage("未取得本次 Google 連線權杖；已保留 G 登入記憶。請按「登入 G」重新連線，或按「登出 G」清除登入記憶。");
      gBackupPendingAction = null;
      return;
     }
     gBackupRememberAuth();
     gBackupSetAuthIndicator("active");
-    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。");
+    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。");
     const action = gBackupPendingAction;
     gBackupPendingAction = null;
     if (typeof action === "function") action();
@@ -6627,7 +6637,7 @@
   if (typeof action === "function") gBackupPendingAction = action;
   if (gBackupTokenRefreshing) return;
   gBackupSetAuthIndicator("remembered");
-  gBackupSetMessage("G帳號保持登入中，正在自動重新連線 Google...");
+  gBackupSetMessage("已保留 G 登入記憶，正在重新連線 Google...");
   gBackupRequestAccessTokenWithPrompt("");
  }
  function gBackupRequireToken(action, forceConsent) {
@@ -6643,7 +6653,7 @@
    gBackupRequestAccessTokenWithPrompt("consent");
   } else {
    gBackupSetAuthIndicator("remembered");
-   gBackupSetMessage("G帳號保持登入中，正在自動重新連線 Google...");
+   gBackupSetMessage("已保留 G 登入記憶，正在重新連線 Google...");
    gBackupRequestAccessTokenWithPrompt("");
   }
  }
@@ -6727,10 +6737,11 @@
   await gBackupShowNotice("備份完成", "Google Drive 備份已完成。", "success");
  }
  async function gBackupRestoreFromDrive() {
-  const confirmed = await gBackupShowConfirm("從 G 還原", "確定要從 Google Drive 還原嗎？", "還原前會先下載一份目前本機備份 JSON。", "danger", "確認還原", "取消");
-  if (!confirmed) return;
-  gBackupDownloadCurrent("還原前本機備份");
-  localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCollectObject()));
+  const shouldDownloadBeforeRestore = await gBackupShowConfirm("從 G 還原", "確定要從 Google Drive 還原嗎？", "按「下載後還原」會先下載一份目前本機備份 JSON；按「不下載直接還原」會直接進行還原。", "danger", "下載後還原", "不下載直接還原");
+  if (shouldDownloadBeforeRestore) {
+   gBackupDownloadCurrent("還原前本機備份");
+   localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCollectObject()));
+  }
   gBackupSetMessage("正在從 Google Drive 讀取備份...");
   const existing = await gBackupFindDriveFile();
   if (!existing || !existing.id) {
@@ -6811,9 +6822,9 @@
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
-  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("G帳號保持登入中；開啟 G備份/還原或執行 G 功能時會自動重新連線。只有按「登出 G」才會離線。"); }
+  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("已保留 G 登入記憶；按下 G 功能時會重新連線 Google。只有按「登出 G」才會清除登入記憶。"); }
   else gBackupRenderLoggedOutStatus();
-  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保持登入記憶。"); }, true); });
+  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。"); }, true); });
   if (logoutBtn) logoutBtn.addEventListener("click", function() {
    if (gBackupAccessToken && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gBackupAccessToken, function() {});
    gBackupAccessToken = "";
