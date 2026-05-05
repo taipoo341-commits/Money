@@ -2521,6 +2521,32 @@
  box-shadow: 0 0 18px rgba(246, 196, 83, 0.22), 0 0 18px rgba(66, 133, 244, 0.16), inset 0 0 16px rgba(16, 185, 129, 0.08);
  text-shadow: 0 0 10px rgba(246, 196, 83, 0.52);
 }
+.g-backup-entry-actions {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 10px;
+ flex-wrap: wrap;
+}
+.local-storage-clear-btn {
+ width: min(240px, 100%);
+ min-height: 48px;
+ border: 1px solid rgba(251, 113, 133, 0.58);
+ border-radius: 999px;
+ background: linear-gradient(90deg, rgba(127, 29, 29, 0.24), rgba(244, 63, 94, 0.15), rgba(15, 23, 42, 0.34));
+ color: #fecaca;
+ font-size: 15px;
+ font-weight: 950;
+ letter-spacing: 0.10em;
+ cursor: pointer;
+ box-shadow: 0 0 16px rgba(251, 113, 133, 0.16), inset 0 0 14px rgba(244, 63, 94, 0.06);
+ text-shadow: 0 0 9px rgba(251, 113, 133, 0.38);
+}
+.local-storage-clear-btn:hover,
+.local-storage-clear-btn:focus-visible {
+ background: linear-gradient(90deg, rgba(127, 29, 29, 0.34), rgba(244, 63, 94, 0.24), rgba(15, 23, 42, 0.42));
+ outline: 1px solid rgba(251, 113, 133, 0.62);
+}
 .g-backup-main-btn:hover,
 .g-backup-main-btn:focus-visible {
  background: linear-gradient(90deg, rgba(66, 133, 244, 0.34), rgba(16, 185, 129, 0.28), rgba(246, 196, 83, 0.24));
@@ -2774,6 +2800,7 @@
  box-shadow: 0 -12px 24px rgba(0,0,0,.34), 0 0 18px rgba(66,133,244,.12) !important;
 }
 @media (max-width: 760px) {
+ .g-backup-entry-actions { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
  .g-backup-modal {
   align-items: stretch !important;
   padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)) !important;
@@ -3138,7 +3165,10 @@
       
 <!-- G備份/還原：頁面最下方入口開始 -->
 <section class="panel g-backup-panel" aria-label="Google Drive 備份與還原">
- <button id="gBackupRestoreOpenBtn" class="g-backup-main-btn" type="button">G備份/還原</button>
+ <div class="g-backup-entry-actions">
+  <button id="gBackupRestoreOpenBtn" class="g-backup-main-btn" type="button">G備份/還原</button>
+  <button id="localStorageClearBtn" class="local-storage-clear-btn" type="button">刪本機紀錄</button>
+ </div>
 </section>
 <!-- G備份/還原：頁面最下方入口結束 -->
 
@@ -6367,10 +6397,10 @@
   modal.setAttribute("aria-hidden", "false");
   if (gBackupAccessToken) {
    gBackupSetAuthIndicator("active");
-   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。");
+   gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。");
   } else if (gBackupHasRememberedAuth()) {
    gBackupSetAuthIndicator("remembered");
-   gBackupSetMessage("已保留 G 登入記憶；按下 G 功能時會重新連線 Google，只有按「登出 G」才會清除登入記憶。");
+   gBackupSetMessage("G 已授權過，本次頁面待重新連線；按下 G 功能時會重新連線 Google，只有按「登出 G」才會清除授權記憶。");
   } else {
    gBackupSetAuthIndicator(false);
    gBackupSetMessage("尚未登入 Google。請先查看功能，再依需要按「登入 G」或 G 功能按鈕授權。");
@@ -6534,6 +6564,18 @@
    else localStorage.setItem(key, String(clean[key]));
   });
  }
+ async function clearLocalOvertimeStorageRecords() {
+  const confirmed = await gBackupShowConfirm("刪除本機紀錄", "確定要刪除本機的加班費計算紀錄嗎？", "此動作會刪除本機瀏覽器內所有 personalOvertimeState: 開頭的月份紀錄，包含基本薪給、天災與選舉日設定、大修日期設定、請假／受訓批次設定與主月曆資料。此動作不會刪除 Google Drive 備份、不會登出 G、不會刪除我的最愛。", "danger", "確認刪除", "取消");
+  if (!confirmed) return;
+  const keysToRemove = [];
+  Object.keys(localStorage).forEach(function(key) {
+   if (key.indexOf("personalOvertimeState:") === 0) keysToRemove.push(key);
+  });
+  keysToRemove.forEach(function(key) { localStorage.removeItem(key); });
+  gBackupSetMessage("已刪除本機加班費計算紀錄，頁面即將重新載入。");
+  await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄。Google Drive 備份與 G 登入狀態不受影響。", "success");
+  window.location.reload();
+ }
  function gBackupHasRememberedAuth() {
   try { return localStorage.getItem(G_BACKUP_AUTH_REMEMBER_KEY) === "1"; }
   catch (err) { return false; }
@@ -6553,7 +6595,7 @@
   if (dot) dot.classList.toggle("is-on", mode !== "off");
   if (text) {
    if (mode === "active") text.textContent = "G帳號已連線";
-   else if (mode === "remembered") text.textContent = "已保留 G 登入記憶";
+   else if (mode === "remembered") text.textContent = "G已授權過｜待連線";
    else text.textContent = "尚未登入";
   }
  }
@@ -6580,7 +6622,7 @@
     gBackupTokenRefreshing = false;
     if (gBackupHasRememberedAuth()) {
      gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("已保留 G 登入記憶；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會清除登入記憶。");
+     gBackupSetMessage("G 已授權過，本次頁面待重新連線；若瀏覽器要求重新確認，請按「登入 G」。只有按「登出 G」才會清除授權記憶。");
     }
    }
   }, 12000);
@@ -6602,7 +6644,7 @@
      gBackupAccessToken = "";
      if (gBackupHasRememberedAuth()) {
       gBackupSetAuthIndicator("remembered");
-      gBackupSetMessage("已保留 G 登入記憶；本次重新連線未完成。請按「登入 G」重新連線，或按「登出 G」清除登入記憶。錯誤：" + response.error);
+      gBackupSetMessage("G 已授權過，本次重新連線未完成。請按「登入 G」重新連線，或按「登出 G」清除授權記憶。錯誤：" + response.error);
      } else {
       gBackupSetAuthIndicator(false);
       gBackupSetMessage("Google 登入失敗：" + response.error);
@@ -6613,13 +6655,13 @@
     gBackupAccessToken = response && response.access_token ? response.access_token : "";
     if (!gBackupAccessToken) {
      if (gBackupHasRememberedAuth()) gBackupSetAuthIndicator("remembered");
-     gBackupSetMessage("未取得本次 Google 連線權杖；已保留 G 登入記憶。請按「登入 G」重新連線，或按「登出 G」清除登入記憶。");
+     gBackupSetMessage("未取得本次 Google 連線權杖；G 已授權過但本次頁面待重新連線。請按「登入 G」重新連線，或按「登出 G」清除授權記憶。");
      gBackupPendingAction = null;
      return;
     }
     gBackupRememberAuth();
     gBackupSetAuthIndicator("active");
-    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。");
+    gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。");
     const action = gBackupPendingAction;
     gBackupPendingAction = null;
     if (typeof action === "function") action();
@@ -6637,7 +6679,7 @@
   if (typeof action === "function") gBackupPendingAction = action;
   if (gBackupTokenRefreshing) return;
   gBackupSetAuthIndicator("remembered");
-  gBackupSetMessage("已保留 G 登入記憶，正在重新連線 Google...");
+  gBackupSetMessage("G 已授權過，正在重新連線 Google...");
   gBackupRequestAccessTokenWithPrompt("");
  }
  function gBackupRequireToken(action, forceConsent) {
@@ -6653,7 +6695,7 @@
    gBackupRequestAccessTokenWithPrompt("consent");
   } else {
    gBackupSetAuthIndicator("remembered");
-   gBackupSetMessage("已保留 G 登入記憶，正在重新連線 Google...");
+   gBackupSetMessage("G 已授權過，正在重新連線 Google...");
    gBackupRequestAccessTokenWithPrompt("");
   }
  }
@@ -6807,6 +6849,7 @@
  }
  gBackupReady(function() {
   const openBtn = document.getElementById("gBackupRestoreOpenBtn");
+  const localClearBtn = document.getElementById("localStorageClearBtn");
   const closeBtn = document.getElementById("gBackupCloseBtn");
   const loginBtn = document.getElementById("gBackupLoginBtn");
   const logoutBtn = document.getElementById("gBackupLogoutBtn");
@@ -6819,19 +6862,20 @@
   const deleteDriveBtn = document.getElementById("gBackupDeleteDriveBtn");
   const fileInput = document.getElementById("gBackupLocalFileInput");
   if (openBtn) openBtn.addEventListener("click", gBackupOpenModal);
+  if (localClearBtn) localClearBtn.addEventListener("click", clearLocalOvertimeStorageRecords);
   if (closeBtn) closeBtn.addEventListener("click", gBackupCloseModal);
   const modal = document.getElementById("gBackupRestoreModal");
   if (modal) modal.addEventListener("click", function(event) { if (event.target === modal) gBackupCloseModal(); });
-  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("已保留 G 登入記憶；按下 G 功能時會重新連線 Google。只有按「登出 G」才會清除登入記憶。"); }
+  if (gBackupHasRememberedAuth()) { gBackupSetAuthIndicator("remembered"); gBackupSetMessage("G 已授權過，本次頁面待重新連線；按下 G 功能時會重新連線 Google。只有按「登出 G」才會清除授權記憶。"); }
   else gBackupRenderLoggedOutStatus();
-  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留登入記憶。"); }, true); });
+  if (loginBtn) loginBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupSetMessage("G帳號已連線；除非按「登出 G」，否則會保留授權記憶。"); }, true); });
   if (logoutBtn) logoutBtn.addEventListener("click", function() {
    if (gBackupAccessToken && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gBackupAccessToken, function() {});
    gBackupAccessToken = "";
    gBackupPendingAction = null;
    gBackupClearRememberedAuth();
    gBackupRenderLoggedOutStatus();
-   gBackupSetMessage("已登出 Google，已清除本機登入記憶並離線。");
+   gBackupSetMessage("已登出 Google，已清除本機授權記憶並離線。");
   });
   if (uploadBtn) uploadBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupUploadToDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
   if (restoreBtn) restoreBtn.addEventListener("click", function() { gBackupRequireToken(function() { gBackupRestoreFromDrive().catch(function(err) { gBackupSetMessage(err.message); gBackupShowNotice("操作失敗", err.message, "danger"); }); }); });
