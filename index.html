@@ -510,6 +510,71 @@
       letter-spacing: 0.16em;
       margin-bottom: 12px;
     }
+    .special-title-row,
+    .batch-inner-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .special-title-row .special-title { margin-bottom: 0; }
+    .batch-inner-title {
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.16em;
+    }
+    .special-add-btn,
+    .special-delete-btn,
+    .batch-add-btn,
+    .batch-delete-row-btn {
+      min-height: 30px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 950;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .special-add-btn,
+    .batch-add-btn {
+      min-width: 58px;
+      border: 1px solid rgba(52, 211, 153, 0.48);
+      background: rgba(16, 185, 129, 0.14);
+      color: #a7f3d0;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.12);
+    }
+    .special-add-btn:hover,
+    .special-add-btn:focus-visible,
+    .batch-add-btn:hover,
+    .batch-add-btn:focus-visible {
+      background: rgba(16, 185, 129, 0.24);
+      outline: 1px solid rgba(110, 231, 183, 0.55);
+    }
+    .special-delete-btn,
+    .batch-delete-row-btn {
+      min-width: 72px;
+      border: 1px solid rgba(251, 113, 133, 0.48);
+      background: rgba(244, 63, 94, 0.14);
+      color: #fda4af;
+    }
+    .special-delete-btn:hover,
+    .special-delete-btn:focus-visible,
+    .batch-delete-row-btn:hover,
+    .batch-delete-row-btn:focus-visible {
+      background: rgba(244, 63, 94, 0.24);
+      outline: 1px solid rgba(251, 113, 133, 0.58);
+    }
+    .special-delete-btn.placeholder-delete,
+    .batch-delete-row-btn.placeholder-delete {
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .special-record.with-delete-space { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 72px; }
+    .special-record.election-with-delete-space { grid-template-columns: minmax(0, 1fr) 72px; }
+    .special-election-row { grid-template-columns: 1fr !important; }
+    .batch-row.with-delete-space { grid-template-columns: repeat(5, minmax(0, 1fr)) 80px; }
     .special-record-list {
       display: grid;
       gap: 8px;
@@ -1223,6 +1288,13 @@
       .overhaul-content { padding: 12px !important; }
       .batch-row,
       .overhaul-range-row { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 6px !important; padding: 9px !important; }
+      .batch-row.with-delete-space { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+      .special-record.with-delete-space,
+      .special-record.election-with-delete-space { grid-template-columns: 1fr !important; }
+      .special-delete-btn,
+      .batch-delete-row-btn { width: 100% !important; min-height: 32px !important; font-size: 11px !important; }
+      .batch-inner-title-row { margin-bottom: 10px !important; }
+      .batch-add-btn { min-height: 32px !important; font-size: 11px !important; }
       .batch-field-title,
       .overhaul-field-title { font-size: 9px !important; letter-spacing: 0 !important; }
       .batch-select,
@@ -3015,22 +3087,32 @@
 
 
 /* === 參數設定進階版樣式 === */
-.parameter-settings-main-btn{width:100%;min-height:48px;border:1px solid rgba(153,246,228,.58);border-radius:999px;background:linear-gradient(90deg,rgba(20,184,166,.22),rgba(66,133,244,.18));color:#ccfbf1;font-size:15px;font-weight:950;letter-spacing:.1em;cursor:pointer}.g-backup-entry-actions{grid-template-columns:minmax(0,1.05fr) minmax(0,.9fr) minmax(0,.88fr)!important;width:min(760px,100%)!important}.parameter-settings-modal,.parameter-date-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.74);backdrop-filter:blur(7px);overscroll-behavior:contain}.parameter-settings-modal{z-index:135000;padding:18px}.parameter-date-modal{z-index:145000;padding:18px}.parameter-settings-modal.open,.parameter-date-modal.open{display:flex}.parameter-settings-card{width:min(1040px,100%);max-height:min(90vh,860px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;border:1px solid rgba(153,246,228,.3);border-radius:24px;background:linear-gradient(145deg,rgba(8,13,22,.97),rgba(12,18,28,.95));overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.7)}.parameter-settings-header{padding:18px;border-bottom:1px solid rgba(153,246,228,.18)}.parameter-settings-title{color:#ccfbf1;font-size:24px;font-weight:950;letter-spacing:.1em}.parameter-settings-subtitle,.parameter-settings-note{color:#cbd5e1;font-size:12px;font-weight:850;line-height:1.6}.parameter-settings-body{min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px;display:grid;gap:14px}.parameter-settings-section{border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.085);padding:14px}.parameter-settings-section-title{display:flex;justify-content:space-between;gap:10px;color:#99f6e4;font-size:15px;font-weight:950;margin-bottom:10px}.parameter-settings-list{display:grid;gap:8px}.parameter-settings-row{display:grid;grid-template-columns:1fr 74px 108px 1.25fr 112px 88px 88px 72px 72px;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(0,0,0,.18);padding:9px}.parameter-settings-row.holiday-row{grid-template-columns:128px 116px 1.15fr 96px 84px 72px 72px}.parameter-settings-row.exception-row{grid-template-columns:110px 110px 84px 72px 72px}.parameter-settings-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.parameter-settings-grid.six{grid-template-columns:repeat(6,minmax(0,1fr))}.parameter-settings-field{display:grid;gap:4px}.parameter-settings-field span{font-size:11px;color:#94a3b8;font-weight:950}.parameter-settings-input,.parameter-settings-select,.parameter-settings-linked-shift{width:100%;min-width:0;height:36px;border:1px solid rgba(153,246,228,.28);border-radius:10px;background:rgba(0,0,0,.3);color:#e5e7eb;padding:0 10px;font-size:13px;font-weight:900;outline:none}.parameter-settings-linked-shift{display:flex;align-items:center;justify-content:center;color:#ccfbf1;background:rgba(20,184,166,.12)}.parameter-date-btn,.parameter-settings-add-btn,.parameter-settings-small-btn,.parameter-settings-footer-btn{min-height:36px;border-radius:11px;border:1px solid rgba(153,246,228,.34);background:rgba(20,184,166,.12);color:#ccfbf1;font-size:12px;font-weight:950;cursor:pointer}.parameter-date-btn{border-color:rgba(147,197,253,.34);background:rgba(59,130,246,.1);color:#bfdbfe}.parameter-settings-small-btn.danger{border-color:rgba(251,113,133,.42);background:rgba(244,63,94,.12);color:#fda4af}.parameter-settings-small-btn.file{border-color:rgba(147,197,253,.34);background:rgba(59,130,246,.1);color:#bfdbfe}.parameter-settings-footer{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px 18px;border-top:1px solid rgba(153,246,228,.14)}.parameter-settings-footer-btn.primary{background:rgba(16,185,129,.22);color:#a7f3d0}.parameter-settings-footer-btn.warning{background:rgba(251,191,36,.12);color:#fde68a}.parameter-settings-message{min-height:24px;color:#fde68a;font-size:12px;font-weight:900}.parameter-settings-file-input{display:none!important}.parameter-date-card{width:min(430px,100%);border:1px solid rgba(153,246,228,.34);border-radius:20px;background:linear-gradient(145deg,rgba(8,13,22,.98),rgba(12,18,28,.98));padding:16px}.parameter-date-head{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:10px}.parameter-date-title{text-align:center;color:#ccfbf1;font-weight:950}.parameter-date-nav,.parameter-date-action-btn{height:38px;border-radius:11px;border:1px solid rgba(147,197,253,.3);background:rgba(59,130,246,.1);color:#bfdbfe;font-weight:950}.parameter-date-week-grid,.parameter-date-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.parameter-date-week-cell{color:#94a3b8;text-align:center;font-size:11px;font-weight:950}.parameter-date-day-btn,.parameter-date-empty-cell{min-height:42px;border-radius:10px}.parameter-date-day-btn{border:1px solid rgba(153,246,228,.22);background:rgba(0,0,0,.3);color:#e5e7eb;font-weight:950}.parameter-date-day-btn.selected{border-color:rgba(52,211,153,.72);background:rgba(16,185,129,.18);color:#a7f3d0}.parameter-date-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.reset-confirm-modal{z-index:170000!important}@media(max-width:760px){.g-backup-entry-actions{grid-template-columns:1fr!important;width:100%!important}.parameter-settings-modal{align-items:stretch;padding:8px}.parameter-settings-card{max-height:calc(100vh - 16px)}.parameter-settings-row,.parameter-settings-row.holiday-row,.parameter-settings-row.exception-row,.parameter-settings-grid,.parameter-settings-grid.six,.parameter-settings-footer{grid-template-columns:1fr}.parameter-settings-body{padding:12px}}
+.parameter-settings-main-btn{width:100%;min-height:48px;border:1px solid rgba(153,246,228,.58);border-radius:999px;background:linear-gradient(90deg,rgba(20,184,166,.22),rgba(66,133,244,.18));color:#ccfbf1;font-size:15px;font-weight:950;letter-spacing:.1em;cursor:pointer}.g-backup-entry-actions{grid-template-columns:minmax(0,1.05fr) minmax(0,.9fr) minmax(0,.88fr)!important;width:min(760px,100%)!important}.parameter-settings-modal,.parameter-date-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.74);backdrop-filter:blur(7px);overscroll-behavior:contain}.parameter-settings-modal{z-index:135000;padding:18px}.parameter-date-modal{z-index:145000;padding:18px}.parameter-settings-modal.open,.parameter-date-modal.open{display:flex}.parameter-settings-card{width:min(1040px,100%);max-height:min(90vh,860px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;border:1px solid rgba(153,246,228,.3);border-radius:24px;background:linear-gradient(145deg,rgba(8,13,22,.97),rgba(12,18,28,.95));overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.7)}.parameter-settings-header{padding:18px;border-bottom:1px solid rgba(153,246,228,.18)}.parameter-settings-title{color:#ccfbf1;font-size:24px;font-weight:950;letter-spacing:.1em}.parameter-settings-subtitle,.parameter-settings-note{color:#cbd5e1;font-size:12px;font-weight:850;line-height:1.6}.parameter-settings-body{min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px;display:grid;gap:14px}.parameter-settings-section{border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.085);padding:14px}.parameter-settings-section-title{display:flex;justify-content:space-between;gap:10px;color:#99f6e4;font-size:15px;font-weight:950;margin-bottom:10px}.parameter-settings-list{display:grid;gap:8px}.parameter-settings-row{display:grid;grid-template-columns:1fr 74px 108px 1.25fr 112px 88px 88px 72px;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(0,0,0,.18);padding:9px}.parameter-settings-row.holiday-row{grid-template-columns:128px 116px 1.15fr 96px 84px 72px}.parameter-settings-row.exception-row{grid-template-columns:110px 110px 84px 72px}.parameter-settings-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.parameter-settings-grid.six{grid-template-columns:repeat(6,minmax(0,1fr))}.parameter-settings-field{display:grid;gap:4px}.parameter-settings-field span{font-size:11px;color:#94a3b8;font-weight:950}.parameter-settings-input,.parameter-settings-select,.parameter-settings-linked-shift{width:100%;min-width:0;height:36px;border:1px solid rgba(153,246,228,.28);border-radius:10px;background:rgba(0,0,0,.3);color:#e5e7eb;padding:0 10px;font-size:13px;font-weight:900;outline:none}.parameter-settings-linked-shift{display:flex;align-items:center;justify-content:center;color:#ccfbf1;background:rgba(20,184,166,.12)}.parameter-date-btn,.parameter-settings-add-btn,.parameter-settings-small-btn,.parameter-settings-footer-btn{min-height:36px;border-radius:11px;border:1px solid rgba(153,246,228,.34);background:rgba(20,184,166,.12);color:#ccfbf1;font-size:12px;font-weight:950;cursor:pointer}.parameter-date-btn{border-color:rgba(147,197,253,.34);background:rgba(59,130,246,.1);color:#bfdbfe}.parameter-settings-small-btn.danger{border-color:rgba(251,113,133,.42);background:rgba(244,63,94,.12);color:#fda4af}.parameter-settings-small-btn.file{border-color:rgba(147,197,253,.34);background:rgba(59,130,246,.1);color:#bfdbfe}.parameter-settings-footer{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px 18px;border-top:1px solid rgba(153,246,228,.14)}.parameter-settings-footer-btn.primary{background:rgba(16,185,129,.22);color:#a7f3d0}.parameter-settings-footer-btn.warning{background:rgba(251,191,36,.12);color:#fde68a}.parameter-settings-message{min-height:24px;color:#fde68a;font-size:12px;font-weight:900}.parameter-settings-file-input{display:none!important}.parameter-date-card{width:min(430px,100%);border:1px solid rgba(153,246,228,.34);border-radius:20px;background:linear-gradient(145deg,rgba(8,13,22,.98),rgba(12,18,28,.98));padding:16px}.parameter-date-head{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:10px}.parameter-date-title{text-align:center;color:#ccfbf1;font-weight:950}.parameter-date-nav,.parameter-date-action-btn{height:38px;border-radius:11px;border:1px solid rgba(147,197,253,.3);background:rgba(59,130,246,.1);color:#bfdbfe;font-weight:950}.parameter-date-week-grid,.parameter-date-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.parameter-date-week-cell{color:#94a3b8;text-align:center;font-size:11px;font-weight:950}.parameter-date-day-btn,.parameter-date-empty-cell{min-height:42px;border-radius:10px}.parameter-date-day-btn{border:1px solid rgba(153,246,228,.22);background:rgba(0,0,0,.3);color:#e5e7eb;font-weight:950}.parameter-date-day-btn.selected{border-color:rgba(52,211,153,.72);background:rgba(16,185,129,.18);color:#a7f3d0}.parameter-date-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.reset-confirm-modal{z-index:170000!important}@media(max-width:760px){.g-backup-entry-actions{grid-template-columns:1fr!important;width:100%!important}.parameter-settings-modal{align-items:stretch;padding:8px}.parameter-settings-card{max-height:calc(100vh - 16px)}.parameter-settings-row,.parameter-settings-row.holiday-row,.parameter-settings-row.exception-row,.parameter-settings-grid,.parameter-settings-grid.six,.parameter-settings-footer{grid-template-columns:1fr}.parameter-settings-body{padding:12px}}
+/* === 參數設定：啟用緊鄰標題修正 === */
+.parameter-settings-section-title{
+  display:grid!important;
+  grid-template-columns:auto auto minmax(0,1fr) auto!important;
+  align-items:center!important;
+  justify-content:start!important;
+  gap:12px!important;
+}
+.parameter-settings-section-title .parameter-settings-check-label{
+  justify-self:start!important;
+  color:#ccfbf1!important;
+  font-size:13px!important;
+  font-weight:950!important;
+  white-space:nowrap!important;
+}
+.parameter-settings-section-title .parameter-settings-add-btn{
+  justify-self:end!important;
+  grid-column:4!important;
+}
+.parameter-settings-section-title span{
+  justify-self:start!important;
+}
+@media(max-width:760px){.parameter-settings-section-title{grid-template-columns:auto auto!important}.parameter-settings-section-title .parameter-settings-add-btn{grid-column:1 / -1!important;width:100%!important}.parameter-settings-section-title .parameter-settings-check-label{font-size:12px!important}}
+/* === 參數設定：啟用緊鄰標題修正結束 === */
 /* === 參數設定進階版樣式結束 === */
-
-
-/* === 特殊日期與批次列數精簡：預設一列，使用新增按鈕擴充 === */
-.batch-content-action-row { display:flex; justify-content:flex-end; margin-bottom:10px; }
-@media(max-width:760px){.batch-content-action-row{justify-content:stretch}.batch-content-action-row .batch-add-btn{width:100%}}
-
-.special-title-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; }
-.special-title-row .special-title { margin-bottom:0; }
-.special-add-btn, .special-delete-btn, .batch-add-btn, .batch-delete-btn { min-height:30px; border-radius:9px; border:1px solid rgba(153,246,228,.34); background:rgba(20,184,166,.12); color:#ccfbf1; font-size:11px; font-weight:950; cursor:pointer; white-space:nowrap; }
-.special-delete-btn, .batch-delete-btn { border-color:rgba(251,113,133,.42); background:rgba(244,63,94,.12); color:#fda4af; }
-.special-record-manage { grid-template-columns:minmax(0,1fr) minmax(0,1fr) 64px; }
-.special-election-item { display:grid; grid-template-columns:minmax(0,1fr) 64px; gap:6px; align-items:center; }
-.batch-row .batch-extra-action { margin-top:6px; }
-@media(max-width:760px){.special-title-row{gap:6px}.special-add-btn,.special-delete-btn,.batch-add-btn,.batch-delete-btn{min-height:30px;font-size:10px}.special-record-manage{grid-template-columns:1fr 52px}.special-record-manage .special-date-row{grid-column:1/-1}.special-election-item{grid-template-columns:minmax(0,1fr) 52px}}
 
 </style>
 </head>
@@ -3158,15 +3240,24 @@
         <div id="specialContent" class="special-content">
           <div class="special-grid">
             <div class="special-card">
-              <div class="special-title-row"><div class="special-title">停止辦公</div><button class="special-add-btn" type="button" data-special-add="closure">新增</button></div>
+              <div class="special-title-row">
+                <div class="special-title">停止辦公</div>
+                <button id="closureAddBtn" class="special-add-btn" type="button">新增</button>
+              </div>
               <div id="closureRecordList" class="special-record-list"></div>
             </div>
             <div class="special-card">
-              <div class="special-title-row"><div class="special-title">選舉日</div><button class="special-add-btn" type="button" data-special-add="election">新增</button></div>
+              <div class="special-title-row">
+                <div class="special-title">選舉日</div>
+                <button id="electionAddBtn" class="special-add-btn" type="button">新增</button>
+              </div>
               <div id="electionRecordList" class="special-election-row"></div>
             </div>
             <div class="special-card">
-              <div class="special-title-row"><div class="special-title">教育訓練</div><button class="special-add-btn" type="button" data-special-add="training">新增</button></div>
+              <div class="special-title-row">
+                <div class="special-title">教育訓練</div>
+                <button id="trainingAddBtn" class="special-add-btn" type="button">新增</button>
+              </div>
               <div id="trainingRecordList" class="special-record-list"></div>
             </div>
           </div>
@@ -3181,7 +3272,10 @@
           <div id="batchToggleIcon">＋</div>
         </button>
         <div id="batchContent" class="batch-content special-content">
-          <div class="batch-content-action-row"><button id="batchAddRangeBtn" class="batch-add-btn" type="button">新增批次列</button></div>
+          <div class="batch-inner-title-row">
+            <div class="batch-inner-title">批次列設定</div>
+            <button id="batchAddBtn" class="batch-add-btn" type="button">新增</button>
+          </div>
           <div id="batchRangeList" class="batch-row-list"></div>
         </div>
       </section>
@@ -3463,9 +3557,9 @@
 <div id="parameterSettingsModal" class="parameter-settings-modal" aria-hidden="true"><div class="parameter-settings-card" role="dialog" aria-modal="true"><div class="parameter-settings-header"><div class="parameter-settings-title">參數設定</div><div class="parameter-settings-subtitle">班別跟主畫面連動；週期、時數、交接班分鐘、薪資倍率、夜點費、餐費與獎金皆可由本機參數覆寫。</div></div><div class="parameter-settings-body">
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>輪班週期覆寫</span><button id="parameterAddShiftRuleBtn" class="parameter-settings-add-btn" type="button">新增週期</button></div><div class="parameter-settings-note">週期輸入框點選後會全選，可直接覆蓋輸入。離開輸入框後更新定錨格選單。</div><div id="parameterShiftRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>行事曆覆寫</span><button id="parameterAddHolidayOverrideBtn" class="parameter-settings-add-btn" type="button">新增日期</button></div><div id="parameterHolidayOverrideList" class="parameter-settings-list"></div></section>
-<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><label class="parameter-settings-check-label"><input id="parameterHoursEnabled" type="checkbox">啟用</label><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-note">啟用打勾時，才使用本區的值別時數、交接班分鐘與啟用中的時數例外；未打勾時使用內建初始值。</div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>0 空班 HR</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1 一值 HR</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2 二值 HR</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3 三值 HR</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label></div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>交接班分鐘</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5、第1格的3為8.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
-<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><label class="parameter-settings-check-label"><input id="parameterSalaryEnabled" type="checkbox">啟用</label></div><div class="parameter-settings-note">啟用打勾時，才使用本區的薪資倍率、夜點費、餐費與獎金金額；未打勾時使用內建初始值。</div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>1.33倍率，分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>1.67倍率，分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>2.66倍率，分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six"><label class="parameter-settings-field"><span>初夜夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input" type="text" inputmode="numeric"></label></div></section>
-<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
+<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><label class="parameter-settings-check-label"><input id="parameterHoursEnabled" type="checkbox">啟用</label><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>0 空班 HR</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1 一值 HR</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2 二值 HR</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3 三值 HR</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label></div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>交接班分鐘</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5、第1格的3為8.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
+<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><label class="parameter-settings-check-label"><input id="parameterSalaryEnabled" type="checkbox">啟用</label></div><div class="parameter-settings-grid"><label class="parameter-settings-field"><span>超時2HR以內的倍數，請填分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>超時2~8HR內的倍數，請填分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>超時8HR以上的倍數，請填分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six"><label class="parameter-settings-field"><span>初夜夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input" type="text" inputmode="numeric"></label></div></section>
+<section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存並套用</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
 <div id="parameterDateModal" class="parameter-date-modal" aria-hidden="true"><div class="parameter-date-card"><div class="parameter-date-head"><button id="parameterDatePrevBtn" class="parameter-date-nav" type="button">‹</button><div id="parameterDateTitle" class="parameter-date-title">選擇日期</div><button id="parameterDateNextBtn" class="parameter-date-nav" type="button">›</button></div><div id="parameterDateWeekGrid" class="parameter-date-week-grid"></div><div id="parameterDateCalendarGrid" class="parameter-date-calendar-grid"></div><div class="parameter-date-actions"><button id="parameterDateClearBtn" class="parameter-date-action-btn" type="button">清除日期</button><button id="parameterDateCancelBtn" class="parameter-date-action-btn" type="button">取消</button></div></div></div>
 <!-- 參數設定：浮動視窗結束 -->
 
@@ -3475,11 +3569,11 @@
     <div class="reset-confirm-card" role="dialog" aria-modal="true" aria-labelledby="resetConfirmTitle">
       <div class="reset-confirm-header">
         <div id="resetConfirmTitle" class="reset-confirm-title">⚠ 清除確認 ⚠</div>
-        <div id="resetConfirmSubtitle" class="reset-confirm-subtitle">這是不可復原的資料清除動作</div>
+        <div class="reset-confirm-subtitle">這是不可復原的資料清除動作</div>
       </div>
       <div class="reset-confirm-body">
         <div id="resetConfirmMessage">確定要清除資料嗎？</div>
-        <div id="resetConfirmWarning" class="reset-confirm-warning">提醒：按下確認後，該範圍已輸入的考勤、薪資、天災、選舉日、批次與大修設定都會被清除。</div>
+        <div class="reset-confirm-warning">提醒：按下確認後，該範圍已輸入的考勤、薪資、天災、選舉日、批次與大修設定都會被清除。</div>
       </div>
       <div class="reset-confirm-actions">
         <button id="resetConfirmCancel" class="reset-confirm-btn reset-confirm-cancel" type="button">取消</button>
@@ -3621,36 +3715,82 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function normalizeIsoDateText(value){ const t=String(value||"").trim(); const m=t.match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return ""; const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3])); return d.getFullYear()==Number(m[1])&&d.getMonth()+1==Number(m[2])&&d.getDate()==Number(m[3])?t:""; }
     function ymdToParameterIso(y,m,d){ const p=v=>String(v).padStart(2,"0"); return `${y}-${p(m)}-${p(d)}`; }
     function parameterTodayIso(){ const y=Number(document.getElementById("rocYear")?.value||toRocYear(new Date()))+1911; const m=Number(document.getElementById("month")?.value||new Date().getMonth()+1); return ymdToParameterIso(y,m,1); }
-    function normalizeParameterSettings(raw){ const s=raw&&typeof raw==="object"?raw:{}; const n=deepCloneParameter(PARAMETER_DEFAULT_SETTINGS); n.shiftRules=[]; n.holidayOverrides=[]; const calc=s.calc&&typeof s.calc==="object"?s.calc:{}; n.calc.hoursEnabled=calc.hoursEnabled===true; n.calc.salaryEnabled=calc.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(calc.codeHours?.["0"],0),"1":sanitizeParameterNumber(calc.codeHours?.["1"],9),"2":sanitizeParameterNumber(calc.codeHours?.["2"],8),"3":sanitizeParameterNumber(calc.codeHours?.["3"],7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(calc.handoverMinutes,30)); n.calc.rates={code7:String(calc.rates?.code7||"4/3"),code8:String(calc.rates?.code8||"5/3"),code6:String(calc.rates?.code6||"8/3")}; n.calc.fees={initialNight:Math.max(0,sanitizeParameterNumber(calc.fees?.initialNight,250)),deepNight:Math.max(0,sanitizeParameterNumber(calc.fees?.deepNight,400)),breakfast:Math.max(0,sanitizeParameterNumber(calc.fees?.breakfast,75)),lunchDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.lunchDinner,150)),redEnvelope:Math.max(0,sanitizeParameterNumber(calc.fees?.redEnvelope,600)),reunionDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.reunionDinner,800))}; n.calc.hourExceptions=Array.isArray(calc.hourExceptions)?calc.hourExceptions.map((x,i)=>({id:String(x.id||`hex-${Date.now()}-${i}`),position:Math.max(1,Number(x.position||1)),hours:sanitizeParameterNumber(x.hours,0),enabled:x.enabled!==false})):[]; if(Array.isArray(s.shiftRules)) s.shiftRules.forEach((x,i)=>{const ed=normalizeIsoDateText(x.effectiveDate); const pat=String(x.cyclePattern||"").replace(/\s+/g,""); if(!ed||!/^[0123]+$/.test(pat)) return; const ad=normalizeIsoDateText(x.anchorDate)||ed; n.shiftRules.push({id:String(x.id||`shift-${Date.now()}-${i}`),name:String(x.name||"自訂輪班週期").slice(0,30),shiftGroup:["A","B","C","D"].includes(x.shiftGroup)?x.shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:ed,cyclePattern:pat,anchorDate:ad,anchorPosition:Math.max(1,Math.min(pat.length,Number(x.anchorPosition||1))),enabled:x.enabled!==false});}); if(Array.isArray(s.holidayOverrides)) s.holidayOverrides.forEach((x,i)=>{const d=normalizeIsoDateText(x.date); if(!d) return; const a=x.action==="remove"?"remove":"add"; n.holidayOverrides.push({id:String(x.id||`hol-${Date.now()}-${i}`),date:d,action:a,name:String(x.name||(a==="remove"?"取消放假日":"臨時國定假日")).slice(0,30),includeNationalHours:x.includeNationalHours!==false,includeHolidayBenefit:x.includeHolidayBenefit!==false,enabled:x.enabled!==false});}); return n; }
+    function normalizeParameterSettings(raw){
+      const s=raw&&typeof raw==="object"?raw:{};
+      const n=deepCloneParameter(PARAMETER_DEFAULT_SETTINGS);
+      n.shiftRules=[];
+      n.holidayOverrides=[];
+      const calc=s.calc&&typeof s.calc==="object"?s.calc:{};
+      n.calc.hoursEnabled=calc.hoursEnabled===true;
+      n.calc.salaryEnabled=calc.salaryEnabled===true;
+      n.calc.codeHours={"0":sanitizeParameterNumber(calc.codeHours?.["0"],0),"1":sanitizeParameterNumber(calc.codeHours?.["1"],9),"2":sanitizeParameterNumber(calc.codeHours?.["2"],8),"3":sanitizeParameterNumber(calc.codeHours?.["3"],7)};
+      n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(calc.handoverMinutes,30));
+      n.calc.rates={code7:String(calc.rates?.code7||"4/3"),code8:String(calc.rates?.code8||"5/3"),code6:String(calc.rates?.code6||"8/3")};
+      n.calc.fees={initialNight:Math.max(0,sanitizeParameterNumber(calc.fees?.initialNight,250)),deepNight:Math.max(0,sanitizeParameterNumber(calc.fees?.deepNight,400)),breakfast:Math.max(0,sanitizeParameterNumber(calc.fees?.breakfast,75)),lunchDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.lunchDinner,150)),redEnvelope:Math.max(0,sanitizeParameterNumber(calc.fees?.redEnvelope,600)),reunionDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.reunionDinner,800))};
+      n.calc.hourExceptions=Array.isArray(calc.hourExceptions)?calc.hourExceptions.map((x,i)=>({id:String(x.id||`hex-${Date.now()}-${i}`),position:Math.max(1,Number(x.position||1)),hours:sanitizeParameterNumber(x.hours,0),enabled:x.enabled===true})):[];
+      if(Array.isArray(s.shiftRules)) s.shiftRules.forEach((x,i)=>{const ed=normalizeIsoDateText(x.effectiveDate); const pat=String(x.cyclePattern||"").replace(/\s+/g,""); if(!ed||!/^[0123]+$/.test(pat)) return; const ad=normalizeIsoDateText(x.anchorDate)||ed; n.shiftRules.push({id:String(x.id||`shift-${Date.now()}-${i}`),name:String(x.name||"自訂輪班週期").slice(0,30),shiftGroup:["A","B","C","D"].includes(x.shiftGroup)?x.shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:ed,cyclePattern:pat,anchorDate:ad,anchorPosition:Math.max(1,Math.min(pat.length,Number(x.anchorPosition||1))),enabled:x.enabled===true});});
+      if(Array.isArray(s.holidayOverrides)) s.holidayOverrides.forEach((x,i)=>{const d=normalizeIsoDateText(x.date); if(!d) return; const a=x.action==="remove"?"remove":"add"; n.holidayOverrides.push({id:String(x.id||`hol-${Date.now()}-${i}`),date:d,action:a,name:String(x.name||(a==="remove"?"取消放假日":"臨時國定假日")).slice(0,30),includeNationalHours:x.includeNationalHours!==false,includeHolidayBenefit:x.includeHolidayBenefit!==false,enabled:x.enabled===true});});
+      return n;
+    }
     function loadParameterSettings(){ try{const raw=localStorage.getItem(PARAMETER_SETTINGS_STORAGE_KEY); parameterSettings=normalizeParameterSettings(raw?JSON.parse(raw):PARAMETER_DEFAULT_SETTINGS);}catch(e){parameterSettings=deepCloneParameter(PARAMETER_DEFAULT_SETTINGS); console.warn("無法讀取參數設定",e);} return parameterSettings; }
     function saveParameterSettings(){ parameterSettings=normalizeParameterSettings(parameterSettings); try{localStorage.setItem(PARAMETER_SETTINGS_STORAGE_KEY,JSON.stringify(parameterSettings));}catch(e){console.warn("無法儲存參數設定",e);} }
     function parseParameterDateValue(t){const v=normalizeIsoDateText(t); if(!v)return null; const p=v.split("-").map(Number); return new Date(p[0],p[1]-1,p[2]);}
-    function isParameterHoursOverrideEnabled(){return parameterSettings.calc?.hoursEnabled===true;}
-    function isParameterSalaryOverrideEnabled(){return parameterSettings.calc?.salaryEnabled===true;}
-    function getParameterCodeHour(codeValue){const builtin={"0":0,"1":9,"2":8,"3":7}; const key=String(Number(codeValue)); if(isParameterHoursOverrideEnabled()){const n=Number(parameterSettings.calc?.codeHours?.[key]); if(Number.isFinite(n)) return Math.max(0,n);} return builtin[key]??0;}
-    function getParameterHandoverMinutes(){if(!isParameterHoursOverrideEnabled())return 30; return Math.max(0,Number(parameterSettings.calc?.handoverMinutes??30));}
+    function getParameterHandoverMinutes(){return parameterSettings.calc?.hoursEnabled===true ? Math.max(0,Number(parameterSettings.calc?.handoverMinutes??30)) : 30;}
     function getParameterPartialHandoverMinutes(){return Math.round(getParameterHandoverMinutes()/2);}
     function parseParameterFraction(text,fallback){const s=String(text||"").trim(); const m=s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/); if(m){const a=Number(m[1]),b=Number(m[2]); if(Number.isFinite(a)&&Number.isFinite(b)&&b!==0)return a/b;} const n=Number(s); return Number.isFinite(n)?n:fallback;}
-    function getParameterRate(key){const f={code7:4/3,code8:5/3,code6:8/3}; if(!isParameterSalaryOverrideEnabled())return f[key]; return parseParameterFraction(parameterSettings.calc?.rates?.[key],f[key]);}
-    function getParameterFee(key){const f={initialNight:250,deepNight:400,breakfast:75,lunchDinner:150,redEnvelope:600,reunionDinner:800}; if(!isParameterSalaryOverrideEnabled())return f[key]??0; return Math.max(0,Number(parameterSettings.calc?.fees?.[key]??f[key]??0));}
-    function getEffectiveShiftRuleForDate(y,m,d,sg){const cur=new Date(y,m-1,d); return (parameterSettings.shiftRules||[]).filter(r=>r.enabled!==false&&r.shiftGroup===sg&&normalizeIsoDateText(r.effectiveDate)&&normalizeIsoDateText(r.anchorDate)&&/^[0123]+$/.test(String(r.cyclePattern||""))).map(r=>({...r,effectiveDateObject:parseParameterDateValue(r.effectiveDate)})).filter(r=>r.effectiveDateObject&&r.effectiveDateObject<=cur).sort((a,b)=>b.effectiveDateObject-a.effectiveDateObject)[0]||null;}
-    function getCycleHourForCustomPattern(pattern,index){const pos=index+1; if(isParameterHoursOverrideEnabled()){const ex=(parameterSettings.calc?.hourExceptions||[]).find(x=>x.enabled!==false&&Number(x.position)===pos); if(ex) return Number(ex.hours)||0;} const code=String(pattern||"").charAt(index); return getParameterCodeHour(code);}
-    function applyParameterHolidayOverrides(pc,y){const r=pc||{workDict:{},holidayMap:new Map()}; if(!(r.holidayMap instanceof Map))r.holidayMap=new Map(); if(!r.workDict)r.workDict={}; (parameterSettings.holidayOverrides||[]).forEach(x=>{if(x.enabled===false)return; const dt=parseParameterDateValue(x.date); if(!dt||dt.getFullYear()!==Number(y))return; const m=dt.getMonth()+1,d=dt.getDate(),k=dateKey(y,m,d),had=r.holidayMap.has(k); if(x.action==="remove"){if(had){r.holidayMap.delete(k); r.workDict[m]=Math.max(0,Number(r.workDict[m]||0)+1);}}else{if(!had)r.workDict[m]=Math.max(0,Number(r.workDict[m]||0)-1); if(x.includeNationalHours!==false)r.holidayMap.set(k,x.name||"臨時國定假日");}}); return r;}
+    function getParameterRate(key){const f={code7:4/3,code8:5/3,code6:8/3}; return parameterSettings.calc?.salaryEnabled===true ? parseParameterFraction(parameterSettings.calc?.rates?.[key],f[key]) : f[key];}
+    function getParameterFee(key){const f={initialNight:250,deepNight:400,breakfast:75,lunchDinner:150,redEnvelope:600,reunionDinner:800}; return parameterSettings.calc?.salaryEnabled===true ? Math.max(0,Number(parameterSettings.calc?.fees?.[key]??f[key]??0)) : (f[key]??0);}
+    function getEffectiveShiftRuleForDate(y,m,d,sg){const cur=new Date(y,m-1,d); return (parameterSettings.shiftRules||[]).filter(r=>r.enabled===true&&r.shiftGroup===sg&&normalizeIsoDateText(r.effectiveDate)&&normalizeIsoDateText(r.anchorDate)&&/^[0123]+$/.test(String(r.cyclePattern||""))).map(r=>({...r,effectiveDateObject:parseParameterDateValue(r.effectiveDate)})).filter(r=>r.effectiveDateObject&&r.effectiveDateObject<=cur).sort((a,b)=>b.effectiveDateObject-a.effectiveDateObject)[0]||null;}
+    function getCycleHourForCustomPattern(pattern,index){const pos=index+1; const ex=parameterSettings.calc?.hoursEnabled===true ? (parameterSettings.calc?.hourExceptions||[]).find(x=>x.enabled===true&&Number(x.position)===pos) : null; if(ex) return Number(ex.hours)||0; const code=String(pattern||"").charAt(index); return parameterSettings.calc?.hoursEnabled===true ? Number(parameterSettings.calc?.codeHours?.[code]??0) : Number({"0":0,"1":9,"2":8,"3":7}[code]??0);}
+    function applyParameterHolidayOverrides(pc,y){const r=pc||{workDict:{},holidayMap:new Map()}; if(!(r.holidayMap instanceof Map))r.holidayMap=new Map(); if(!r.workDict)r.workDict={}; (parameterSettings.holidayOverrides||[]).forEach(x=>{if(x.enabled!==true)return; const dt=parseParameterDateValue(x.date); if(!dt||dt.getFullYear()!==Number(y))return; const m=dt.getMonth()+1,d=dt.getDate(),k=dateKey(y,m,d),had=r.holidayMap.has(k); if(x.action==="remove"){if(had){r.holidayMap.delete(k); r.workDict[m]=Math.max(0,Number(r.workDict[m]||0)+1);}}else{if(!had)r.workDict[m]=Math.max(0,Number(r.workDict[m]||0)-1); if(x.includeNationalHours!==false)r.holidayMap.set(k,x.name||"臨時國定假日");}}); return r;}
     function parameterSettingsSetMessage(msg){const el=document.getElementById("parameterSettingsMessage"); if(el)el.textContent=msg||"";}
     function parameterSettingsEscapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
     function parameterPatternPositionOptions(pattern,sel){const clean=String(pattern||"").replace(/\s+/g,""); const len=Math.max(1,clean.length||1); const s=Math.max(1,Math.min(len,Number(sel||1))); let h=""; for(let i=1;i<=len;i++){h+=`<option value="${i}" ${i===s?"selected":""}>第${i}格 = ${clean.charAt(i-1)||"-"}</option>`;} return h;}
     function parameterDateButtonLabel(v){return normalizeIsoDateText(v)||"選擇日期";}
-    function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><label class="parameter-settings-check-label"><input data-parameter-field="shift-enabled" type="checkbox" ${r.enabled!==false?"checked":""}>啟用</label><button class="parameter-settings-small-btn" type="button" data-parameter-apply-row="shift" data-parameter-apply-index="${i}">套用</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}"><label class="parameter-settings-check-label"><input data-parameter-field="holiday-national" type="checkbox" ${x.includeNationalHours!==false?"checked":""}>國定</label><label class="parameter-settings-check-label"><input data-parameter-field="holiday-enabled" type="checkbox" ${x.enabled!==false?"checked":""}>啟用</label><button class="parameter-settings-small-btn" type="button" data-parameter-apply-row="holiday" data-parameter-apply-index="${i}">套用</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el)el.innerHTML=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"><label class="parameter-settings-check-label"><input data-parameter-field="exception-enabled" type="checkbox" ${x.enabled!==false?"checked":""}>啟用</label><button class="parameter-settings-small-btn" type="button" data-parameter-apply-row="exception" data-parameter-apply-index="${i}">套用</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("")||`<div class="parameter-settings-note">尚未建立時數例外。</div>`; fillParameterCalcInputs();}
-    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; const hoursEnabled=document.getElementById("parameterHoursEnabled"); if(hoursEnabled)hoursEnabled.checked=c.hoursEnabled===true; const salaryEnabled=document.getElementById("parameterSalaryEnabled"); if(salaryEnabled)salaryEnabled.checked=c.salaryEnabled===true; set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
+    function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><label class="parameter-settings-check-label"><input data-parameter-field="shift-enabled" type="checkbox" ${r.enabled===true?"checked":""}>啟用</label><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}"><label class="parameter-settings-check-label"><input data-parameter-field="holiday-national" type="checkbox" ${x.includeNationalHours!==false?"checked":""}>國定</label><label class="parameter-settings-check-label"><input data-parameter-field="holiday-enabled" type="checkbox" ${x.enabled===true?"checked":""}>啟用</label><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el)el.innerHTML=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"><label class="parameter-settings-check-label"><input data-parameter-field="exception-enabled" type="checkbox" ${x.enabled===true?"checked":""}>啟用</label><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("")||`<div class="parameter-settings-note">尚未建立時數例外。</div>`; fillParameterCalcInputs();}
+    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; const he=document.getElementById("parameterHoursEnabled"); if(he)he.checked=c.hoursEnabled===true; const se=document.getElementById("parameterSalaryEnabled"); if(se)se.checked=c.salaryEnabled===true; set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
     function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); n.calc.hoursEnabled=Boolean(document.getElementById("parameterHoursEnabled")?.checked); n.calc.salaryEnabled=Boolean(document.getElementById("parameterSalaryEnabled")?.checked); n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:Boolean(row.querySelector('[data-parameter-field="exception-enabled"]')?.checked)})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:Boolean(row.querySelector('[data-parameter-field="shift-enabled"]')?.checked)})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:Boolean(row.querySelector('[data-parameter-field="holiday-national"]')?.checked),includeHolidayBenefit:true,enabled:Boolean(row.querySelector('[data-parameter-field="holiday-enabled"]')?.checked)});}); return normalizeParameterSettings(n);}
-    function parameterSettingsOpenModal(){loadParameterSettings();parameterSettingsRender();const m=document.getElementById("parameterSettingsModal");if(!m)return;if(typeof gBackupLockBodyScroll==="function")gBackupLockBodyScroll();m.classList.add("open");m.setAttribute("aria-hidden","false");parameterSettingsSetMessage("已載入參數設定。倍率建議使用分數，例如 4/3、5/3、8/3。");}
-    function parameterSettingsCloseModal(){closeParameterDatePicker();const m=document.getElementById("parameterSettingsModal");if(m){m.classList.remove("open");m.setAttribute("aria-hidden","true");}if(typeof gBackupUnlockBodyScroll==="function")gBackupUnlockBodyScroll();}
-    function parameterSettingsAddShiftRule(){const d=parameterTodayIso();parameterSettings.shiftRules.push({id:`shift-${Date.now()}`,name:"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:d,cyclePattern:CYCLE_CODES.join(""),anchorDate:d,anchorPosition:1,enabled:true});parameterSettingsRender();}
-    function parameterSettingsAddHolidayOverride(){parameterSettings.holidayOverrides.push({id:`hol-${Date.now()}`,date:parameterTodayIso(),action:"add",name:"臨時國定假日",includeNationalHours:true,includeHolidayBenefit:true,enabled:true});parameterSettingsRender();}
-    function parameterSettingsAddHourException(){parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.hourExceptions.push({id:`hex-${Date.now()}`,position:1,hours:0,enabled:true});parameterSettingsRender();}
-    function parameterSettingsSaveAndApply(message,closeAfterSave){parameterSettings=parameterSettingsReadFromUi();saveParameterSettings();parameterSettingsRender();parameterSettingsSetMessage(message||"已儲存參數設定並重新計算畫面。");renderAll(true);if(closeAfterSave)parameterSettingsCloseModal();}
-    async function parameterSettingsInitialDefault(){const ok=await showResetConfirmDialog("確定要還原參數初始設定嗎？這只會重設參數設定，不會清除已輸入的考勤、薪資、天災、選舉日、批次與大修設定。",{title:"參數初始設定",subtitle:"只重設參數設定，不清除既有考勤資料",warning:"按下確認後，僅會將參數設定回到目前這一版 index.html 的內建規則；已輸入的考勤、薪資、天災、選舉日、批次與大修設定都會保留。",okText:"確認還原"});if(!ok)return;parameterSettings=deepCloneParameter(PARAMETER_DEFAULT_SETTINGS);saveParameterSettings();parameterSettingsRender();renderAll(true);parameterSettingsSetMessage("已還原參數初始設定；考勤、薪資、天災、選舉日、批次與大修設定均已保留。");}
-    function parameterSettingsReloadSaved(){loadParameterSettings();parameterSettingsRender();parameterSettingsSetMessage("已重新讀取已儲存參數。");}
+    let parameterSettingsBodyScrollLocked = false;
+    let parameterSettingsBodyScrollY = 0;
+    function parameterSettingsLockBodyScroll(){
+      if(parameterSettingsBodyScrollLocked)return;
+      parameterSettingsBodyScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${parameterSettingsBodyScrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+      parameterSettingsBodyScrollLocked = true;
+    }
+    function parameterSettingsUnlockBodyScroll(){
+      if(!parameterSettingsBodyScrollLocked)return;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, parameterSettingsBodyScrollY || 0);
+      parameterSettingsBodyScrollLocked = false;
+    }
+    function parameterSettingsOpenModal(){loadParameterSettings();parameterSettingsRender();const m=document.getElementById("parameterSettingsModal");if(!m)return;parameterSettingsLockBodyScroll();m.classList.add("open");m.setAttribute("aria-hidden","false");parameterSettingsSetMessage("已載入參數設定。倍率建議使用分數，例如 4/3、5/3、8/3。");}
+    function parameterSettingsCloseModal(){closeParameterDatePicker();const m=document.getElementById("parameterSettingsModal");if(m){m.classList.remove("open");m.setAttribute("aria-hidden","true");}parameterSettingsUnlockBodyScroll();}
+    function parameterSettingsIsAutoSelectInput(el){
+      if(!el || !el.matches || !el.matches(".parameter-settings-input"))return false;
+      const section = el.closest(".parameter-settings-section");
+      const title = section ? String(section.querySelector(".parameter-settings-section-title span")?.textContent || "") : "";
+      return title.includes("值別時數與交接班") || title.includes("薪資倍率與金額");
+    }
+    function parameterSettingsSelectInputIfNeeded(el){
+      if(!parameterSettingsIsAutoSelectInput(el))return;
+      window.setTimeout(()=>{try{el.select();}catch(err){}},0);
+    }
+    function parameterSettingsAddShiftRule(){const d=parameterTodayIso();parameterSettings.shiftRules.push({id:`shift-${Date.now()}`,name:"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:d,cyclePattern:CYCLE_CODES.join(""),anchorDate:d,anchorPosition:1,enabled:false});parameterSettingsRender();}
+    function parameterSettingsAddHolidayOverride(){parameterSettings.holidayOverrides.push({id:`hol-${Date.now()}`,date:parameterTodayIso(),action:"add",name:"臨時國定假日",includeNationalHours:true,includeHolidayBenefit:true,enabled:false});parameterSettingsRender();}
+    function parameterSettingsAddHourException(){parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.hourExceptions.push({id:`hex-${Date.now()}`,position:1,hours:0,enabled:false});parameterSettingsRender();}
+    function parameterSettingsSaveAndApply(){parameterSettings=parameterSettingsReadFromUi();saveParameterSettings();parameterSettingsRender();parameterSettingsSetMessage("已儲存並套用參數設定。");renderAll(true);}
+    async function parameterSettingsInitialDefault(){const ok=await showResetConfirmDialog("確定要還原參數初始設定嗎？會回到【初始設計】的內建規則。",{hideWarning:true});if(!ok)return;parameterSettings=deepCloneParameter(PARAMETER_DEFAULT_SETTINGS);saveParameterSettings();parameterSettingsRender();renderAll(true);parameterSettingsSetMessage("已還原初始設定。");}
     function parameterSettingsDownloadText(fileName,txt){const b=new Blob([txt],{type:"application/json;charset=utf-8"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=fileName;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);}
     function parameterSettingsExportJson(){parameterSettings=parameterSettingsReadFromUi();saveParameterSettings();parameterSettingsDownloadText("加班費計算參數設定.json",JSON.stringify(parameterSettings,null,2));}
     function parameterSettingsImportJsonFile(file){if(!file)return;const r=new FileReader();r.onload=function(){try{parameterSettings=normalizeParameterSettings(JSON.parse(String(r.result||"{}")));saveParameterSettings();parameterSettingsRender();renderAll(true);parameterSettingsSetMessage("已匯入並套用參數設定 JSON。");}catch(e){parameterSettingsSetMessage("匯入失敗：JSON 格式錯誤。");}};r.readAsText(file,"utf-8");}
@@ -3660,7 +3800,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function renderParameterDatePicker(){const title=document.getElementById("parameterDateTitle"),wg=document.getElementById("parameterDateWeekGrid"),cg=document.getElementById("parameterDateCalendarGrid");if(!title||!wg||!cg)return;title.textContent=`${parameterDatePickerState.year} 年 ${parameterDatePickerState.month} 月`;wg.innerHTML=SUNDAY_WEEK_LABELS.map(x=>`<div class="parameter-date-week-cell">${x}</div>`).join("");const first=new Date(parameterDatePickerState.year,parameterDatePickerState.month-1,1),dim=new Date(parameterDatePickerState.year,parameterDatePickerState.month,0).getDate();let h="";for(let i=0;i<first.getDay();i++)h+=`<div class="parameter-date-empty-cell"></div>`;const cur=getParameterDatePickerCurrentValue();for(let d=1;d<=dim;d++){const iso=ymdToParameterIso(parameterDatePickerState.year,parameterDatePickerState.month,d);h+=`<button class="parameter-date-day-btn ${iso===cur?"selected":""}" type="button" data-parameter-date-choice="${iso}">${d}</button>`;}cg.innerHTML=h;}
     function setParameterDatePickerValue(iso){const v=normalizeIsoDateText(iso),s=parameterDatePickerState;if(s.target==="shift-effective"&&parameterSettings.shiftRules[s.index])parameterSettings.shiftRules[s.index].effectiveDate=v;if(s.target==="shift-anchor"&&parameterSettings.shiftRules[s.index])parameterSettings.shiftRules[s.index].anchorDate=v;if(s.target==="holiday-date"&&parameterSettings.holidayOverrides[s.index])parameterSettings.holidayOverrides[s.index].date=v;parameterSettingsRender();closeParameterDatePicker();}
     function moveParameterDatePickerMonth(delta){const n=new Date(parameterDatePickerState.year,parameterDatePickerState.month-1+delta,1);parameterDatePickerState.year=n.getFullYear();parameterDatePickerState.month=n.getMonth()+1;renderParameterDatePicker();}
-    function bindParameterSettingsEvents(){document.getElementById("parameterSettingsOpenBtn")?.addEventListener("click",parameterSettingsOpenModal);document.getElementById("parameterCloseBtn")?.addEventListener("click",parameterSettingsCloseModal);document.getElementById("parameterAddShiftRuleBtn")?.addEventListener("click",parameterSettingsAddShiftRule);document.getElementById("parameterAddHolidayOverrideBtn")?.addEventListener("click",parameterSettingsAddHolidayOverride);document.getElementById("parameterAddHourExceptionBtn")?.addEventListener("click",parameterSettingsAddHourException);document.getElementById("parameterSaveBtn")?.addEventListener("click",()=>parameterSettingsSaveAndApply("已儲存參數設定並重新計算畫面。",true));document.getElementById("parameterInitialBtn")?.addEventListener("click",parameterSettingsInitialDefault);document.getElementById("parameterExportBtn")?.addEventListener("click",parameterSettingsExportJson);document.getElementById("parameterImportBtn")?.addEventListener("click",()=>document.getElementById("parameterImportFileInput")?.click());document.getElementById("parameterImportFileInput")?.addEventListener("change",e=>{parameterSettingsImportJsonFile(e.target.files&&e.target.files[0]);e.target.value="";});document.getElementById("parameterShiftRuleList")?.addEventListener("focusin",e=>{if(e.target.matches('[data-parameter-field="shift-pattern"]'))e.target.select();});document.getElementById("parameterShiftRuleList")?.addEventListener("click",e=>{const ap=e.target.closest("[data-parameter-apply-row]"),rm=e.target.closest("[data-parameter-remove-shift]"),dt=e.target.closest("[data-parameter-date-target]");if(ap){parameterSettingsSaveAndApply("已套用並儲存此列輪班週期。",false);return;}if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.shiftRules.splice(Number(rm.dataset.parameterRemoveShift),1);parameterSettingsRender();return;}if(dt)openParameterDatePicker(dt.dataset.parameterDateTarget,Number(dt.dataset.parameterDateIndex));if(e.target.matches('[data-parameter-field="shift-pattern"]'))e.target.select();});document.getElementById("parameterShiftRuleList")?.addEventListener("change",e=>{if(e.target.matches('[data-parameter-field="shift-pattern"]')){parameterSettings=parameterSettingsReadFromUi();parameterSettingsRender();}});document.getElementById("parameterHourExceptionList")?.addEventListener("click",e=>{const ap=e.target.closest("[data-parameter-apply-row]"),rm=e.target.closest("[data-parameter-remove-exception]");if(ap){parameterSettingsSaveAndApply("已套用並儲存此列時數例外。",false);return;}if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.hourExceptions.splice(Number(rm.dataset.parameterRemoveException),1);parameterSettingsRender();}});document.getElementById("parameterHolidayOverrideList")?.addEventListener("click",e=>{const ap=e.target.closest("[data-parameter-apply-row]"),rm=e.target.closest("[data-parameter-remove-holiday]"),dt=e.target.closest("[data-parameter-date-target]");if(ap){parameterSettingsSaveAndApply("已套用並儲存此列行事曆覆寫。",false);return;}if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.holidayOverrides.splice(Number(rm.dataset.parameterRemoveHoliday),1);parameterSettingsRender();return;}if(dt)openParameterDatePicker(dt.dataset.parameterDateTarget,Number(dt.dataset.parameterDateIndex));});document.getElementById("parameterDatePrevBtn")?.addEventListener("click",()=>moveParameterDatePickerMonth(-1));document.getElementById("parameterDateNextBtn")?.addEventListener("click",()=>moveParameterDatePickerMonth(1));document.getElementById("parameterDateCancelBtn")?.addEventListener("click",closeParameterDatePicker);document.getElementById("parameterDateClearBtn")?.addEventListener("click",()=>setParameterDatePickerValue(""));document.getElementById("parameterDateModal")?.addEventListener("click",e=>{if(e.target.id==="parameterDateModal")closeParameterDatePicker();const c=e.target.closest("[data-parameter-date-choice]");if(c)setParameterDatePickerValue(c.dataset.parameterDateChoice);});}
+    function bindParameterSettingsEvents(){document.getElementById("parameterSettingsOpenBtn")?.addEventListener("click",parameterSettingsOpenModal);document.getElementById("parameterCloseBtn")?.addEventListener("click",parameterSettingsCloseModal);document.getElementById("parameterAddShiftRuleBtn")?.addEventListener("click",parameterSettingsAddShiftRule);document.getElementById("parameterAddHolidayOverrideBtn")?.addEventListener("click",parameterSettingsAddHolidayOverride);document.getElementById("parameterAddHourExceptionBtn")?.addEventListener("click",parameterSettingsAddHourException);document.getElementById("parameterSaveBtn")?.addEventListener("click",parameterSettingsSaveAndApply);document.getElementById("parameterInitialBtn")?.addEventListener("click",parameterSettingsInitialDefault);document.getElementById("parameterExportBtn")?.addEventListener("click",parameterSettingsExportJson);document.getElementById("parameterImportBtn")?.addEventListener("click",()=>document.getElementById("parameterImportFileInput")?.click());document.getElementById("parameterImportFileInput")?.addEventListener("change",e=>{parameterSettingsImportJsonFile(e.target.files&&e.target.files[0]);e.target.value="";});const parameterModal=document.getElementById("parameterSettingsModal");parameterModal?.addEventListener("focusin",e=>parameterSettingsSelectInputIfNeeded(e.target));parameterModal?.addEventListener("pointerup",e=>parameterSettingsSelectInputIfNeeded(e.target));document.getElementById("parameterShiftRuleList")?.addEventListener("focusin",e=>{if(e.target.matches('[data-parameter-field="shift-pattern"]'))e.target.select();});document.getElementById("parameterShiftRuleList")?.addEventListener("click",e=>{const rm=e.target.closest("[data-parameter-remove-shift]"),dt=e.target.closest("[data-parameter-date-target]");if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.shiftRules.splice(Number(rm.dataset.parameterRemoveShift),1);parameterSettingsRender();return;}if(dt)openParameterDatePicker(dt.dataset.parameterDateTarget,Number(dt.dataset.parameterDateIndex));if(e.target.matches('[data-parameter-field="shift-pattern"]'))e.target.select();});document.getElementById("parameterShiftRuleList")?.addEventListener("change",e=>{if(e.target.matches('[data-parameter-field="shift-pattern"]')){parameterSettings=parameterSettingsReadFromUi();parameterSettingsRender();}});document.getElementById("parameterHourExceptionList")?.addEventListener("click",e=>{const rm=e.target.closest("[data-parameter-remove-exception]");if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.hourExceptions.splice(Number(rm.dataset.parameterRemoveException),1);parameterSettingsRender();}});document.getElementById("parameterHolidayOverrideList")?.addEventListener("click",e=>{const rm=e.target.closest("[data-parameter-remove-holiday]"),dt=e.target.closest("[data-parameter-date-target]");if(rm){parameterSettings=parameterSettingsReadFromUi();parameterSettings.holidayOverrides.splice(Number(rm.dataset.parameterRemoveHoliday),1);parameterSettingsRender();return;}if(dt)openParameterDatePicker(dt.dataset.parameterDateTarget,Number(dt.dataset.parameterDateIndex));});document.getElementById("parameterDatePrevBtn")?.addEventListener("click",()=>moveParameterDatePickerMonth(-1));document.getElementById("parameterDateNextBtn")?.addEventListener("click",()=>moveParameterDatePickerMonth(1));document.getElementById("parameterDateCancelBtn")?.addEventListener("click",closeParameterDatePicker);document.getElementById("parameterDateClearBtn")?.addEventListener("click",()=>setParameterDatePickerValue(""));document.getElementById("parameterDateModal")?.addEventListener("click",e=>{if(e.target.id==="parameterDateModal")closeParameterDatePicker();const c=e.target.closest("[data-parameter-date-choice]");if(c)setParameterDatePickerValue(c.dataset.parameterDateChoice);});}
 
     function getCurrentStorageKey() {
       const rocYear = document.getElementById("rocYear") ? Number(document.getElementById("rocYear").value) : toRocYear(new Date());
@@ -3671,17 +3811,26 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function clearObject(target) {
       Object.keys(target).forEach(key => delete target[key]);
     }
-    function makeDefaultClosureRecord() { return { day: 0, type: "full" }; }
-    function makeDefaultTrainingRecord() { return { day: 0, hours: 3 }; }
-    function makeDefaultBatchRangeRecord() { return { startDay: 0, endDay: 0, code: 5, leaveHours: 0, mode: "workOnly", otherLabel: "其他", lastApplied: null }; }
     function resetSpecialDatesToDefault() {
-      specialDates.closure = [makeDefaultClosureRecord()];
+      specialDates.closure = [
+        { day: 0, type: "full" }
+      ];
       specialDates.election = [0];
-      specialDates.training = [makeDefaultTrainingRecord()];
+      specialDates.training = [
+        { day: 0, hours: 3 }
+      ];
     }
     function resetBatchRangeRecordsToDefault() {
       batchRangeRecords.length = 0;
-      batchRangeRecords.push(makeDefaultBatchRangeRecord());
+      batchRangeRecords.push({
+        startDay: 0,
+        endDay: 0,
+        code: 5,
+        leaveHours: 0,
+        mode: "workOnly",
+        otherLabel: "其他",
+        lastApplied: null
+      });
     }
     function resetOverhaulSettingsToDefault() {
       overhaulSettings.startDay = 0;
@@ -3735,10 +3884,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (data.specialDates && typeof data.specialDates === "object") {
           specialDates.closure = Array.isArray(data.specialDates.closure) ? data.specialDates.closure : specialDates.closure;
           specialDates.election = Array.isArray(data.specialDates.election) ? data.specialDates.election : specialDates.election;
-          specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training : specialDates.training;
-          if (!specialDates.closure.length) specialDates.closure.push(makeDefaultClosureRecord());
-          if (!specialDates.election.length) specialDates.election.push(0);
-          if (!specialDates.training.length) specialDates.training.push(makeDefaultTrainingRecord());
+          specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training.slice(0, 2) : specialDates.training;
+          while (specialDates.training.length < 1) specialDates.training.push({ day: 0, hours: 3 });
         }
         if (Array.isArray(data.batchRangeRecords)) {
           batchRangeRecords.length = 0;
@@ -3758,7 +3905,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
               otherLabel: normalizeOtherCodeLabel(item.lastApplied.otherLabel || "其他")
             } : null
           }));
-          if (batchRangeRecords.length < 1) batchRangeRecords.push(makeDefaultBatchRangeRecord());
+          while (batchRangeRecords.length < 1) batchRangeRecords.push({ startDay: 0, endDay: 0, code: 5, leaveHours: 0, mode: "workOnly", otherLabel: "其他", lastApplied: null });
         }
         if (data.overhaulSettings && typeof data.overhaulSettings === "object") {
           overhaulSettings.startDay = Number(data.overhaulSettings.startDay || 0);
@@ -3793,18 +3940,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const modal = document.getElementById("resetConfirmModal");
       const messageEl = document.getElementById("resetConfirmMessage");
       if (!modal || !messageEl) return Promise.resolve(window.confirm(message));
-      const titleEl = document.getElementById("resetConfirmTitle");
-      const subtitleEl = document.getElementById("resetConfirmSubtitle");
-      const warningEl = document.getElementById("resetConfirmWarning");
-      const okBtn = document.getElementById("resetConfirmOk");
-      if (titleEl) titleEl.textContent = options.title || "⚠ 清除確認 ⚠";
-      if (subtitleEl) subtitleEl.textContent = options.subtitle || "這是不可復原的資料清除動作";
-      if (warningEl) warningEl.textContent = options.warning || "提醒：按下確認後，該範圍已輸入的考勤、薪資、天災、選舉日、批次與大修設定都會被清除。";
-      if (okBtn) okBtn.textContent = options.okText || "確認清除";
+      const warningEl = modal.querySelector(".reset-confirm-warning");
+      if (warningEl) warningEl.style.display = options.hideWarning ? "none" : "";
       messageEl.textContent = message;
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
-      return new Promise(resolve => { resetConfirmResolver = resolve; });
+      return new Promise(resolve => {
+        resetConfirmResolver = resolve;
+      });
     }
     function closeResetConfirmDialog(result) {
       const modal = document.getElementById("resetConfirmModal");
@@ -4801,10 +4944,22 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function isD11Error(dayInfo) {
       return dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄";
     }
+    function isParameterRemovedHolidayDate(year, month, day) {
+      const targetTime = new Date(Number(year), Number(month) - 1, Number(day)).getTime();
+      return (parameterSettings.holidayOverrides || []).some(item => {
+        if (item.enabled !== true || item.action !== "remove") return false;
+        const dt = parseParameterDateValue(item.date);
+        return !!dt && dt.getTime() === targetTime;
+      });
+    }
     function isSpecialDeductDay(dayInfo) {
+      const year = Number(dayInfo.year);
       const month = Number(dayInfo.month);
       const day = Number(dayInfo.day);
-      const type = getHolidayTypeName(dayInfo.holidayName);
+      const holidayName = String(dayInfo.holidayName || "").trim();
+      if (!holidayName) return false;
+      if (isParameterRemovedHolidayDate(year, month, day)) return false;
+      const type = getHolidayTypeName(holidayName);
       return (
         (month === 1 && day === 1) ||
         (month === 2 && day === 28) ||
@@ -4817,37 +4972,25 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       );
     }
     function calcD11PositiveAdjustment(dayInfo) {
+      const code = Number(dayInfo.actualCode);
+      const cycleIndex = Number(dayInfo.cycleIndex);
+      if (Math.trunc(code) === 4) return 0;
+      if (ADJUST_CODES.has(code) || SUBSTITUTE_CODES.has(code)) return 0;
+      if (cycleIndex === 2) return -1.5;
+      if (cycleIndex === 8) return 1.5;
       return 0;
-    }
-    function getD11ExplicitCycleExceptionHours(dayInfo) {
-      if (!isParameterHoursOverrideEnabled()) return null;
-      const position = Number(dayInfo.cycleIndex) + 1;
-      if (!Number.isFinite(position) || position < 1) return null;
-      const exception = (parameterSettings.calc?.hourExceptions || []).find(function(item) {
-        return item && item.enabled !== false && Number(item.position) === position;
-      });
-      if (!exception) return null;
-      const hours = Number(exception.hours);
-      return Number.isFinite(hours) ? Math.max(0, hours) : null;
     }
     function calcD11BaseByWeight(dayInfo) {
       const code = Number(dayInfo.actualCode);
       const baseCode = Number(dayInfo.baseCode);
-      const codeValue = getCodeValue(code);
-      if (Math.trunc(code) === 4) return 8;
-      const explicitHours = getD11ExplicitCycleExceptionHours(dayInfo);
-      if (explicitHours !== null) return explicitHours;
-      if (isLeaveCode(code) && isWorkCode(baseCode)) {
-        return getParameterCodeHour(baseCode);
+      let weight = Math.trunc(code) === 4 ? 4 : Number(baseCode) % 10;
+      if (![1, 2, 3, 4].includes(weight)) {
+        weight = getCodeValue(code) || Number(baseCode) || 0;
       }
-      if (isWorkCode(code)) {
-        return getParameterCodeHour(codeValue);
-      }
-      let weight = Number(baseCode) % 10;
-      if (![1, 2, 3].includes(weight)) {
-        weight = codeValue || Number(baseCode) || 0;
-      }
-      return getParameterCodeHour(weight);
+      const isSpecialShiftDay = isElectionDay(dayInfo.day);
+      const normalMap = { 1: 9, 2: 8, 3: 7, 4: 8 };
+      const specialMap = { 1: 8, 2: 8, 3: 7, 4: 8 };
+      return isSpecialShiftDay ? (specialMap[weight] || 0) : (normalMap[weight] || 0);
     }
     function calcD11FullDayDeduct(dayInfo) {
       const code = Number(dayInfo.actualCode);
@@ -4961,8 +5104,58 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function getPreviousMonthCarryForFirstDay(days) {
       if (!days.length) return 0;
-      const firstIndex = Number(days[0].cycleIndex);
-      return PREVIOUS_MONTH_WORK_CARRY[firstIndex] || 0;
+      const currentMonth = Number(days[0].month);
+      const currentYear = Number(days[0].year);
+      const shiftGroup = document.getElementById("shiftGroup") ? document.getElementById("shiftGroup").value : "D";
+      const previousDate = new Date(currentYear, currentMonth - 1, 0);
+      const previousYear = previousDate.getFullYear();
+      const previousMonth = previousDate.getMonth() + 1;
+      const previousRocYear = previousYear - 1911;
+      const previousStorageKey = `personalOvertimeState:${shiftGroup}:${previousRocYear}:${previousMonth}`;
+      let previousManualRecords = {};
+      try {
+        const raw = localStorage.getItem(previousStorageKey);
+        const data = raw ? JSON.parse(raw) : null;
+        if (data && data.manualRecords && typeof data.manualRecords === "object") {
+          previousManualRecords = data.manualRecords;
+        }
+      } catch (err) {
+        previousManualRecords = {};
+      }
+      let carry = 0;
+      const previousDaysInMonth = previousDate.getDate();
+      for (let day = previousDaysInMonth; day >= 1; day--) {
+        const current = new Date(previousYear, previousMonth - 1, day);
+        const base = calcBaseShift(previousYear, previousMonth, day, shiftGroup);
+        const record = previousManualRecords[day] || {};
+        const previousDayInfo = enrichDayInfo({
+          day,
+          month: previousMonth,
+          year: previousYear,
+          date: current,
+          weekIndex: getMondayFirstIndex(current),
+          weekday: WEEK_LABELS[getMondayFirstIndex(current)],
+          baseCode: base.baseCode,
+          baseHours: base.baseHours,
+          cycleIndex: base.cycleIndex,
+          actualCode: record.code !== undefined ? Number(record.code) : base.baseCode,
+          leaveHours: record.leaveHours !== undefined ? Number(record.leaveHours) : 0,
+          otherLabel: record.otherLabel || "",
+          compoundSplit: record.compoundSplit || null,
+          holidayName: calendarData.holidayMap.get(dateKey(previousYear, previousMonth, day)) || "",
+          isWeekend: current.getDay() === 0 || current.getDay() === 6
+        });
+        if (isWorkForContinuousWorkBlock(previousDayInfo)) {
+          carry += 1;
+        } else {
+          break;
+        }
+      }
+      if (Object.keys(previousManualRecords).length === 0 && carry === previousDaysInMonth) {
+        const firstIndex = Number(days[0].cycleIndex);
+        return PREVIOUS_MONTH_WORK_CARRY[firstIndex] || 0;
+      }
+      return carry;
     }
     function getContinuousWorkDaysAroundIndex(days, index, previousMonthCarry) {
       let leftWorkDays = 0;
@@ -5448,6 +5641,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const rawDayInfo = {
           day,
           month,
+          year,
           date: current,
           weekIndex: getMondayFirstIndex(current),
           weekday: WEEK_LABELS[getMondayFirstIndex(current)],
@@ -5625,6 +5819,20 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       saveCurrentMonthState();
       renderAll(false);
     }
+    function addBatchRangeRecord() {
+      batchRangeRecords.push({ startDay: 0, endDay: 0, code: 5, leaveHours: 0, mode: "workOnly", otherLabel: "其他", lastApplied: null });
+      saveCurrentMonthState();
+      renderAll(false);
+    }
+    function deleteBatchRangeRecord(index) {
+      const idx = Number(index);
+      if (idx <= 0 || batchRangeRecords.length <= 1) return;
+      const record = normalizeBatchRangeRecord(batchRangeRecords[idx] || {});
+      clearAppliedBatchRange(record);
+      batchRangeRecords.splice(idx, 1);
+      saveCurrentMonthState();
+      renderAll(false);
+    }
     function renderBatchRangeControls() {
       const rocYear = Number(document.getElementById("rocYear").value);
       const month = Number(document.getElementById("month").value);
@@ -5635,7 +5843,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       list.innerHTML = batchRangeRecords.map((record, idx) => {
         const safeRecord = normalizeBatchRangeRecord(record);
         return `
-          <div class="batch-row">
+          <div class="batch-row with-delete-space">
             <div>
               <div class="batch-field-title">起日</div>
               ${buildSpecialDateButton("batchStart", idx, safeRecord.startDay)}
@@ -5659,11 +5867,20 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
               <div class="batch-field-title">動作</div>
               <button class="batch-action-btn" type="button" data-batch-action="apply" data-index="${idx}">套用</button>
               <button class="batch-action-btn batch-clear-btn" type="button" data-batch-action="clear" data-index="${idx}" style="margin-top:6px;">清除</button>
-              ${idx > 0 ? `<button class="batch-action-btn batch-delete-btn batch-extra-action" type="button" data-batch-action="delete" data-index="${idx}">刪除列</button>` : ""}
+            </div>
+            <div>
+              <div class="batch-field-title">&nbsp;</div>
+              <button class="batch-delete-row-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-batch-delete-row="${idx}">刪除列</button>
             </div>
           </div>
         `;
       }).join("");
+      list.querySelectorAll("[data-batch-delete-row]").forEach(btn => {
+        btn.addEventListener("click", function() {
+          if (this.classList.contains("placeholder-delete")) return;
+          deleteBatchRangeRecord(this.dataset.batchDeleteRow);
+        });
+      });
       list.querySelectorAll(".batch-select").forEach(sel => {
         sel.addEventListener("change", function() {
           const index = Number(this.dataset.index);
@@ -5685,12 +5902,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           const index = Number(this.dataset.index);
           if (this.dataset.batchAction === "apply") applyBatchRangeRecord(index);
           if (this.dataset.batchAction === "clear") clearBatchRangeRecord(index);
-          if (this.dataset.batchAction === "delete") removeBatchRangeRecord(index);
         });
       });
       bindSpecialDateButtonEvents(list);
-      const batchAddBtn = document.getElementById("batchAddRangeBtn");
-      if (batchAddBtn) batchAddBtn.onclick = addBatchRangeRecord;
       updateBatchSummary();
     }
     function updateOverhaulSummary() {
@@ -5800,38 +6014,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       renderOverhaulCalendar(daysInMonth, firstOffset, year, month, shiftGroup);
       updateOverhaulSummary();
     }
-    function addSpecialDateRow(group) {
-      if (group === "closure") specialDates.closure.push(makeDefaultClosureRecord());
-      if (group === "election") specialDates.election.push(0);
-      if (group === "training") specialDates.training.push(makeDefaultTrainingRecord());
-      saveCurrentMonthState();
-      renderAll(false);
-    }
-    function removeSpecialDateRow(group, index) {
-      if (group === "closure" && specialDates.closure.length > 1) specialDates.closure.splice(index, 1);
-      if (group === "election" && specialDates.election.length > 1) specialDates.election.splice(index, 1);
-      if (group === "training" && specialDates.training.length > 1) specialDates.training.splice(index, 1);
-      if (!specialDates.closure.length) specialDates.closure.push(makeDefaultClosureRecord());
-      if (!specialDates.election.length) specialDates.election.push(0);
-      if (!specialDates.training.length) specialDates.training.push(makeDefaultTrainingRecord());
-      saveCurrentMonthState();
-      renderAll(false);
-    }
-    function addBatchRangeRecord() {
-      batchRangeRecords.push(makeDefaultBatchRangeRecord());
-      saveCurrentMonthState();
-      renderAll(false);
-    }
-    function removeBatchRangeRecord(index) {
-      if (batchRangeRecords.length <= 1) return;
-      const record = normalizeBatchRangeRecord(batchRangeRecords[index] || {});
-      const applied = (batchRangeRecords[index] && batchRangeRecords[index].lastApplied) ? getBatchAppliedSnapshot(batchRangeRecords[index].lastApplied) : getBatchAppliedSnapshot(record);
-      clearAppliedBatchRange(applied);
-      batchRangeRecords.splice(index, 1);
-      if (!batchRangeRecords.length) batchRangeRecords.push(makeDefaultBatchRangeRecord());
-      saveCurrentMonthState();
-      renderAll(false);
-    }
     function updateSpecialSummary() {
       const closureCount = specialDates.closure.filter(item => item.day > 0 && item.type !== "none").length;
       const electionCount = specialDates.election.filter(day => Number(day) > 0).length;
@@ -5858,9 +6040,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function buildSpecialDateButton(group, index, day) { return `<div class="special-date-row"><button class="special-date-btn" type="button" data-special-date-group="${group}" data-index="${index}">${getSpecialDateLabel(day)}</button><button class="special-date-reset-btn" type="button" data-special-reset-group="${group}" data-index="${index}">RESET</button></div>`; }
     function setSpecialDateValue(group, index, value) {
       const day = Number(value) || 0;
-      if (group === "closure") { if (!specialDates.closure[index]) specialDates.closure[index] = makeDefaultClosureRecord(); specialDates.closure[index].day = day; }
-      if (group === "election") { if (specialDates.election[index] === undefined) specialDates.election[index] = 0; specialDates.election[index] = day; }
-      if (group === "training") { if (!specialDates.training[index]) specialDates.training[index] = makeDefaultTrainingRecord(); specialDates.training[index].day = day; }
+      if (group === "closure") specialDates.closure[index].day = day;
+      if (group === "election") specialDates.election[index] = day;
+      if (group === "training") specialDates.training[index].day = day;
       if (group === "batchStart") {
         if (!batchRangeRecords[index]) batchRangeRecords[index] = { startDay: 0, endDay: 0, code: 5, leaveHours: 0, mode: "workOnly", otherLabel: "其他", lastApplied: null };
         batchRangeRecords[index].startDay = day;
@@ -5924,25 +6106,40 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
     }
     function clearActiveSpecialDatePickerValue() { if (!activeSpecialDateTarget) return; setSpecialDateValue(activeSpecialDateTarget.group, activeSpecialDateTarget.index, 0); closeSpecialDatePicker(); }
+    function addSpecialDateRecord(group) {
+      if (group === "closure") specialDates.closure.push({ day: 0, type: "full" });
+      if (group === "election") specialDates.election.push(0);
+      if (group === "training") specialDates.training.push({ day: 0, hours: 3 });
+      saveCurrentMonthState();
+      renderAll(false);
+    }
+    function deleteSpecialDateRecord(group, index) {
+      const idx = Number(index);
+      if (idx <= 0) return;
+      if (group === "closure" && specialDates.closure.length > 1) specialDates.closure.splice(idx, 1);
+      if (group === "election" && specialDates.election.length > 1) specialDates.election.splice(idx, 1);
+      if (group === "training" && specialDates.training.length > 1) specialDates.training.splice(idx, 1);
+      saveCurrentMonthState();
+      renderAll(false);
+    }
     function renderSpecialDateControls() {
-      if (!specialDates.closure.length) specialDates.closure.push(makeDefaultClosureRecord());
-      if (!specialDates.election.length) specialDates.election.push(0);
-      if (!specialDates.training.length) specialDates.training.push(makeDefaultTrainingRecord());
       document.getElementById("closureRecordList").innerHTML = specialDates.closure.map((record, idx) => `
-        <div class="special-record special-record-manage">
+        <div class="special-record with-delete-space">
           ${buildSpecialDateButton("closure", idx, record.day)}
           <select class="special-type-select" data-group="closureType" data-index="${idx}">${buildClosureTypeOptions(record.type)}</select>
-          ${idx > 0 ? `<button class="special-delete-btn" type="button" data-special-delete="closure" data-index="${idx}">刪除</button>` : ""}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
-      document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `<div class="special-election-item">${buildSpecialDateButton("election", idx, value)}${idx > 0 ? `<button class="special-delete-btn" type="button" data-special-delete="election" data-index="${idx}">刪除</button>` : ""}</div>`).join("");
+      document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `
+        <div class="special-record election-with-delete-space">
+          ${buildSpecialDateButton("election", idx, value)}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="election" data-special-delete-index="${idx}">刪除列</button>
+        </div>`).join("");
       document.getElementById("trainingRecordList").innerHTML = (specialDates.training || []).map((record, idx) => `
-        <div class="special-record special-record-manage">
+        <div class="special-record with-delete-space">
           ${buildSpecialDateButton("training", idx, record.day)}
           <select class="special-hour-select" data-group="trainingHours" data-index="${idx}">${buildTrainingHourOptions(record.hours)}</select>
-          ${idx > 0 ? `<button class="special-delete-btn" type="button" data-special-delete="training" data-index="${idx}">刪除</button>` : ""}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="training" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
-      document.querySelectorAll(".special-add-btn").forEach(btn => { btn.onclick = function() { addSpecialDateRow(this.dataset.specialAdd); }; });
-      document.querySelectorAll(".special-delete-btn").forEach(btn => { btn.onclick = function() { removeSpecialDateRow(this.dataset.specialDelete, Number(this.dataset.index)); }; });
       bindSpecialDateButtonEvents(document);
       document.querySelectorAll(".special-type-select, .special-hour-select").forEach(sel => {
         sel.addEventListener("change", function() {
@@ -5951,6 +6148,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           if (group === "closureType") { specialDates.closure[index].type = this.value; if (this.value === "none") specialDates.closure[index].day = 0; }
           if (group === "trainingHours") specialDates.training[index].hours = Number(this.value);
           saveCurrentMonthState(); renderAll(false);
+        });
+      });
+      document.querySelectorAll("[data-special-delete-group]").forEach(btn => {
+        btn.addEventListener("click", function() {
+          if (this.classList.contains("placeholder-delete")) return;
+          deleteSpecialDateRecord(this.dataset.specialDeleteGroup, this.dataset.specialDeleteIndex);
         });
       });
       updateSpecialSummary();
@@ -6561,6 +6764,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
       const returnTodayBtn = document.getElementById("returnTodayBtn");
       if (returnTodayBtn) returnTodayBtn.addEventListener("click", () => returnToTodayMonth());
+      document.getElementById("closureAddBtn")?.addEventListener("click", () => addSpecialDateRecord("closure"));
+      document.getElementById("electionAddBtn")?.addEventListener("click", () => addSpecialDateRecord("election"));
+      document.getElementById("trainingAddBtn")?.addEventListener("click", () => addSpecialDateRecord("training"));
+      document.getElementById("batchAddBtn")?.addEventListener("click", () => addBatchRangeRecord());
       const rocYearInput = document.getElementById("rocYear");
       rocYearInput.setAttribute("maxlength", "3");
       rocYearInput.addEventListener("focus", function() {
@@ -7411,7 +7618,5 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
 </script>
 <!-- G備份/還原：腳本結束 -->
 
-
-<!-- 修正版備註：初始設定提醒已改為只重設參數設定；停止辦公、教育訓練、選舉日與批次設定預設一列，並可用新增按鈕擴充。 -->
 </body>
 </html>
