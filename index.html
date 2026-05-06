@@ -3334,6 +3334,12 @@
 .parameter-salary-rate-grid{grid-template-columns:1fr!important;gap:7px!important;}.parameter-salary-rate-grid .parameter-settings-field{display:grid!important;grid-template-columns:minmax(0,1fr) 88px!important;gap:7px!important;align-items:center!important;}.parameter-salary-rate-grid .parameter-settings-field span{font-size:11px!important;line-height:1.25!important;white-space:normal!important;}.parameter-salary-rate-grid .parameter-settings-input{height:34px!important;text-align:center!important;}.parameter-salary-fee-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;}.parameter-salary-fee-grid .parameter-settings-field span{text-align:center!important;font-size:clamp(10px,3vw,12px)!important;white-space:nowrap!important;}.parameter-salary-fee-grid .parameter-settings-input{height:34px!important;text-align:center!important;font-size:clamp(13px,3.8vw,15px)!important;padding:0 3px!important;}.parameter-settings-section .g-backup-local-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;}.parameter-settings-footer{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:10px 12px max(10px,env(safe-area-inset-bottom))!important;}.parameter-settings-footer-btn{min-width:0!important;min-height:42px!important;font-size:clamp(11px,3.2vw,13px)!important;letter-spacing:0!important;padding:0 4px!important;white-space:nowrap!important;border-radius:12px!important;}}
 /* === 參數設定全版UX v20260505-FractionSplit 結束 === */
 
+
+/* === v20260505-SpecialMobile-LayoutPolish：特殊日、批次列與各時數資訊排版同步修正 === */
+.special-record.special-row-closure,.special-record.special-row-training,.special-record.special-row-election{display:grid!important;align-items:end!important;gap:8px!important;width:100%!important}.special-record.special-row-closure.no-delete,.special-record.special-row-training.no-delete{grid-template-columns:minmax(130px,1.35fr) minmax(120px,1fr) 72px!important}.special-record.special-row-closure.has-delete,.special-record.special-row-training.has-delete{grid-template-columns:minmax(130px,1.35fr) minmax(120px,1fr) 72px 82px!important}.special-record.special-row-election.no-delete{grid-template-columns:minmax(130px,1fr) 72px!important}.special-record.special-row-election.has-delete{grid-template-columns:minmax(130px,1fr) 72px 82px!important}.special-record.special-row-closure .special-date-row,.special-record.special-row-training .special-date-row,.special-record.special-row-election .special-date-row{display:contents!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-training .special-date-btn,.special-record.special-row-election .special-date-btn{order:1!important}.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-hour-select{order:2!important}.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-election .special-date-reset-btn{order:3!important}.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn,.special-record.special-row-election .special-delete-btn{order:4!important}.special-record.special-row-election .special-date-reset-btn{order:2!important}.special-record.special-row-election .special-delete-btn{order:3!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-date-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-training .special-hour-select,.special-record.special-row-election .special-date-btn,.special-record.special-row-election .special-date-reset-btn,.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{width:100%!important;min-width:0!important;height:36px!important;min-height:36px!important;margin:0!important;text-align:center!important;white-space:nowrap!important}.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{border-radius:11px!important}.batch-row.batch-row-layout-v2{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-areas:"start end code code" "mode apply clear delete"!important;gap:8px!important;align-items:end!important}.batch-row.batch-row-layout-v2.no-delete{grid-template-areas:"start end code code" "mode apply clear clear"!important}.batch-row.batch-row-layout-v2 .batch-cell-start{grid-area:start!important}.batch-row.batch-row-layout-v2 .batch-cell-end{grid-area:end!important}.batch-row.batch-row-layout-v2 .batch-cell-code{grid-area:code!important}.batch-row.batch-row-layout-v2 .batch-cell-mode{grid-area:mode!important}.batch-row.batch-row-layout-v2 .batch-cell-apply{grid-area:apply!important}.batch-row.batch-row-layout-v2 .batch-cell-clear{grid-area:clear!important}.batch-row.batch-row-layout-v2 .batch-cell-delete{grid-area:delete!important}.batch-row.batch-row-layout-v2 .batch-action-btn,.batch-row.batch-row-layout-v2 .batch-delete-row-btn,.batch-row.batch-row-layout-v2 .batch-select,.batch-row.batch-row-layout-v2 .batch-code-picker-button,.batch-row.batch-row-layout-v2 .special-date-btn,.batch-row.batch-row-layout-v2 .special-date-reset-btn{width:100%!important;min-width:0!important;height:36px!important;min-height:36px!important;margin:0!important;white-space:nowrap!important}.batch-row.batch-row-layout-v2 .special-date-row{grid-template-columns:minmax(0,1fr) 64px!important}
+@media(max-width:760px){.special-record.special-row-closure.no-delete,.special-record.special-row-training.no-delete{grid-template-columns:minmax(84px,1fr) minmax(88px,.9fr) 52px!important;gap:5px!important}.special-record.special-row-closure.has-delete,.special-record.special-row-training.has-delete{grid-template-columns:minmax(78px,1fr) minmax(78px,.9fr) 48px 58px!important;gap:5px!important}.special-record.special-row-election.no-delete{grid-template-columns:minmax(120px,1fr) 52px!important;gap:5px!important}.special-record.special-row-election.has-delete{grid-template-columns:minmax(90px,1fr) 50px 58px!important;gap:5px!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-date-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-training .special-hour-select,.special-record.special-row-election .special-date-btn,.special-record.special-row-election .special-date-reset-btn,.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{height:32px!important;min-height:32px!important;font-size:clamp(9px,2.75vw,11px)!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;border-radius:9px!important}.batch-row.batch-row-layout-v2,.batch-row.batch-row-layout-v2.no-delete,.batch-row.batch-row-layout-v2.has-delete{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"start end" "code mode" "apply clear" "delete delete"!important;gap:7px!important;padding:9px!important}.batch-row.batch-row-layout-v2.no-delete{grid-template-areas:"start end" "code mode" "apply clear"!important}.batch-row.batch-row-layout-v2 .batch-field-title{display:block!important;min-height:14px!important;margin-bottom:4px!important;text-align:center!important;font-size:clamp(9px,2.6vw,10px)!important;letter-spacing:0!important;white-space:nowrap!important}.batch-row.batch-row-layout-v2 .special-date-row{grid-template-columns:minmax(0,1fr) 50px!important;gap:4px!important}.batch-row.batch-row-layout-v2 .batch-action-btn,.batch-row.batch-row-layout-v2 .batch-delete-row-btn,.batch-row.batch-row-layout-v2 .batch-select,.batch-row.batch-row-layout-v2 .batch-code-picker-button,.batch-row.batch-row-layout-v2 .special-date-btn,.batch-row.batch-row-layout-v2 .special-date-reset-btn{height:32px!important;min-height:32px!important;font-size:clamp(9px,2.8vw,11px)!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;border-radius:9px!important}details.core-stats-panel .core-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* === v20260505-SpecialMobile-LayoutPolish 結束 === */
+
 </style>
 </head>
 <body>
@@ -3534,7 +3540,7 @@
       </section>
       <details class="panel core-stats-panel">
         <summary class="section-header-toggle">
-          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">值班總工時、交接班時數、國定時數、保養時數、12切</div></div>
+          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">值班總工時、交接班時數、國定時數、保養時數；12切總工時維持現狀</div></div>
           <div class="details-icon">＋</div>
         </summary>
         <div id="coreStatsContent" class="core-stats-content">
@@ -6128,43 +6134,18 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       list.innerHTML = batchRangeRecords.map((record, idx) => {
         const safeRecord = normalizeBatchRangeRecord(record);
         return `
-          <div class="batch-row with-delete-space">
-            <div>
-              <div class="batch-field-title">起日</div>
-              ${buildSpecialDateButton("batchStart", idx, safeRecord.startDay)}
-            </div>
-            <div>
-              <div class="batch-field-title">迄日</div>
-              ${buildSpecialDateButton("batchEnd", idx, safeRecord.endDay)}
-            </div>
-            <div>
-              <div class="batch-field-title">假別</div>
-              ${buildBatchCodePickerHtml(idx, safeRecord.code)}
-            </div>
-            <label>
-              <div class="batch-field-title">模式</div>
-              <select class="batch-select" data-batch-field="mode" data-index="${idx}" ${safeRecord.code === 4 ? "disabled" : ""}>
-                <option value="workOnly" ${safeRecord.mode === "workOnly" ? "selected" : ""}>只套用上班日</option>
-                <option value="all" ${safeRecord.mode === "all" ? "selected" : ""}>包含空班</option>
-              </select>
-            </label>
-            <div>
-              <div class="batch-field-title">動作</div>
-              <button class="batch-action-btn" type="button" data-batch-action="apply" data-index="${idx}">套用</button>
-              <button class="batch-action-btn batch-clear-btn" type="button" data-batch-action="clear" data-index="${idx}" style="margin-top:6px;">清除</button>
-            </div>
-            <div>
-              <div class="batch-field-title">&nbsp;</div>
-              <button class="batch-delete-row-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-batch-delete-row="${idx}">刪除列</button>
-            </div>
-          </div>
-        `;
+          <div class="batch-row batch-row-layout-v2 ${idx === 0 ? "no-delete" : "has-delete"}">
+            <div class="batch-cell batch-cell-start"><div class="batch-field-title">起日</div>${buildSpecialDateButton("batchStart", idx, safeRecord.startDay)}</div>
+            <div class="batch-cell batch-cell-end"><div class="batch-field-title">訖日</div>${buildSpecialDateButton("batchEnd", idx, safeRecord.endDay)}</div>
+            <div class="batch-cell batch-cell-code"><div class="batch-field-title">假別</div>${buildBatchCodePickerHtml(idx, safeRecord.code)}</div>
+            <label class="batch-cell batch-cell-mode"><div class="batch-field-title">模式</div><select class="batch-select" data-batch-field="mode" data-index="${idx}" ${safeRecord.code === 4 ? "disabled" : ""}><option value="workOnly" ${safeRecord.mode === "workOnly" ? "selected" : ""}>只套用上班日</option><option value="all" ${safeRecord.mode === "all" ? "selected" : ""}>包含空班</option></select></label>
+            <div class="batch-cell batch-cell-apply"><div class="batch-field-title">套用</div><button class="batch-action-btn" type="button" data-batch-action="apply" data-index="${idx}">套用</button></div>
+            <div class="batch-cell batch-cell-clear"><div class="batch-field-title">清除</div><button class="batch-action-btn batch-clear-btn" type="button" data-batch-action="clear" data-index="${idx}">清除</button></div>
+            ${idx === 0 ? "" : `<div class="batch-cell batch-cell-delete"><div class="batch-field-title">刪除</div><button class="batch-delete-row-btn" type="button" data-batch-delete-row="${idx}">刪除列</button></div>`}
+          </div>`;
       }).join("");
       list.querySelectorAll("[data-batch-delete-row]").forEach(btn => {
-        btn.addEventListener("click", function() {
-          if (this.classList.contains("placeholder-delete")) return;
-          deleteBatchRangeRecord(this.dataset.batchDeleteRow);
-        });
+        btn.addEventListener("click", function() { deleteBatchRangeRecord(this.dataset.batchDeleteRow); });
       });
       list.querySelectorAll(".batch-select").forEach(sel => {
         sel.addEventListener("change", function() {
@@ -6177,8 +6158,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
             batchRangeRecords[index][field] = this.value;
           }
           if (field === "code" && Number(this.value) === 4) batchRangeRecords[index].mode = "all";
-          saveCurrentMonthState();
-          renderAll(false);
+          saveCurrentMonthState(); renderAll(false);
         });
       });
       bindBatchCodePickerEvents(list);
@@ -6409,21 +6389,21 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function renderSpecialDateControls() {
       document.getElementById("closureRecordList").innerHTML = specialDates.closure.map((record, idx) => `
-        <div class="special-record with-delete-space">
+        <div class="special-record special-row-closure ${idx === 0 ? "no-delete" : "has-delete"}">
           ${buildSpecialDateButton("closure", idx, record.day)}
           <select class="special-type-select" data-group="closureType" data-index="${idx}">${buildClosureTypeOptions(record.type)}</select>
-          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>
+          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>`}
         </div>`).join("");
       document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `
-        <div class="special-record election-with-delete-space">
+        <div class="special-record special-row-election ${idx === 0 ? "no-delete" : "has-delete"}">
           ${buildSpecialDateButton("election", idx, value)}
-          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="election" data-special-delete-index="${idx}">刪除列</button>
+          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="election" data-special-delete-index="${idx}">刪除列</button>`}
         </div>`).join("");
       document.getElementById("trainingRecordList").innerHTML = (specialDates.training || []).map((record, idx) => `
-        <div class="special-record with-delete-space">
+        <div class="special-record special-row-training ${idx === 0 ? "no-delete" : "has-delete"}">
           ${buildSpecialDateButton("training", idx, record.day)}
           <select class="special-hour-select" data-group="trainingHours" data-index="${idx}">${buildTrainingHourOptions(record.hours)}</select>
-          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="training" data-special-delete-index="${idx}">刪除列</button>
+          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="training" data-special-delete-index="${idx}">刪除列</button>`}
         </div>`).join("");
       bindSpecialDateButtonEvents(document);
       document.querySelectorAll(".special-type-select, .special-hour-select").forEach(sel => {
@@ -6437,7 +6417,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
       document.querySelectorAll("[data-special-delete-group]").forEach(btn => {
         btn.addEventListener("click", function() {
-          if (this.classList.contains("placeholder-delete")) return;
           deleteSpecialDateRecord(this.dataset.specialDeleteGroup, this.dataset.specialDeleteIndex);
         });
       });
