@@ -3335,10 +3335,219 @@
 /* === 參數設定全版UX v20260505-FractionSplit 結束 === */
 
 
-/* === v20260505-SpecialMobile-LayoutPolish：特殊日、批次列與各時數資訊排版同步修正 === */
-.special-record.special-row-closure,.special-record.special-row-training,.special-record.special-row-election{display:grid!important;align-items:end!important;gap:8px!important;width:100%!important}.special-record.special-row-closure.no-delete,.special-record.special-row-training.no-delete{grid-template-columns:minmax(130px,1.35fr) minmax(120px,1fr) 72px!important}.special-record.special-row-closure.has-delete,.special-record.special-row-training.has-delete{grid-template-columns:minmax(130px,1.35fr) minmax(120px,1fr) 72px 82px!important}.special-record.special-row-election.no-delete{grid-template-columns:minmax(130px,1fr) 72px!important}.special-record.special-row-election.has-delete{grid-template-columns:minmax(130px,1fr) 72px 82px!important}.special-record.special-row-closure .special-date-row,.special-record.special-row-training .special-date-row,.special-record.special-row-election .special-date-row{display:contents!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-training .special-date-btn,.special-record.special-row-election .special-date-btn{order:1!important}.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-hour-select{order:2!important}.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-election .special-date-reset-btn{order:3!important}.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn,.special-record.special-row-election .special-delete-btn{order:4!important}.special-record.special-row-election .special-date-reset-btn{order:2!important}.special-record.special-row-election .special-delete-btn{order:3!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-date-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-training .special-hour-select,.special-record.special-row-election .special-date-btn,.special-record.special-row-election .special-date-reset-btn,.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{width:100%!important;min-width:0!important;height:36px!important;min-height:36px!important;margin:0!important;text-align:center!important;white-space:nowrap!important}.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{border-radius:11px!important}.batch-row.batch-row-layout-v2{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-areas:"start end code code" "mode apply clear delete"!important;gap:8px!important;align-items:end!important}.batch-row.batch-row-layout-v2.no-delete{grid-template-areas:"start end code code" "mode apply clear clear"!important}.batch-row.batch-row-layout-v2 .batch-cell-start{grid-area:start!important}.batch-row.batch-row-layout-v2 .batch-cell-end{grid-area:end!important}.batch-row.batch-row-layout-v2 .batch-cell-code{grid-area:code!important}.batch-row.batch-row-layout-v2 .batch-cell-mode{grid-area:mode!important}.batch-row.batch-row-layout-v2 .batch-cell-apply{grid-area:apply!important}.batch-row.batch-row-layout-v2 .batch-cell-clear{grid-area:clear!important}.batch-row.batch-row-layout-v2 .batch-cell-delete{grid-area:delete!important}.batch-row.batch-row-layout-v2 .batch-action-btn,.batch-row.batch-row-layout-v2 .batch-delete-row-btn,.batch-row.batch-row-layout-v2 .batch-select,.batch-row.batch-row-layout-v2 .batch-code-picker-button,.batch-row.batch-row-layout-v2 .special-date-btn,.batch-row.batch-row-layout-v2 .special-date-reset-btn{width:100%!important;min-width:0!important;height:36px!important;min-height:36px!important;margin:0!important;white-space:nowrap!important}.batch-row.batch-row-layout-v2 .special-date-row{grid-template-columns:minmax(0,1fr) 64px!important}
-@media(max-width:760px){.special-record.special-row-closure.no-delete,.special-record.special-row-training.no-delete{grid-template-columns:minmax(84px,1fr) minmax(88px,.9fr) 52px!important;gap:5px!important}.special-record.special-row-closure.has-delete,.special-record.special-row-training.has-delete{grid-template-columns:minmax(78px,1fr) minmax(78px,.9fr) 48px 58px!important;gap:5px!important}.special-record.special-row-election.no-delete{grid-template-columns:minmax(120px,1fr) 52px!important;gap:5px!important}.special-record.special-row-election.has-delete{grid-template-columns:minmax(90px,1fr) 50px 58px!important;gap:5px!important}.special-record.special-row-closure .special-date-btn,.special-record.special-row-closure .special-date-reset-btn,.special-record.special-row-closure .special-type-select,.special-record.special-row-training .special-date-btn,.special-record.special-row-training .special-date-reset-btn,.special-record.special-row-training .special-hour-select,.special-record.special-row-election .special-date-btn,.special-record.special-row-election .special-date-reset-btn,.special-record.special-row-election .special-delete-btn,.special-record.special-row-closure .special-delete-btn,.special-record.special-row-training .special-delete-btn{height:32px!important;min-height:32px!important;font-size:clamp(9px,2.75vw,11px)!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;border-radius:9px!important}.batch-row.batch-row-layout-v2,.batch-row.batch-row-layout-v2.no-delete,.batch-row.batch-row-layout-v2.has-delete{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"start end" "code mode" "apply clear" "delete delete"!important;gap:7px!important;padding:9px!important}.batch-row.batch-row-layout-v2.no-delete{grid-template-areas:"start end" "code mode" "apply clear"!important}.batch-row.batch-row-layout-v2 .batch-field-title{display:block!important;min-height:14px!important;margin-bottom:4px!important;text-align:center!important;font-size:clamp(9px,2.6vw,10px)!important;letter-spacing:0!important;white-space:nowrap!important}.batch-row.batch-row-layout-v2 .special-date-row{grid-template-columns:minmax(0,1fr) 50px!important;gap:4px!important}.batch-row.batch-row-layout-v2 .batch-action-btn,.batch-row.batch-row-layout-v2 .batch-delete-row-btn,.batch-row.batch-row-layout-v2 .batch-select,.batch-row.batch-row-layout-v2 .batch-code-picker-button,.batch-row.batch-row-layout-v2 .special-date-btn,.batch-row.batch-row-layout-v2 .special-date-reset-btn{height:32px!important;min-height:32px!important;font-size:clamp(9px,2.8vw,11px)!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;border-radius:9px!important}details.core-stats-panel .core-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-/* === v20260505-SpecialMobile-LayoutPolish 結束 === */
+/* === v20260506-AlignFix：特殊日列對齊、批次欄位置中、底部三鍵同列、例外欄位標題 === */
+.special-record.with-delete-space,
+.special-record.election-with-delete-space {
+  display: grid !important;
+  align-items: end !important;
+  gap: 8px !important;
+}
+.special-record.with-delete-space {
+  grid-template-columns: minmax(150px, 1.25fr) minmax(150px, 1fr) 72px 82px !important;
+}
+.special-record.election-with-delete-space {
+  grid-template-columns: minmax(170px, 1fr) 72px 82px !important;
+}
+.special-record.with-delete-space .special-date-row,
+.special-record.election-with-delete-space .special-date-row {
+  display: contents !important;
+}
+.special-record.with-delete-space .special-date-btn,
+.special-record.election-with-delete-space .special-date-btn {
+  order: 1 !important;
+}
+.special-record.with-delete-space .special-type-select,
+.special-record.with-delete-space .special-hour-select {
+  order: 2 !important;
+}
+.special-record.with-delete-space .special-date-reset-btn,
+.special-record.election-with-delete-space .special-date-reset-btn {
+  order: 3 !important;
+}
+.special-record.with-delete-space .special-delete-btn,
+.special-record.election-with-delete-space .special-delete-btn {
+  order: 4 !important;
+}
+.special-record.election-with-delete-space .special-date-reset-btn {
+  order: 2 !important;
+}
+.special-record.election-with-delete-space .special-delete-btn {
+  order: 3 !important;
+}
+.special-record.with-delete-space .special-date-btn,
+.special-record.with-delete-space .special-date-reset-btn,
+.special-record.with-delete-space .special-type-select,
+.special-record.with-delete-space .special-hour-select,
+.special-record.with-delete-space .special-delete-btn,
+.special-record.election-with-delete-space .special-date-btn,
+.special-record.election-with-delete-space .special-date-reset-btn,
+.special-record.election-with-delete-space .special-delete-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  margin: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  border-radius: 10px !important;
+}
+.batch-row.batch-row-align-v3 {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  grid-template-areas:
+    "start end code mode"
+    "apply clear delete delete" !important;
+  gap: 8px !important;
+  align-items: end !important;
+}
+.batch-row.batch-row-align-v3.batch-no-delete {
+  grid-template-areas:
+    "start end code mode"
+    "apply clear clear clear" !important;
+}
+.batch-row.batch-row-align-v3 .batch-start-cell { grid-area: start !important; }
+.batch-row.batch-row-align-v3 .batch-end-cell { grid-area: end !important; }
+.batch-row.batch-row-align-v3 .batch-code-cell { grid-area: code !important; }
+.batch-row.batch-row-align-v3 .batch-mode-cell { grid-area: mode !important; }
+.batch-row.batch-row-align-v3 .batch-apply-cell { grid-area: apply !important; }
+.batch-row.batch-row-align-v3 .batch-clear-cell { grid-area: clear !important; }
+.batch-row.batch-row-align-v3 .batch-delete-cell { grid-area: delete !important; }
+.batch-row.batch-row-align-v3 .batch-field-title {
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+.batch-row.batch-row-align-v3 .batch-code-picker-button,
+.batch-row.batch-row-align-v3 .batch-select,
+.batch-row.batch-row-align-v3 .batch-action-btn,
+.batch-row.batch-row-align-v3 .batch-delete-row-btn,
+.batch-row.batch-row-align-v3 .special-date-btn,
+.batch-row.batch-row-align-v3 .special-date-reset-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  margin: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+.batch-row.batch-row-align-v3 .batch-code-picker-button {
+  text-align: left !important;
+}
+.parameter-settings-row.exception-row .parameter-settings-field {
+  min-width: 0 !important;
+  gap: 4px !important;
+}
+.parameter-settings-row.exception-row .parameter-settings-field span {
+  display: block !important;
+  text-align: center !important;
+  color: rgba(170,184,200,.82) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+}
+.g-backup-entry-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .96fr) minmax(0, 1fr) !important;
+  gap: 10px !important;
+  width: min(860px, 100%) !important;
+  margin: 0 auto !important;
+}
+.g-backup-entry-actions .g-backup-main-btn,
+.g-backup-entry-actions .parameter-settings-main-btn,
+.g-backup-entry-actions .local-storage-clear-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 760px) {
+  .special-record.with-delete-space {
+    grid-template-columns: minmax(86px, 1fr) minmax(94px, .95fr) 52px 58px !important;
+    gap: 5px !important;
+  }
+  .special-record.election-with-delete-space {
+    grid-template-columns: minmax(118px, 1fr) 52px 58px !important;
+    gap: 5px !important;
+  }
+  .special-record.with-delete-space .special-date-btn,
+  .special-record.with-delete-space .special-date-reset-btn,
+  .special-record.with-delete-space .special-type-select,
+  .special-record.with-delete-space .special-hour-select,
+  .special-record.with-delete-space .special-delete-btn,
+  .special-record.election-with-delete-space .special-date-btn,
+  .special-record.election-with-delete-space .special-date-reset-btn,
+  .special-record.election-with-delete-space .special-delete-btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+    font-size: clamp(9px, 2.7vw, 11px) !important;
+    letter-spacing: 0 !important;
+  }
+  .batch-row.batch-row-align-v3,
+  .batch-row.batch-row-align-v3.batch-no-delete,
+  .batch-row.batch-row-align-v3.batch-has-delete {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "start end"
+      "code mode"
+      "apply clear"
+      "delete delete" !important;
+    gap: 7px !important;
+    padding: 9px !important;
+  }
+  .batch-row.batch-row-align-v3.batch-no-delete {
+    grid-template-areas:
+      "start end"
+      "code mode"
+      "apply clear" !important;
+  }
+  .batch-row.batch-row-align-v3 .batch-field-title {
+    min-height: 14px !important;
+    margin-bottom: 4px !important;
+    font-size: clamp(9px, 2.6vw, 10px) !important;
+    letter-spacing: 0 !important;
+  }
+  .batch-row.batch-row-align-v3 .special-date-row {
+    grid-template-columns: minmax(0, 1fr) 50px !important;
+    gap: 4px !important;
+  }
+  .batch-row.batch-row-align-v3 .batch-code-picker-button,
+  .batch-row.batch-row-align-v3 .batch-select,
+  .batch-row.batch-row-align-v3 .batch-action-btn,
+  .batch-row.batch-row-align-v3 .batch-delete-row-btn,
+  .batch-row.batch-row-align-v3 .special-date-btn,
+  .batch-row.batch-row-align-v3 .special-date-reset-btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+    font-size: clamp(9px, 2.8vw, 11px) !important;
+    letter-spacing: 0 !important;
+    border-radius: 9px !important;
+  }
+  .g-backup-entry-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .g-backup-entry-actions .g-backup-main-btn,
+  .g-backup-entry-actions .parameter-settings-main-btn,
+  .g-backup-entry-actions .local-storage-clear-btn {
+    min-height: 42px !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    font-size: clamp(11px, 3.15vw, 13px) !important;
+    letter-spacing: 0 !important;
+  }
+  .parameter-settings-row.exception-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: end !important;
+  }
+  .parameter-settings-row.exception-row .parameter-settings-field span {
+    font-size: clamp(9px, 2.6vw, 11px) !important;
+  }
+}
+/* === v20260506-AlignFix 結束 === */
 
 </style>
 </head>
@@ -3540,7 +3749,7 @@
       </section>
       <details class="panel core-stats-panel">
         <summary class="section-header-toggle">
-          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">值班總工時、交接班時數、國定時數、保養時數；12切總工時維持現狀</div></div>
+          <div><div>各時數資訊</div><div id="coreStatsSummary" class="special-summary">值班總工時、交接班時數、國定時數、保養時數、12切</div></div>
           <div class="details-icon">＋</div>
         </summary>
         <div id="coreStatsContent" class="core-stats-content">
@@ -3783,7 +3992,7 @@
 <div id="parameterSettingsModal" class="parameter-settings-modal" aria-hidden="true"><div class="parameter-settings-card" role="dialog" aria-modal="true"><div class="parameter-settings-header"><div class="parameter-settings-title"><span class="parameter-core-title-main">參數設定</span><span class="parameter-core-title-sub">System Core Layer</span></div><div class="parameter-settings-subtitle">系統核心控制台｜全版收合與倍率驗證 v20260505-FractionSplit｜班別跟主畫面連動；週期、時數、交接班分鐘、薪資倍率、夜點費、餐費與獎金皆可由本機參數覆寫。</div></div><div class="parameter-settings-body">
 <section class="parameter-settings-section" data-parameter-section="shiftRules"><div class="parameter-settings-section-title"><span>輪班週期覆寫</span><button id="parameterAddShiftRuleBtn" class="parameter-settings-add-btn" type="button">新增週期</button></div><div class="parameter-settings-note">週期輸入框點選後會全選，可直接覆蓋輸入。離開輸入框後更新定錨格選單。</div><div id="parameterShiftRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="holidayOverrides"><div class="parameter-settings-section-title"><span>行事曆覆寫</span><button id="parameterAddHolidayOverrideBtn" class="parameter-settings-add-btn" type="button">新增日期</button></div><div id="parameterHolidayOverrideList" class="parameter-settings-list"></div></section>
-<section class="parameter-settings-section" data-parameter-section="hours"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><button id="parameterHoursEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="hours">未啟用</button><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid parameter-hours-inline-grid"><label class="parameter-settings-field"><span>0空班(HR)</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1一值(HR)</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2二值(HR)</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3三值(HR)</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>交接班(分)</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5、第1格的3為8.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
+<section class="parameter-settings-section" data-parameter-section="hours"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><button id="parameterHoursEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="hours">未啟用</button><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid parameter-hours-inline-grid"><label class="parameter-settings-field"><span>0空班(HR)</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1一值(HR)</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2二值(HR)</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3三值(HR)</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>交接班(分)</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="salary"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><button id="parameterSalaryEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="salary">未啟用</button></div><div class="parameter-settings-grid parameter-salary-rate-grid"><label class="parameter-settings-field"><span>超時2HR以內的倍數，請填分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>超時2~8HR內的倍數，請填分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>超時8HR以上的倍數，請填分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six parameter-salary-fee-grid"><label class="parameter-settings-field"><span>初夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label></div></section>
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存並套用</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
 <div id="parameterDateModal" class="parameter-date-modal" aria-hidden="true"><div class="parameter-date-card"><div class="parameter-date-head"><button id="parameterDatePrevBtn" class="parameter-date-nav" type="button">‹</button><div id="parameterDateTitle" class="parameter-date-title">選擇日期</div><button id="parameterDateNextBtn" class="parameter-date-nav" type="button">›</button></div><div id="parameterDateWeekGrid" class="parameter-date-week-grid"></div><div id="parameterDateCalendarGrid" class="parameter-date-calendar-grid"></div><div class="parameter-date-actions"><button id="parameterDateClearBtn" class="parameter-date-action-btn" type="button">清除日期</button><button id="parameterDateCancelBtn" class="parameter-date-action-btn" type="button">取消</button></div></div></div>
@@ -4015,7 +4224,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function parameterSettingsEscapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
     function parameterPatternPositionOptions(pattern,sel){const clean=String(pattern||"").replace(/\s+/g,""); const len=Math.max(1,clean.length||1); const s=Math.max(1,Math.min(len,Number(sel||1))); let h=""; for(let i=1;i<=len;i++){h+=`<option value="${i}" ${i===s?"selected":""}>第${i}格 = ${clean.charAt(i-1)||"-"}</option>`;} return h;}
     function parameterDateButtonLabel(v){return normalizeIsoDateText(v)||"選擇日期";}
-    function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><button class="parameter-row-toggle-btn ${r.enabled===true?"is-enabled":""}" type="button" data-parameter-field="shift-enabled" data-parameter-row-toggle="shift" data-parameter-enabled="${r.enabled===true?"true":"false"}" aria-pressed="${r.enabled===true?"true":"false"}">${r.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action" onchange="parameterHolidayActionChanged(this)"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}" onclick="parameterSelectAllInput(this)" onfocus="parameterSelectAllInput(this)"><button class="parameter-national-toggle-btn ${x.includeNationalHours!==false&&x.action!=="remove"?"is-national":""} ${x.action==="remove"?"parameter-hidden":""}" type="button" data-parameter-field="holiday-national" data-parameter-national="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}" aria-pressed="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}">${x.includeNationalHours!==false&&x.action!=="remove"?"國定假日":"非國定"}</button><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="holiday-enabled" data-parameter-row-toggle="holiday" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el)el.innerHTML=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="exception-enabled" data-parameter-row-toggle="exception" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("")||`<div class="parameter-settings-note">尚未建立時數例外。</div>`; fillParameterCalcInputs();}
+    function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><button class="parameter-row-toggle-btn ${r.enabled===true?"is-enabled":""}" type="button" data-parameter-field="shift-enabled" data-parameter-row-toggle="shift" data-parameter-enabled="${r.enabled===true?"true":"false"}" aria-pressed="${r.enabled===true?"true":"false"}">${r.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action" onchange="parameterHolidayActionChanged(this)"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}" onclick="parameterSelectAllInput(this)" onfocus="parameterSelectAllInput(this)"><button class="parameter-national-toggle-btn ${x.includeNationalHours!==false&&x.action!=="remove"?"is-national":""} ${x.action==="remove"?"parameter-hidden":""}" type="button" data-parameter-field="holiday-national" data-parameter-national="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}" aria-pressed="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}">${x.includeNationalHours!==false&&x.action!=="remove"?"國定假日":"非國定"}</button><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="holiday-enabled" data-parameter-row-toggle="holiday" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el)el.innerHTML=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><label class="parameter-settings-field parameter-exception-anchor-field"><span>定錨格</span><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"></label><label class="parameter-settings-field parameter-exception-hours-field"><span>時數</span><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"></label><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="exception-enabled" data-parameter-row-toggle="exception" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("")||`<div class="parameter-settings-note">尚未建立時數例外。</div>`; fillParameterCalcInputs();}
     function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; updateParameterSectionControls(); set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
     function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); if(!n.sections||typeof n.sections!=="object")n.sections={shiftRulesEnabled:true,holidayOverridesEnabled:true}; n.sections.shiftRulesEnabled=true; n.sections.holidayOverridesEnabled=true; n.calc.hoursEnabled=parameterSettings.calc?.hoursEnabled===true; n.calc.salaryEnabled=parameterSettings.calc?.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:parameterRowToggleIsEnabled(row,"shift-enabled")})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?false:parameterNationalButtonIsNational(row),includeHolidayBenefit:true,enabled:parameterRowToggleIsEnabled(row,"holiday-enabled")});}); return normalizeParameterSettings(n);}
     let parameterSettingsBodyScrollLocked = false;
@@ -6134,18 +6343,46 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       list.innerHTML = batchRangeRecords.map((record, idx) => {
         const safeRecord = normalizeBatchRangeRecord(record);
         return `
-          <div class="batch-row batch-row-layout-v2 ${idx === 0 ? "no-delete" : "has-delete"}">
-            <div class="batch-cell batch-cell-start"><div class="batch-field-title">起日</div>${buildSpecialDateButton("batchStart", idx, safeRecord.startDay)}</div>
-            <div class="batch-cell batch-cell-end"><div class="batch-field-title">訖日</div>${buildSpecialDateButton("batchEnd", idx, safeRecord.endDay)}</div>
-            <div class="batch-cell batch-cell-code"><div class="batch-field-title">假別</div>${buildBatchCodePickerHtml(idx, safeRecord.code)}</div>
-            <label class="batch-cell batch-cell-mode"><div class="batch-field-title">模式</div><select class="batch-select" data-batch-field="mode" data-index="${idx}" ${safeRecord.code === 4 ? "disabled" : ""}><option value="workOnly" ${safeRecord.mode === "workOnly" ? "selected" : ""}>只套用上班日</option><option value="all" ${safeRecord.mode === "all" ? "selected" : ""}>包含空班</option></select></label>
-            <div class="batch-cell batch-cell-apply"><div class="batch-field-title">套用</div><button class="batch-action-btn" type="button" data-batch-action="apply" data-index="${idx}">套用</button></div>
-            <div class="batch-cell batch-cell-clear"><div class="batch-field-title">清除</div><button class="batch-action-btn batch-clear-btn" type="button" data-batch-action="clear" data-index="${idx}">清除</button></div>
-            ${idx === 0 ? "" : `<div class="batch-cell batch-cell-delete"><div class="batch-field-title">刪除</div><button class="batch-delete-row-btn" type="button" data-batch-delete-row="${idx}">刪除列</button></div>`}
-          </div>`;
+          <div class="batch-row with-delete-space batch-row-align-v3 ${idx === 0 ? "batch-no-delete" : "batch-has-delete"}">
+            <div class="batch-cell batch-start-cell">
+              <div class="batch-field-title">起日</div>
+              ${buildSpecialDateButton("batchStart", idx, safeRecord.startDay)}
+            </div>
+            <div class="batch-cell batch-end-cell">
+              <div class="batch-field-title">迄日</div>
+              ${buildSpecialDateButton("batchEnd", idx, safeRecord.endDay)}
+            </div>
+            <div class="batch-cell batch-code-cell">
+              <div class="batch-field-title">假別</div>
+              ${buildBatchCodePickerHtml(idx, safeRecord.code)}
+            </div>
+            <label class="batch-cell batch-mode-cell">
+              <div class="batch-field-title">模式</div>
+              <select class="batch-select" data-batch-field="mode" data-index="${idx}" ${safeRecord.code === 4 ? "disabled" : ""}>
+                <option value="workOnly" ${safeRecord.mode === "workOnly" ? "selected" : ""}>只套用上班日</option>
+                <option value="all" ${safeRecord.mode === "all" ? "selected" : ""}>包含空班</option>
+              </select>
+            </label>
+            <div class="batch-cell batch-apply-cell">
+              <div class="batch-field-title">套用</div>
+              <button class="batch-action-btn" type="button" data-batch-action="apply" data-index="${idx}">套用</button>
+            </div>
+            <div class="batch-cell batch-clear-cell">
+              <div class="batch-field-title">清除</div>
+              <button class="batch-action-btn batch-clear-btn" type="button" data-batch-action="clear" data-index="${idx}">清除</button>
+            </div>
+            <div class="batch-cell batch-delete-cell ${idx === 0 ? "placeholder-delete" : ""}">
+              <div class="batch-field-title">刪除</div>
+              <button class="batch-delete-row-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-batch-delete-row="${idx}">刪除列</button>
+            </div>
+          </div>
+        `;
       }).join("");
       list.querySelectorAll("[data-batch-delete-row]").forEach(btn => {
-        btn.addEventListener("click", function() { deleteBatchRangeRecord(this.dataset.batchDeleteRow); });
+        btn.addEventListener("click", function() {
+          if (this.classList.contains("placeholder-delete")) return;
+          deleteBatchRangeRecord(this.dataset.batchDeleteRow);
+        });
       });
       list.querySelectorAll(".batch-select").forEach(sel => {
         sel.addEventListener("change", function() {
@@ -6158,7 +6395,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
             batchRangeRecords[index][field] = this.value;
           }
           if (field === "code" && Number(this.value) === 4) batchRangeRecords[index].mode = "all";
-          saveCurrentMonthState(); renderAll(false);
+          saveCurrentMonthState();
+          renderAll(false);
         });
       });
       bindBatchCodePickerEvents(list);
@@ -6389,21 +6627,21 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function renderSpecialDateControls() {
       document.getElementById("closureRecordList").innerHTML = specialDates.closure.map((record, idx) => `
-        <div class="special-record special-row-closure ${idx === 0 ? "no-delete" : "has-delete"}">
+        <div class="special-record with-delete-space">
           ${buildSpecialDateButton("closure", idx, record.day)}
           <select class="special-type-select" data-group="closureType" data-index="${idx}">${buildClosureTypeOptions(record.type)}</select>
-          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>`}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
       document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `
-        <div class="special-record special-row-election ${idx === 0 ? "no-delete" : "has-delete"}">
+        <div class="special-record election-with-delete-space">
           ${buildSpecialDateButton("election", idx, value)}
-          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="election" data-special-delete-index="${idx}">刪除列</button>`}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="election" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
       document.getElementById("trainingRecordList").innerHTML = (specialDates.training || []).map((record, idx) => `
-        <div class="special-record special-row-training ${idx === 0 ? "no-delete" : "has-delete"}">
+        <div class="special-record with-delete-space">
           ${buildSpecialDateButton("training", idx, record.day)}
           <select class="special-hour-select" data-group="trainingHours" data-index="${idx}">${buildTrainingHourOptions(record.hours)}</select>
-          ${idx === 0 ? "" : `<button class="special-delete-btn" type="button" data-special-delete-group="training" data-special-delete-index="${idx}">刪除列</button>`}
+          <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="training" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
       bindSpecialDateButtonEvents(document);
       document.querySelectorAll(".special-type-select, .special-hour-select").forEach(sel => {
@@ -6417,6 +6655,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
       document.querySelectorAll("[data-special-delete-group]").forEach(btn => {
         btn.addEventListener("click", function() {
+          if (this.classList.contains("placeholder-delete")) return;
           deleteSpecialDateRecord(this.dataset.specialDeleteGroup, this.dataset.specialDeleteIndex);
         });
       });
