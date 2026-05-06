@@ -3550,7 +3550,7 @@
 /* === v20260506-AlignFix 結束 === */
 
 
-/* === v20260506-Stable-MicroTune-4：批次、例外標題列、未啟用區塊手機展開修正 === */
+/* === v20260506-Stable-MicroTune-5：批次、例外標題列、未啟用區塊手機展開、基本薪給三態邏輯 === */
 #batchSummary:empty { display: none !important; }
 .batch-row.batch-row-align-v3.batch-no-delete .batch-delete-cell {
  display: none !important;
@@ -3617,7 +3617,7 @@
   font-size: clamp(9px, 2.8vw, 11px) !important;
  }
 }
-/* === v20260506-Stable-MicroTune-4 結束 === */
+/* === v20260506-Stable-MicroTune-5 結束 === */
 </style>
 </head>
 <body>
@@ -6900,10 +6900,16 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function applySalaryBasePayFromState(data) {
       const hasSalary = Object.prototype.hasOwnProperty.call(data, "salaryBasePay");
-      const savedSource = data.salaryBasePaySource || "carry";
-      if (hasSalary && savedSource === "manual") {
+      const savedAmount = Number(data.salaryBasePay || 0);
+      const savedSource = data.salaryBasePaySource || "legacy";
+      if (savedSource === "cleared" || (hasSalary && savedSource === "manual" && savedAmount <= 0)) {
+        salaryBasePaySource = "cleared";
+        setSalaryBasePayInput(0);
+        return;
+      }
+      if (hasSalary && (savedSource === "manual" || savedSource === "legacy") && savedAmount > 0) {
         salaryBasePaySource = "manual";
-        setSalaryBasePayInput(Number(data.salaryBasePay || 0));
+        setSalaryBasePayInput(savedAmount);
         return;
       }
       const carryAmount = getSalaryCarryForwardBasePay();
@@ -6911,7 +6917,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (carryAmount > 0) {
         setSalaryBasePayInput(carryAmount);
       } else {
-        setSalaryBasePayInput(hasSalary ? Number(data.salaryBasePay || 0) : 0);
+        setSalaryBasePayInput(0);
       }
     }
     function fmtAccountingMoney(value) {
@@ -7403,8 +7409,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         salaryBasePayInput.addEventListener("click", function() { this.select(); });
         salaryBasePayInput.addEventListener("input", function() {
           const digits = String(this.value || "").replace(/[^0-9]/g, "");
-          this.value = fmtInputAccountingMoney(Number(digits || 0));
-          salaryBasePaySource = "manual";
+          const amount = Number(digits || 0);
+          this.value = fmtInputAccountingMoney(amount);
+          salaryBasePaySource = amount > 0 ? "manual" : "cleared";
           saveCurrentMonthState();
           renderAll(false);
         });
