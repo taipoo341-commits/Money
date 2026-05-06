@@ -3550,7 +3550,7 @@
 /* === v20260506-AlignFix 結束 === */
 
 
-/* === v20260506-MicroTune-3：批次第一列刪除區隱藏、新增列保留刪除按鈕、例外標題列單一化 === */
+/* === v20260506-Stable-MicroTune-4：批次、例外標題列、未啟用區塊手機展開修正 === */
 #batchSummary:empty { display: none !important; }
 .batch-row.batch-row-align-v3.batch-no-delete .batch-delete-cell {
  display: none !important;
@@ -3591,6 +3591,20 @@
 .parameter-settings-row.exception-row .parameter-exception-hours-field {
  gap: 0 !important;
 }
+.parameter-settings-section.parameter-section-disabled .parameter-mobile-section-toggle {
+ pointer-events: auto !important;
+ cursor: pointer !important;
+ opacity: 1 !important;
+ filter: none !important;
+}
+.parameter-settings-section.parameter-section-disabled .parameter-settings-section-title .parameter-mobile-section-toggle {
+ display: inline-grid !important;
+}
+.parameter-settings-section.parameter-section-disabled button.parameter-mobile-section-toggle:disabled {
+ pointer-events: auto !important;
+ cursor: pointer !important;
+ opacity: 1 !important;
+}
 @media(max-width:760px){
  .parameter-exception-header-row {
   grid-template-columns: minmax(0,.9fr) minmax(0,.9fr) minmax(0,1.05fr) minmax(0,.95fr) !important;
@@ -3603,7 +3617,7 @@
   font-size: clamp(9px, 2.8vw, 11px) !important;
  }
 }
-/* === v20260506-MicroTune-3 結束 === */
+/* === v20260506-Stable-MicroTune-4 結束 === */
 </style>
 </head>
 <body>
@@ -4273,7 +4287,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  function setParameterNationalButton(btn,isNational){if(!btn)return;btn.dataset.parameterNational=isNational?"true":"false";btn.classList.toggle("is-national",isNational);btn.textContent=isNational?"國定假日":"非國定";btn.setAttribute("aria-pressed",isNational?"true":"false");}
  function toggleParameterNationalButton(btn){setParameterNationalButton(btn,!(btn.dataset.parameterNational==="true"||btn.classList.contains("is-national")));}
  function parameterHolidayActionChanged(selectEl){const row=selectEl?selectEl.closest("[data-parameter-holiday-index]"):null;if(!row)return;const nationalBtn=row.querySelector('[data-parameter-field="holiday-national"]');if(!nationalBtn)return;if(selectEl.value==="remove"){nationalBtn.classList.add("parameter-hidden");setParameterNationalButton(nationalBtn,false);}else{nationalBtn.classList.remove("parameter-hidden");setParameterNationalButton(nationalBtn,true);}}
- function updateParameterSectionControls(){const map={hours:"parameterHoursEnabled",salary:"parameterSalaryEnabled"};Object.entries(map).forEach(([section,id])=>{const enabled=getParameterSectionEnabled(section);const btn=document.getElementById(id);if(btn){btn.textContent=enabled?"啟用":"未啟用";btn.classList.toggle("is-enabled",enabled);btn.setAttribute("aria-pressed",enabled?"true":"false");}const panel=document.querySelector(`[data-parameter-section="${section}"]`);if(panel){panel.classList.toggle("parameter-section-disabled",!enabled);panel.querySelectorAll("input,select,button").forEach(el=>{if(el.matches("[data-parameter-section-toggle]"))return;el.disabled=!enabled;});}});}
+ function updateParameterSectionControls(){const map={hours:"parameterHoursEnabled",salary:"parameterSalaryEnabled"};Object.entries(map).forEach(([section,id])=>{const enabled=getParameterSectionEnabled(section);const btn=document.getElementById(id);if(btn){btn.textContent=enabled?"啟用":"未啟用";btn.classList.toggle("is-enabled",enabled);btn.setAttribute("aria-pressed",enabled?"true":"false");}const panel=document.querySelector(`[data-parameter-section="${section}"]`);if(panel){panel.classList.toggle("parameter-section-disabled",!enabled);panel.querySelectorAll("input,select,button").forEach(el=>{if(el.matches("[data-parameter-section-toggle], .parameter-mobile-section-toggle"))return;el.disabled=!enabled;});panel.querySelectorAll(".parameter-mobile-section-toggle").forEach(el=>{el.disabled=false;el.removeAttribute("disabled");});}});}
  function parameterSelectAllInput(el){if(!el||!el.select)return;setTimeout(()=>{try{el.select();}catch(err){}},0);}
  function parameterSettingsSetMessage(msg){const el=document.getElementById("parameterSettingsMessage"); if(el)el.textContent=msg||"";}
     function parameterSettingsEscapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
