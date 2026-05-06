@@ -3550,18 +3550,24 @@
 /* === v20260506-AlignFix 結束 === */
 
 
-/* === v20260506-MicroTune-2：批次刪除文字移除、例外欄位僅標註定錨格與時數、控制台副標精簡 === */
+/* === v20260506-MicroTune-3：批次第一列刪除區隱藏、新增列保留刪除按鈕、例外標題列單一化 === */
 #batchSummary:empty { display: none !important; }
-.batch-delete-row-icon-only {
- color: transparent !important;
- font-size: 0 !important;
- line-height: 0 !important;
- overflow: hidden !important;
-}
-.batch-delete-row-icon-only::before,
-.batch-delete-row-icon-only::after {
- content: "" !important;
+.batch-row.batch-row-align-v3.batch-no-delete .batch-delete-cell {
  display: none !important;
+ visibility: hidden !important;
+ pointer-events: none !important;
+}
+.batch-row.batch-row-align-v3.batch-has-delete .batch-delete-cell {
+ display: block !important;
+ visibility: visible !important;
+ pointer-events: auto !important;
+}
+.batch-row.batch-row-align-v3.batch-has-delete .batch-delete-row-btn {
+ display: block !important;
+ visibility: visible !important;
+ color: #fda4af !important;
+ font-size: 11px !important;
+ line-height: normal !important;
 }
 .parameter-exception-header-row {
  display: grid !important;
@@ -3577,6 +3583,14 @@
  white-space: nowrap !important;
 }
 .parameter-exception-header-row > div { min-width: 0 !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+.parameter-settings-row.exception-row .parameter-exception-anchor-field > span,
+.parameter-settings-row.exception-row .parameter-exception-hours-field > span {
+ display: none !important;
+}
+.parameter-settings-row.exception-row .parameter-exception-anchor-field,
+.parameter-settings-row.exception-row .parameter-exception-hours-field {
+ gap: 0 !important;
+}
 @media(max-width:760px){
  .parameter-exception-header-row {
   grid-template-columns: minmax(0,.9fr) minmax(0,.9fr) minmax(0,1.05fr) minmax(0,.95fr) !important;
@@ -3585,8 +3599,11 @@
   font-size: clamp(10px,3vw,12px) !important;
   letter-spacing: 0 !important;
  }
+ .batch-row.batch-row-align-v3.batch-has-delete .batch-delete-row-btn {
+  font-size: clamp(9px, 2.8vw, 11px) !important;
+ }
 }
-/* === v20260506-MicroTune-2 結束 === */
+/* === v20260506-MicroTune-3 結束 === */
 </style>
 </head>
 <body>
@@ -6411,7 +6428,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
             </div>
             <div class="batch-cell batch-delete-cell ${idx === 0 ? "placeholder-delete" : ""}">
               <div class="batch-field-title">刪除</div>
-              <button class="batch-delete-row-btn batch-delete-row-icon-only ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-batch-delete-row="${idx}" aria-label="刪除列" title="刪除列"></button>
+              <button class="batch-delete-row-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-batch-delete-row="${idx}">刪除列</button>
             </div>
           </div>
         `;
