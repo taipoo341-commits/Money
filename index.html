@@ -3550,7 +3550,7 @@
 /* === v20260506-AlignFix 結束 === */
 
 
-/* === v20260506-Stable-MicroTune-5：批次、例外標題列、未啟用區塊手機展開、基本薪給三態邏輯 === */
+/* === v20260506-Stable-MicroTune-4：批次、例外標題列、未啟用區塊手機展開修正 === */
 #batchSummary:empty { display: none !important; }
 .batch-row.batch-row-align-v3.batch-no-delete .batch-delete-cell {
  display: none !important;
@@ -3617,7 +3617,7 @@
   font-size: clamp(9px, 2.8vw, 11px) !important;
  }
 }
-/* === v20260506-Stable-MicroTune-5 結束 === */
+/* === v20260506-Stable-MicroTune-4 結束 === */
 </style>
 </head>
 <body>
@@ -4206,6 +4206,7 @@
         let codePickerBodyScrollY = 0;
     let codePickerBodyScrollLocked = false;
 const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
+    const CODE_FAVORITES_BACKUP_STORAGE_KEY = "personalOvertimeCodeFavoritesProtected";
     let codeFavoriteSet = new Set();
     let activeStorageKey = "";
     
@@ -4855,19 +4856,35 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       saveCurrentMonthState();
     }
+    function normalizeCodeFavoriteArray(rawValue) {
+      try {
+        const arr = typeof rawValue === "string" && rawValue ? JSON.parse(rawValue) : rawValue;
+        const validCodeKeys = new Set(CODE_OPTIONS.map(code => keyOf(code)));
+        return (Array.isArray(arr) ? arr : []).map(value => keyOf(value)).filter(value => validCodeKeys.has(value));
+      } catch (err) {
+        return [];
+      }
+    }
     function loadCodeFavorites() {
       try {
-        const raw = localStorage.getItem(CODE_FAVORITES_STORAGE_KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        codeFavoriteSet = new Set((Array.isArray(arr) ? arr : []).map(value => keyOf(value)).filter(value => CODE_OPTIONS.some(code => keyOf(code) === value)));
+        const primaryRaw = localStorage.getItem(CODE_FAVORITES_STORAGE_KEY);
+        const backupRaw = localStorage.getItem(CODE_FAVORITES_BACKUP_STORAGE_KEY);
+        let favoriteArray = normalizeCodeFavoriteArray(primaryRaw);
+        if (!favoriteArray.length) favoriteArray = normalizeCodeFavoriteArray(backupRaw);
+        codeFavoriteSet = new Set(favoriteArray);
+        saveCodeFavorites();
       } catch (err) {
         codeFavoriteSet = new Set();
-        console.warn("無法讀取我的最愛假別", err);
+        console.warn("無法讀取我的最愛代碼", err);
       }
     }
     function saveCodeFavorites() {
-      try { localStorage.setItem(CODE_FAVORITES_STORAGE_KEY, JSON.stringify(Array.from(codeFavoriteSet))); }
-      catch (err) { console.warn("無法儲存我的最愛假別", err); }
+      try {
+        const favoriteJson = JSON.stringify(Array.from(codeFavoriteSet));
+        localStorage.setItem(CODE_FAVORITES_STORAGE_KEY, favoriteJson);
+        localStorage.setItem(CODE_FAVORITES_BACKUP_STORAGE_KEY, favoriteJson);
+      }
+      catch (err) { console.warn("無法儲存我的最愛代碼", err); }
     }
     function isCodeFavorite(code) { return codeFavoriteSet.has(keyOf(code)); }
     function toggleCodeFavorite(code) {
@@ -6900,16 +6917,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function applySalaryBasePayFromState(data) {
       const hasSalary = Object.prototype.hasOwnProperty.call(data, "salaryBasePay");
-      const savedAmount = Number(data.salaryBasePay || 0);
-      const savedSource = data.salaryBasePaySource || "legacy";
-      if (savedSource === "cleared" || (hasSalary && savedSource === "manual" && savedAmount <= 0)) {
-        salaryBasePaySource = "cleared";
-        setSalaryBasePayInput(0);
-        return;
-      }
-      if (hasSalary && (savedSource === "manual" || savedSource === "legacy") && savedAmount > 0) {
+      const savedSource = data.salaryBasePaySource || "carry";
+      if (hasSalary && savedSource === "manual") {
         salaryBasePaySource = "manual";
-        setSalaryBasePayInput(savedAmount);
+        setSalaryBasePayInput(Number(data.salaryBasePay || 0));
         return;
       }
       const carryAmount = getSalaryCarryForwardBasePay();
@@ -6917,7 +6928,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (carryAmount > 0) {
         setSalaryBasePayInput(carryAmount);
       } else {
-        setSalaryBasePayInput(0);
+        setSalaryBasePayInput(hasSalary ? Number(data.salaryBasePay || 0) : 0);
       }
     }
     function fmtAccountingMoney(value) {
@@ -7323,6 +7334,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         weekStartMode = "monday";
       }
       calculationInfoVisible = false;
+      loadCodeFavorites();
       updateWeekStartToggleUI();
       updateCalculationInfoToggleUI();
       activeStorageKey = getCurrentStorageKey();
@@ -7409,9 +7421,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         salaryBasePayInput.addEventListener("click", function() { this.select(); });
         salaryBasePayInput.addEventListener("input", function() {
           const digits = String(this.value || "").replace(/[^0-9]/g, "");
-          const amount = Number(digits || 0);
-          this.value = fmtInputAccountingMoney(amount);
-          salaryBasePaySource = amount > 0 ? "manual" : "cleared";
+          this.value = fmtInputAccountingMoney(Number(digits || 0));
+          salaryBasePaySource = "manual";
           saveCurrentMonthState();
           renderAll(false);
         });
@@ -7827,17 +7838,27 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  async function clearLocalOvertimeStorageRecords() {
   const confirmed = await gBackupShowConfirm("刪除本機紀錄", "確定要刪除本機的加班費計算紀錄嗎？", "此動作會刪除本機瀏覽器內所有 personalOvertimeState: 開頭的月份紀錄，包含基本薪給、天災與選舉日設定、大修日期設定、請假／受訓批次設定與主月曆資料。此動作不會刪除 Google Drive 備份、不會登出 G、不會刪除我的最愛。", "danger", "確認刪除", "取消");
   if (!confirmed) return;
+  loadCodeFavorites();
+  const favoriteJsonBeforeClear = JSON.stringify(Array.from(codeFavoriteSet));
   const keysToRemove = [];
   Object.keys(localStorage).forEach(function(key) {
    if (key.indexOf("personalOvertimeState:") === 0) keysToRemove.push(key);
   });
   keysToRemove.forEach(function(key) { localStorage.removeItem(key); });
   try { localStorage.removeItem(G_BACKUP_LOCAL_STATUS_KEY); } catch (err) { console.warn("無法清除本機備份下載紀錄", err); }
+  try {
+   localStorage.setItem(CODE_FAVORITES_STORAGE_KEY, favoriteJsonBeforeClear);
+   localStorage.setItem(CODE_FAVORITES_BACKUP_STORAGE_KEY, favoriteJsonBeforeClear);
+   codeFavoriteSet = new Set(normalizeCodeFavoriteArray(favoriteJsonBeforeClear));
+  } catch (err) {
+   console.warn("刪除本機紀錄後無法回寫我的最愛代碼", err);
+  }
   gBackupRenderLocalStatus();
-  gBackupSetMessage("已刪除本機加班費計算紀錄，並已清除本機備份下載紀錄，頁面即將重新載入。");
-  await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄。Google Drive 備份與 G 登入狀態不受影響。", "success");
+  gBackupSetMessage("已刪除本機加班費計算紀錄，並已保留我的最愛代碼，頁面即將重新載入。");
+  await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄。Google Drive 備份、G 登入狀態與我的最愛代碼不受影響。", "success");
   window.location.reload();
  }
+
  function gBackupHasRememberedAuth() {
   try { return localStorage.getItem(G_BACKUP_AUTH_REMEMBER_KEY) === "1"; }
   catch (err) { return false; }
