@@ -5305,6 +5305,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const index = ((diffDays % 12) + 12 + offset) % 12;
       return { cycleIndex: index, baseCode: CYCLE_CODES[index], baseHours: CYCLE_HOURS[index] };
     }
+    function isChildrenAndTombSweepingCombined(row) {
+      const raw = row.description || "";
+      return raw.includes("兒童") && (raw.includes("清明") || raw.includes("民族掃墓"));
+    }
     function normalizeHolidayName(row) {
       const raw = row.description || "";
       if (row.date.endsWith("0101")) return "開國紀念日";
@@ -5314,12 +5318,24 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (row.date.endsWith("1225")) return "行憲紀念日";
       if (raw.includes("除夕")) return "除夕";
       if (raw.includes("春節")) return "春節";
-      if (raw.includes("兒童") && raw.includes("清明")) return "兒童節/清明節";
-      if (raw.includes("民族掃墓")) return "清明節";
+      if (isChildrenAndTombSweepingCombined(row)) return "兒童節";
+      if (raw.includes("兒童")) return "兒童節";
+      if (raw.includes("清明") || raw.includes("民族掃墓")) return "清明節";
       if (raw.includes("勞動")) return "勞動節";
       if (raw.includes("端午")) return "端午節";
       if (raw.includes("中秋")) return "中秋節";
       return raw;
+    }
+    function getObservedTombSweepingDateForCombinedHoliday(year, month, day) {
+      const base = new Date(year, month - 1, day);
+      const observed = new Date(base);
+      observed.setDate(base.getDate() + (base.getDay() === 4 ? 1 : -1));
+      return {
+        y: observed.getFullYear(),
+        m: observed.getMonth() + 1,
+        d: observed.getDate(),
+        desc: "清明節"
+      };
     }
     function processTaiwanCalendar(jsonData) {
       const workDict = {};
@@ -5345,12 +5361,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           !desc.includes("調整放假") &&
           !desc.includes("調整上班");
         if (!keep) return;
-        processed.push({
-          y: parseInt(row.date.slice(0, 4), 10),
-          m: parseInt(row.date.slice(4, 6), 10),
-          d: parseInt(row.date.slice(6, 8), 10),
-          desc: normalizeHolidayName(row)
-        });
+        const y = parseInt(row.date.slice(0, 4), 10);
+        const m = parseInt(row.date.slice(4, 6), 10);
+        const d = parseInt(row.date.slice(6, 8), 10);
+        processed.push({ y, m, d, desc: normalizeHolidayName(row) });
+        if (isChildrenAndTombSweepingCombined(row)) {
+          processed.push(getObservedTombSweepingDateForCombinedHoliday(y, m, d));
+        }
       });
       const spring = processed
         .filter(x => x.desc === "春節")
@@ -6747,11 +6764,31 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
       updateSpecialSummary();
     }
+    function getHolidayDisplayName(dayInfo) {
+      const name = String(dayInfo?.holidayName || "").trim();
+      if (!name) return "";
+      const month = Number(dayInfo?.month || 0);
+      const day = Number(dayInfo?.day || 0);
+      if (name.includes("小年夜")) return "小年夜";
+      if (name.includes("除夕")) return "除夕";
+      if (name.includes("初一")) return "初一";
+      if (name.includes("初二")) return "初二";
+      if (name.includes("初三")) return "初三";
+      if (name.includes("開國") || name.includes("新年") || (month === 1 && day === 1)) return "新年";
+      if (name.includes("和平") || (month === 2 && day === 28)) return "228";
+      if (name.includes("兒童")) return "兒童";
+      if (name.includes("清明") || name.includes("民族掃墓")) return "清明";
+      if (name.includes("端午")) return "端午";
+      if (name.includes("教師") || name.includes("孔子")) return "教師";
+      if (name.includes("中秋")) return "中秋";
+      if (name.includes("國慶") || (month === 10 && day === 10)) return "國慶";
+      if (name.includes("光復") || name.includes("古寧頭")) return "光復";
+      if (name.includes("行憲")) return "行憲";
+      if (name.includes("勞動")) return "勞動";
+      return name.replace(/紀念日/g, "").replace(/節/g, "").trim() || name;
+    }
     function getPrimaryHolidayBadge(dayInfo) {
-      if (!dayInfo.holidayName) return "";
-      const type = getHolidayTypeName(dayInfo.holidayName);
-      if (type === "國定") return "國定";
-      return type;
+      return getHolidayDisplayName(dayInfo);
     }
     function renderCalendar() {
       const rocYear = Number(document.getElementById("rocYear").value);
@@ -7277,19 +7314,270 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
 
     async function loadCalendar() {
       const rocYear = Number(document.getElementById("rocYear").value);
+      const westernYear = rocYear + 1911;
       const sync = document.getElementById("syncMessage");
-      sync.textContent = "同步行事曆中...";
-      try {
-        const res = await fetch(`https://cdn.jsdelivr.net/gh/ruyut/TaiwanCalendar/data/${rocYear + 1911}.json`);
-        if (!res.ok) throw new Error("讀取失敗");
-        const json = await res.json();
-        calendarData = applyParameterHolidayOverrides(processTaiwanCalendar(json), rocYear + 1911);
-        sync.textContent = "已同步台灣行事曆資料";
-      } catch (err) {
-        calendarData = applyParameterHolidayOverrides({ workDict: {}, holidayMap: new Map() }, rocYear + 1911);
-        sync.textContent = "無法讀取行事曆資料，已套用本機參數覆寫";
-        console.warn(err);
+      const cacheKey = `personalOvertimeCalendarCache:${westernYear}`;
+      const failLogs = [];
+
+      function buildCalendarCacheKey(targetWesternYear) {
+        return `personalOvertimeCalendarCache:${targetWesternYear}`;
       }
+
+      function normalizeCalendarDate(value) {
+        const raw = String(value || "").trim();
+        const digits = raw.replace(/\D/g, "");
+        if (/^\d{8}$/.test(digits)) {
+          const first4 = Number(digits.slice(0, 4));
+          const last4 = Number(digits.slice(4, 8));
+          if (first4 >= 1900) return digits;
+          if (last4 >= 1900) return digits.slice(4, 8) + digits.slice(0, 2) + digits.slice(2, 4);
+          return digits;
+        }
+        if (/^\d{7}$/.test(digits) && digits.startsWith("1")) {
+          return String(Number(digits.slice(0, 3)) + 1911) + digits.slice(3);
+        }
+        return digits;
+      }
+
+      function normalizeCalendarRows(rows) {
+        if (!Array.isArray(rows)) return [];
+        return rows.map(row => {
+          const date = normalizeCalendarDate(row.date || row["西元日期"] || row["日期"] || row["date"]);
+          const holidayValue = row.isHoliday !== undefined ? row.isHoliday : (row["是否放假"] !== undefined ? row["是否放假"] : row.isholiday);
+          let isHoliday = false;
+          if (typeof holidayValue === "boolean") {
+            isHoliday = holidayValue;
+          } else {
+            const text = String(holidayValue === undefined ? "" : holidayValue).trim().toLowerCase();
+            isHoliday = text === "2" || text === "true" || text === "是" || text === "y" || text === "yes";
+          }
+          return {
+            date,
+            week: String(row.week || row["星期"] || row["week"] || "").trim(),
+            isHoliday,
+            description: String(row.description || row["備註"] || row["說明"] || row.name || row["節日"] || "").trim()
+          };
+        }).filter(row => /^\d{8}$/.test(row.date));
+      }
+
+      function inferCalendarWesternYear(rows) {
+        const yearCounts = new Map();
+        normalizeCalendarRows(rows).forEach(row => {
+          const year = Number(row.date.slice(0, 4));
+          if (Number.isFinite(year)) yearCounts.set(year, (yearCounts.get(year) || 0) + 1);
+        });
+        let bestYear = 0;
+        let bestCount = 0;
+        yearCounts.forEach((count, year) => {
+          if (count > bestCount) {
+            bestYear = year;
+            bestCount = count;
+          }
+        });
+        if (bestYear >= 1900 && bestCount >= 300) return bestYear;
+        return 0;
+      }
+
+      function saveCalendarCache(rows, sourceName, targetWesternYear = westernYear) {
+        try {
+          const normalizedRows = normalizeCalendarRows(rows);
+          if (normalizedRows.length < 300) return;
+          localStorage.setItem(buildCalendarCacheKey(targetWesternYear), JSON.stringify({
+            version: 7,
+            year: targetWesternYear,
+            sourceName,
+            savedAt: new Date().toISOString(),
+            rows: normalizedRows
+          }));
+        } catch (err) {
+          console.warn("行事曆快取儲存失敗", err);
+        }
+      }
+
+      function loadCalendarCache() {
+        try {
+          const raw = localStorage.getItem(cacheKey);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          const rows = normalizeCalendarRows(parsed.rows);
+          if (rows.length < 300) return null;
+          return rows;
+        } catch (err) {
+          console.warn("行事曆快取讀取失敗", err);
+          return null;
+        }
+      }
+
+      function parseCsvText(csvText) {
+        const text = String(csvText || "").replace(/^\uFEFF/, "");
+        const table = [];
+        let row = [];
+        let field = "";
+        let quoted = false;
+        for (let i = 0; i < text.length; i += 1) {
+          const ch = text[i];
+          const next = text[i + 1];
+          if (quoted) {
+            if (ch === '"' && next === '"') {
+              field += '"';
+              i += 1;
+            } else if (ch === '"') {
+              quoted = false;
+            } else {
+              field += ch;
+            }
+          } else if (ch === '"') {
+            quoted = true;
+          } else if (ch === ",") {
+            row.push(field);
+            field = "";
+          } else if (ch === "\n") {
+            row.push(field);
+            table.push(row);
+            row = [];
+            field = "";
+          } else if (ch !== "\r") {
+            field += ch;
+          }
+        }
+        row.push(field);
+        table.push(row);
+        const meaningfulRows = table.filter(item => item.some(cell => String(cell || "").trim() !== ""));
+        if (!meaningfulRows.length) return [];
+        const headers = meaningfulRows[0].map(header => String(header || "").trim().replace(/^\uFEFF/, ""));
+        return meaningfulRows.slice(1).map(values => {
+          const obj = {};
+          headers.forEach((header, index) => {
+            obj[header] = values[index] || "";
+          });
+          return obj;
+        });
+      }
+
+      function decodeCsvArrayBuffer(buffer) {
+        let utf8Text = new TextDecoder("utf-8").decode(buffer);
+        const utf8Rows = normalizeCalendarRows(parseCsvText(utf8Text));
+        if (utf8Rows.length >= 300) return utf8Text;
+        if (utf8Text.includes("�")) {
+          try {
+            const big5Text = new TextDecoder("big5").decode(buffer);
+            const big5Rows = normalizeCalendarRows(parseCsvText(big5Text));
+            if (big5Rows.length >= 300) return big5Text;
+          } catch (err) {
+            console.warn("Big5 解碼不可用，維持 UTF-8 解碼結果", err);
+          }
+        }
+        try {
+          const big5Text = new TextDecoder("big5").decode(buffer);
+          const big5Rows = normalizeCalendarRows(parseCsvText(big5Text));
+          if (big5Rows.length > utf8Rows.length) return big5Text;
+        } catch (err) {
+          console.warn("Big5 解碼檢查失敗", err);
+        }
+        return utf8Text;
+      }
+
+      function showCalendarSyncText(message) {
+        if (!sync) return;
+        sync.textContent = message;
+      }
+
+      function showCalendarImportPrompt(message) {
+        if (!sync) return;
+        sync.innerHTML = "";
+        const statusLine = document.createElement("div");
+        statusLine.textContent = message;
+        statusLine.style.marginBottom = "6px";
+        const hintLine = document.createElement("div");
+        hintLine.textContent = "來源失效，請匯CSV檔";
+        hintLine.style.color = "#fde68a";
+        hintLine.style.fontWeight = "950";
+        hintLine.style.marginBottom = "6px";
+        hintLine.style.textShadow = "0 0 8px rgba(246,196,83,.38)";
+        const importButton = document.createElement("button");
+        importButton.type = "button";
+        importButton.textContent = "匯入官方 CSV";
+        importButton.style.border = "1px solid rgba(246,196,83,.64)";
+        importButton.style.borderRadius = "999px";
+        importButton.style.background = "linear-gradient(90deg, rgba(246,196,83,.16), rgba(16,185,129,.18))";
+        importButton.style.color = "#fff3b0";
+        importButton.style.fontWeight = "950";
+        importButton.style.fontSize = "12px";
+        importButton.style.padding = "7px 12px";
+        importButton.style.cursor = "pointer";
+        importButton.style.boxShadow = "0 0 12px rgba(246,196,83,.22)";
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.accept = ".csv,text/csv";
+        fileInput.style.display = "none";
+        importButton.addEventListener("click", () => fileInput.click());
+        fileInput.addEventListener("change", () => {
+          const file = fileInput.files && fileInput.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const csvText = decodeCsvArrayBuffer(reader.result);
+              const allRows = normalizeCalendarRows(parseCsvText(csvText));
+              const importedWesternYear = inferCalendarWesternYear(allRows);
+              if (allRows.length < 300 || !importedWesternYear) throw new Error("CSV 欄位無法解析，請確認不是 Google 行事曆專用格式");
+              const rows = allRows.filter(row => Number(row.date.slice(0, 4)) === importedWesternYear);
+              const importedRocYear = importedWesternYear - 1911;
+              const rocYearInput = document.getElementById("rocYear");
+              if (rocYearInput) rocYearInput.value = importedRocYear;
+              saveCalendarCache(rows, `手動匯入官方 CSV：${file.name}`, importedWesternYear);
+              calendarData = applyParameterHolidayOverrides(processTaiwanCalendar(rows), importedWesternYear);
+              showCalendarImportPrompt(`已同步台灣行事曆資料：匯入官方 CSV，已切換民國 ${importedRocYear} 年`);
+              await renderAll(false);
+            } catch (err) {
+              showCalendarImportPrompt(`匯入官方 CSV 失敗：${err.message || "請確認為一般版政府行政機關辦公日曆表 CSV"}`);
+              console.warn("官方 CSV 匯入失敗", err);
+            } finally {
+              fileInput.value = "";
+            }
+          };
+          reader.onerror = () => {
+            showCalendarImportPrompt("匯入官方 CSV 失敗：檔案讀取失敗");
+            fileInput.value = "";
+          };
+          reader.readAsArrayBuffer(file);
+        });
+        sync.appendChild(statusLine);
+        sync.appendChild(hintLine);
+        sync.appendChild(importButton);
+        sync.appendChild(fileInput);
+      }
+
+      async function loadFromGithubJson() {
+        const res = await fetch(`https://cdn.jsdelivr.net/gh/ruyut/TaiwanCalendar/data/${westernYear}.json`);
+        if (!res.ok) throw new Error(`GitHub TaiwanCalendar JSON 讀取失敗：${res.status}`);
+        const json = await res.json();
+        const rows = normalizeCalendarRows(json);
+        if (rows.length < 300) throw new Error("GitHub TaiwanCalendar JSON 筆數不足");
+        saveCalendarCache(rows, "GitHub TaiwanCalendar JSON", westernYear);
+        calendarData = applyParameterHolidayOverrides(processTaiwanCalendar(rows), westernYear);
+        showCalendarSyncText("已同步台灣行事曆資料：GitHub JSON");
+      }
+
+      showCalendarSyncText("同步行事曆中...");
+      try {
+        await loadFromGithubJson();
+        return;
+      } catch (err) {
+        failLogs.push(err);
+        console.warn("GitHub TaiwanCalendar JSON 讀取失敗，改用本機快取或手動匯入官方 CSV", err);
+      }
+
+      const cachedRows = loadCalendarCache();
+      if (cachedRows) {
+        calendarData = applyParameterHolidayOverrides(processTaiwanCalendar(cachedRows), westernYear);
+        showCalendarImportPrompt("已使用本機快取行事曆資料");
+        return;
+      }
+
+      calendarData = applyParameterHolidayOverrides({ workDict: {}, holidayMap: new Map() }, westernYear);
+      showCalendarImportPrompt("無法讀取行事曆資料，已套用本機參數覆寫");
+      console.warn("行事曆遠端與快取來源皆失敗", failLogs);
     }
     async function renderAll(needLoadCalendar) {
       if (needLoadCalendar) await loadCalendar();
