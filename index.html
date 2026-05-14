@@ -4280,6 +4280,33 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     let codeFavoriteSet = new Set();
     let activeStorageKey = "";
     
+    const SHIFT_GROUP_PREFERENCE_STORAGE_KEY = "personalOvertimeShiftGroupPreference";
+    function normalizeShiftGroupPreference(value) {
+      const normalized = String(value || "").trim().toUpperCase();
+      return ["A", "B", "C", "D"].includes(normalized) ? normalized : "D";
+    }
+    function loadShiftGroupPreference() {
+      const shiftGroupSelect = document.getElementById("shiftGroup");
+      if (!shiftGroupSelect) return "D";
+      let savedShiftGroup = "D";
+      try {
+        savedShiftGroup = normalizeShiftGroupPreference(localStorage.getItem(SHIFT_GROUP_PREFERENCE_STORAGE_KEY));
+      } catch (err) {
+        savedShiftGroup = "D";
+      }
+      shiftGroupSelect.value = savedShiftGroup;
+      return savedShiftGroup;
+    }
+    function saveShiftGroupPreference(value) {
+      const normalized = normalizeShiftGroupPreference(value);
+      try {
+        localStorage.setItem(SHIFT_GROUP_PREFERENCE_STORAGE_KEY, normalized);
+      } catch (err) {
+        console.warn("無法儲存班別記憶設定", err);
+      }
+      return normalized;
+    }
+    
     const PARAMETER_SETTINGS_STORAGE_KEY = "personalOvertimeParameterSettings";
     const PARAMETER_DEFAULT_SETTINGS = { version: 4, sections: { shiftRulesEnabled: true, holidayOverridesEnabled: true }, shiftRules: [], holidayOverrides: [], calc: { hoursEnabled: false, salaryEnabled: false, codeHours: { "0": 0, "1": 9, "2": 8, "3": 7 }, hourExceptions: [], handoverMinutes: 30, rates: { code7: "4/3", code8: "5/3", code6: "8/3" }, fees: { initialNight: 250, deepNight: 400, breakfast: 75, lunchDinner: 150, redEnvelope: 600, reunionDinner: 800 } } };
     let parameterSettings = JSON.parse(JSON.stringify(PARAMETER_DEFAULT_SETTINGS));
@@ -7692,6 +7719,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         weekStartMode = "monday";
       }
       calculationInfoVisible = false;
+      loadShiftGroupPreference();
       loadCodeFavorites();
       updateWeekStartToggleUI();
       updateCalculationInfoToggleUI();
@@ -7809,6 +7837,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         });
       }
       document.getElementById("shiftGroup").addEventListener("change", () => {
+        saveShiftGroupPreference(document.getElementById("shiftGroup").value);
         updateShiftSelectStyle();
         switchMonthState(false);
       });
@@ -7854,7 +7883,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  const G_BACKUP_CLIENT_ID = "107200643244-6m7b52c3ho8nofgqf2m1v87eu60hssl8.apps.googleusercontent.com";
  const G_BACKUP_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
  const G_BACKUP_FILE_NAME = "overtime-backup.json";
- const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode", "personalOvertimeParameterSettings"]);
+ const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode", "personalOvertimeParameterSettings", "personalOvertimeShiftGroupPreference"]);
  const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
  const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
  const G_BACKUP_AUTH_REMEMBER_KEY = "personalOvertimeGoogleAuthRemembered";
