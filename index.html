@@ -6112,6 +6112,28 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (value === 3) return 7;
       return 0;
     }
+    function calcElectionBaseAdditionalHours(dayInfo) {
+      const actualValue = getCodeValue(dayInfo.actualCode);
+      const baseValue = getCodeValue(dayInfo.baseCode);
+      const value = actualValue || baseValue;
+      if (value === 1) return 8;
+      if (value === 2) return 6;
+      if (value === 3) return 7;
+      return 0;
+    }
+    function calcElectionLeaveDeductHours(dayInfo) {
+      const baseHours = calcElectionBaseAdditionalHours(dayInfo);
+      if (baseHours <= 0) return 0;
+      if (isFullDayLeave(dayInfo)) return baseHours;
+      if (hasPartialLeaveHrText(dayInfo)) return Math.min(baseHours, Math.max(0, getEffectiveLeaveHours(dayInfo)));
+      return 0;
+    }
+    function calcElectionPayableAdditionalHours(dayInfo) {
+      const baseHours = calcElectionBaseAdditionalHours(dayInfo);
+      if (baseHours <= 0) return 0;
+      if (!isWorkCode(dayInfo.actualCode) && !isLeaveCode(dayInfo.actualCode)) return 0;
+      return Math.max(0, baseHours - calcElectionLeaveDeductHours(dayInfo));
+    }
     function calcHrDiffForAV(dayInfo, returnVal) {
       if (!hasPartialLeaveHrText(dayInfo)) return 0;
       const actualWorkHours = getActualWorkHoursForBenefit(dayInfo);
@@ -6124,8 +6146,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄") return sum;
         const closureHours = calcClosureOverlapHours(dayInfo, days);
         if (closureHours > 0) return sum + closureHours;
-        if (isElectionDay(dayInfo.day) && isWorkCode(dayInfo.actualCode)) {
-          return sum + calcElectionAdditionalHours(dayInfo);
+        if (isElectionDay(dayInfo.day)) {
+          return sum + calcElectionPayableAdditionalHours(dayInfo);
         }
         if (!isSpecialHolidayForBenefits(dayInfo.holidayName, dayInfo.month, dayInfo.day) && !isCompanyNewYearWorkPeriod(dayInfo)) return sum;
         if (!isValidBenefitWorkDay(dayInfo)) return sum;
@@ -6145,8 +6167,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄") return sum;
         const closureHours = calcClosureOverlapHours(dayInfo, days);
         if (closureHours > 0) return sum + closureHours;
-        if (isElectionDay(dayInfo.day) && isWorkCode(dayInfo.actualCode)) {
-          return sum + calcElectionAdditionalHours(dayInfo);
+        if (isElectionDay(dayInfo.day)) {
+          return sum + calcElectionPayableAdditionalHours(dayInfo);
         }
         if (!isSpecialHolidayForBenefits(dayInfo.holidayName, dayInfo.month, dayInfo.day) && !isCompanyNewYearWorkPeriod(dayInfo)) return sum;
         if (!isValidBenefitWorkDay(dayInfo)) return sum;
@@ -8614,5 +8636,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   }
 </script>
 
+
+<!--
+  修正紀錄 2026-06-15：選舉日部分請假待遇修正。
+  規則：輪值人員選舉日待遇先依原值別取得基準時數，再扣除選舉公假／部分請假時數；全日請假扣至 0HR。
+  範例：二值選舉日基準 6HR，請公假 1HR，選舉日待遇為 5HR。
+-->
 </body>
 </html>
