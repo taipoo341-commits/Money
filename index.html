@@ -4132,6 +4132,7 @@
 <section class="parameter-settings-section" data-parameter-section="shiftRules"><div class="parameter-settings-section-title"><span>輪班週期覆寫</span><button id="parameterAddShiftRuleBtn" class="parameter-settings-add-btn" type="button">新增週期</button></div><div class="parameter-settings-note">週期輸入框點選後會全選，可直接覆蓋輸入。離開輸入框後更新定錨格選單。</div><div id="parameterShiftRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="holidayOverrides"><div class="parameter-settings-section-title"><span>行事曆覆寫</span><button id="parameterAddHolidayOverrideBtn" class="parameter-settings-add-btn" type="button">新增日期</button></div><div id="parameterHolidayOverrideList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="hours"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><button id="parameterHoursEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="hours">未啟用</button><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid parameter-hours-inline-grid"><label class="parameter-settings-field"><span>0空班(HR)</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1一值(HR)</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2二值(HR)</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3三值(HR)</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>交接班(分)</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
+<section class="parameter-settings-section" data-parameter-section="election"><div class="parameter-settings-section-title"><span>選舉日待遇參數</span></div><div class="parameter-settings-note">二值選舉日公假會依下方預設公假時數自動寫入主月曆；D10 由原本部分請假邏輯自然產生，D11 仍由原本班表工時邏輯計算。</div><div class="parameter-settings-grid parameter-election-grid"><label class="parameter-settings-field"><span>選舉日開始時間</span><input id="parameterElectionStartTime" class="parameter-settings-input" type="text" inputmode="text"></label><label class="parameter-settings-field"><span>選舉日結束時間</span><input id="parameterElectionEndTime" class="parameter-settings-input" type="text" inputmode="text"></label><label class="parameter-settings-field"><span>三值第一天加班分鐘（D10）</span><input id="parameterElectionThreeFirstD10Minutes" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>三值第二／第三天加班分鐘（D10）</span><input id="parameterElectionThreeLaterD10Minutes" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>二值第一／第二天預設公假</span><input id="parameterElectionTwoFirstSecondDefaultLeaveHours" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>二值第三天／二連一預設公假</span><input id="parameterElectionTwoThirdDefaultLeaveHours" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>二值第三天／二連一接一值補入</span><input id="parameterElectionTwoThirdNextOneHours" class="parameter-settings-input" type="text" inputmode="decimal"></label></div></section>
 <section class="parameter-settings-section" data-parameter-section="salary"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><button id="parameterSalaryEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="salary">未啟用</button></div><div class="parameter-settings-grid parameter-salary-rate-grid"><label class="parameter-settings-field"><span>超時2HR以內的倍數，請填分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>超時2~8HR內的倍數，請填分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>超時8HR以上的倍數，請填分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six parameter-salary-fee-grid"><label class="parameter-settings-field"><span>初夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label></div></section>
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存並套用</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
 <div id="parameterDateModal" class="parameter-date-modal" aria-hidden="true"><div class="parameter-date-card"><div class="parameter-date-head"><button id="parameterDatePrevBtn" class="parameter-date-nav" type="button">‹</button><div id="parameterDateTitle" class="parameter-date-title">選擇日期</div><button id="parameterDateNextBtn" class="parameter-date-nav" type="button">›</button></div><div id="parameterDateWeekGrid" class="parameter-date-week-grid"></div><div id="parameterDateCalendarGrid" class="parameter-date-calendar-grid"></div><div class="parameter-date-actions"><button id="parameterDateClearBtn" class="parameter-date-action-btn" type="button">清除日期</button><button id="parameterDateCancelBtn" class="parameter-date-action-btn" type="button">取消</button></div></div></div>
@@ -4308,12 +4309,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     
     const PARAMETER_SETTINGS_STORAGE_KEY = "personalOvertimeParameterSettings";
-    const PARAMETER_DEFAULT_SETTINGS = { version: 4, sections: { shiftRulesEnabled: true, holidayOverridesEnabled: true }, shiftRules: [], holidayOverrides: [], calc: { hoursEnabled: false, salaryEnabled: false, codeHours: { "0": 0, "1": 9, "2": 8, "3": 7 }, hourExceptions: [], handoverMinutes: 30, rates: { code7: "4/3", code8: "5/3", code6: "8/3" }, fees: { initialNight: 250, deepNight: 400, breakfast: 75, lunchDinner: 150, redEnvelope: 600, reunionDinner: 800 } } };
+    const PARAMETER_DEFAULT_SETTINGS = { version: 5, sections: { shiftRulesEnabled: true, holidayOverridesEnabled: true }, shiftRules: [], holidayOverrides: [], calc: { hoursEnabled: false, salaryEnabled: false, codeHours: { "0": 0, "1": 9, "2": 8, "3": 7 }, hourExceptions: [], handoverMinutes: 30, election: { effectiveStart: "00:00", effectiveEnd: "24:00", threeFirstD10AddMinutes: 30, threeLaterD10AddMinutes: 120, twoFirstSecondDefaultLeaveHours: 2, twoThirdDefaultLeaveHours: 0.5, twoThirdNextOneHours: 1.25 }, rates: { code7: "4/3", code8: "5/3", code6: "8/3" }, fees: { initialNight: 250, deepNight: 400, breakfast: 75, lunchDinner: 150, redEnvelope: 600, reunionDinner: 800 } } };
     let parameterSettings = JSON.parse(JSON.stringify(PARAMETER_DEFAULT_SETTINGS));
     let parameterDatePickerState = { target: "", index: -1, year: 2026, month: 1 };
     function deepCloneParameter(obj){ return JSON.parse(JSON.stringify(obj || PARAMETER_DEFAULT_SETTINGS)); }
     function getLinkedParameterShiftGroup(){ return document.getElementById("shiftGroup")?.value || "D"; }
-    function sanitizeParameterNumber(value, fallback){ const n = Number(String(value ?? "").trim()); return Number.isFinite(n) ? n : fallback; }
+    function sanitizeParameterNumber(value, fallback){ const t=String(value ?? "").trim(); if(t==="") return fallback; const n = Number(t); return Number.isFinite(n) ? n : fallback; }
     function normalizeIsoDateText(value){ const t=String(value||"").trim(); const m=t.match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return ""; const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3])); return d.getFullYear()==Number(m[1])&&d.getMonth()+1==Number(m[2])&&d.getDate()==Number(m[3])?t:""; }
     function ymdToParameterIso(y,m,d){ const p=v=>String(v).padStart(2,"0"); return `${y}-${p(m)}-${p(d)}`; }
     function parameterTodayIso(){ const y=Number(document.getElementById("rocYear")?.value||toRocYear(new Date()))+1911; const m=Number(document.getElementById("month")?.value||new Date().getMonth()+1); return ymdToParameterIso(y,m,1); }
@@ -4331,6 +4332,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(calc.handoverMinutes,30));
       n.calc.rates={code7:String(calc.rates?.code7||"4/3"),code8:String(calc.rates?.code8||"5/3"),code6:String(calc.rates?.code6||"8/3")};
       n.calc.fees={initialNight:Math.max(0,sanitizeParameterNumber(calc.fees?.initialNight,250)),deepNight:Math.max(0,sanitizeParameterNumber(calc.fees?.deepNight,400)),breakfast:Math.max(0,sanitizeParameterNumber(calc.fees?.breakfast,75)),lunchDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.lunchDinner,150)),redEnvelope:Math.max(0,sanitizeParameterNumber(calc.fees?.redEnvelope,600)),reunionDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.reunionDinner,800))};
+      const election=calc.election&&typeof calc.election==="object"?calc.election:{};
+      n.calc.election={effectiveStart:String(election.effectiveStart||"00:00"),effectiveEnd:String(election.effectiveEnd||"24:00"),threeFirstD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeFirstD10AddMinutes,30)),threeLaterD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeLaterD10AddMinutes,120)),twoFirstSecondDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoFirstSecondDefaultLeaveHours,2)),twoThirdDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoThirdDefaultLeaveHours,0.5)),twoThirdNextOneHours:Math.max(0,sanitizeParameterNumber(election.twoThirdNextOneHours,1.25))};
       n.calc.hourExceptions=Array.isArray(calc.hourExceptions)?calc.hourExceptions.map((x,i)=>({id:String(x.id||`hex-${Date.now()}-${i}`),position:Math.max(1,Number(x.position||1)),hours:sanitizeParameterNumber(x.hours,0),enabled:x.enabled===true})):[];
       if(Array.isArray(s.shiftRules)) s.shiftRules.forEach((x,i)=>{const ed=normalizeIsoDateText(x.effectiveDate); const pat=String(x.cyclePattern||"").replace(/\s+/g,""); if(!ed||!/^[0123]+$/.test(pat)) return; const ad=normalizeIsoDateText(x.anchorDate)||ed; n.shiftRules.push({id:String(x.id||`shift-${Date.now()}-${i}`),name:String(x.name||"自訂輪班週期").slice(0,30),shiftGroup:["A","B","C","D"].includes(x.shiftGroup)?x.shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:ed,cyclePattern:pat,anchorDate:ad,anchorPosition:Math.max(1,Math.min(pat.length,Number(x.anchorPosition||1))),enabled:x.enabled===true});});
       if(Array.isArray(s.holidayOverrides)) s.holidayOverrides.forEach((x,i)=>{const d=normalizeIsoDateText(x.date); if(!d) return; const a=x.action==="remove"?"remove":"add"; n.holidayOverrides.push({id:String(x.id||`hol-${Date.now()}-${i}`),date:d,action:a,name:String(x.name||(a==="remove"?"取消放假日":"臨時國定假日")).slice(0,30),includeNationalHours:x.includeNationalHours!==false,includeHolidayBenefit:x.includeHolidayBenefit!==false,enabled:x.enabled===true});});
@@ -4392,8 +4395,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function parameterPatternPositionOptions(pattern,sel){const clean=String(pattern||"").replace(/\s+/g,""); const len=Math.max(1,clean.length||1); const s=Math.max(1,Math.min(len,Number(sel||1))); let h=""; for(let i=1;i<=len;i++){h+=`<option value="${i}" ${i===s?"selected":""}>第${i}格 = ${clean.charAt(i-1)||"-"}</option>`;} return h;}
     function parameterDateButtonLabel(v){return normalizeIsoDateText(v)||"選擇日期";}
     function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><button class="parameter-row-toggle-btn ${r.enabled===true?"is-enabled":""}" type="button" data-parameter-field="shift-enabled" data-parameter-row-toggle="shift" data-parameter-enabled="${r.enabled===true?"true":"false"}" aria-pressed="${r.enabled===true?"true":"false"}">${r.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action" onchange="parameterHolidayActionChanged(this)"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}" onclick="parameterSelectAllInput(this)" onfocus="parameterSelectAllInput(this)"><button class="parameter-national-toggle-btn ${x.includeNationalHours!==false&&x.action!=="remove"?"is-national":""} ${x.action==="remove"?"parameter-hidden":""}" type="button" data-parameter-field="holiday-national" data-parameter-national="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}" aria-pressed="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}">${x.includeNationalHours!==false&&x.action!=="remove"?"國定假日":"非國定"}</button><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="holiday-enabled" data-parameter-row-toggle="holiday" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el){const hourExceptionRows=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><label class="parameter-settings-field parameter-exception-anchor-field"><span>定錨格</span><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"></label><label class="parameter-settings-field parameter-exception-hours-field"><span>時數</span><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"></label><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="exception-enabled" data-parameter-row-toggle="exception" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("");el.innerHTML=hourExceptionRows?`<div class="parameter-exception-header-row" aria-hidden="true"><div>定錨格</div><div>時數</div><div></div><div></div></div>${hourExceptionRows}`:`<div class="parameter-settings-note">尚未建立時數例外。</div>`;} fillParameterCalcInputs();}
-    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; updateParameterSectionControls(); set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
-    function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); if(!n.sections||typeof n.sections!=="object")n.sections={shiftRulesEnabled:true,holidayOverridesEnabled:true}; n.sections.shiftRulesEnabled=true; n.sections.holidayOverridesEnabled=true; n.calc.hoursEnabled=parameterSettings.calc?.hoursEnabled===true; n.calc.salaryEnabled=parameterSettings.calc?.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:parameterRowToggleIsEnabled(row,"shift-enabled")})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?false:parameterNationalButtonIsNational(row),includeHolidayBenefit:true,enabled:parameterRowToggleIsEnabled(row,"holiday-enabled")});}); return normalizeParameterSettings(n);}
+    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; updateParameterSectionControls(); set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);const election=c.election||PARAMETER_DEFAULT_SETTINGS.calc.election;set("parameterElectionStartTime",election.effectiveStart||"00:00");set("parameterElectionEndTime",election.effectiveEnd||"24:00");set("parameterElectionThreeFirstD10Minutes",election.threeFirstD10AddMinutes);set("parameterElectionThreeLaterD10Minutes",election.threeLaterD10AddMinutes);set("parameterElectionTwoFirstSecondDefaultLeaveHours",election.twoFirstSecondDefaultLeaveHours);set("parameterElectionTwoThirdDefaultLeaveHours",election.twoThirdDefaultLeaveHours);set("parameterElectionTwoThirdNextOneHours",election.twoThirdNextOneHours);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
+    function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); if(!n.sections||typeof n.sections!=="object")n.sections={shiftRulesEnabled:true,holidayOverridesEnabled:true}; n.sections.shiftRulesEnabled=true; n.sections.holidayOverridesEnabled=true; n.calc.hoursEnabled=parameterSettings.calc?.hoursEnabled===true; n.calc.salaryEnabled=parameterSettings.calc?.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.election={effectiveStart:document.getElementById("parameterElectionStartTime")?.value||"00:00",effectiveEnd:document.getElementById("parameterElectionEndTime")?.value||"24:00",threeFirstD10AddMinutes:sanitizeParameterNumber(document.getElementById("parameterElectionThreeFirstD10Minutes")?.value,30),threeLaterD10AddMinutes:sanitizeParameterNumber(document.getElementById("parameterElectionThreeLaterD10Minutes")?.value,120),twoFirstSecondDefaultLeaveHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoFirstSecondDefaultLeaveHours")?.value,2),twoThirdDefaultLeaveHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoThirdDefaultLeaveHours")?.value,0.5),twoThirdNextOneHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoThirdNextOneHours")?.value,1.25)}; n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:parameterRowToggleIsEnabled(row,"shift-enabled")})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?false:parameterNationalButtonIsNational(row),includeHolidayBenefit:true,enabled:parameterRowToggleIsEnabled(row,"holiday-enabled")});}); return normalizeParameterSettings(n);}
     let parameterSettingsBodyScrollLocked = false;
     let parameterSettingsBodyScrollY = 0;
     function parameterSettingsLockBodyScroll(){
@@ -4424,7 +4427,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if(!el || !el.matches || !el.matches(".parameter-settings-input"))return false;
       const section = el.closest(".parameter-settings-section");
       const title = section ? String(section.querySelector(".parameter-settings-section-title span")?.textContent || "") : "";
-      return title.includes("值別時數與交接班") || title.includes("薪資倍率與金額");
+      return title.includes("值別時數與交接班") || title.includes("選舉日待遇參數") || title.includes("薪資倍率與金額");
     }
     function parameterSettingsSelectInputIfNeeded(el){
       if(!parameterSettingsIsAutoSelectInput(el))return;
@@ -5539,6 +5542,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     function hasPartialLeaveHrText(dayInfo) {
       const record = manualRecords[dayInfo.day] || {};
+      if (dayInfo.electionAutoPublicLeave && Number(dayInfo.leaveHours || 0) > 0) return true;
       if (isCompoundSplitPartialLeave(dayInfo)) return true;
       return isLeaveCode(dayInfo.actualCode) && record.leaveHours !== undefined && Number(record.leaveHours) > 0;
     }
@@ -5552,6 +5556,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const record = manualRecords[dayInfo.day] || {};
       if (isCompoundLeaveCodeForDay(code, dayInfo.day) && hasCompoundSplitInput(dayInfo)) return getCompoundSplitTotalHours(dayInfo);
       if (record.leaveHours !== undefined && Number(record.leaveHours) > 0) return Number(record.leaveHours);
+      if (dayInfo.electionAutoPublicLeave && Number(dayInfo.leaveHours || 0) > 0) return Number(dayInfo.leaveHours || 0);
       if (record.code !== undefined) return Number(dayInfo.baseHours || 0);
       return Number(dayInfo.leaveHours || 0);
     }
@@ -5582,6 +5587,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       if (isLeaveCode(code)) {
         const label = getLabelForDayInfo(code, dayInfo);
+        if (dayInfo.electionAutoPublicLeave) {
+          const suffix = isElectionTwoThirdDay(dayInfo) ? "（二連一）" : "（二值）";
+          return `${label}${fmtHourWithUnit(getEffectiveLeaveHours(dayInfo))}${suffix}`;
+        }
         return hasPartialLeaveHrText(dayInfo) ? `${label}${fmtHourWithUnit(getEffectiveLeaveHours(dayInfo))}` : label;
       }
       if (isWorkCode(code)) {
@@ -5603,11 +5612,55 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (code > 9) return getLabelForDayInfo(code, dayInfo);
       return "";
     }
+    function getParameterElectionSettings() {
+      return (parameterSettings.calc && parameterSettings.calc.election) ? parameterSettings.calc.election : PARAMETER_DEFAULT_SETTINGS.calc.election;
+    }
+    function getElectionCyclePatternForDay(dayInfo) {
+      const year = Number(dayInfo.year);
+      const month = Number(dayInfo.month);
+      const day = Number(dayInfo.day);
+      const shiftGroup = document.getElementById("shiftGroup")?.value || getLinkedParameterShiftGroup();
+      const customRule = getEffectiveShiftRuleForDate(year, month, day, shiftGroup);
+      if (customRule && /^[0123]+$/.test(String(customRule.cyclePattern || ""))) {
+        return String(customRule.cyclePattern).split("").map(Number);
+      }
+      return CYCLE_CODES.slice();
+    }
+    function getElectionRuleValue(dayInfo) {
+      return getCodeValue(dayInfo.actualCode) || getCodeValue(dayInfo.baseCode) || (Number(dayInfo.baseCode) % 10) || 0;
+    }
+    function getElectionSameValueSequenceIndex(dayInfo, value) {
+      const pattern = getElectionCyclePatternForDay(dayInfo);
+      const index = Number(dayInfo.cycleIndex);
+      if (!Number.isFinite(index) || index < 0 || index >= pattern.length) return 1;
+      let start = index;
+      while (start > 0 && Number(pattern[start - 1]) === Number(value)) start -= 1;
+      return Math.max(1, index - start + 1);
+    }
+    function isElectionTwoThirdDay(dayInfo) {
+      return getElectionRuleValue(dayInfo) === 2 && getElectionSameValueSequenceIndex(dayInfo, 2) >= 3;
+    }
+    function isElectionThreeFirstDay(dayInfo) {
+      return getElectionRuleValue(dayInfo) === 3 && getElectionSameValueSequenceIndex(dayInfo, 3) <= 1;
+    }
+    function calcElectionDefaultPublicLeaveHours(dayInfo) {
+      if (!isElectionDay(dayInfo.day)) return 0;
+      const election = getParameterElectionSettings();
+      const value = getElectionRuleValue(dayInfo);
+      if (value !== 2) return 0;
+      return isElectionTwoThirdDay(dayInfo) ? Number(election.twoThirdDefaultLeaveHours || 0) : Number(election.twoFirstSecondDefaultLeaveHours || 0);
+    }
+    function shouldApplyElectionAutoPublicLeave(dayInfo, record) {
+      if (!isElectionDay(dayInfo.day)) return false;
+      if (Number(dayInfo.baseCode) !== 2) return false;
+      if (record && record.code !== undefined) return false;
+      return calcElectionDefaultPublicLeaveHours(dayInfo) > 0;
+    }
     function calcElectionD10AdjustmentMinutes(dayInfo) {
       if (!isElectionDay(dayInfo.day)) return 0;
-      const value = getCodeValue(dayInfo.actualCode);
-      if (value === 3) return 120;
-      if (value === 2) return -15;
+      const election = getParameterElectionSettings();
+      const value = getElectionRuleValue(dayInfo);
+      if (value === 3) return isElectionThreeFirstDay(dayInfo) ? Number(election.threeFirstD10AddMinutes || 0) : Number(election.threeLaterD10AddMinutes || 0);
       return 0;
     }
     function calcD10OvertimeMinutes(dayInfo) {
@@ -5687,10 +5740,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (![1, 2, 3, 4].includes(weight)) {
         weight = getCodeValue(code) || Number(baseCode) || 0;
       }
-      const isSpecialShiftDay = isElectionDay(dayInfo.day);
       const normalMap = { 1: 9, 2: 8, 3: 7, 4: 8 };
-      const specialMap = { 1: 8, 2: 8, 3: 7, 4: 8 };
-      return isSpecialShiftDay ? (specialMap[weight] || 0) : (normalMap[weight] || 0);
+      if (isElectionDay(dayInfo.day)) {
+        const electionValue = getElectionRuleValue(dayInfo) || weight;
+        if (electionValue === 2 || electionValue === 3) return Math.max(0, Number(dayInfo.baseHours || 0));
+        if (electionValue === 1) return 8;
+        if (Math.trunc(code) === 4) return 8;
+      }
+      return normalMap[weight] || 0;
     }
     function calcD11FullDayDeduct(dayInfo) {
       const code = Number(dayInfo.actualCode);
@@ -5752,6 +5809,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       if (isWorkCode(code)) {
         const value = getCodeValue(code);
+        if (isElectionDay(dayInfo.day) && [2, 3].includes(getElectionRuleValue(dayInfo))) {
+          return Math.max(0, calcD11BaseByWeight(dayInfo) - calcD11BackDeduct(dayInfo));
+        }
         const base = { 1: 9, 2: 8, 3: 7 }[value] || 0;
         return Math.max(0, base + calcD11PositiveAdjustment(dayInfo) - calcD11BackDeduct(dayInfo));
       }
@@ -6113,20 +6173,25 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       return 0;
     }
     function calcElectionBaseAdditionalHours(dayInfo) {
-      const actualValue = getCodeValue(dayInfo.actualCode);
-      const baseValue = getCodeValue(dayInfo.baseCode);
-      const value = actualValue || baseValue;
+      const value = getElectionRuleValue(dayInfo);
+      const d11Base = Math.max(0, Number(calcD11BaseByWeight(dayInfo) || 0));
       if (value === 1) return 8;
-      if (value === 2) return 6;
-      if (value === 3) return 7;
+      if (value === 2) {
+        const election = getParameterElectionSettings();
+        return isElectionTwoThirdDay(dayInfo) ? d11Base + Number(election.twoThirdNextOneHours || 0) : d11Base;
+      }
+      if (value === 3) {
+        return isElectionThreeFirstDay(dayInfo) ? Math.min(d11Base, 8) : d11Base;
+      }
       return 0;
     }
     function calcElectionLeaveDeductHours(dayInfo) {
       const baseHours = calcElectionBaseAdditionalHours(dayInfo);
       if (baseHours <= 0) return 0;
       if (isFullDayLeave(dayInfo)) return baseHours;
-      if (hasPartialLeaveHrText(dayInfo)) return Math.min(baseHours, Math.max(0, getEffectiveLeaveHours(dayInfo)));
-      return 0;
+      const defaultLeaveHours = calcElectionDefaultPublicLeaveHours(dayInfo);
+      const actualLeaveHours = hasPartialLeaveHrText(dayInfo) ? Math.max(0, getEffectiveLeaveHours(dayInfo)) : 0;
+      return Math.min(baseHours, Math.max(defaultLeaveHours, actualLeaveHours));
     }
     function calcElectionPayableAdditionalHours(dayInfo) {
       const baseHours = calcElectionBaseAdditionalHours(dayInfo);
@@ -6326,6 +6391,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const total = Math.round(getCompoundSplitTotalHours(dayInfo) * 2) / 2;
         return threshold > 0 && total >= threshold ? 0 : total;
       }
+      if (dayInfo.electionAutoPublicLeave && Number(dayInfo.leaveHours || 0) > 0) return Number(dayInfo.leaveHours || 0);
       return Number(dayInfo.leaveHours || 0);
     }
     function buildLeaveHourOptionsForDay(dayInfo, trainingClassSelected) {
@@ -6358,8 +6424,23 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const current = new Date(year, month - 1, day);
         const base = calcBaseShift(year, month, day, shiftGroup);
         const record = manualRecords[day] || {};
-        const actualCode = record.code !== undefined ? Number(record.code) : base.baseCode;
-        const leaveHours = record.leaveHours !== undefined ? Number(record.leaveHours) : 0;
+        let actualCode = record.code !== undefined ? Number(record.code) : base.baseCode;
+        let leaveHours = record.leaveHours !== undefined ? Number(record.leaveHours) : 0;
+        const autoPublicLeaveProbe = {
+          day,
+          month,
+          year,
+          date: current,
+          baseCode: base.baseCode,
+          baseHours: base.baseHours,
+          cycleIndex: base.cycleIndex,
+          actualCode,
+          leaveHours
+        };
+        if (shouldApplyElectionAutoPublicLeave(autoPublicLeaveProbe, record)) {
+          actualCode = 4.2;
+          leaveHours = calcElectionDefaultPublicLeaveHours({ ...autoPublicLeaveProbe, actualCode: base.baseCode });
+        }
         const rawDayInfo = {
           day,
           month,
@@ -6374,6 +6455,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           leaveHours,
           otherLabel: record.otherLabel || "",
           compoundSplit: record.compoundSplit || null,
+          electionAutoPublicLeave: actualCode === 4.2 && record.code === undefined,
           holidayName: calendarData.holidayMap.get(dateKey(year, month, day)) || "",
           isWeekend: current.getDay() === 0 || current.getDay() === 6
         };
@@ -7008,6 +7090,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         sel.addEventListener("change", function() {
           const day = Number(this.dataset.day);
           if (!manualRecords[day]) manualRecords[day] = {};
+          const currentDayInfo = buildDays().find(item => Number(item.day) === day);
+          if (currentDayInfo && currentDayInfo.electionAutoPublicLeave && manualRecords[day].code === undefined) manualRecords[day].code = 4.2;
           if (this.value === "class") {
             manualRecords[day].trainingMode = "class";
             delete manualRecords[day].leaveHours;
@@ -8641,6 +8725,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   修正紀錄 2026-06-15：選舉日部分請假待遇修正。
   規則：輪值人員選舉日待遇先依原值別取得基準時數，再扣除選舉公假／部分請假時數；全日請假扣至 0HR。
   範例：二值選舉日基準 6HR，請公假 1HR，選舉日待遇為 5HR。
+-->
+
+<!--
+  修正紀錄 2026-06-21：選舉日待遇參數最小化與二值自動公假。
+  內容：參數設定僅保留有效時間、三值加班分鐘、二值預設公假、二連一補入；二值選舉日由預設公假自動寫入主月曆，D10回歸部分請假邏輯，D11回歸班表工時邏輯。
 -->
 </body>
 </html>
