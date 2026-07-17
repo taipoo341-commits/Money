@@ -679,13 +679,20 @@
     @media (max-width: 720px) {
       .parameter-election-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
       .election-rule-header,
-      .parameter-settings-row.election-rule-row { grid-template-columns: 76px 60px 62px 54px 54px 48px; gap: 4px; }
+      .parameter-settings-row.election-rule-row { grid-template-columns: 68px 58px minmax(52px, 1fr) 46px 52px 48px; gap: 4px; }
       .election-rule-header { display: grid; padding: 0 4px 6px; font-size: 9px; letter-spacing: 0; line-height: 1.25; }
       .parameter-settings-row.election-rule-row { padding: 7px 4px !important; }
       .parameter-settings-row.election-rule-row .parameter-settings-select,
       .parameter-settings-row.election-rule-row .parameter-settings-input,
       .parameter-settings-row.election-rule-row .parameter-row-toggle-btn,
       .parameter-settings-row.election-rule-row .parameter-settings-small-btn { min-width: 0; width: 100%; height: 34px; padding: 3px 2px; font-size: 11px; }
+      .special-record.with-delete-space:has(.closure-type-control) { grid-template-columns: minmax(0, 1fr) 74px !important; gap: 7px !important; }
+      .special-record.with-delete-space:has(.closure-type-control) .special-date-btn { grid-column: 1; grid-row: 1; }
+      .special-record.with-delete-space:has(.closure-type-control) .special-date-reset-btn { grid-column: 2; grid-row: 1; }
+      .special-record.with-delete-space:has(.closure-type-control) .closure-type-control { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+      .special-record.with-delete-space:has(.closure-type-control) .special-delete-btn { grid-column: 1 / -1; grid-row: 3; }
+      .closure-custom-times { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; }
+      .closure-custom-time-input { min-width: 0; font-size: 13px; }
     }
     .substitute-top-panel {
       margin-bottom: 16px;
