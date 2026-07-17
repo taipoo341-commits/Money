@@ -666,6 +666,17 @@
       text-align: center;
       font-size: 13px;
     }
+    .closure-type-control { order: 2; min-width: 0; }
+    .closure-type-control .special-type-select { width: 100%; }
+    .closure-custom-times { display: flex; align-items: center; gap: 4px; margin-top: 5px; }
+    .closure-custom-time-input { width: 100%; min-width: 0; height: 30px; border: 1px solid rgba(103, 232, 249, 0.3); border-radius: 7px; background: rgba(0, 0, 0, 0.36); color: #e2e8f0; padding: 3px 5px; text-align: center; font-size: 11px; font-weight: 800; }
+    .closure-custom-times span { color: #94a3b8; font-size: 11px; white-space: nowrap; }
+    .election-rule-header,
+    .parameter-settings-row.election-rule-row { display: grid !important; grid-template-columns: 1.1fr .65fr .8fr 1.4fr .85fr .7fr; gap: 8px; align-items: center; }
+    .election-rule-header { padding: 0 10px 7px; color: #94a3b8; font-size: 11px; font-weight: 900; letter-spacing: .04em; }
+    .election-rule-header div { text-align: center; }
+    .election-rule-header div:last-child { font-size: 0; }
+    @media (max-width: 720px) { .election-rule-header { display: none; } .parameter-settings-row.election-rule-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .substitute-top-panel {
       margin-bottom: 16px;
       padding: 14px 18px;
@@ -3806,7 +3817,7 @@
       <section class="panel special-panel">
         <button id="specialToggle" class="special-toggle" type="button">
           <div>
-            <div>天災與選舉日設定</div>
+            <div>天災、選舉與加班設定</div>
             <div id="specialSummary" class="special-summary">未啟用</div>
           </div>
           <div id="specialToggleIcon">＋</div>
@@ -3829,7 +3840,7 @@
             </div>
             <div class="special-card">
               <div class="special-title-row">
-                <div class="special-title">教育訓練</div>
+                <div class="special-title">額外加班</div>
                 <button id="trainingAddBtn" class="special-add-btn" type="button">新增</button>
               </div>
               <div id="trainingRecordList" class="special-record-list"></div>
@@ -4132,7 +4143,7 @@
 <section class="parameter-settings-section" data-parameter-section="shiftRules"><div class="parameter-settings-section-title"><span>輪班週期覆寫</span><button id="parameterAddShiftRuleBtn" class="parameter-settings-add-btn" type="button">新增週期</button></div><div class="parameter-settings-note">週期輸入框點選後會全選，可直接覆蓋輸入。離開輸入框後更新定錨格選單。</div><div id="parameterShiftRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="holidayOverrides"><div class="parameter-settings-section-title"><span>行事曆覆寫</span><button id="parameterAddHolidayOverrideBtn" class="parameter-settings-add-btn" type="button">新增日期</button></div><div id="parameterHolidayOverrideList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="hours"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><button id="parameterHoursEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="hours">未啟用</button><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid parameter-hours-inline-grid"><label class="parameter-settings-field"><span>0空班(HR)</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1一值(HR)</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2二值(HR)</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3三值(HR)</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>交接班(分)</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
-<section class="parameter-settings-section" data-parameter-section="election"><div class="parameter-settings-section-title"><span>選舉日待遇參數</span></div><div class="parameter-settings-note">二值選舉日公假會依下方預設公假時數自動寫入主月曆；D10 由原本部分請假邏輯自然產生，D11 仍由原本班表工時邏輯計算。</div><div class="parameter-settings-grid parameter-election-grid"><label class="parameter-settings-field"><span>選舉日開始時間</span><input id="parameterElectionStartTime" class="parameter-settings-input" type="text" inputmode="text"></label><label class="parameter-settings-field"><span>選舉日結束時間</span><input id="parameterElectionEndTime" class="parameter-settings-input" type="text" inputmode="text"></label><label class="parameter-settings-field"><span>三值第一天加班分鐘（D10）</span><input id="parameterElectionThreeFirstD10Minutes" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>三值第二／第三天加班分鐘（D10）</span><input id="parameterElectionThreeLaterD10Minutes" class="parameter-settings-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>二值第一／第二天預設公假</span><input id="parameterElectionTwoFirstSecondDefaultLeaveHours" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>二值第三天／二連一預設公假</span><input id="parameterElectionTwoThirdDefaultLeaveHours" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>二值第三天／二連一接一值補入</span><input id="parameterElectionTwoThirdNextOneHours" class="parameter-settings-input" type="text" inputmode="decimal"></label></div></section>
+<section class="parameter-settings-section" data-parameter-section="election"><div class="parameter-settings-section-title"><span>選舉日自訂規則</span><button id="parameterAddElectionRuleBtn" class="parameter-settings-add-btn" type="button">新增規則</button></div><div class="parameter-settings-note">時間可輸入 0800、800 或 08:00，離開欄位後會統一顯示。規則依目前輪班週期中「某值別第幾次出現」套用，不需自行數週期格數。</div><div class="parameter-settings-grid parameter-election-grid"><label class="parameter-settings-field"><span>選舉日開始時間</span><input id="parameterElectionStartTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="0000"></label><label class="parameter-settings-field"><span>選舉日結束時間</span><input id="parameterElectionEndTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="2400"></label></div><div id="parameterElectionPatternHint" class="parameter-settings-note"></div><div id="parameterElectionRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="salary"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><button id="parameterSalaryEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="salary">未啟用</button></div><div class="parameter-settings-grid parameter-salary-rate-grid"><label class="parameter-settings-field"><span>超時2HR以內的倍數，請填分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>超時2~8HR內的倍數，請填分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>超時8HR以上的倍數，請填分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six parameter-salary-fee-grid"><label class="parameter-settings-field"><span>初夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label></div></section>
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存並套用</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
 <div id="parameterDateModal" class="parameter-date-modal" aria-hidden="true"><div class="parameter-date-card"><div class="parameter-date-head"><button id="parameterDatePrevBtn" class="parameter-date-nav" type="button">‹</button><div id="parameterDateTitle" class="parameter-date-title">選擇日期</div><button id="parameterDateNextBtn" class="parameter-date-nav" type="button">›</button></div><div id="parameterDateWeekGrid" class="parameter-date-week-grid"></div><div id="parameterDateCalendarGrid" class="parameter-date-calendar-grid"></div><div class="parameter-date-actions"><button id="parameterDateClearBtn" class="parameter-date-action-btn" type="button">清除日期</button><button id="parameterDateCancelBtn" class="parameter-date-action-btn" type="button">取消</button></div></div></div>
@@ -4179,6 +4190,106 @@
     </div>
   </div>
   <script>
+    /* IndexedDB 持久化層：保留既有同步 UI 流程，並將本機資料安全鏡像至 IndexedDB。 */
+    const overtimeIndexedDb = (function () {
+      const DB_NAME = "personalOvertimeIndexedDb";
+      const DB_VERSION = 1;
+      const STORE_NAME = "settings";
+      let databasePromise = null;
+      let enabled = typeof window.indexedDB !== "undefined";
+
+      function isManagedKey(key) {
+        return String(key || "").indexOf("personalOvertime") === 0;
+      }
+
+      function open() {
+        if (!enabled) return Promise.reject(new Error("此瀏覽器不支援 IndexedDB。"));
+        if (databasePromise) return databasePromise;
+        databasePromise = new Promise(function (resolve, reject) {
+          const request = indexedDB.open(DB_NAME, DB_VERSION);
+          request.onupgradeneeded = function () {
+            const db = request.result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) db.createObjectStore(STORE_NAME, { keyPath: "key" });
+          };
+          request.onsuccess = function () { resolve(request.result); };
+          request.onerror = function () { reject(request.error || new Error("無法開啟 IndexedDB。")); };
+        }).catch(function (error) {
+          enabled = false;
+          console.warn("IndexedDB 無法使用，將暫時沿用 localStorage。", error);
+          throw error;
+        });
+        return databasePromise;
+      }
+
+      async function getAll() {
+        const db = await open();
+        return new Promise(function (resolve, reject) {
+          const request = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).getAll();
+          request.onsuccess = function () { resolve(request.result || []); };
+          request.onerror = function () { reject(request.error || new Error("無法讀取 IndexedDB。")); };
+        });
+      }
+
+      async function set(key, value) {
+        if (!enabled || !isManagedKey(key)) return;
+        const db = await open();
+        return new Promise(function (resolve, reject) {
+          const request = db.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME).put({ key: String(key), value: String(value), updatedAt: new Date().toISOString() });
+          request.onsuccess = function () { resolve(); };
+          request.onerror = function () { reject(request.error || new Error("無法寫入 IndexedDB。")); };
+        });
+      }
+
+      async function remove(key) {
+        if (!enabled || !isManagedKey(key)) return;
+        const db = await open();
+        return new Promise(function (resolve, reject) {
+          const request = db.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME).delete(String(key));
+          request.onsuccess = function () { resolve(); };
+          request.onerror = function () { reject(request.error || new Error("無法刪除 IndexedDB 資料。")); };
+        });
+      }
+
+      async function hydrate() {
+        if (!enabled) return { source: "localStorage", count: 0 };
+        const records = await getAll();
+        if (records.length) {
+          records.forEach(function (record) { localStorage.setItem(record.key, record.value); });
+          return { source: "indexedDB", count: records.length };
+        }
+        const legacy = [];
+        Object.keys(localStorage).forEach(function (key) {
+          if (isManagedKey(key)) legacy.push({ key: key, value: localStorage.getItem(key), updatedAt: new Date().toISOString() });
+        });
+        if (legacy.length) {
+          const db = await open();
+          await new Promise(function (resolve, reject) {
+            const transaction = db.transaction(STORE_NAME, "readwrite");
+            legacy.forEach(function (record) { transaction.objectStore(STORE_NAME).put(record); });
+            transaction.oncomplete = resolve;
+            transaction.onerror = function () { reject(transaction.error || new Error("無法搬移既有本機資料。")); };
+          });
+        }
+        return { source: "localStorage-migrated", count: legacy.length };
+      }
+
+      function installLocalStorageMirror() {
+        const nativeSetItem = Storage.prototype.setItem;
+        const nativeRemoveItem = Storage.prototype.removeItem;
+        Storage.prototype.setItem = function (key, value) {
+          nativeSetItem.call(this, key, value);
+          if (this === localStorage && isManagedKey(key)) set(key, value).catch(function (error) { console.warn("IndexedDB 鏡像寫入失敗", error); });
+        };
+        Storage.prototype.removeItem = function (key) {
+          nativeRemoveItem.call(this, key);
+          if (this === localStorage && isManagedKey(key)) remove(key).catch(function (error) { console.warn("IndexedDB 鏡像刪除失敗", error); });
+        };
+      }
+
+      return { hydrate: hydrate, installLocalStorageMirror: installLocalStorageMirror, isEnabled: function () { return enabled; } };
+    })();
+    overtimeIndexedDb.installLocalStorageMirror();
+
     const SHIFT_OFFSETS = { A: 0, B: 9, C: 6, D: 3 };
     const CYCLE_CODES = [2, 2, 2, 1, 1, 1, 0, 0, 3, 3, 3, 0];
     const CYCLE_HOURS = [8, 8, 6.5, 9, 9, 9, 0, 0, 8.5, 7, 7, 0];
@@ -4194,7 +4305,8 @@
       morning: "上午(前日22時前)",
       morningSameDay: "上午(當日4時30分前)",
       afternoon: "下午",
-      night: "晚上"
+      night: "晚上",
+      custom: "自訂起訖時間"
     };
     const CLOSURE_INTERVALS = {
       full: [0, 24],
@@ -4204,6 +4316,30 @@
       afternoon: [13.5, 24],
       night: [18, 24]
     };
+    function normalizeClosureTime(value, fallback) {
+      const raw = String(value || "").trim().replace(/[^0-9:]/g, "");
+      if (!raw) return fallback;
+      const digits = raw.includes(":") ? raw.replace(":", "") : raw;
+      if (!/^\d{3,4}$/.test(digits)) return fallback;
+      const padded = digits.padStart(4, "0");
+      const hours = Number(padded.slice(0, 2));
+      const minutes = Number(padded.slice(2));
+      if (hours < 0 || hours > 24 || minutes < 0 || minutes > 59 || (hours === 24 && minutes !== 0)) return fallback;
+      return String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0");
+    }
+    function closureTimeToHours(value, fallback) {
+      const normalized = normalizeClosureTime(value, fallback);
+      const parts = normalized.split(":").map(Number);
+      return parts[0] + parts[1] / 60;
+    }
+    function getClosureInterval(record) {
+      if (!record || record.type === "none") return null;
+      if (record.type !== "custom") return CLOSURE_INTERVALS[record.type] || null;
+      if (!String(record.startTime || "").trim() || !String(record.endTime || "").trim()) return null;
+      const start = closureTimeToHours(record.startTime, "01:00");
+      const end = closureTimeToHours(record.endTime, "24:00");
+      return end > start ? [start, end] : null;
+    }
     const CODE_LABELS = {
       0: "空班", 1: "一值", 2: "二值", 3: "三值",
       4: "受訓", 4.1: "出差", 4.2: "公假", 4.3: "公出",
@@ -4309,10 +4445,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     }
     
     const PARAMETER_SETTINGS_STORAGE_KEY = "personalOvertimeParameterSettings";
-    const PARAMETER_DEFAULT_SETTINGS = { version: 5, sections: { shiftRulesEnabled: true, holidayOverridesEnabled: true }, shiftRules: [], holidayOverrides: [], calc: { hoursEnabled: false, salaryEnabled: false, codeHours: { "0": 0, "1": 9, "2": 8, "3": 7 }, hourExceptions: [], handoverMinutes: 30, election: { effectiveStart: "00:00", effectiveEnd: "24:00", threeFirstD10AddMinutes: 30, threeLaterD10AddMinutes: 120, twoFirstSecondDefaultLeaveHours: 2, twoThirdDefaultLeaveHours: 0.5, twoThirdNextOneHours: 1.25 }, rates: { code7: "4/3", code8: "5/3", code6: "8/3" }, fees: { initialNight: 250, deepNight: 400, breakfast: 75, lunchDinner: 150, redEnvelope: 600, reunionDinner: 800 } } };
+    const PARAMETER_DEFAULT_SETTINGS = { version: 7, sections: { shiftRulesEnabled: true, holidayOverridesEnabled: true }, shiftRules: [], holidayOverrides: [], calc: { hoursEnabled: false, salaryEnabled: false, codeHours: { "0": 0, "1": 9, "2": 8, "3": 7 }, hourExceptions: [], handoverMinutes: 30, election: { effectiveStart: "00:00", effectiveEnd: "24:00", rules: [{id:"e3-1",shiftValue:3,occurrence:1,d10Minutes:30,publicLeaveHours:0,enabled:true},{id:"e3-2",shiftValue:3,occurrence:2,d10Minutes:120,publicLeaveHours:0,enabled:true},{id:"e3-3",shiftValue:3,occurrence:3,d10Minutes:120,publicLeaveHours:0,enabled:true},{id:"e2-1",shiftValue:2,occurrence:1,d10Minutes:0,publicLeaveHours:2,enabled:true},{id:"e2-2",shiftValue:2,occurrence:2,d10Minutes:0,publicLeaveHours:2,enabled:true},{id:"e2-3",shiftValue:2,occurrence:3,d10Minutes:0,publicLeaveHours:0.5,enabled:true}] }, rates: { code7: "4/3", code8: "5/3", code6: "8/3" }, fees: { initialNight: 250, deepNight: 400, breakfast: 75, lunchDinner: 150, redEnvelope: 600, reunionDinner: 800 } } };
     let parameterSettings = JSON.parse(JSON.stringify(PARAMETER_DEFAULT_SETTINGS));
     let parameterDatePickerState = { target: "", index: -1, year: 2026, month: 1 };
     function deepCloneParameter(obj){ return JSON.parse(JSON.stringify(obj || PARAMETER_DEFAULT_SETTINGS)); }
+    function normalizeCompactTime(value, fallback){const digits=String(value??"").trim().replace(/[^0-9:]/g,"");if(!digits)return fallback;const raw=digits.includes(":")?digits.replace(":",""):digits; if(!/^\d{3,4}$/.test(raw))return fallback;const padded=raw.padStart(4,"0"),h=Number(padded.slice(0,2)),m=Number(padded.slice(2));return h>=0&&h<=24&&m>=0&&m<60&&(h<24||m===0)?String(h).padStart(2,"0")+":"+String(m).padStart(2,"0"):fallback;}
+    function legacyElectionRules(e){return [{id:"e3-1",shiftValue:3,occurrence:1,d10Minutes:Math.max(0,sanitizeParameterNumber(e.threeFirstD10AddMinutes,30)),publicLeaveHours:0,enabled:true},{id:"e3-2",shiftValue:3,occurrence:2,d10Minutes:Math.max(0,sanitizeParameterNumber(e.threeLaterD10AddMinutes,120)),publicLeaveHours:0,enabled:true},{id:"e3-3",shiftValue:3,occurrence:3,d10Minutes:Math.max(0,sanitizeParameterNumber(e.threeLaterD10AddMinutes,120)),publicLeaveHours:0,enabled:true},{id:"e2-1",shiftValue:2,occurrence:1,d10Minutes:Math.max(0,sanitizeParameterNumber(e.twoFirstSecondD10AddMinutes,0)),publicLeaveHours:Math.max(0,sanitizeParameterNumber(e.twoFirstSecondDefaultLeaveHours,2)),enabled:true},{id:"e2-2",shiftValue:2,occurrence:2,d10Minutes:Math.max(0,sanitizeParameterNumber(e.twoFirstSecondD10AddMinutes,0)),publicLeaveHours:Math.max(0,sanitizeParameterNumber(e.twoFirstSecondDefaultLeaveHours,2)),enabled:true},{id:"e2-3",shiftValue:2,occurrence:3,d10Minutes:Math.max(0,sanitizeParameterNumber(e.twoThirdD10AddMinutes,0)),publicLeaveHours:Math.max(0,sanitizeParameterNumber(e.twoThirdDefaultLeaveHours,0.5)),enabled:true}];}
     function getLinkedParameterShiftGroup(){ return document.getElementById("shiftGroup")?.value || "D"; }
     function sanitizeParameterNumber(value, fallback){ const t=String(value ?? "").trim(); if(t==="") return fallback; const n = Number(t); return Number.isFinite(n) ? n : fallback; }
     function normalizeIsoDateText(value){ const t=String(value||"").trim(); const m=t.match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return ""; const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3])); return d.getFullYear()==Number(m[1])&&d.getMonth()+1==Number(m[2])&&d.getDate()==Number(m[3])?t:""; }
@@ -4333,7 +4471,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       n.calc.rates={code7:String(calc.rates?.code7||"4/3"),code8:String(calc.rates?.code8||"5/3"),code6:String(calc.rates?.code6||"8/3")};
       n.calc.fees={initialNight:Math.max(0,sanitizeParameterNumber(calc.fees?.initialNight,250)),deepNight:Math.max(0,sanitizeParameterNumber(calc.fees?.deepNight,400)),breakfast:Math.max(0,sanitizeParameterNumber(calc.fees?.breakfast,75)),lunchDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.lunchDinner,150)),redEnvelope:Math.max(0,sanitizeParameterNumber(calc.fees?.redEnvelope,600)),reunionDinner:Math.max(0,sanitizeParameterNumber(calc.fees?.reunionDinner,800))};
       const election=calc.election&&typeof calc.election==="object"?calc.election:{};
-      n.calc.election={effectiveStart:String(election.effectiveStart||"00:00"),effectiveEnd:String(election.effectiveEnd||"24:00"),threeFirstD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeFirstD10AddMinutes,30)),threeLaterD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeLaterD10AddMinutes,120)),twoFirstSecondDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoFirstSecondDefaultLeaveHours,2)),twoThirdDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoThirdDefaultLeaveHours,0.5)),twoThirdNextOneHours:Math.max(0,sanitizeParameterNumber(election.twoThirdNextOneHours,1.25))};
+      n.calc.election={effectiveStart:String(election.effectiveStart||"00:00"),effectiveEnd:String(election.effectiveEnd||"24:00"),twoFirstSecondD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.twoFirstSecondD10AddMinutes,0)),twoThirdD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.twoThirdD10AddMinutes,0)),threeFirstD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeFirstD10AddMinutes,30)),threeLaterD10AddMinutes:Math.max(0,sanitizeParameterNumber(election.threeLaterD10AddMinutes,120)),twoFirstSecondDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoFirstSecondDefaultLeaveHours,2)),twoThirdDefaultLeaveHours:Math.max(0,sanitizeParameterNumber(election.twoThirdDefaultLeaveHours,0.5)),twoThirdNextOneHours:Math.max(0,sanitizeParameterNumber(election.twoThirdNextOneHours,1.25))};
+      n.calc.election.rules=(Array.isArray(election.rules)?election.rules:legacyElectionRules(election)).map((r,i)=>({id:String(r.id||`er-${Date.now()}-${i}`),shiftValue:Math.max(0,Math.min(3,Number(r.shiftValue||0))),occurrence:Math.max(1,Number(r.occurrence||1)),d10Minutes:Math.max(0,sanitizeParameterNumber(r.d10Minutes,0)),publicLeaveHours:Math.max(0,sanitizeParameterNumber(r.publicLeaveHours,0)),enabled:r.enabled!==false}));
       n.calc.hourExceptions=Array.isArray(calc.hourExceptions)?calc.hourExceptions.map((x,i)=>({id:String(x.id||`hex-${Date.now()}-${i}`),position:Math.max(1,Number(x.position||1)),hours:sanitizeParameterNumber(x.hours,0),enabled:x.enabled===true})):[];
       if(Array.isArray(s.shiftRules)) s.shiftRules.forEach((x,i)=>{const ed=normalizeIsoDateText(x.effectiveDate); const pat=String(x.cyclePattern||"").replace(/\s+/g,""); if(!ed||!/^[0123]+$/.test(pat)) return; const ad=normalizeIsoDateText(x.anchorDate)||ed; n.shiftRules.push({id:String(x.id||`shift-${Date.now()}-${i}`),name:String(x.name||"自訂輪班週期").slice(0,30),shiftGroup:["A","B","C","D"].includes(x.shiftGroup)?x.shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:ed,cyclePattern:pat,anchorDate:ad,anchorPosition:Math.max(1,Math.min(pat.length,Number(x.anchorPosition||1))),enabled:x.enabled===true});});
       if(Array.isArray(s.holidayOverrides)) s.holidayOverrides.forEach((x,i)=>{const d=normalizeIsoDateText(x.date); if(!d) return; const a=x.action==="remove"?"remove":"add"; n.holidayOverrides.push({id:String(x.id||`hol-${Date.now()}-${i}`),date:d,action:a,name:String(x.name||(a==="remove"?"取消放假日":"臨時國定假日")).slice(0,30),includeNationalHours:x.includeNationalHours!==false,includeHolidayBenefit:x.includeHolidayBenefit!==false,enabled:x.enabled===true});});
@@ -4394,9 +4533,15 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function parameterSettingsEscapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
     function parameterPatternPositionOptions(pattern,sel){const clean=String(pattern||"").replace(/\s+/g,""); const len=Math.max(1,clean.length||1); const s=Math.max(1,Math.min(len,Number(sel||1))); let h=""; for(let i=1;i<=len;i++){h+=`<option value="${i}" ${i===s?"selected":""}>第${i}格 = ${clean.charAt(i-1)||"-"}</option>`;} return h;}
     function parameterDateButtonLabel(v){return normalizeIsoDateText(v)||"選擇日期";}
+    function getElectionReferencePattern(){const y=Number(document.getElementById("rocYear")?.value||115)+1911,m=Number(document.getElementById("month")?.value||1),g=getLinkedParameterShiftGroup(),rule=getEffectiveShiftRuleForDate(y,m,1,g);return rule&&/^[0123]+$/.test(rule.cyclePattern)?String(rule.cyclePattern).split("").map(Number):CYCLE_CODES.slice();}
+    function parameterElectionRuleRender(){const list=document.getElementById("parameterElectionRuleList"),hint=document.getElementById("parameterElectionPatternHint");if(!list)return;const pattern=getElectionReferencePattern(),rules=parameterSettings.calc.election.rules||[];if(hint)hint.textContent="目前參考週期："+pattern.join(" ");const occurrenceOptions=(value,selected)=>{const count=pattern.filter(v=>v===Number(value)).length;const labels=["第一天","第二天","第三天","第四天","第五天","第六天","第七天","第八天","第九天","第十天"];return Array.from({length:Math.max(1,count)},(_,i)=>`<option value="${i+1}" ${Number(selected)===i+1?"selected":""}>${labels[i]||`第 ${i+1} 天`}</option>`).join("");};const header=`<div class="election-rule-header"><div>值別</div><div>順序</div><div>額外加班(分鐘)</div><div>公假(小時)</div><div>狀態</div><div>操作</div></div>`;list.innerHTML=rules.length?header+rules.map((r,i)=>`<div class="parameter-settings-row election-rule-row" data-election-rule-index="${i}"><select class="parameter-settings-select" data-election-rule-field="shiftValue"><option value="0" ${r.shiftValue===0?"selected":""}>空班</option><option value="1" ${r.shiftValue===1?"selected":""}>一值</option><option value="2" ${r.shiftValue===2?"selected":""}>二值</option><option value="3" ${r.shiftValue===3?"selected":""}>三值</option></select><select class="parameter-settings-select" data-election-rule-field="occurrence">${occurrenceOptions(r.shiftValue,r.occurrence)}</select><input class="parameter-settings-input" data-election-rule-field="d10Minutes" inputmode="numeric" value="${r.d10Minutes}" aria-label="額外加班(分鐘)"><input class="parameter-settings-input" data-election-rule-field="publicLeaveHours" inputmode="decimal" value="${r.publicLeaveHours}" aria-label="公假(小時)"><button class="parameter-row-toggle-btn ${r.enabled?"is-enabled":""}" type="button" data-election-rule-toggle="${i}">${r.enabled?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-election-rule-remove="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立選舉日規則。</div>`;list.querySelectorAll("select,input").forEach(el=>el.addEventListener("change",()=>{parameterSettings=parameterSettingsReadFromUi();parameterElectionRuleRender();}));list.querySelectorAll("[data-election-rule-toggle]").forEach(btn=>btn.addEventListener("click",()=>{parameterSettings=parameterSettingsReadFromUi();const r=parameterSettings.calc.election.rules[Number(btn.dataset.electionRuleToggle)];if(r)r.enabled=!r.enabled;parameterElectionRuleRender();}));list.querySelectorAll("[data-election-rule-remove]").forEach(btn=>btn.addEventListener("click",()=>{parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.election.rules.splice(Number(btn.dataset.electionRuleRemove),1);parameterElectionRuleRender();}));}
+    function parameterAddElectionRule(){parameterSettings=parameterSettingsReadFromUi();parameterSettings.calc.election.rules.push({id:`er-${Date.now()}`,shiftValue:3,occurrence:1,d10Minutes:0,publicLeaveHours:0,enabled:true});parameterElectionRuleRender();}
+    document.addEventListener("click",function(event){if(event.target&&event.target.id==="parameterAddElectionRuleBtn")parameterAddElectionRule();});
+    document.addEventListener("focusin",function(event){if(event.target&&event.target.matches(".parameter-time-input"))event.target.select();});
+    document.addEventListener("change",function(event){if(event.target&&event.target.matches(".parameter-time-input"))event.target.value=normalizeCompactTime(event.target.value,event.target.id.includes("Start")?"00:00":"24:00");});
     function parameterSettingsRender(){const sg=getLinkedParameterShiftGroup(); const sl=document.getElementById("parameterShiftRuleList"),hl=document.getElementById("parameterHolidayOverrideList"),el=document.getElementById("parameterHourExceptionList"); if(sl)sl.innerHTML=parameterSettings.shiftRules.length?parameterSettings.shiftRules.map((r,i)=>`<div class="parameter-settings-row" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}"><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.effectiveDate)}">${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}"><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-anchor" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(r.anchorDate)}">${parameterDateButtonLabel(r.anchorDate)}</button><select class="parameter-settings-select" data-parameter-field="shift-anchor-position">${parameterPatternPositionOptions(r.cyclePattern,r.anchorPosition)}</select><button class="parameter-row-toggle-btn ${r.enabled===true?"is-enabled":""}" type="button" data-parameter-field="shift-enabled" data-parameter-row-toggle="shift" data-parameter-enabled="${r.enabled===true?"true":"false"}" aria-pressed="${r.enabled===true?"true":"false"}">${r.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-shift="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>`; if(hl)hl.innerHTML=parameterSettings.holidayOverrides.length?parameterSettings.holidayOverrides.map((x,i)=>`<div class="parameter-settings-row holiday-row" data-parameter-holiday-index="${i}"><button class="parameter-date-btn" type="button" data-parameter-date-target="holiday-date" data-parameter-date-index="${i}" data-parameter-date-value="${parameterSettingsEscapeHtml(x.date)}">${parameterDateButtonLabel(x.date)}</button><select class="parameter-settings-select" data-parameter-field="holiday-action" onchange="parameterHolidayActionChanged(this)"><option value="add" ${x.action!=="remove"?"selected":""}>新增放假日</option><option value="remove" ${x.action==="remove"?"selected":""}>取消放假日</option></select><input class="parameter-settings-input" data-parameter-field="holiday-name" value="${parameterSettingsEscapeHtml(x.name)}" onclick="parameterSelectAllInput(this)" onfocus="parameterSelectAllInput(this)"><button class="parameter-national-toggle-btn ${x.includeNationalHours!==false&&x.action!=="remove"?"is-national":""} ${x.action==="remove"?"parameter-hidden":""}" type="button" data-parameter-field="holiday-national" data-parameter-national="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}" aria-pressed="${x.includeNationalHours!==false&&x.action!=="remove"?"true":"false"}">${x.includeNationalHours!==false&&x.action!=="remove"?"國定假日":"非國定"}</button><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="holiday-enabled" data-parameter-row-toggle="holiday" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-holiday="${i}">刪除</button></div>`).join(""):`<div class="parameter-settings-note">尚未建立行事曆覆寫。</div>`; if(el){const hourExceptionRows=(parameterSettings.calc.hourExceptions||[]).map((x,i)=>`<div class="parameter-settings-row exception-row" data-parameter-hour-exception-index="${i}"><label class="parameter-settings-field parameter-exception-anchor-field"><span>定錨格</span><input class="parameter-settings-input" data-parameter-field="exception-position" type="text" inputmode="numeric" value="${x.position}"></label><label class="parameter-settings-field parameter-exception-hours-field"><span>時數</span><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}"></label><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="exception-enabled" data-parameter-row-toggle="exception" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button></div>`).join("");el.innerHTML=hourExceptionRows?`<div class="parameter-exception-header-row" aria-hidden="true"><div>定錨格</div><div>時數</div><div></div><div></div></div>${hourExceptionRows}`:`<div class="parameter-settings-note">尚未建立時數例外。</div>`;} fillParameterCalcInputs();}
-    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; updateParameterSectionControls(); set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);const election=c.election||PARAMETER_DEFAULT_SETTINGS.calc.election;set("parameterElectionStartTime",election.effectiveStart||"00:00");set("parameterElectionEndTime",election.effectiveEnd||"24:00");set("parameterElectionThreeFirstD10Minutes",election.threeFirstD10AddMinutes);set("parameterElectionThreeLaterD10Minutes",election.threeLaterD10AddMinutes);set("parameterElectionTwoFirstSecondDefaultLeaveHours",election.twoFirstSecondDefaultLeaveHours);set("parameterElectionTwoThirdDefaultLeaveHours",election.twoThirdDefaultLeaveHours);set("parameterElectionTwoThirdNextOneHours",election.twoThirdNextOneHours);set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);}
-    function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); if(!n.sections||typeof n.sections!=="object")n.sections={shiftRulesEnabled:true,holidayOverridesEnabled:true}; n.sections.shiftRulesEnabled=true; n.sections.holidayOverridesEnabled=true; n.calc.hoursEnabled=parameterSettings.calc?.hoursEnabled===true; n.calc.salaryEnabled=parameterSettings.calc?.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.election={effectiveStart:document.getElementById("parameterElectionStartTime")?.value||"00:00",effectiveEnd:document.getElementById("parameterElectionEndTime")?.value||"24:00",threeFirstD10AddMinutes:sanitizeParameterNumber(document.getElementById("parameterElectionThreeFirstD10Minutes")?.value,30),threeLaterD10AddMinutes:sanitizeParameterNumber(document.getElementById("parameterElectionThreeLaterD10Minutes")?.value,120),twoFirstSecondDefaultLeaveHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoFirstSecondDefaultLeaveHours")?.value,2),twoThirdDefaultLeaveHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoThirdDefaultLeaveHours")?.value,0.5),twoThirdNextOneHours:sanitizeParameterNumber(document.getElementById("parameterElectionTwoThirdNextOneHours")?.value,1.25)}; n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:parameterRowToggleIsEnabled(row,"shift-enabled")})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?false:parameterNationalButtonIsNational(row),includeHolidayBenefit:true,enabled:parameterRowToggleIsEnabled(row,"holiday-enabled")});}); return normalizeParameterSettings(n);}
+    function fillParameterCalcInputs(){const c=parameterSettings.calc; const set=(id,v)=>{const e=document.getElementById(id); if(e)e.value=v;}; updateParameterSectionControls(); set("parameterHour0",c.codeHours["0"]);set("parameterHour1",c.codeHours["1"]);set("parameterHour2",c.codeHours["2"]);set("parameterHour3",c.codeHours["3"]);set("parameterHandoverMinutes",c.handoverMinutes);const election=c.election||PARAMETER_DEFAULT_SETTINGS.calc.election;set("parameterElectionStartTime",election.effectiveStart||"00:00");set("parameterElectionEndTime",election.effectiveEnd||"24:00");set("parameterRateCode7",c.rates.code7);set("parameterRateCode8",c.rates.code8);set("parameterRateCode6",c.rates.code6);set("parameterInitialNightFee",c.fees.initialNight);set("parameterDeepNightFee",c.fees.deepNight);set("parameterBreakfastFee",c.fees.breakfast);set("parameterLunchDinnerFee",c.fees.lunchDinner);set("parameterRedEnvelopeFee",c.fees.redEnvelope);set("parameterReunionDinnerFee",c.fees.reunionDinner);parameterElectionRuleRender();}
+    function parameterSettingsReadFromUi(){const n=deepCloneParameter(parameterSettings); if(!n.sections||typeof n.sections!=="object")n.sections={shiftRulesEnabled:true,holidayOverridesEnabled:true}; n.sections.shiftRulesEnabled=true; n.sections.holidayOverridesEnabled=true; n.calc.hoursEnabled=parameterSettings.calc?.hoursEnabled===true; n.calc.salaryEnabled=parameterSettings.calc?.salaryEnabled===true; n.calc.codeHours={"0":sanitizeParameterNumber(document.getElementById("parameterHour0")?.value,0),"1":sanitizeParameterNumber(document.getElementById("parameterHour1")?.value,9),"2":sanitizeParameterNumber(document.getElementById("parameterHour2")?.value,8),"3":sanitizeParameterNumber(document.getElementById("parameterHour3")?.value,7)}; n.calc.handoverMinutes=Math.max(0,sanitizeParameterNumber(document.getElementById("parameterHandoverMinutes")?.value,30)); n.calc.rates={code7:document.getElementById("parameterRateCode7")?.value||"4/3",code8:document.getElementById("parameterRateCode8")?.value||"5/3",code6:document.getElementById("parameterRateCode6")?.value||"8/3"}; n.calc.fees={initialNight:sanitizeParameterNumber(document.getElementById("parameterInitialNightFee")?.value,250),deepNight:sanitizeParameterNumber(document.getElementById("parameterDeepNightFee")?.value,400),breakfast:sanitizeParameterNumber(document.getElementById("parameterBreakfastFee")?.value,75),lunchDinner:sanitizeParameterNumber(document.getElementById("parameterLunchDinnerFee")?.value,150),redEnvelope:sanitizeParameterNumber(document.getElementById("parameterRedEnvelopeFee")?.value,600),reunionDinner:sanitizeParameterNumber(document.getElementById("parameterReunionDinnerFee")?.value,800)}; n.calc.election={effectiveStart:normalizeCompactTime(document.getElementById("parameterElectionStartTime")?.value,"00:00"),effectiveEnd:normalizeCompactTime(document.getElementById("parameterElectionEndTime")?.value,"24:00"),rules:[]}; document.querySelectorAll("[data-election-rule-index]").forEach((row,i)=>n.calc.election.rules.push({id:`er-${Date.now()}-${i}`,shiftValue:Number(row.querySelector('[data-election-rule-field="shiftValue"]')?.value||0),occurrence:Number(row.querySelector('[data-election-rule-field="occurrence"]')?.value||1),d10Minutes:sanitizeParameterNumber(row.querySelector('[data-election-rule-field="d10Minutes"]')?.value,0),publicLeaveHours:sanitizeParameterNumber(row.querySelector('[data-election-rule-field="publicLeaveHours"]')?.value,0),enabled:row.querySelector('[data-election-rule-toggle]')?.classList.contains("is-enabled")})); n.calc.hourExceptions=[]; document.querySelectorAll("[data-parameter-hour-exception-index]").forEach(row=>n.calc.hourExceptions.push({id:`hex-${Date.now()}-${n.calc.hourExceptions.length}`,position:Math.max(1,Number(row.querySelector('[data-parameter-field="exception-position"]')?.value||1)),hours:sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")})); n.shiftRules=[]; document.querySelectorAll("[data-parameter-shift-index]").forEach(row=>n.shiftRules.push({id:`shift-${Date.now()}-${n.shiftRules.length}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||"",cyclePattern:(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||"").replace(/\s+/g,""),anchorDate:row.querySelector('[data-parameter-date-target="shift-anchor"]')?.dataset.parameterDateValue||"",anchorPosition:Number(row.querySelector('[data-parameter-field="shift-anchor-position"]')?.value||1),enabled:parameterRowToggleIsEnabled(row,"shift-enabled")})); n.holidayOverrides=[]; document.querySelectorAll("[data-parameter-holiday-index]").forEach(row=>{const action=row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?"remove":"add"; n.holidayOverrides.push({id:`hol-${Date.now()}-${n.holidayOverrides.length}`,date:row.querySelector('[data-parameter-date-target="holiday-date"]')?.dataset.parameterDateValue||"",action,name:row.querySelector('[data-parameter-field="holiday-name"]')?.value||(action==="remove"?"取消放假日":"臨時國定假日"),includeNationalHours:row.querySelector('[data-parameter-field="holiday-action"]')?.value==="remove"?false:parameterNationalButtonIsNational(row),includeHolidayBenefit:true,enabled:parameterRowToggleIsEnabled(row,"holiday-enabled")});}); return normalizeParameterSettings(n);}
     let parameterSettingsBodyScrollLocked = false;
     let parameterSettingsBodyScrollY = 0;
     function parameterSettingsLockBodyScroll(){
@@ -5643,25 +5788,32 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function isElectionThreeFirstDay(dayInfo) {
       return getElectionRuleValue(dayInfo) === 3 && getElectionSameValueSequenceIndex(dayInfo, 3) <= 1;
     }
-    function calcElectionDefaultPublicLeaveHours(dayInfo) {
-      if (!isElectionDay(dayInfo.day)) return 0;
+    function getElectionValueOccurrence(dayInfo, value) {
+      const pattern = getElectionCyclePatternForDay(dayInfo);
+      const index = Number(dayInfo.cycleIndex);
+      if (!Number.isFinite(index) || index < 0 || index >= pattern.length) return 1;
+      return pattern.slice(0, index + 1).filter(item => Number(item) === Number(value)).length;
+    }
+    function getElectionCustomRule(dayInfo) {
       const election = getParameterElectionSettings();
       const value = getElectionRuleValue(dayInfo);
-      if (value !== 2) return 0;
-      return isElectionTwoThirdDay(dayInfo) ? Number(election.twoThirdDefaultLeaveHours || 0) : Number(election.twoFirstSecondDefaultLeaveHours || 0);
+      const occurrence = getElectionValueOccurrence(dayInfo, value);
+      return (election.rules || []).find(rule => rule.enabled !== false && Number(rule.shiftValue) === value && Number(rule.occurrence) === occurrence) || null;
+    }
+    function calcElectionDefaultPublicLeaveHours(dayInfo) {
+      if (!isElectionDay(dayInfo.day)) return 0;
+      const rule = getElectionCustomRule(dayInfo);
+      return rule ? Number(rule.publicLeaveHours || 0) : 0;
     }
     function shouldApplyElectionAutoPublicLeave(dayInfo, record) {
       if (!isElectionDay(dayInfo.day)) return false;
-      if (Number(dayInfo.baseCode) !== 2) return false;
       if (record && record.code !== undefined) return false;
       return calcElectionDefaultPublicLeaveHours(dayInfo) > 0;
     }
     function calcElectionD10AdjustmentMinutes(dayInfo) {
       if (!isElectionDay(dayInfo.day)) return 0;
-      const election = getParameterElectionSettings();
-      const value = getElectionRuleValue(dayInfo);
-      if (value === 3) return isElectionThreeFirstDay(dayInfo) ? Number(election.threeFirstD10AddMinutes || 0) : Number(election.threeLaterD10AddMinutes || 0);
-      return 0;
+      const rule = getElectionCustomRule(dayInfo);
+      return rule ? Number(rule.d10Minutes || 0) : 0;
     }
     function calcD10OvertimeMinutes(dayInfo) {
       const code = Number(dayInfo.actualCode);
@@ -6098,7 +6250,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (!intervals.length) return 0;
       let total = 0;
       records.forEach(record => {
-        const closureInterval = CLOSURE_INTERVALS[record.type];
+        const closureInterval = getClosureInterval(record);
         if (!closureInterval) return;
         intervals.forEach(workInterval => {
           total += overlapHours(workInterval[0], workInterval[1], closureInterval[0], closureInterval[1]);
@@ -6294,7 +6446,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const intervals = getCalendarDayClosureIntervals(dayInfo, allDays);
       if (!intervals.length) return false;
       return records.some(record => {
-        const closureInterval = CLOSURE_INTERVALS[record.type];
+        const closureInterval = getClosureInterval(record);
         if (!closureInterval) return false;
         return intervals.some(workInterval => {
           const overlapStart = Math.max(workInterval[0], closureInterval[0]);
@@ -6474,6 +6626,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       return Object.entries(CLOSURE_TYPE_LABELS).map(([value, label]) => {
         return `<option value="${value}" ${selectedType === value ? "selected" : ""}>${label}</option>`;
       }).join("");
+    }
+    function buildClosureTypeControl(record, index) {
+      const startTime = normalizeClosureTime(record.startTime, "");
+      const endTime = normalizeClosureTime(record.endTime, "");
+      const customFields = record.type === "custom" ? `<div class="closure-custom-times"><input class="closure-custom-time-input" data-closure-time="start" data-index="${index}" value="${startTime}" inputmode="text" maxlength="5" aria-label="停止辦公開始時間"><span>至</span><input class="closure-custom-time-input" data-closure-time="end" data-index="${index}" value="${endTime}" inputmode="text" maxlength="5" aria-label="停止辦公結束時間"></div>` : "";
+      return `<div class="closure-type-control"><select class="special-type-select" data-group="closureType" data-index="${index}">${buildClosureTypeOptions(record.type)}</select>${customFields}</div>`;
     }
     function buildTrainingHourOptions(selectedValue) {
       let html = "";
@@ -6828,7 +6986,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const summary = [];
       if (closureCount > 0) summary.push(`停止辦公 ${closureCount} 筆`);
       if (electionCount > 0) summary.push(`選舉日 ${electionCount} 筆`);
-      if (trainingCount > 0) summary.push(`教育訓練 ${trainingCount} 筆`);
+      if (trainingCount > 0) summary.push(`額外加班 ${trainingCount} 筆`);
       document.getElementById("specialSummary").textContent = summary.length ? summary.join("，") : "未啟用";
       document.getElementById("specialToggleIcon").textContent = specialPanelOpen ? "－" : "＋";
       document.getElementById("specialContent").classList.toggle("open", specialPanelOpen);
@@ -6866,7 +7024,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       activeSpecialDateTarget = { group, index: Number(index) };
       const modal = document.getElementById("specialDateModal");
       const title = document.getElementById("specialDateTitle");
-      const titleMap = { closure: "停止辦公日期", election: "選舉日日期", training: "教育訓練日期", batchStart: "批次起日", batchEnd: "批次迄日", overhaulStart: "大修起日", overhaulEnd: "大修訖日" };
+      const titleMap = { closure: "停止辦公日期", election: "選舉日日期", training: "額外加班日期", batchStart: "批次起日", batchEnd: "批次迄日", overhaulStart: "大修起日", overhaulEnd: "大修訖日" };
       if (title) title.textContent = titleMap[group] || "選擇日期";
       renderSpecialDatePickerCalendar();
       if (modal) { modal.classList.add("open"); modal.setAttribute("aria-hidden", "false"); }
@@ -6933,7 +7091,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       document.getElementById("closureRecordList").innerHTML = specialDates.closure.map((record, idx) => `
         <div class="special-record with-delete-space">
           ${buildSpecialDateButton("closure", idx, record.day)}
-          <select class="special-type-select" data-group="closureType" data-index="${idx}">${buildClosureTypeOptions(record.type)}</select>
+          ${buildClosureTypeControl(record, idx)}
           <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>
         </div>`).join("");
       document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `
@@ -6952,8 +7110,20 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         sel.addEventListener("change", function() {
           const group = this.dataset.group;
           const index = Number(this.dataset.index);
-          if (group === "closureType") { specialDates.closure[index].type = this.value; if (this.value === "none") specialDates.closure[index].day = 0; }
+          if (group === "closureType") { specialDates.closure[index].type = this.value; if (this.value === "custom") { specialDates.closure[index].startTime = ""; specialDates.closure[index].endTime = ""; } if (this.value === "none") specialDates.closure[index].day = 0; }
           if (group === "trainingHours") specialDates.training[index].hours = Number(this.value);
+          saveCurrentMonthState(); renderAll(false);
+        });
+      });
+      document.querySelectorAll("[data-closure-time]").forEach(input => {
+        input.addEventListener("focus", function() { this.select(); });
+        input.addEventListener("click", function() { this.select(); });
+        input.addEventListener("change", function() {
+          const record = specialDates.closure[Number(this.dataset.index)];
+          if (!record) return;
+          const field = this.dataset.closureTime === "end" ? "endTime" : "startTime";
+          const fallback = "";
+          record[field] = normalizeClosureTime(this.value, fallback);
           saveCurrentMonthState(); renderAll(false);
         });
       });
@@ -7036,10 +7206,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const holidayLabel = getPrimaryHolidayBadge(d);
         const holidayHtml = holidayLabel ? `<div class="holiday-badge">${holidayLabel}</div>` : "";
         const closureHtml = getClosureRecordsForDay(d.day).map(record => {
-          return `<div class="special-badge">停止辦公${CLOSURE_TYPE_LABELS[record.type]}</div>`;
+          const interval = getClosureInterval(record);
+          const label = record.type === "custom" && interval ? `自訂(${normalizeClosureTime(record.startTime, "01:00")}–${normalizeClosureTime(record.endTime, "24:00")})` : CLOSURE_TYPE_LABELS[record.type];
+          return `<div class="special-badge">停止辦公${label || ""}</div>`;
         }).join("");
         const trainingHtml = getTrainingRecordsForDay(d.day).map(record => {
-          return `<div class="special-badge">教育訓練${fmtHour(record.hours)}HR</div>`;
+          return `<div class="special-badge">額外加班${fmtHour(record.hours)}HR</div>`;
         }).join("");
         const electionHtml = isElectionDay(d.day) ? `<div class="special-badge election-badge">選舉日</div>` : "";
         const proxyMinutes = getOverhaulOverrideMinutes(d.day);
@@ -7966,8 +8138,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
       renderAll(true);
     }
-    window.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("DOMContentLoaded", async () => {
       try {
+        const persistence = await overtimeIndexedDb.hydrate();
+        console.info("本機資料儲存已就緒：" + persistence.source + "（" + persistence.count + " 筆）");
         init();
       } catch (err) {
         document.body.innerHTML = `
@@ -8201,11 +8375,98 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   });
   return {
    backupName: G_BACKUP_FILE_NAME,
-   backupType: "personalOvertimeLocalStorageSubset",
-   version: 2,
+   backupType: "personalOvertimeIndexedDbSubset",
+   version: 3,
    savedAt: new Date().toISOString(),
    keys: data
   };
+ }
+ function gBackupUtf8Bytes(value) {
+  const text = String(value);
+  const bytes = [];
+  for (let i = 0; i < text.length; i += 1) {
+   let codePoint = text.charCodeAt(i);
+   if (codePoint >= 0xd800 && codePoint <= 0xdbff && i + 1 < text.length) {
+    const next = text.charCodeAt(i + 1);
+    if (next >= 0xdc00 && next <= 0xdfff) {
+     codePoint = 0x10000 + ((codePoint - 0xd800) << 10) + (next - 0xdc00);
+     i += 1;
+    }
+   }
+   if (codePoint < 0x80) bytes.push(codePoint);
+   else if (codePoint < 0x800) bytes.push(0xc0 | (codePoint >> 6), 0x80 | (codePoint & 0x3f));
+   else if (codePoint < 0x10000) bytes.push(0xe0 | (codePoint >> 12), 0x80 | ((codePoint >> 6) & 0x3f), 0x80 | (codePoint & 0x3f));
+   else bytes.push(0xf0 | (codePoint >> 18), 0x80 | ((codePoint >> 12) & 0x3f), 0x80 | ((codePoint >> 6) & 0x3f), 0x80 | (codePoint & 0x3f));
+  }
+  return bytes;
+ }
+ function gBackupSha256Hex(value) {
+  const bytes = gBackupUtf8Bytes(value);
+  const bitLength = bytes.length * 8;
+  bytes.push(0x80);
+  while ((bytes.length % 64) !== 56) bytes.push(0);
+  const high = Math.floor(bitLength / 0x100000000);
+  const low = bitLength >>> 0;
+  [high, low].forEach(function (word) { bytes.push((word >>> 24) & 0xff, (word >>> 16) & 0xff, (word >>> 8) & 0xff, word & 0xff); });
+  const constants = [
+   0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+   0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+   0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+   0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+   0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+   0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+   0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+   0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+  ];
+  let h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  const rotateRight = function (word, amount) { return (word >>> amount) | (word << (32 - amount)); };
+  for (let offset = 0; offset < bytes.length; offset += 64) {
+   const words = new Array(64);
+   for (let i = 0; i < 16; i += 1) words[i] = ((bytes[offset + i * 4] << 24) | (bytes[offset + i * 4 + 1] << 16) | (bytes[offset + i * 4 + 2] << 8) | bytes[offset + i * 4 + 3]) >>> 0;
+   for (let i = 16; i < 64; i += 1) {
+    const s0 = rotateRight(words[i - 15], 7) ^ rotateRight(words[i - 15], 18) ^ (words[i - 15] >>> 3);
+    const s1 = rotateRight(words[i - 2], 17) ^ rotateRight(words[i - 2], 19) ^ (words[i - 2] >>> 10);
+    words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;
+   }
+   let a=h0,b=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+   for (let i = 0; i < 64; i += 1) {
+    const s1 = rotateRight(e, 6) ^ rotateRight(e, 11) ^ rotateRight(e, 25);
+    const choose = (e & f) ^ (~e & g);
+    const temp1 = (h + s1 + choose + constants[i] + words[i]) >>> 0;
+    const s0 = rotateRight(a, 2) ^ rotateRight(a, 13) ^ rotateRight(a, 22);
+    const majority = (a & b) ^ (a & c) ^ (b & c);
+    const temp2 = (s0 + majority) >>> 0;
+    h=g; g=f; f=e; e=(d + temp1) >>> 0; d=c; c=b; b=a; a=(temp1 + temp2) >>> 0;
+   }
+   h0=(h0+a)>>>0; h1=(h1+b)>>>0; h2=(h2+c)>>>0; h3=(h3+d)>>>0; h4=(h4+e)>>>0; h5=(h5+f)>>>0; h6=(h6+g)>>>0; h7=(h7+h)>>>0;
+  }
+  return [h0,h1,h2,h3,h4,h5,h6,h7].map(function (word) { return word.toString(16).padStart(8, "0"); }).join("");
+ }
+ function gBackupCanonicalJson(value) {
+  if (value === null) return "null";
+  if (typeof value === "string" || typeof value === "boolean") return JSON.stringify(value);
+  if (typeof value === "number") return Number.isFinite(value) ? JSON.stringify(value) : "null";
+  if (Array.isArray(value)) return "[" + value.map(function (item) { return item === undefined ? "null" : gBackupCanonicalJson(item); }).join(",") + "]";
+  if (typeof value === "object") return "{" + Object.keys(value).sort().filter(function (key) { return value[key] !== undefined; }).map(function (key) { return JSON.stringify(key) + ":" + gBackupCanonicalJson(value[key]); }).join(",") + "}";
+  throw new Error("備份資料含有不支援的欄位型別。");
+ }
+ function gBackupCreateSecurePayload() {
+  const payload = gBackupCollectObject();
+  payload.integrity = { algorithm: "SHA-256", value: gBackupSha256Hex(gBackupCanonicalJson(payload)) };
+  return payload;
+ }
+ function gBackupVerifyPayloadIntegrity(payload) {
+  if (!payload || typeof payload !== "object") throw new Error("備份檔格式錯誤：不是 JSON 物件。");
+  if (!payload.integrity) {
+   if (Number(payload.version || 0) >= 3) throw new Error("備份檔缺少 SHA-256 完整性校驗資料。");
+   return false;
+  }
+  if (payload.integrity.algorithm !== "SHA-256" || !/^[a-f0-9]{64}$/i.test(String(payload.integrity.value || ""))) throw new Error("備份檔的 SHA-256 校驗格式無效。");
+  const unsignedPayload = {};
+  Object.keys(payload).forEach(function (key) { if (key !== "integrity") unsignedPayload[key] = payload[key]; });
+  const actual = gBackupSha256Hex(gBackupCanonicalJson(unsignedPayload));
+  if (actual !== String(payload.integrity.value).toLowerCase()) throw new Error("備份檔完整性校驗失敗：檔案可能已損毀或被修改。");
+  return true;
  }
  function gBackupDownloadText(fileName, text) {
   const blob = new Blob([text], { type: "application/json;charset=utf-8" });
@@ -8225,7 +8486,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  function gBackupDownloadCurrent(prefix) {
   const fileName = gBackupMakeReadableBackupFileName();
-  gBackupDownloadText(fileName, JSON.stringify(gBackupCollectObject(), null, 2));
+  gBackupDownloadText(fileName, JSON.stringify(gBackupCreateSecurePayload(), null, 2));
   gBackupRememberLocalDownload(fileName);
   return fileName;
  }
@@ -8312,7 +8573,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   return gBackupMakeReadableBackupFileName();
  }
  function gBackupValidatePayload(payload) {
-  if (!payload || typeof payload !== "object") throw new Error("備份檔格式錯誤：不是 JSON 物件。");
+  gBackupVerifyPayloadIntegrity(payload);
   const keys = payload.keys && typeof payload.keys === "object" ? payload.keys : payload;
   const clean = {};
   Object.keys(keys).forEach(function(key) {
@@ -8515,9 +8776,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const response = await gBackupDriveRequest("https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(existing.id) + "?alt=media", { method: "GET" });
   const text = await response.text();
   try {
-   JSON.parse(text);
+   gBackupValidatePayload(JSON.parse(text));
   } catch (err) {
-   throw new Error("Google 備份檔內容不是有效 JSON，請先不要還原。詳細錯誤：" + (err.message || err));
+   throw new Error("Google 備份檔未通過 JSON／完整性校驗，請先不要還原。詳細錯誤：" + (err.message || err));
   }
   const downloadedFileName = gBackupMakeTimestampFileName("google-drive-backup");
   gBackupDownloadText(downloadedFileName, text);
@@ -8526,7 +8787,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  async function gBackupUploadToDrive() {
   gBackupSetMessage("正在備份到 Google Drive...");
-  const bodyText = JSON.stringify(gBackupCollectObject(), null, 2);
+  const bodyText = JSON.stringify(gBackupCreateSecurePayload(), null, 2);
   const existing = await gBackupFindDriveFile();
   if (existing && existing.id) {
    await gBackupDriveRequest("https://www.googleapis.com/upload/drive/v3/files/" + encodeURIComponent(existing.id) + "?uploadType=media", {
@@ -8563,7 +8824,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   }
   if (mode === "download") {
    gBackupDownloadCurrent("還原前本機備份");
-   localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCollectObject()));
+   localStorage.setItem(G_BACKUP_BEFORE_RESTORE_KEY, JSON.stringify(gBackupCreateSecurePayload()));
   }
   gBackupSetMessage("正在從 Google Drive 讀取備份...");
   const existing = await gBackupFindDriveFile();
@@ -8616,7 +8877,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   }
   if (mode === "download") {
    gBackupDownloadCurrent("匯入前本機備份");
-   localStorage.setItem(G_BACKUP_BEFORE_IMPORT_KEY, JSON.stringify(gBackupCollectObject()));
+   localStorage.setItem(G_BACKUP_BEFORE_IMPORT_KEY, JSON.stringify(gBackupCreateSecurePayload()));
   }
   const reader = new FileReader();
   reader.onload = async function() {
