@@ -3892,6 +3892,143 @@
         min-width: 0 !important;
       }
     }
+
+    /* === 2026-07-18 P6 停止辦公列緊湊排列修正 === */
+    @media (max-width: 760px) {
+      /* 第一筆非自訂：日期、類型、RESET，同列且不保留刪除欄空間 */
+      .special-record.with-delete-space:has(.closure-type-control):has(.placeholder-delete):not(:has(.closure-custom-times)) {
+        grid-template-columns: minmax(58px, .72fr) minmax(0, 2.55fr) minmax(58px, .78fr) !important;
+        gap: 6px !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):has(.placeholder-delete):not(:has(.closure-custom-times)) .special-date-btn {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):has(.placeholder-delete):not(:has(.closure-custom-times)) .special-type-select {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):has(.placeholder-delete):not(:has(.closure-custom-times)) .special-date-reset-btn {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+      }
+
+      /* 第二筆以後非自訂：日期、類型、RESET、刪除列，同列 */
+      .special-record.with-delete-space:has(.closure-type-control):not(:has(.placeholder-delete)):not(:has(.closure-custom-times)) {
+        grid-template-columns: minmax(54px, .62fr) minmax(0, 2.2fr) minmax(56px, .72fr) minmax(62px, .82fr) !important;
+        gap: 5px !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):not(:has(.placeholder-delete)):not(:has(.closure-custom-times)) .special-date-btn {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):not(:has(.placeholder-delete)):not(:has(.closure-custom-times)) .special-type-select {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):not(:has(.placeholder-delete)):not(:has(.closure-custom-times)) .special-date-reset-btn {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-type-control):not(:has(.placeholder-delete)):not(:has(.closure-custom-times)) .special-delete-btn {
+        grid-column: 4 !important;
+        grid-row: 1 !important;
+      }
+
+      /* 第一筆自訂：類型對齊時間組，日期、起訖時間、RESET 同列 */
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) {
+        grid-template-columns: minmax(54px, .72fr) minmax(44px, 1fr) 14px minmax(44px, 1fr) minmax(58px, .78fr) !important;
+        gap: 4px !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .special-type-select {
+        grid-column: 2 / 5 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .special-date-btn {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .closure-custom-times {
+        display: contents !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .closure-custom-time-input:first-child {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .closure-custom-times > span {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        align-self: center !important;
+        justify-self: center !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .closure-custom-time-input:last-child {
+        grid-column: 4 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):has(.placeholder-delete) .special-date-reset-btn {
+        grid-column: 5 !important;
+        grid-row: 2 !important;
+      }
+
+      /* 第二筆以後自訂：日期、起訖時間、RESET、刪除列全部同列 */
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) {
+        grid-template-columns: minmax(48px, .64fr) minmax(42px, .82fr) 12px minmax(42px, .82fr) minmax(54px, .72fr) minmax(60px, .82fr) !important;
+        gap: 3px !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .special-type-select {
+        grid-column: 2 / 5 !important;
+        grid-row: 1 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .special-date-btn {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .closure-custom-times {
+        display: contents !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .closure-custom-time-input:first-child {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .closure-custom-times > span {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        align-self: center !important;
+        justify-self: center !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .closure-custom-time-input:last-child {
+        grid-column: 4 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .special-date-reset-btn {
+        grid-column: 5 !important;
+        grid-row: 2 !important;
+      }
+      .special-record.with-delete-space:has(.closure-custom-times):not(:has(.placeholder-delete)) .special-delete-btn {
+        grid-column: 6 !important;
+        grid-row: 2 !important;
+      }
+
+      #closureRecordList .special-date-btn,
+      #closureRecordList .special-date-reset-btn,
+      #closureRecordList .special-delete-btn,
+      #closureRecordList .special-type-select,
+      #closureRecordList .closure-custom-time-input {
+        min-width: 0 !important;
+        width: 100% !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        letter-spacing: 0 !important;
+      }
+      #closureRecordList .special-delete-btn:not(.placeholder-delete) {
+        min-height: 30px !important;
+        font-size: 10px !important;
+        white-space: nowrap !important;
+      }
+      #closureRecordList .placeholder-delete {
+        display: none !important;
+      }
+    }
 </style>
 </head>
 <body>
@@ -4336,7 +4473,7 @@
 <section class="parameter-settings-section" data-parameter-section="shiftRules"><div class="parameter-settings-section-title"><span>輪班週期覆寫</span><button id="parameterAddShiftRuleBtn" class="parameter-settings-add-btn" type="button">新增週期</button></div><div class="parameter-settings-note">週期輸入框點選後會全選，可直接覆蓋輸入。離開輸入框後更新定錨格選單。</div><div id="parameterShiftRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="holidayOverrides"><div class="parameter-settings-section-title"><span>行事曆覆寫</span><button id="parameterAddHolidayOverrideBtn" class="parameter-settings-add-btn" type="button">新增日期</button></div><div id="parameterHolidayOverrideList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="hours"><div class="parameter-settings-section-title"><span>值別時數與交接班</span><button id="parameterHoursEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="hours">未啟用</button><button id="parameterAddHourExceptionBtn" class="parameter-settings-add-btn" type="button">新增例外</button></div><div class="parameter-settings-grid parameter-hours-inline-grid"><label class="parameter-settings-field"><span>0空班(HR)</span><input id="parameterHour0" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>1一值(HR)</span><input id="parameterHour1" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>2二值(HR)</span><input id="parameterHour2" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>3三值(HR)</span><input id="parameterHour3" class="parameter-settings-input" type="text" inputmode="decimal"></label><label class="parameter-settings-field"><span>交接班(分)</span><input id="parameterHandoverMinutes" class="parameter-settings-input" type="text" inputmode="numeric"></label></div><div class="parameter-settings-note">例外以週期第幾格覆寫時數，例如第3格的2為6.5。</div><div id="parameterHourExceptionList" class="parameter-settings-list"></div></section>
-<section class="parameter-settings-section" data-parameter-section="election"><div class="parameter-settings-section-title"><span>選舉日自訂規則</span><button id="parameterAddElectionRuleBtn" class="parameter-settings-add-btn" type="button">新增規則</button></div><div class="parameter-settings-note">時間可輸入 0800、800 或 08:00，離開欄位後會統一顯示。規則依目前輪班週期中「某值別第幾次出現」套用，不需自行數週期格數。</div><div class="parameter-settings-grid parameter-election-grid"><label class="parameter-settings-field"><span>選舉日開始時間</span><input id="parameterElectionStartTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="0000"></label><label class="parameter-settings-field"><span>選舉日結束時間</span><input id="parameterElectionEndTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="2400"></label></div><div id="parameterElectionPatternHint" class="parameter-settings-note"></div><div id="parameterElectionRuleList" class="parameter-settings-list"></div></section>
+<section class="parameter-settings-section" data-parameter-section="election"><div class="parameter-settings-section-title"><span>選舉日自訂規則</span><button id="parameterAddElectionRuleBtn" class="parameter-settings-add-btn" type="button">新增規則</button></div><div class="parameter-settings-grid parameter-election-grid"><label class="parameter-settings-field"><span>選舉日開始時間</span><input id="parameterElectionStartTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="0000"></label><label class="parameter-settings-field"><span>選舉日結束時間</span><input id="parameterElectionEndTime" class="parameter-settings-input parameter-time-input" type="text" inputmode="numeric" placeholder="2400"></label></div><div id="parameterElectionPatternHint" class="parameter-settings-note"></div><div id="parameterElectionRuleList" class="parameter-settings-list"></div></section>
 <section class="parameter-settings-section" data-parameter-section="salary"><div class="parameter-settings-section-title"><span>薪資倍率與金額</span><button id="parameterSalaryEnabled" class="parameter-section-toggle-btn" type="button" data-parameter-section-toggle="salary">未啟用</button></div><div class="parameter-settings-grid parameter-salary-rate-grid"><label class="parameter-settings-field"><span>超時2HR以內的倍數，請填分數</span><input id="parameterRateCode7" class="parameter-settings-input" type="text" placeholder="4/3"></label><label class="parameter-settings-field"><span>超時2~8HR內的倍數，請填分數</span><input id="parameterRateCode8" class="parameter-settings-input" type="text" placeholder="5/3"></label><label class="parameter-settings-field"><span>超時8HR以上的倍數，請填分數</span><input id="parameterRateCode6" class="parameter-settings-input" type="text" placeholder="8/3"></label></div><div class="parameter-settings-grid six parameter-salary-fee-grid"><label class="parameter-settings-field"><span>初夜點</span><input id="parameterInitialNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>深夜點</span><input id="parameterDeepNightFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>初一紅包</span><input id="parameterRedEnvelopeFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>早餐</span><input id="parameterBreakfastFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>午晚餐</span><input id="parameterLunchDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label><label class="parameter-settings-field"><span>年夜飯</span><input id="parameterReunionDinnerFee" class="parameter-settings-input parameter-money-input" type="text" inputmode="numeric"></label></div></section>
 <section class="parameter-settings-section"><div class="parameter-settings-section-title"><span>參數匯入／匯出</span></div><div class="g-backup-local-grid"><button id="parameterExportBtn" class="parameter-settings-small-btn file" type="button">下載參數 JSON</button><button id="parameterImportBtn" class="parameter-settings-small-btn file" type="button">匯入參數 JSON</button></div><input id="parameterImportFileInput" class="parameter-settings-file-input" type="file" accept="application/json,.json"></section><div id="parameterSettingsMessage" class="parameter-settings-message" aria-live="polite"></div></div><div class="parameter-settings-footer"><button id="parameterSaveBtn" class="parameter-settings-footer-btn primary" type="button">儲存並套用</button><button id="parameterInitialBtn" class="parameter-settings-footer-btn warning" type="button">初始設定</button><button id="parameterCloseBtn" class="parameter-settings-footer-btn" type="button">關閉</button></div></div></div>
 <div id="parameterDateModal" class="parameter-date-modal" aria-hidden="true"><div class="parameter-date-card"><div class="parameter-date-head"><button id="parameterDatePrevBtn" class="parameter-date-nav" type="button">‹</button><div id="parameterDateTitle" class="parameter-date-title">選擇日期</div><button id="parameterDateNextBtn" class="parameter-date-nav" type="button">›</button></div><div id="parameterDateWeekGrid" class="parameter-date-week-grid"></div><div id="parameterDateCalendarGrid" class="parameter-date-calendar-grid"></div><div class="parameter-date-actions"><button id="parameterDateClearBtn" class="parameter-date-action-btn" type="button">清除日期</button><button id="parameterDateCancelBtn" class="parameter-date-action-btn" type="button">取消</button></div></div></div>
