@@ -4029,6 +4029,21 @@
         display: none !important;
       }
     }
+
+/* === 2026-07-18 輪班週期方案B與歷史封存測試版 === */
+.shift-rule-header-v8,.shift-rule-row-v8{display:grid;grid-template-columns:minmax(130px,1.25fr) 68px 116px minmax(150px,1.55fr) 88px 96px 86px 72px;gap:8px;align-items:center}.shift-rule-header-v8{padding:0 9px 7px;color:#94a3b8;font-size:11px;font-weight:950;text-align:center}.shift-rule-row-v8{border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(0,0,0,.18);padding:9px}.shift-rule-period-v8{grid-column:1/-1;color:#94a3b8;font-size:11px;font-weight:900;padding:2px 4px 0}.shift-rule-period-v8 strong{color:#a7f3d0}.shift-rule-archived-v8{border-color:rgba(148,163,184,.18);background:rgba(51,65,85,.18)}.shift-rule-archived-v8 input,.shift-rule-archived-v8 select,.shift-rule-archived-v8 .parameter-date-btn{opacity:.72}.shift-rule-state-v8{min-height:36px;border-radius:999px;border:1px solid rgba(52,211,153,.55);background:rgba(16,185,129,.15);color:#a7f3d0;font-size:12px;font-weight:950}.shift-rule-state-v8.is-off{border-color:rgba(251,113,133,.44);background:rgba(244,63,94,.11);color:#fda4af}.shift-rule-state-v8.is-archived{border-color:rgba(148,163,184,.35);background:rgba(100,116,139,.12);color:#cbd5e1}.shift-rule-view-v8{border-color:rgba(147,197,253,.34)!important;background:rgba(59,130,246,.10)!important;color:#bfdbfe!important}
+@media(max-width:760px){.shift-rule-header-v8{display:none!important}.shift-rule-row-v8{grid-template-columns:minmax(0,1.35fr) 58px 74px!important;gap:6px!important;padding:9px!important}.shift-rule-row-v8>*{min-width:0!important}.shift-rule-row-v8 [data-parameter-field="shift-name"]{grid-column:1;grid-row:1}.shift-rule-row-v8 .parameter-settings-linked-shift{grid-column:2;grid-row:1}.shift-rule-row-v8 .shift-rule-state-v8{grid-column:3;grid-row:1}.shift-rule-row-v8 [data-parameter-date-target="shift-effective"]{grid-column:1;grid-row:2}.shift-rule-row-v8 [data-parameter-field="shift-pattern"]{grid-column:2/4;grid-row:2}.shift-rule-row-v8 [data-shift-value-v8]{grid-column:1;grid-row:3}.shift-rule-row-v8 [data-shift-occurrence-v8]{grid-column:2;grid-row:3}.shift-rule-row-v8 [data-shift-action-v8],.shift-rule-row-v8 [data-shift-delete-v8]{grid-column:3;grid-row:3;width:100%;height:34px}.shift-rule-period-v8{grid-column:1/-1;grid-row:4;font-size:10px;line-height:1.45}.shift-rule-row-v8 input,.shift-rule-row-v8 select,.shift-rule-row-v8 button,.shift-rule-row-v8 .parameter-settings-linked-shift{height:34px!important;font-size:11px!important;padding-left:4px!important;padding-right:4px!important}.shift-rule-row-v8::before{content:"名稱 / 班別 / 狀態";grid-column:1/-1;grid-row:auto;color:#64748b;font-size:9px;font-weight:900;display:none}}
+
+/* === 2026-07-18 值別時數例外：值別、順序、時數一致化 === */
+.hour-exception-header-v9,.hour-exception-row-v9{display:grid!important;grid-template-columns:minmax(90px,1fr) minmax(100px,1.1fr) minmax(90px,.9fr) 88px 72px!important;gap:8px!important;align-items:center!important}.hour-exception-header-v9{padding:0 9px 7px;color:#94a3b8;font-size:11px;font-weight:950;text-align:center}.hour-exception-row-v9{border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(0,0,0,.18);padding:9px}.hour-exception-row-v9 .parameter-settings-input{text-align:center}.hour-exception-note-v9{grid-column:1/-1;color:#94a3b8;font-size:10px;font-weight:850;line-height:1.45}.hour-exception-invalid-v9{border-color:rgba(251,113,133,.48)!important;box-shadow:0 0 14px rgba(244,63,94,.12)!important}.hour-exception-invalid-v9 .hour-exception-note-v9{color:#fda4af!important}
+@media(max-width:760px){.hour-exception-header-v9,.hour-exception-row-v9{grid-template-columns:minmax(50px,.82fr) minmax(66px,1.05fr) minmax(48px,.72fr) minmax(62px,.88fr) minmax(54px,.78fr)!important;gap:3px!important;padding-left:3px!important;padding-right:3px!important}.hour-exception-header-v9{font-size:clamp(8px,2.35vw,10px)!important;line-height:1.15!important}.hour-exception-row-v9 select,.hour-exception-row-v9 input,.hour-exception-row-v9 button{width:100%!important;min-width:0!important;height:34px!important;padding-left:2px!important;padding-right:2px!important;font-size:clamp(10px,2.7vw,12px)!important;letter-spacing:0!important}.hour-exception-note-v9{font-size:9px!important}}
+
+/* === 2026-07-18 V11 值別順序有效週期彙整 === */
+.hour-exception-source-v11{margin:0 0 8px;padding:7px 9px;border:1px solid rgba(103,232,249,.16);border-radius:10px;background:rgba(14,165,233,.06);color:#94a3b8;font-size:10px;font-weight:850;line-height:1.45}
+@media(max-width:760px){.hour-exception-source-v11{font-size:9px;padding:6px 7px}}
+
+/* === 2026-07-18 D11 值別時數同步修正 === */
+/* 自訂輪班週期日期的 D11 基礎時數改讀 dayInfo.baseHours；系統預設週期仍維持原始固定規則。 */
 </style>
 </head>
 <body>
@@ -6216,6 +6231,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (cycleIndex === 8) return 1.5;
       return 0;
     }
+    function calcD11UsesCustomShiftHours(dayInfo) {
+      const year = Number(dayInfo.year || 0);
+      const month = Number(dayInfo.month || 0);
+      const day = Number(dayInfo.day || 0);
+      const shiftGroup = document.getElementById("shiftGroup")?.value || "D";
+      if (!(year > 0 && month > 0 && day > 0)) return false;
+      return Boolean(getEffectiveShiftRuleForDate(year, month, day, shiftGroup));
+    }
     function calcD11BaseByWeight(dayInfo) {
       const code = Number(dayInfo.actualCode);
       const baseCode = Number(dayInfo.baseCode);
@@ -6229,6 +6252,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (electionValue === 2 || electionValue === 3) return Math.max(0, Number(dayInfo.baseHours || 0));
         if (electionValue === 1) return 8;
         if (Math.trunc(code) === 4) return 8;
+      }
+      if ([1, 2, 3].includes(weight) && calcD11UsesCustomShiftHours(dayInfo)) {
+        return Math.max(0, Number(dayInfo.baseHours || 0));
       }
       return normalMap[weight] || 0;
     }
@@ -6295,8 +6321,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (isElectionDay(dayInfo.day) && [2, 3].includes(getElectionRuleValue(dayInfo))) {
           return Math.max(0, calcD11BaseByWeight(dayInfo) - calcD11BackDeduct(dayInfo));
         }
-        const base = { 1: 9, 2: 8, 3: 7 }[value] || 0;
-        return Math.max(0, base + calcD11PositiveAdjustment(dayInfo) - calcD11BackDeduct(dayInfo));
+        const configuredBase = calcD11UsesCustomShiftHours(dayInfo)
+          ? Math.max(0, Number(dayInfo.baseHours || 0))
+          : ({ 1: 9, 2: 8, 3: 7 }[value] || 0);
+        return Math.max(0, configuredBase + calcD11PositiveAdjustment(dayInfo) - calcD11BackDeduct(dayInfo));
       }
       return 0;
     }
@@ -9327,6 +9355,131 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
 </script>
 <!-- G備份/還原：腳本結束 -->
 
+
+
+<script>
+/* 輪班週期方案B與歷史封存測試層 */
+(function(){
+  const baseNormalizeParameterSettings=normalizeParameterSettings;
+  const baseParameterSettingsRender=parameterSettingsRender;
+  const baseParameterSettingsReadFromUi=parameterSettingsReadFromUi;
+  const baseSaveParameterSettings=saveParameterSettings;
+  const baseParameterSettingsSaveAndApply=parameterSettingsSaveAndApply;
+  function isoTodayV8(){return new Date().toISOString().slice(0,10);}
+  function addDaysIsoV8(iso,days){const d=parseParameterDateValue(iso);if(!d)return"";d.setDate(d.getDate()+days);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
+  function positionToValueOccurrenceV8(pattern,position){const p=String(pattern||"");const idx=Math.max(0,Math.min(p.length-1,Number(position||1)-1));const value=Number(p.charAt(idx)||0);let occurrence=0;for(let i=0;i<=idx;i++)if(Number(p.charAt(i))===value)occurrence++;return{value,occurrence:Math.max(1,occurrence)};}
+  function valueOccurrenceToPositionV8(pattern,value,occurrence){const p=String(pattern||"");let seen=0;for(let i=0;i<p.length;i++){if(Number(p.charAt(i))===Number(value)){seen++;if(seen===Number(occurrence))return i+1;}}return 1;}
+  function valueOptionsV8(pattern,selected){const present=[...new Set(String(pattern||"").split("").filter(x=>/[0-3]/.test(x)).map(Number))];const labels={0:"空班",1:"一值",2:"二值",3:"三值"};return present.map(v=>`<option value="${v}" ${v===Number(selected)?"selected":""}>${labels[v]}</option>`).join("");}
+  function occurrenceOptionsV8(pattern,value,selected){const count=String(pattern||"").split("").filter(x=>Number(x)===Number(value)).length;const labels=["第一天","第二天","第三天","第四天","第五天","第六天","第七天","第八天","第九天","第十天"];return Array.from({length:Math.max(1,count)},(_,i)=>`<option value="${i+1}" ${i+1===Number(selected)?"selected":""}>${labels[i]||`第${i+1}天`}</option>`).join("");}
+  function normalizeShiftHistoryV8(rules){const today=isoTodayV8();const out=(rules||[]).map((r,i)=>{const effectiveDate=normalizeIsoDateText(r.effectiveDate);const pattern=String(r.cyclePattern||"").replace(/\s+/g,"");const anchorPosition=Math.max(1,Math.min(pattern.length||1,Number(r.anchorPosition||1)));let status=String(r.status||"");if(!["active","pending","archived","disabled","revoked"].includes(status))status=r.enabled===false?"disabled":(effectiveDate>today?"pending":"active");return{...r,id:String(r.id||`shift-${Date.now()}-${i}`),effectiveDate,anchorDate:effectiveDate,cyclePattern:pattern,anchorPosition,endDate:normalizeIsoDateText(r.endDate),status,enabled:r.enabled!==false,statusChangedAt:r.statusChangedAt||"",archivedAt:r.archivedAt||"",createdAt:r.createdAt||new Date().toISOString()};}).filter(r=>r.effectiveDate&&/^[0123]+$/.test(r.cyclePattern));
+    const groups=[...new Set(out.map(r=>r.shiftGroup))];groups.forEach(group=>{const live=out.filter(r=>r.shiftGroup===group&&r.enabled!==false&&r.status!=="revoked").sort((a,b)=>a.effectiveDate.localeCompare(b.effectiveDate));live.forEach((r,i)=>{const next=live[i+1];if(next){r.endDate=addDaysIsoV8(next.effectiveDate,-1);r.status="archived";if(!r.archivedAt)r.archivedAt=new Date().toISOString();}else{r.endDate="";r.status=r.effectiveDate>today?"pending":"active";}});});return out;}
+  normalizeParameterSettings=function(raw){const n=baseNormalizeParameterSettings(raw);const source=raw&&Array.isArray(raw.shiftRules)?raw.shiftRules:[];n.version=Math.max(8,Number(raw?.version||0));n.shiftRules=normalizeShiftHistoryV8(source.length?source:n.shiftRules);return n;};
+  saveParameterSettings=function(){parameterSettings.shiftRules=normalizeShiftHistoryV8(parameterSettings.shiftRules);return baseSaveParameterSettings();};
+  getEffectiveShiftRuleForDate=function(y,m,d,sg){const key=`${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;return(parameterSettings.shiftRules||[]).filter(r=>r.shiftGroup===sg&&r.enabled!==false&&r.status!=="revoked"&&r.effectiveDate<=key&&(!r.endDate||r.endDate>=key)&&/^[0123]+$/.test(String(r.cyclePattern||""))).sort((a,b)=>b.effectiveDate.localeCompare(a.effectiveDate))[0]||null;};
+  function renderShiftRulesV8(){const list=document.getElementById("parameterShiftRuleList");if(!list)return;const rules=parameterSettings.shiftRules||[];const sg=getLinkedParameterShiftGroup();const header='<div class="shift-rule-header-v8"><div>名稱</div><div>班別</div><div>開始日</div><div>輪班週期</div><div>值別</div><div>順序</div><div>狀態</div><div>操作</div></div>';
+    list.innerHTML=rules.length?header+rules.map((r,i)=>{const vo=positionToValueOccurrenceV8(r.cyclePattern,r.anchorPosition);const archived=r.status==="archived";const pending=r.status==="pending";const disabled=r.enabled===false||r.status==="disabled";const stateText=archived?"已封存":pending?"預定生效":disabled?"未啟用":"啟用";const period=`有效區間：<strong>${r.effectiveDate}</strong> 至 <strong>${r.endDate||"持續生效"}</strong>${archived?"，歷史班表將繼續使用本規則":""}`;const action=archived?`<button class="parameter-settings-small-btn shift-rule-view-v8" type="button" data-shift-action-v8="view" data-index="${i}">查看</button>`:(pending?`<button class="parameter-settings-small-btn danger" type="button" data-shift-delete-v8="${i}">刪除</button>`:`<button class="parameter-settings-small-btn" type="button" data-shift-action-v8="archive" data-index="${i}">封存</button>`);return`<div class="shift-rule-row-v8 ${archived?"shift-rule-archived-v8":""}" data-parameter-shift-index="${i}"><input class="parameter-settings-input" data-parameter-field="shift-name" value="${parameterSettingsEscapeHtml(r.name)}" ${archived?"disabled":""}><div class="parameter-settings-linked-shift">${sg}班</div><button class="parameter-date-btn" type="button" data-parameter-date-target="shift-effective" data-parameter-date-index="${i}" data-parameter-date-value="${r.effectiveDate}" ${archived?"disabled":""}>${parameterDateButtonLabel(r.effectiveDate)}</button><input class="parameter-settings-input" data-parameter-field="shift-pattern" value="${parameterSettingsEscapeHtml(r.cyclePattern)}" ${archived?"disabled":""}><select class="parameter-settings-select" data-shift-value-v8 ${archived?"disabled":""}>${valueOptionsV8(r.cyclePattern,vo.value)}</select><select class="parameter-settings-select" data-shift-occurrence-v8 ${archived?"disabled":""}>${occurrenceOptionsV8(r.cyclePattern,vo.value,vo.occurrence)}</select><button class="shift-rule-state-v8 ${archived?"is-archived":disabled?"is-off":""}" type="button" data-shift-state-v8="${i}" ${archived?"disabled":""}>${stateText}</button>${action}<div class="shift-rule-period-v8">${period}</div></div>`;}).join(""):'<div class="parameter-settings-note">尚未建立輪班週期覆寫。</div>';}
+  parameterSettingsRender=function(){baseParameterSettingsRender();renderShiftRulesV8();};
+  parameterSettingsReadFromUi=function(){const previous=parameterSettings.shiftRules||[];const n=baseParameterSettingsReadFromUi();const rows=[...document.querySelectorAll(".shift-rule-row-v8[data-parameter-shift-index]")];n.shiftRules=rows.map(row=>{const i=Number(row.dataset.parameterShiftIndex);const old=previous[i]||{};const pattern=String(row.querySelector('[data-parameter-field="shift-pattern"]')?.value||old.cyclePattern||"").replace(/\s+/g,"");const value=Number(row.querySelector('[data-shift-value-v8]')?.value??positionToValueOccurrenceV8(pattern,old.anchorPosition).value);const occurrence=Number(row.querySelector('[data-shift-occurrence-v8]')?.value||1);const effectiveDate=row.querySelector('[data-parameter-date-target="shift-effective"]')?.dataset.parameterDateValue||old.effectiveDate||"";const enabled=old.status==="archived"?true:!(row.querySelector('[data-shift-state-v8]')?.classList.contains("is-off"));return{...old,id:old.id||`shift-${Date.now()}-${i}`,name:row.querySelector('[data-parameter-field="shift-name"]')?.value||old.name||"自訂輪班週期",shiftGroup:getLinkedParameterShiftGroup(),effectiveDate,anchorDate:effectiveDate,cyclePattern:pattern,anchorPosition:valueOccurrenceToPositionV8(pattern,value,occurrence),enabled,status:old.status==="archived"?"archived":(enabled?(effectiveDate>isoTodayV8()?"pending":"active"):"disabled")};});return normalizeParameterSettings(n);};
+  parameterSettingsAddShiftRule=function(){parameterSettings=parameterSettingsReadFromUi();const d=parameterTodayIso();const number=(parameterSettings.shiftRules||[]).length+1;parameterSettings.shiftRules.push({id:`shift-${Date.now()}`,name:`自訂輪班週期${number}`,shiftGroup:getLinkedParameterShiftGroup(),effectiveDate:d,cyclePattern:CYCLE_CODES.join(""),anchorDate:d,anchorPosition:1,endDate:"",status:"disabled",enabled:false,createdAt:new Date().toISOString()});parameterSettingsRender();};
+  parameterSettingsSaveAndApply=async function(){parameterSettings=parameterSettingsReadFromUi();parameterSettings.shiftRules=normalizeShiftHistoryV8(parameterSettings.shiftRules);return baseParameterSettingsSaveAndApply.apply(this,arguments);};
+  document.addEventListener("click",async function(e){const del=e.target.closest("[data-shift-delete-v8]");const action=e.target.closest("[data-shift-action-v8]");const state=e.target.closest("[data-shift-state-v8]");if(!del&&!action&&!state)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();parameterSettings=parameterSettingsReadFromUi();if(del){const i=Number(del.dataset.shiftDeleteV8);const r=parameterSettings.shiftRules[i];const ok=await parameterConfirmDialog({variant:"danger",title:"刪除預定生效規則",message:`確定刪除「${r?.name||"輪班規則"}」嗎？`,detail:"預定生效規則尚未形成歷史區間，可以直接刪除。"});if(ok)parameterSettings.shiftRules.splice(i,1);}else if(action){const i=Number(action.dataset.index);const r=parameterSettings.shiftRules[i];if(action.dataset.shiftActionV8==="view"){await parameterConfirmDialog({variant:"info",title:"歷史輪班週期",message:`${r.name}｜${r.effectiveDate} 至 ${r.endDate||"持續生效"}`,detail:`${r.shiftGroup}班｜週期 ${r.cyclePattern}｜歷史區間仍依此規則計算。`});}else if(action.dataset.shiftActionV8==="archive"){const ok=await parameterConfirmDialog({variant:"warning",title:"封存目前規則",message:`確定封存「${r.name}」嗎？`,detail:"封存會保留開始日至今天的歷史班表；明日起將改用下一筆有效規則或系統預設週期。"});if(ok){r.endDate=isoTodayV8();r.status="archived";r.enabled=true;r.archivedAt=new Date().toISOString();}}}else if(state){const i=Number(state.dataset.shiftStateV8);const r=parameterSettings.shiftRules[i];r.enabled=!r.enabled;r.status=r.enabled?(r.effectiveDate>isoTodayV8()?"pending":"active"):"disabled";}parameterSettings.shiftRules=normalizeShiftHistoryV8(parameterSettings.shiftRules);saveParameterSettings();parameterSettingsRender();renderAll(true);},true);
+  document.addEventListener("change",function(e){const row=e.target.closest(".shift-rule-row-v8");if(!row)return;if(e.target.matches('[data-shift-value-v8],[data-parameter-field="shift-pattern"]')){parameterSettings=parameterSettingsReadFromUi();parameterSettingsRender();}},true);
+  try{const raw=localStorage.getItem(PARAMETER_SETTINGS_STORAGE_KEY);parameterSettings=normalizeParameterSettings(raw?JSON.parse(raw):parameterSettings);saveParameterSettings();parameterSettingsRender();}catch(err){console.warn("輪班週期歷史層初始化失敗",err);}
+})();
+</script>
+
+
+<script>
+/* 值別時數例外 V9：由定錨格改為值別＋順序＋時數 */
+(function(){
+  const normalizeBeforeHourV9=normalizeParameterSettings;
+  const renderBeforeHourV9=parameterSettingsRender;
+  const readBeforeHourV9=parameterSettingsReadFromUi;
+  const saveBeforeHourV9=saveParameterSettings;
+  function hourPatternsV11(){const group=getLinkedParameterShiftGroup();const patterns=[CYCLE_CODES.join("")];(parameterSettings.shiftRules||[]).forEach(r=>{const pattern=String(r.cyclePattern||"").replace(/\s+/g,"");const usable=r.shiftGroup===group&&r.enabled!==false&&r.status!=="disabled"&&r.status!=="revoked"&&/^[0123]+$/.test(pattern);if(usable&&!patterns.includes(pattern))patterns.push(pattern);});return patterns;}
+  function hourPatternV9(){const patterns=hourPatternsV11();const y=Number(document.getElementById("rocYear")?.value||115)+1911,m=Number(document.getElementById("month")?.value||1),g=getLinkedParameterShiftGroup();const active=getEffectiveShiftRuleForDate(y,m,new Date(y,m,0).getDate(),g);const activePattern=String(active?.cyclePattern||"");return /^[0123]+$/.test(activePattern)?activePattern:patterns[patterns.length-1]||CYCLE_CODES.join("");}
+  function maxOccurrenceForValueV11(value){return Math.max(1,...hourPatternsV11().map(pattern=>String(pattern).split("").filter(x=>Number(x)===Number(value)).length));}
+  function positionToHourRuleV9(pattern,position){const p=String(pattern||"");const idx=Math.max(0,Math.min(Math.max(0,p.length-1),Number(position||1)-1));const value=Number(p.charAt(idx)||0);let occurrence=0;for(let i=0;i<=idx;i++)if(Number(p.charAt(i))===value)occurrence++;return{shiftValue:value,occurrence:Math.max(1,occurrence)};}
+  function hourValueOptionsV9(pattern,selected){const labels={0:"空班",1:"一值",2:"二值",3:"三值"};const vals=[...new Set(hourPatternsV11().flatMap(p=>String(p).split("").filter(x=>/[0-3]/.test(x)).map(Number)))];return vals.map(v=>`<option value="${v}" ${v===Number(selected)?"selected":""}>${labels[v]}</option>`).join("");}
+  function hourOccurrenceOptionsV9(pattern,value,selected){const count=maxOccurrenceForValueV11(value);const labels=["第一天","第二天","第三天","第四天","第五天","第六天","第七天","第八天","第九天","第十天"];return Array.from({length:count},(_,i)=>`<option value="${i+1}" ${i+1===Number(selected)?"selected":""}>${labels[i]||`第${i+1}天`}</option>`).join("");}
+  function normalizeHourExceptionsV9(list,pattern){return(Array.isArray(list)?list:[]).map((x,i)=>{const legacy=positionToHourRuleV9(pattern,x.position);return{...x,id:String(x.id||`hex-${Date.now()}-${i}`),shiftValue:Number.isFinite(Number(x.shiftValue))?Math.max(0,Math.min(3,Number(x.shiftValue))):legacy.shiftValue,occurrence:Math.max(1,Number(x.occurrence||legacy.occurrence)),hours:Math.max(0,sanitizeParameterNumber(x.hours,0)),enabled:x.enabled===true};});}
+  normalizeParameterSettings=function(raw){const n=normalizeBeforeHourV9(raw);const pattern=(n.shiftRules||[]).find(r=>r.enabled!==false&&r.status!=="revoked")?.cyclePattern||CYCLE_CODES.join("");n.version=Math.max(9,Number(n.version||0));n.calc.hourExceptions=normalizeHourExceptionsV9(raw?.calc?.hourExceptions||n.calc.hourExceptions,pattern);return n;};
+  function renderHourExceptionsV9(){const list=document.getElementById("parameterHourExceptionList");if(!list)return;const pattern=hourPatternV9();const rows=parameterSettings.calc?.hourExceptions||[];const sourceNote='<div class="hour-exception-source-v11">順序選項已彙整：系統預設、已啟用、已封存及預定生效週期；未啟用規則不列入。</div>';const header=sourceNote+'<div class="hour-exception-header-v9"><div>值別</div><div>順序</div><div>時數</div><div>狀態</div><div>操作</div></div>';list.innerHTML=rows.length?header+rows.map((x,i)=>{const count=maxOccurrenceForValueV11(x.shiftValue);const invalid=Number(x.occurrence)>count;return`<div class="hour-exception-row-v9 ${invalid?"hour-exception-invalid-v9":""}" data-parameter-hour-exception-index="${i}"><select class="parameter-settings-select" data-hour-shift-v9>${hourValueOptionsV9(pattern,x.shiftValue)}</select><select class="parameter-settings-select" data-hour-occurrence-v9>${hourOccurrenceOptionsV9(pattern,x.shiftValue,x.occurrence)}</select><input class="parameter-settings-input" data-parameter-field="exception-hours" type="text" inputmode="decimal" value="${x.hours}" onfocus="parameterSelectAllInput(this)" onclick="parameterSelectAllInput(this)"><button class="parameter-row-toggle-btn ${x.enabled===true?"is-enabled":""}" type="button" data-parameter-field="exception-enabled" data-parameter-row-toggle="exception" data-parameter-enabled="${x.enabled===true?"true":"false"}" aria-pressed="${x.enabled===true?"true":"false"}">${x.enabled===true?"啟用":"未啟用"}</button><button class="parameter-settings-small-btn danger" type="button" data-parameter-remove-exception="${i}">刪除</button>${invalid?`<div class="hour-exception-note-v9">目前已啟用、已封存或預定生效的週期均不存在此值別順序，本規則不套用。</div>`:""}</div>`;}).join(""):'<div class="parameter-settings-note">尚未建立時數例外。</div>';}
+  parameterSettingsRender=function(){renderBeforeHourV9();renderHourExceptionsV9();};
+  parameterSettingsReadFromUi=function(){const n=readBeforeHourV9();const previous=parameterSettings.calc?.hourExceptions||[];const rows=[...document.querySelectorAll(".hour-exception-row-v9[data-parameter-hour-exception-index]")];n.calc.hourExceptions=rows.map((row,i)=>({id:previous[i]?.id||`hex-${Date.now()}-${i}`,shiftValue:Number(row.querySelector('[data-hour-shift-v9]')?.value||0),occurrence:Number(row.querySelector('[data-hour-occurrence-v9]')?.value||1),hours:Math.max(0,sanitizeParameterNumber(row.querySelector('[data-parameter-field="exception-hours"]')?.value,0)),enabled:parameterRowToggleIsEnabled(row,"exception-enabled")}));return normalizeParameterSettings(n);};
+  const cycleHourBeforeV9=getCycleHourForCustomPattern;
+  getCycleHourForCustomPattern=function(pattern,index){if(parameterSettings.calc?.hoursEnabled===true){const code=Number(String(pattern||"").charAt(index));let occurrence=0;for(let i=0;i<=index;i++)if(Number(String(pattern||"").charAt(i))===code)occurrence++;const ex=(parameterSettings.calc.hourExceptions||[]).find(x=>x.enabled===true&&Number(x.shiftValue)===code&&Number(x.occurrence)===occurrence);if(ex)return Number(ex.hours)||0;}return cycleHourBeforeV9(pattern,index);};
+  parameterSettingsAddHourException=function(){parameterSettings=parameterSettingsReadFromUi();const pattern=hourPatternV9();const first=Number(pattern.charAt(0)||0);parameterSettings.calc.hourExceptions.push({id:`hex-${Date.now()}`,shiftValue:first,occurrence:1,hours:0,enabled:false});parameterSettingsRender();};
+  saveParameterSettings=function(){parameterSettings=parameterSettingsReadFromUi();return saveBeforeHourV9();};
+  document.addEventListener("click",function(e){const add=e.target.closest("#parameterAddHourExceptionBtn");if(!add)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();parameterSettingsAddHourException();},true);
+  document.addEventListener("change",function(e){if(!e.target.closest(".hour-exception-row-v9"))return;if(e.target.matches('[data-hour-shift-v9]')){parameterSettings=parameterSettingsReadFromUi();parameterSettingsRender();}},true);
+  try{const raw=localStorage.getItem(PARAMETER_SETTINGS_STORAGE_KEY);parameterSettings=normalizeParameterSettings(raw?JSON.parse(raw):parameterSettings);saveBeforeHourV9();parameterSettingsRender();}catch(err){console.warn("值別時數例外 V9 初始化失敗",err);}
+})();
+</script>
+
+
+<script>
+/* 2026-07-18 V10：刪除、初始設定與啟動行事曆修復層 */
+(function(){
+  function persistParameterSettingsV10(){
+    parameterSettings=normalizeParameterSettings(parameterSettings);
+    try{localStorage.setItem(PARAMETER_SETTINGS_STORAGE_KEY,JSON.stringify(parameterSettings));}
+    catch(error){console.warn("無法儲存參數設定",error);}
+    return parameterSettings;
+  }
+  saveParameterSettings=persistParameterSettingsV10;
+  function renderParameterAndCalendarV10(){
+    parameterSettingsRender();
+    renderAll(false);
+  }
+  async function resetParameterSettingsV10(){
+    const ok=await showResetConfirmDialog("確定要還原參數初始設定嗎？會清除輪班週期覆寫、值別時數例外與其他本機參數覆寫，並回到【初始設計】。",{hideWarning:true});
+    if(!ok)return;
+    parameterSettings=normalizeParameterSettings(deepCloneParameter(PARAMETER_DEFAULT_SETTINGS));
+    persistParameterSettingsV10();
+    renderParameterAndCalendarV10();
+    parameterSettingsSetMessage("已還原初始設定；輪班週期覆寫與值別時數例外已清除。");
+  }
+  document.addEventListener("click",async function(event){
+    const initial=event.target.closest("#parameterInitialBtn");
+    const shiftDelete=event.target.closest("[data-shift-delete-v8]");
+    const hourDelete=event.target.closest(".hour-exception-row-v9 [data-parameter-remove-exception]");
+    if(!initial&&!shiftDelete&&!hourDelete)return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    if(initial){
+      await resetParameterSettingsV10();
+      return;
+    }
+    parameterSettings=parameterSettingsReadFromUi();
+    if(shiftDelete){
+      const index=Number(shiftDelete.dataset.shiftDeleteV8);
+      const rule=parameterSettings.shiftRules[index];
+      if(!rule)return;
+      const ok=await parameterConfirmDialog({variant:"danger",title:"刪除預定生效規則",message:`確定刪除「${rule.name||"輪班規則"}」嗎？`,detail:"此規則尚未開始，不會影響已封存的歷史班表。"});
+      if(!ok)return;
+      parameterSettings.shiftRules.splice(index,1);
+      persistParameterSettingsV10();
+      renderParameterAndCalendarV10();
+      parameterSettingsSetMessage("已刪除預定生效輪班規則。");
+      return;
+    }
+    if(hourDelete){
+      const row=hourDelete.closest(".hour-exception-row-v9");
+      const index=Number(row?.dataset.parameterHourExceptionIndex);
+      if(!Number.isInteger(index)||index<0)return;
+      const rule=parameterSettings.calc.hourExceptions[index];
+      const ok=await parameterConfirmDialog({variant:"danger",title:"刪除值別時數例外",message:"確定刪除此筆值別時數例外嗎？",detail:rule?`值別代碼 ${rule.shiftValue}｜順序 ${rule.occurrence}｜時數 ${rule.hours}`:"刪除後將回復一般值別時數。"});
+      if(!ok)return;
+      parameterSettings.calc.hourExceptions.splice(index,1);
+      persistParameterSettingsV10();
+      renderParameterAndCalendarV10();
+      parameterSettingsSetMessage("已刪除值別時數例外。");
+    }
+  },true);
+})();
+</script>
 
 <script>
   if ("serviceWorker" in navigator) {
