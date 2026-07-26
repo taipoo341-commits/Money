@@ -6639,7 +6639,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       if (restHoursWithMinutes > 46) {
         return {
-          text: "已超過46小時加班上限",
+          text: `已超過46小時加班上限 (超過${fmtHourText(restHoursWithMinutes - 46)})`,
           status: "over"
         };
       }
