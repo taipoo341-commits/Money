@@ -4183,6 +4183,35 @@
 }
 /* === 薪資總覽 2x2 欄寬與加班費組成微調結束 === */
 
+
+/* === 停止辦公官方自動查詢：樣式開始 === */
+.closure-official-toolbar { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px; }
+.closure-official-region { color:#94a3b8; font-size:11px; font-weight:900; white-space:nowrap; }
+.closure-official-region strong { color:#99f6e4; }
+.closure-official-query-btn { min-height:34px; border:1px solid rgba(96,165,250,.48); border-radius:999px; background:linear-gradient(90deg,rgba(37,99,235,.18),rgba(20,184,166,.14)); color:#dbeafe; padding:0 12px; font-size:11px; font-weight:950; cursor:pointer; white-space:nowrap; }
+.closure-official-query-btn:disabled { opacity:.55; cursor:wait; }
+.closure-official-status { margin-bottom:9px; border:1px solid rgba(148,163,184,.16); border-radius:10px; background:rgba(15,23,42,.46); color:#94a3b8; padding:7px 9px; font-size:10px; font-weight:850; line-height:1.5; }
+.closure-official-status.ok { border-color:rgba(52,211,153,.32); color:#a7f3d0; }
+.closure-official-status.warn { border-color:rgba(251,191,36,.34); color:#fde68a; }
+.closure-official-status.error { border-color:rgba(251,113,133,.34); color:#fda4af; }
+#closureRecordList .special-record { position:relative; }
+.closure-source-badge { grid-column:1 / -1; margin-top:2px; border-radius:9px; padding:5px 7px; font-size:10px; font-weight:950; line-height:1.4; }
+.closure-source-badge.official { border:1px solid rgba(52,211,153,.28); background:rgba(16,185,129,.09); color:#a7f3d0; }
+.closure-source-badge.manual { border:1px solid rgba(251,191,36,.30); background:rgba(251,191,36,.08); color:#fde68a; }
+.closure-source-badge span { display:block; margin-top:2px; color:#94a3b8; font-size:9px; font-weight:800; }
+@media(max-width:760px){.closure-official-toolbar{display:grid;grid-template-columns:1fr auto}.closure-official-query-btn{min-height:32px;padding:0 9px;font-size:10px}.closure-official-status{font-size:10px}.closure-source-badge{font-size:10px}}
+/* === 停止辦公官方自動查詢：樣式結束 === */
+
+
+/* === 停止辦公地區與月份自動查詢修正開始 === */
+.closure-official-region-select { min-height:32px; border:1px solid rgba(52,211,153,.34); border-radius:9px; background:#071018; color:#99f6e4; padding:0 26px 0 8px; font-size:11px; font-weight:950; }
+@media(max-width:760px){.closure-official-region-select{min-height:30px;font-size:10px;padding-left:6px}.closure-official-query-btn{padding:0 11px!important}}
+/* === 停止辦公地區與月份自動查詢修正結束 === */
+
+/* === 停止辦公動態歷史翻頁查詢開始 === */
+.closure-official-status.warn { animation: closure-query-pulse 1.5s ease-in-out infinite; }
+@keyframes closure-query-pulse { 0%,100%{opacity:1} 50%{opacity:.72} }
+/* === 停止辦公動態歷史翻頁查詢結束 === */
 </style>
 </head>
 <body>
@@ -4321,6 +4350,11 @@
                 <div class="special-title">停止辦公</div>
                 <button id="closureAddBtn" class="special-add-btn" type="button">新增</button>
               </div>
+              <div class="closure-official-toolbar">
+                <label class="closure-official-region" for="closureOfficialRegionSelect">適用地區：<select id="closureOfficialRegionSelect" class="closure-official-region-select"><option value="高雄市">高雄市</option><option value="臺南市">台南市</option></select></label>
+                <button id="closureOfficialQueryBtn" class="closure-official-query-btn" type="button">查詢官方</button>
+              </div>
+              <div id="closureOfficialStatus" class="closure-official-status">尚未查詢。系統會先直接讀取官方網站；若遭瀏覽器跨來源阻擋，改用公開唯讀轉接服務。查詢失敗不會清除既有設定。</div>
               <div id="closureRecordList" class="special-record-list"></div>
             </div>
             <div class="special-card">
@@ -5338,6 +5372,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       activeStorageKey = getCurrentStorageKey();
       loadStateByKey(activeStorageKey);
       renderAll(needLoadCalendar);
+      if (typeof window.requestClosureOfficialAutoQuery === "function") {
+        setTimeout(function() { window.requestClosureOfficialAutoQuery(); }, 220);
+      }
     }
     function updateShiftSelectStyle() {
       const shiftGroup = document.getElementById("shiftGroup");
@@ -6749,6 +6786,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       return Math.max(0, Math.min(aEnd, bEnd) - Math.max(aStart, bStart));
     }
     function calcClosureOverlapHours(dayInfo, allDays) {
+      if (isSubstituteCode(dayInfo.actualCode)) return 0;
       const records = getClosureRecordsForDay(dayInfo.day);
       if (!records.length) return 0;
       if (dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄" || dayInfo.isViolation) return 0;
@@ -7511,7 +7549,15 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function buildSpecialDateButton(group, index, day) { return `<div class="special-date-row"><button class="special-date-btn" type="button" data-special-date-group="${group}" data-index="${index}">${getSpecialDateLabel(day)}</button><button class="special-date-reset-btn" type="button" data-special-reset-group="${group}" data-index="${index}">RESET</button></div>`; }
     function setSpecialDateValue(group, index, value) {
       const day = Number(value) || 0;
-      if (group === "closure") specialDates.closure[index].day = day;
+      if (group === "closure") {
+        const record = specialDates.closure[index];
+        if (day === 0) {
+          specialDates.closure[index] = { day: 0, type: "full" };
+        } else {
+          record.day = day;
+          if (record.source === "official") { record.manualOverride = true; record.manualUpdatedAt = new Date().toISOString(); }
+        }
+      }
       if (group === "election") specialDates.election[index] = day;
       if (group === "training") specialDates.training[index].day = day;
       if (group === "batchStart") {
@@ -7599,6 +7645,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           ${buildSpecialDateButton("closure", idx, record.day)}
           ${buildClosureTypeControl(record, idx)}
           <button class="special-delete-btn ${idx === 0 ? "placeholder-delete" : ""}" type="button" data-special-delete-group="closure" data-special-delete-index="${idx}">刪除列</button>
+          ${record.source === "official" ? `<div class="closure-source-badge ${record.manualOverride ? "manual" : "official"}">${record.manualOverride ? "官方＋人工覆寫" : "官方自動帶入"}${record.officialText ? `<span>${record.officialText}</span>` : ""}</div>` : ""}
         </div>`).join("");
       document.getElementById("electionRecordList").innerHTML = specialDates.election.map((value, idx) => `
         <div class="special-record election-with-delete-space">
@@ -7616,7 +7663,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         sel.addEventListener("change", function() {
           const group = this.dataset.group;
           const index = Number(this.dataset.index);
-          if (group === "closureType") { specialDates.closure[index].type = this.value; if (this.value === "custom") { specialDates.closure[index].startTime = ""; specialDates.closure[index].endTime = ""; } if (this.value === "none") specialDates.closure[index].day = 0; }
+          if (group === "closureType") { specialDates.closure[index].type = this.value; if (this.value === "custom") { specialDates.closure[index].startTime = ""; specialDates.closure[index].endTime = ""; } if (this.value === "none") specialDates.closure[index].day = 0; if (specialDates.closure[index].source === "official") { specialDates.closure[index].manualOverride = true; specialDates.closure[index].manualUpdatedAt = new Date().toISOString(); } }
           if (group === "trainingHours") specialDates.training[index].hours = Number(this.value);
           saveCurrentMonthState(); renderAll(false);
         });
@@ -7653,6 +7700,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           if (!record) return;
           const field = this.dataset.closureTime === "end" ? "endTime" : "startTime";
           record[field] = normalizeClosureTime(this.value, "");
+          if (record.source === "official") { record.manualOverride = true; record.manualUpdatedAt = new Date().toISOString(); }
           this.value = record[field];
           saveCurrentMonthState();
         });
@@ -9884,6 +9932,278 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   else initLeaveDetailFeature();
 })();
 /* === 年度請假明細查詢：功能結束 === */
+</script>
+
+
+<script>
+/* === 停止辦公官方自動查詢：功能開始 === */
+(function () {
+  const DGPA_ROOT = "https://www.dgpa.gov.tw";
+  const DGPA_DEFAULT_REGION = "高雄市";
+  const DGPA_REGION_STORAGE_KEY = "personalOvertimeClosureOfficialRegion";
+  const DGPA_AUTO_CHECK_KEY = "personalOvertimeClosureOfficialLastCheck";
+  const closureOfficialSessionChecked = new Set();
+  const closureOfficialResultCache = new Map();
+  let closureOfficialQuerySequence = 0;
+  let closureOfficialAutoTimer = 0;
+  function getClosureOfficialRegion() {
+    const select = document.getElementById("closureOfficialRegionSelect");
+    const value = select ? select.value : localStorage.getItem(DGPA_REGION_STORAGE_KEY);
+    return value === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION;
+  }
+  const DGPA_ACCEPTED_TEXTS = new Set([
+    "今天停止上班、停止上課。",
+    "今天停止上班、停止上課。明天照常上班、照常上課。",
+    "今天停止上班、停止上課。明天停止上班、停止上課。",
+    "今天已達停止上班及上課標準。",
+    "今天已達停止上班及上課標準。明天照常上班、照常上課。",
+    "今天已達停止上班及上課標準。明天已達停止上班及上課標準。"
+  ]);
+  function closureOfficialSetStatus(message, type) {
+    const el = document.getElementById("closureOfficialStatus");
+    if (!el) return;
+    el.textContent = message;
+    el.className = "closure-official-status" + (type ? " " + type : "");
+  }
+  function closureOfficialCleanText(value) {
+    return String(value || "").replace(/[\u3000\s\r\n]+/g, "").trim();
+  }
+  function closureOfficialAbsoluteUrl(value) {
+    try { return new URL(String(value || ""), DGPA_ROOT).href; } catch (error) { return ""; }
+  }
+  async function closureOfficialFetchText(url) {
+    const targetUrl = String(url || "");
+    const fetchWithTimeout = async function (requestUrl, options, timeoutMs) {
+      const controller = new AbortController();
+      const timer = setTimeout(function () { controller.abort(); }, timeoutMs);
+      try {
+        const response = await fetch(requestUrl, { ...options, signal:controller.signal });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response;
+      } finally { clearTimeout(timer); }
+    };
+    try {
+      const directResponse = await fetchWithTimeout(targetUrl, { method:"GET", mode:"cors", credentials:"omit", cache:"no-store" }, 12000);
+      return await directResponse.text();
+    } catch (directError) {
+      try {
+        const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl) + "&timestamp=" + Date.now();
+        const proxyResponse = await fetchWithTimeout(proxyUrl, { method:"GET", mode:"cors", credentials:"omit", cache:"no-store" }, 25000);
+        const payload = await proxyResponse.json();
+        if (!payload || typeof payload.contents !== "string" || payload.contents.trim() === "") throw new Error("公開轉接服務未回傳網頁內容");
+        return payload.contents;
+      } catch (proxyError) {
+        const directMessage = directError && directError.message ? directError.message : "直接連線失敗";
+        const proxyMessage = proxyError && proxyError.message ? proxyError.message : "公開轉接服務失敗";
+        throw new Error("官方網站直接連線失敗（" + directMessage + "）；公開讀取轉接亦失敗（" + proxyMessage + "）");
+      }
+    }
+  }
+  function closureOfficialParseRocDate(value) {
+    const text = closureOfficialCleanText(value);
+    const match = text.match(/(\d{2,3})年(\d{1,2})月(\d{1,2})日/);
+    if (!match) return null;
+    return { rocYear:Number(match[1]), month:Number(match[2]), day:Number(match[3]) };
+  }
+  function closureOfficialCountySentence(value) {
+    const text = closureOfficialCleanText(value);
+    const sentences = text.split("。").filter(Boolean);
+    const kept = [];
+    for (const sentence of sentences) {
+      if ((sentence.includes(":") || sentence.includes("：")) && /[區鄉鎮村里]/.test(sentence)) break;
+      kept.push(sentence);
+    }
+    return kept.length ? kept.join("。") + "。" : "";
+  }
+  function closureOfficialHtmlDocument(html) {
+    return new DOMParser().parseFromString(String(html || ""), "text/html");
+  }
+  async function closureOfficialCollectAnnouncementPage(page) {
+    const listUrl = page === 1 ? DGPA_ROOT + "/informationlist?uid=374" : DGPA_ROOT + "/informationlist?uid=374&page=" + page;
+    const doc = closureOfficialHtmlDocument(await closureOfficialFetchText(listUrl));
+    const links = new Map();
+    doc.querySelectorAll("a[href]").forEach(function (a) {
+      const href = closureOfficialAbsoluteUrl(a.getAttribute("href"));
+      if (href.includes("information?uid=374") && href.includes("pid=")) links.set(href, { title:String(a.textContent || "").trim(), url:href });
+    });
+    return Array.from(links.values());
+  }
+  async function closureOfficialReadAnnouncement(item, targetRocYear, targetMonth) {
+    const announcementDoc = closureOfficialHtmlDocument(await closureOfficialFetchText(item.url));
+    let ndsUrl = "";
+    announcementDoc.querySelectorAll("a[href]").forEach(function (a) {
+      if (!ndsUrl && String(a.textContent || "").trim().toLowerCase() === "nds.html") ndsUrl = closureOfficialAbsoluteUrl(a.getAttribute("href"));
+    });
+    if (!ndsUrl) return { dateInfo:null, events:[] };
+    const ndsDoc = closureOfficialHtmlDocument(await closureOfficialFetchText(ndsUrl));
+    const dateInfo = closureOfficialParseRocDate(ndsDoc.querySelector("div.Header_YMD")?.textContent || "");
+    if (!dateInfo) return { dateInfo:null, events:[] };
+    const results = [];
+    ndsDoc.querySelectorAll("tr").forEach(function (row) {
+      const cells = row.querySelectorAll("td");
+      if (cells.length < 2) return;
+      const region = String(cells[0].textContent || "").trim();
+      if (region !== getClosureOfficialRegion()) return;
+      const officialText = closureOfficialCountySentence(cells[1].textContent || "");
+      const excluded = !officialText || officialText.includes("未達停止上班") || officialText.includes("照常上班、照常上課。今天");
+      if (dateInfo.rocYear === targetRocYear && dateInfo.month === targetMonth && !excluded && DGPA_ACCEPTED_TEXTS.has(officialText)) {
+        results.push({ ...dateInfo, region:region, officialText:officialText, officialUrl:item.url, ndsUrl:ndsUrl, pid:(item.url.match(/[?&]pid=([^&]+)/)||[])[1] || "" });
+      }
+    });
+    return { dateInfo:dateInfo, events:results };
+  }
+  function closureOfficialMonthOrdinal(rocYear, month) {
+    return (Number(rocYear) + 1911) * 12 + Number(month) - 1;
+  }
+  async function closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken) {
+    const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
+    const allEvents = [];
+    const seenUrls = new Set();
+    let coveredTargetMonth = false;
+    let pagesScanned = 0;
+    const maxPages = 30;
+    for (let page = 1; page <= maxPages; page += 1) {
+      if (queryToken !== closureOfficialQuerySequence) throw new Error("查詢已由新的年月取代");
+      closureOfficialSetStatus(`正在背景查詢歷史公告，第 ${page} 頁…`, "warn");
+      const announcements = await closureOfficialCollectAnnouncementPage(page);
+      const fresh = announcements.filter(function (item) {
+        if (seenUrls.has(item.url)) return false;
+        seenUrls.add(item.url);
+        return true;
+      });
+      if (!fresh.length) return { events:allEvents, covered:true, pagesScanned:page };
+      const settled = await Promise.allSettled(fresh.map(function (item) { return closureOfficialReadAnnouncement(item, targetRocYear, targetMonth); }));
+      const parsed = settled.filter(function (item) { return item.status === "fulfilled" && item.value; }).map(function (item) { return item.value; });
+      parsed.forEach(function (result) { allEvents.push.apply(allEvents, result.events || []); });
+      const ordinals = parsed.map(function (result) {
+        return result.dateInfo ? closureOfficialMonthOrdinal(result.dateInfo.rocYear, result.dateInfo.month) : null;
+      }).filter(function (value) { return value !== null; });
+      pagesScanned = page;
+      if (ordinals.some(function (value) { return value === targetOrdinal; })) coveredTargetMonth = true;
+      const hasOlderThanTarget = ordinals.some(function (value) { return value < targetOrdinal; });
+      const newestOnPage = ordinals.length ? Math.max.apply(null, ordinals) : null;
+      if (hasOlderThanTarget || (coveredTargetMonth && newestOnPage !== null && newestOnPage < targetOrdinal)) {
+        return { events:allEvents, covered:true, pagesScanned:pagesScanned };
+      }
+    }
+    return { events:allEvents, covered:coveredTargetMonth, pagesScanned:pagesScanned };
+  }
+  function closureOfficialSyncRecords(events) {
+    let added = 0, unchanged = 0, protectedCount = 0;
+    events.forEach(function (event) {
+      let record = specialDates.closure.find(function (item) { return Number(item.day) === event.day && item.source === "official" && item.region === getClosureOfficialRegion(); });
+      if (!record) {
+        const manualSameDay = specialDates.closure.find(function (item) { return Number(item.day) === event.day && item.type !== "none"; });
+        if (manualSameDay) { protectedCount += 1; return; }
+        record = specialDates.closure.find(function (item) { return Number(item.day) === 0; });
+        const payload = { day:event.day, type:"full", source:"official", region:getClosureOfficialRegion(), officialText:event.officialText, officialUrl:event.officialUrl, officialNdsUrl:event.ndsUrl, officialPid:event.pid, officialStartTime:"00:00", officialEndTime:"24:00", manualOverride:false, lastCheckedAt:new Date().toISOString() };
+        if (record) Object.assign(record, payload); else specialDates.closure.push(payload);
+        added += 1;
+      } else {
+        record.officialText = event.officialText;
+        record.officialUrl = event.officialUrl;
+        record.officialNdsUrl = event.ndsUrl;
+        record.officialPid = event.pid;
+        record.lastCheckedAt = new Date().toISOString();
+        if (record.manualOverride) protectedCount += 1;
+        else { record.type = "full"; delete record.startTime; delete record.endTime; unchanged += 1; }
+      }
+    });
+    return { added:added, unchanged:unchanged, protectedCount:protectedCount };
+  }
+  async function queryOfficialClosure(options) {
+    const opts = options || {};
+    const queryToken = ++closureOfficialQuerySequence;
+    const button = document.getElementById("closureOfficialQueryBtn");
+    if (button) button.disabled = true;
+    try {
+      const targetRocYear = Number(document.getElementById("rocYear").value);
+      const targetMonth = Number(document.getElementById("month").value);
+      const targetRegion = getClosureOfficialRegion();
+      const queryKey = targetRocYear + "-" + targetMonth + "-" + targetRegion;
+      let searchResult = !opts.manual ? closureOfficialResultCache.get(queryKey) : null;
+      if (!searchResult) {
+        searchResult = await closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken);
+        if (queryToken !== closureOfficialQuerySequence) return;
+        if (searchResult.covered) closureOfficialResultCache.set(queryKey, searchResult);
+      }
+      if (queryToken !== closureOfficialQuerySequence) return;
+      const unique = Array.from(new Map((searchResult.events || []).map(function (event) {
+        return [event.rocYear + "-" + event.month + "-" + event.day + "-" + event.region, event];
+      })).values());
+      if (!searchResult.covered && unique.length === 0) {
+        closureOfficialSetStatus(`查詢未完成：已搜尋 ${searchResult.pagesScanned} 頁，尚未涵蓋目標月份`, "warn");
+        return;
+      }
+      const currentRocYear = Number(document.getElementById("rocYear").value);
+      const currentMonth = Number(document.getElementById("month").value);
+      const currentRegion = getClosureOfficialRegion();
+      if (currentRocYear !== targetRocYear || currentMonth !== targetMonth || currentRegion !== targetRegion) return;
+      const result = closureOfficialSyncRecords(unique);
+      saveCurrentMonthState();
+      renderAll(false);
+      closureOfficialSessionChecked.add(queryKey);
+      localStorage.setItem(DGPA_AUTO_CHECK_KEY, JSON.stringify({ date:new Date().toISOString().slice(0,10), rocYear:targetRocYear, month:targetMonth, region:targetRegion, checkedAt:new Date().toISOString(), pagesScanned:searchResult.pagesScanned }));
+      if (!unique.length) closureOfficialSetStatus("查詢完成：本月無停止辦公告", "ok");
+      else closureOfficialSetStatus(`查詢完成：新增 ${result.added} 筆、既有 ${result.unchanged} 筆、人工 ${result.protectedCount} 筆`, "ok");
+    } catch (error) {
+      if (queryToken !== closureOfficialQuerySequence) return;
+      console.warn("官方停止辦公告查詢失敗", error);
+      const reason = error && error.name === "AbortError" ? "連線逾時" : (error && error.message ? error.message : "瀏覽器無法讀取官方網站");
+      closureOfficialSetStatus(`查詢失敗：${reason}。既有設定已保留`, "error");
+    } finally {
+      if (queryToken === closureOfficialQuerySequence && button) button.disabled = false;
+    }
+  }
+  function shouldAutoQueryOfficialClosure() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(DGPA_AUTO_CHECK_KEY) || "null");
+      const today = new Date().toISOString().slice(0,10);
+      const rocYear = Number(document.getElementById("rocYear").value);
+      const month = Number(document.getElementById("month").value);
+      const region = getClosureOfficialRegion();
+      const queryKey = rocYear + "-" + month + "-" + region;
+      if (closureOfficialSessionChecked.has(queryKey)) return false;
+      return !saved || saved.date !== today || Number(saved.rocYear) !== rocYear || Number(saved.month) !== month || saved.region !== region;
+    } catch (error) { return true; }
+  }
+  function requestClosureOfficialAutoQuery() {
+    clearTimeout(closureOfficialAutoTimer);
+    closureOfficialQuerySequence += 1;
+    const button = document.getElementById("closureOfficialQueryBtn");
+    if (button) button.disabled = false;
+    closureOfficialAutoTimer = setTimeout(function () {
+      if (shouldAutoQueryOfficialClosure()) queryOfficialClosure({ auto:true });
+      else closureOfficialSetStatus("本月已查詢；可按「查詢官方」重新查詢。", "ok");
+    }, 700);
+  }
+  window.requestClosureOfficialAutoQuery = requestClosureOfficialAutoQuery;
+  function initOfficialClosureQuery() {
+    const button = document.getElementById("closureOfficialQueryBtn");
+    const regionSelect = document.getElementById("closureOfficialRegionSelect");
+    const savedRegion = localStorage.getItem(DGPA_REGION_STORAGE_KEY);
+    if (regionSelect) {
+      regionSelect.value = savedRegion === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION;
+      regionSelect.addEventListener("change", function () {
+        const selectedRegion = this.value === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION;
+        localStorage.setItem(DGPA_REGION_STORAGE_KEY, selectedRegion);
+        specialDates.closure = specialDates.closure.filter(function (record) {
+          return record.source !== "official" || record.region === selectedRegion || record.manualOverride === true;
+        });
+        if (specialDates.closure.length === 0) specialDates.closure.push({ day:0, type:"full" });
+        saveCurrentMonthState();
+        renderAll(false);
+        closureOfficialSetStatus("地區已改為「" + (selectedRegion === "臺南市" ? "台南市" : "高雄市") + "」，正在查詢目前月份…", "warn");
+        setTimeout(requestClosureOfficialAutoQuery, 100);
+      });
+    }
+    if (button) button.addEventListener("click", function () { clearTimeout(closureOfficialAutoTimer); queryOfficialClosure({ manual:true }); });
+    setTimeout(requestClosureOfficialAutoQuery, 1400);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initOfficialClosureQuery);
+  else initOfficialClosureQuery();
+})();
+/* === 停止辦公官方自動查詢：功能結束 === */
 </script>
 
 </body>
