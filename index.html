@@ -4212,6 +4212,10 @@
 .closure-official-status.warn { animation: closure-query-pulse 1.5s ease-in-out infinite; }
 @keyframes closure-query-pulse { 0%,100%{opacity:1} 50%{opacity:.72} }
 /* === 停止辦公動態歷史翻頁查詢結束 === */
+
+/* === 同源官方資料檔讀取修正開始 === */
+/* GitHub Pages 正式環境優先讀取 ./data/dgpa_closures.json，避免跨來源限制。 */
+/* === 同源官方資料檔讀取修正結束 === */
 </style>
 </head>
 <body>
@@ -10055,7 +10059,32 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   function closureOfficialMonthOrdinal(rocYear, month) {
     return (Number(rocYear) + 1911) * 12 + Number(month) - 1;
   }
+  async function closureOfficialLoadSameOriginData(targetRocYear, targetMonth, targetRegion) {
+    const dataUrl = new URL("./data/dgpa_closures.json", window.location.href);
+    dataUrl.searchParams.set("v", String(Date.now()));
+    const response = await fetch(dataUrl.href, { method:"GET", cache:"no-store", credentials:"same-origin" });
+    if (!response.ok) throw new Error("同源官方資料檔 HTTP " + response.status);
+    const payload = await response.json();
+    if (!payload || !Array.isArray(payload.events)) throw new Error("同源官方資料檔格式錯誤");
+    const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
+    const minOrdinal = payload.coverage && payload.coverage.minRocYear && payload.coverage.minMonth ? closureOfficialMonthOrdinal(payload.coverage.minRocYear, payload.coverage.minMonth) : null;
+    const maxOrdinal = payload.coverage && payload.coverage.maxRocYear && payload.coverage.maxMonth ? closureOfficialMonthOrdinal(payload.coverage.maxRocYear, payload.coverage.maxMonth) : null;
+    const covered = minOrdinal !== null && maxOrdinal !== null && targetOrdinal >= minOrdinal && targetOrdinal <= maxOrdinal;
+    const events = payload.events.filter(function (event) {
+      return Number(event.rocYear) === Number(targetRocYear) && Number(event.month) === Number(targetMonth) && event.region === targetRegion;
+    });
+    return { events:events, covered:covered, pagesScanned:Number(payload.pagesScanned || 0), source:"same-origin", updatedAt:payload.updatedAt || "" };
+  }
   async function closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken) {
+    const targetRegion = getClosureOfficialRegion();
+    try {
+      closureOfficialSetStatus("正在讀取站內官方公告資料…", "warn");
+      const sameOriginResult = await closureOfficialLoadSameOriginData(targetRocYear, targetMonth, targetRegion);
+      if (queryToken !== closureOfficialQuerySequence) throw new Error("查詢已由新的年月取代");
+      if (sameOriginResult.covered) return sameOriginResult;
+    } catch (sameOriginError) {
+      console.info("站內官方公告資料尚不可用，改用即時網路查詢", sameOriginError);
+    }
     const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
     const allEvents = [];
     const seenUrls = new Set();
