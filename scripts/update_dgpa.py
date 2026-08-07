@@ -97,19 +97,28 @@ def main():
     if not seen_months:
         raise RuntimeError("No dated DGPA announcements were parsed")
     min_month = min(seen_months)
-    max_month = max(seen_months)
+    last_event_month = max(seen_months)
     tz = timezone(timedelta(hours=8))
+    updated_at = datetime.now(tz)
+    current_month = (updated_at.year - 1911, updated_at.month)
+    coverage_max = max(last_event_month, current_month)
+    sorted_events = sorted(events.values(), key=lambda x: (x["rocYear"], x["month"], x["day"], x["region"]), reverse=True)
+    last_event = None
+    if sorted_events:
+        newest = sorted_events[0]
+        last_event = {"rocYear": newest["rocYear"], "month": newest["month"], "day": newest["day"]}
     payload = {
-        "schemaVersion": 1,
-        "updatedAt": datetime.now(tz).isoformat(timespec="seconds"),
+        "schemaVersion": 2,
+        "updatedAt": updated_at.isoformat(timespec="seconds"),
         "source": ROOT,
         "pagesScanned": pages_scanned,
-        "coverage": {"minRocYear": min_month[0], "minMonth": min_month[1], "maxRocYear": max_month[0], "maxMonth": max_month[1]},
-        "events": sorted(events.values(), key=lambda x: (x["rocYear"], x["month"], x["day"], x["region"]), reverse=True),
+        "coverage": {"minRocYear": min_month[0], "minMonth": min_month[1], "maxRocYear": coverage_max[0], "maxMonth": coverage_max[1]},
+        "lastEvent": last_event,
+        "events": sorted_events,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {OUT}: {len(payload['events'])} events, coverage {min_month}..{max_month}")
+    print(f"Wrote {OUT}: {len(payload['events'])} events, coverage {min_month}..{coverage_max}, last event {last_event}")
 
 if __name__ == "__main__":
     main()

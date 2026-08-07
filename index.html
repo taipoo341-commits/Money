@@ -4216,6 +4216,10 @@
 /* === 同源官方資料檔讀取修正開始 === */
 /* GitHub Pages 正式環境優先讀取 ./data/dgpa_closures.json，避免跨來源限制。 */
 /* === 同源官方資料檔讀取修正結束 === */
+
+/* === 目前月份涵蓋判斷修正開始 === */
+/* 同源 JSON 的 updatedAt 代表資料實際更新月份，與最後一筆停止辦公事件月份分開判斷。 */
+/* === 目前月份涵蓋判斷修正結束 === */
 </style>
 </head>
 <body>
@@ -10067,13 +10071,26 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     const payload = await response.json();
     if (!payload || !Array.isArray(payload.events)) throw new Error("同源官方資料檔格式錯誤");
     const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
+    const now = new Date();
+    const currentRocYear = now.getFullYear() - 1911;
+    const currentMonth = now.getMonth() + 1;
+    const currentOrdinal = closureOfficialMonthOrdinal(currentRocYear, currentMonth);
+    if (targetOrdinal > currentOrdinal) {
+      return { events:[], covered:true, pagesScanned:0, source:"future", updatedAt:payload.updatedAt || "", future:true };
+    }
     const minOrdinal = payload.coverage && payload.coverage.minRocYear && payload.coverage.minMonth ? closureOfficialMonthOrdinal(payload.coverage.minRocYear, payload.coverage.minMonth) : null;
-    const maxOrdinal = payload.coverage && payload.coverage.maxRocYear && payload.coverage.maxMonth ? closureOfficialMonthOrdinal(payload.coverage.maxRocYear, payload.coverage.maxMonth) : null;
+    let maxOrdinal = payload.coverage && payload.coverage.maxRocYear && payload.coverage.maxMonth ? closureOfficialMonthOrdinal(payload.coverage.maxRocYear, payload.coverage.maxMonth) : null;
+    const updatedDate = payload.updatedAt ? new Date(payload.updatedAt) : null;
+    if (updatedDate && !Number.isNaN(updatedDate.getTime())) {
+      const updatedOrdinal = closureOfficialMonthOrdinal(updatedDate.getFullYear() - 1911, updatedDate.getMonth() + 1);
+      maxOrdinal = maxOrdinal === null ? updatedOrdinal : Math.max(maxOrdinal, updatedOrdinal);
+    }
     const covered = minOrdinal !== null && maxOrdinal !== null && targetOrdinal >= minOrdinal && targetOrdinal <= maxOrdinal;
     const events = payload.events.filter(function (event) {
       return Number(event.rocYear) === Number(targetRocYear) && Number(event.month) === Number(targetMonth) && event.region === targetRegion;
     });
-    return { events:events, covered:covered, pagesScanned:Number(payload.pagesScanned || 0), source:"same-origin", updatedAt:payload.updatedAt || "" };
+    return { events:events, covered:covered, pagesScanned:Number(payload.pagesScanned || 0), source:"same-origin", updatedAt:payload.updatedAt || "", current:targetOrdinal === currentOrdinal };
+
   }
   async function closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken) {
     const targetRegion = getClosureOfficialRegion();
@@ -10173,8 +10190,16 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       renderAll(false);
       closureOfficialSessionChecked.add(queryKey);
       localStorage.setItem(DGPA_AUTO_CHECK_KEY, JSON.stringify({ date:new Date().toISOString().slice(0,10), rocYear:targetRocYear, month:targetMonth, region:targetRegion, checkedAt:new Date().toISOString(), pagesScanned:searchResult.pagesScanned }));
-      if (!unique.length) closureOfficialSetStatus("查詢完成：本月無停止辦公告", "ok");
-      else closureOfficialSetStatus(`查詢完成：新增 ${result.added} 筆、既有 ${result.unchanged} 筆、人工 ${result.protectedCount} 筆`, "ok");
+      if (!unique.length) {
+        const now = new Date();
+        const currentOrdinal = closureOfficialMonthOrdinal(now.getFullYear() - 1911, now.getMonth() + 1);
+        const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
+        if (targetOrdinal > currentOrdinal) closureOfficialSetStatus("尚未到該月份，無官方公告資料", "ok");
+        else if (targetOrdinal === currentOrdinal) closureOfficialSetStatus("查詢完成：目前尚無停止辦公告", "ok");
+        else closureOfficialSetStatus("查詢完成：本月無停止辦公告", "ok");
+      } else {
+        closureOfficialSetStatus(`查詢完成：新增 ${result.added} 筆、既有 ${result.unchanged} 筆、人工 ${result.protectedCount} 筆`, "ok");
+      }
     } catch (error) {
       if (queryToken !== closureOfficialQuerySequence) return;
       console.warn("官方停止辦公告查詢失敗", error);
@@ -10214,15 +10239,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     if (regionSelect) {
       regionSelect.value = savedRegion === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION;
       regionSelect.addEventListener("change", function () {
-        const selectedRegion = this.value === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION;
-        localStorage.setItem(DGPA_REGION_STORAGE_KEY, selectedRegion);
-        specialDates.closure = specialDates.closure.filter(function (record) {
-          return record.source !== "official" || record.region === selectedRegion || record.manualOverride === true;
-        });
-        if (specialDates.closure.length === 0) specialDates.closure.push({ day:0, type:"full" });
-        saveCurrentMonthState();
-        renderAll(false);
-        closureOfficialSetStatus("地區已改為「" + (selectedRegion === "臺南市" ? "台南市" : "高雄市") + "」，正在查詢目前月份…", "warn");
+        localStorage.setItem(DGPA_REGION_STORAGE_KEY, this.value === "臺南市" ? "臺南市" : DGPA_DEFAULT_REGION);
+        closureOfficialSetStatus("地區已改為「" + (this.value === "臺南市" ? "台南市" : "高雄市") + "」，正在查詢目前月份…", "warn");
         setTimeout(requestClosureOfficialAutoQuery, 100);
       });
     }
