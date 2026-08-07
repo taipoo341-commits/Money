@@ -4048,6 +4048,92 @@
 
 /* === 2026-07-18 D11 值別時數同步修正 === */
 /* 自訂輪班週期日期的 D11 基礎時數改讀 dayInfo.baseHours；系統預設週期仍維持原始固定規則。 */
+
+/* === 年度請假明細查詢：樣式開始 === */
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger {
+  cursor: pointer;
+  position: relative;
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  touch-action: manipulation;
+}
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger:hover,
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(153, 246, 228, .56) !important;
+  background: linear-gradient(180deg, rgba(153,246,228,.09), rgba(0,0,0,.20)) !important;
+  box-shadow: 0 0 18px rgba(45,212,191,.14), inset 0 0 14px rgba(153,246,228,.045) !important;
+  outline: none;
+}
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger:active { transform: scale(.98); }
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger::after {
+  content: "明細";
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  color: rgba(153,246,228,.66);
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .08em;
+}
+.leave-detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 175000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0,0,0,.76);
+  backdrop-filter: blur(7px) saturate(1.08);
+  overscroll-behavior: contain;
+}
+.leave-detail-modal.open { display: flex; }
+.leave-detail-card {
+  width: min(620px, 100%);
+  max-height: min(86vh, 760px);
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr) auto;
+  overflow: hidden;
+  border: 1px solid rgba(153,246,228,.38);
+  border-radius: 24px;
+  background: radial-gradient(circle at 12% 0%, rgba(153,246,228,.10), transparent 32%), linear-gradient(160deg, rgba(8,17,26,.99), rgba(4,9,16,.99));
+  box-shadow: 0 24px 72px rgba(0,0,0,.72), 0 0 32px rgba(45,212,191,.13), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.leave-detail-header {
+  padding: 18px;
+  border-bottom: 1px solid rgba(153,246,228,.18);
+  background: linear-gradient(90deg, rgba(6,78,59,.26), rgba(15,23,42,.88), rgba(30,41,59,.70));
+}
+.leave-detail-year { color: #94a3b8; font-size: 12px; font-weight: 950; letter-spacing: .10em; }
+.leave-detail-title { margin-top: 5px; color: #ccfbf1; font-size: 23px; font-weight: 950; letter-spacing: .08em; text-shadow: 0 0 12px rgba(153,246,228,.30); }
+.leave-detail-total { margin-top: 10px; color: #f6c453; font-size: 18px; font-weight: 950; text-shadow: 0 0 10px rgba(246,196,83,.30); }
+.leave-detail-body { min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px 16px; display: grid; gap: 10px; }
+.leave-detail-entry { border: 1px solid rgba(255,255,255,.09); border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.18)); padding: 13px 14px; }
+.leave-detail-date { color: #e2e8f0; font-size: 16px; font-weight: 950; letter-spacing: .04em; }
+.leave-detail-entry-info { margin-top: 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.leave-detail-name { color: #99f6e4; font-size: 14px; font-weight: 950; }
+.leave-detail-hours { color: #f6c453; font-size: 16px; font-weight: 950; white-space: nowrap; }
+.leave-detail-empty { min-height: 150px; display: grid; place-items: center; text-align: center; color: #94a3b8; font-size: 15px; font-weight: 900; line-height: 1.7; }
+.leave-detail-warning { border: 1px solid rgba(251,191,36,.34); border-radius: 13px; background: rgba(251,191,36,.08); color: #fde68a; padding: 10px 12px; font-size: 12px; font-weight: 900; line-height: 1.55; }
+.leave-detail-footer { padding: 12px 16px 16px; border-top: 1px solid rgba(153,246,228,.14); background: rgba(3,7,12,.62); }
+.leave-detail-close { width: 100%; min-height: 44px; border: 1px solid rgba(153,246,228,.52); border-radius: 13px; background: linear-gradient(90deg, rgba(20,184,166,.22), rgba(59,130,246,.18)); color: #ecfeff; font-size: 15px; font-weight: 950; cursor: pointer; }
+@media (max-width: 760px) {
+  .annual-leave-info-panel .leave-stat-item.leave-detail-trigger::after { right: 5px; bottom: 3px; font-size: 8px; }
+  .leave-detail-modal { align-items: stretch; padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)); }
+  .leave-detail-card { width: 100%; max-height: none; height: calc(100vh - 16px); border-radius: 20px; }
+  @supports (height: 100dvh) { .leave-detail-card { height: calc(100dvh - 16px); } }
+  .leave-detail-header { padding: 16px 14px; }
+  .leave-detail-title { font-size: 21px; }
+  .leave-detail-total { font-size: 17px; }
+  .leave-detail-body { padding: 12px; }
+  .leave-detail-entry { padding: 12px; }
+  .leave-detail-entry-info { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .leave-detail-date { font-size: 15px; }
+  .leave-detail-hours { font-size: 17px; }
+  .leave-detail-close { min-height: 48px; font-size: 16px; }
+}
+/* === 年度請假明細查詢：樣式結束 === */
+
 </style>
 </head>
 <body>
@@ -9504,5 +9590,240 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   修正紀錄 2026-06-21：選舉日待遇參數最小化與二值自動公假。
   內容：參數設定僅保留有效時間、三值加班分鐘、二值預設公假、二連一補入；二值選舉日由預設公假自動寫入主月曆，D10回歸部分請假邏輯，D11回歸班表工時邏輯。
 -->
+
+<!-- 年度請假明細查詢：浮動視窗開始 -->
+<div id="leaveDetailModal" class="leave-detail-modal" role="dialog" aria-modal="true" aria-labelledby="leaveDetailTitle" aria-hidden="true">
+  <div class="leave-detail-card">
+    <div class="leave-detail-header">
+      <div id="leaveDetailYear" class="leave-detail-year">年度請假資訊</div>
+      <div id="leaveDetailTitle" class="leave-detail-title">請假明細</div>
+      <div id="leaveDetailTotal" class="leave-detail-total">年度合計：0HR</div>
+    </div>
+    <div id="leaveDetailBody" class="leave-detail-body"></div>
+    <div class="leave-detail-footer">
+      <button id="leaveDetailCloseBtn" class="leave-detail-close" type="button">關閉</button>
+    </div>
+  </div>
+</div>
+<!-- 年度請假明細查詢：浮動視窗結束 -->
+
+
+<script>
+/* === 年度請假明細查詢：功能開始 === */
+(function () {
+  const leaveDetailConfig = {
+    leaveAttendanceSpecial: { yearType: "attendance", category: "special", name: "特別休假" },
+    leaveAttendanceMind: { yearType: "attendance", category: "mind", name: "身心調適假" },
+    leaveAttendanceFamily: { yearType: "attendance", category: "family", name: "家庭照顧假" },
+    leaveAccountingPersonal: { yearType: "accounting", category: "personal", name: "事假" },
+    leaveAccountingSick: { yearType: "accounting", category: "sick", name: "病假" }
+  };
+  let leaveDetailPreviousBodyOverflow = "";
+
+  function leaveDetailRoundHours(value) {
+    return typeof roundLeaveStatHours === "function" ? roundLeaveStatHours(value) : Math.round((Number(value) || 0) * 2) / 2;
+  }
+  function leaveDetailSplitHours(split, category) {
+    if (!split || typeof split !== "object") return 0;
+    let total = 0;
+    Object.entries(split).forEach(function (entry) {
+      const key = String(entry[0] || "").trim();
+      const value = Math.max(0, Number(entry[1]) || 0);
+      if (value <= 0) return;
+      if (category === "special" && key.includes("特")) total += value;
+      if (category === "mind" && key.includes("身")) total += value;
+      if (category === "family" && key.includes("家")) total += value;
+      if (category === "sick" && key.includes("病")) total += value;
+      if (category === "personal" && key.includes("事")) total += value;
+    });
+    return leaveDetailRoundHours(total);
+  }
+  function collectLeaveDetailEntriesFromDays(days, category, rocYear, month) {
+    const rows = [];
+    (days || []).forEach(function (dayInfo) {
+      if (!dayInfo || dayInfo.isViolation) return;
+      if (dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄") return;
+      const code = Number(dayInfo.actualCode);
+      if (!isLeaveCode(code)) return;
+      const record = manualRecords[dayInfo.day] || {};
+      const split = record.compoundSplit && typeof record.compoundSplit === "object" ? record.compoundSplit : (dayInfo.compoundSplit || null);
+      let hours = leaveDetailSplitHours(split, category);
+      if (split && typeof split === "object" && Object.keys(split).length > 0) {
+        if (hours <= 0) return;
+      } else {
+        if (classifyLeaveStatByCode(code, dayInfo) !== category) return;
+        hours = Math.max(0, Number(getEffectiveLeaveHours(dayInfo)) || 0);
+      }
+      hours = leaveDetailRoundHours(hours);
+      if (hours <= 0) return;
+      const westernYear = Number(rocYear) + 1911;
+      rows.push({
+        rocYear: Number(rocYear),
+        month: Number(month),
+        day: Number(dayInfo.day),
+        hours: hours,
+        ordinal: Math.floor(Date.UTC(westernYear, Number(month) - 1, Number(dayInfo.day)) / 86400000)
+      });
+    });
+    return rows;
+  }
+  function collectLeaveDetailEntriesForMonth(rocYear, month, shiftGroup, category) {
+    const currentRocYear = Number(document.getElementById("rocYear").value);
+    const currentMonth = Number(document.getElementById("month").value);
+    const currentShift = document.getElementById("shiftGroup").value;
+    if (Number(rocYear) === currentRocYear && Number(month) === currentMonth && String(shiftGroup) === currentShift) {
+      return collectLeaveDetailEntriesFromDays(buildDays(), category, rocYear, month);
+    }
+    const key = `personalOvertimeState:${shiftGroup}:${rocYear}:${month}`;
+    let data = null;
+    try { data = JSON.parse(localStorage.getItem(key) || "null"); } catch (err) { data = null; }
+    if (!data || !data.manualRecords) return [];
+    const backup = {
+      rocYear: document.getElementById("rocYear").value,
+      month: document.getElementById("month").value,
+      shiftGroup: document.getElementById("shiftGroup").value,
+      manualRecords: JSON.parse(JSON.stringify(manualRecords)),
+      specialDates: JSON.parse(JSON.stringify(specialDates)),
+      overhaulSettings: JSON.parse(JSON.stringify(overhaulSettings))
+    };
+    try {
+      document.getElementById("rocYear").value = rocYear;
+      document.getElementById("month").value = month;
+      document.getElementById("shiftGroup").value = shiftGroup;
+      clearObject(manualRecords);
+      Object.assign(manualRecords, data.manualRecords || {});
+      resetSpecialDatesToDefault();
+      if (data.specialDates && typeof data.specialDates === "object") {
+        specialDates.closure = Array.isArray(data.specialDates.closure) ? data.specialDates.closure : specialDates.closure;
+        specialDates.election = Array.isArray(data.specialDates.election) ? data.specialDates.election : specialDates.election;
+        specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training : specialDates.training;
+      }
+      resetOverhaulSettingsToDefault();
+      if (data.overhaulSettings && typeof data.overhaulSettings === "object") {
+        overhaulSettings.startDay = Number(data.overhaulSettings.startDay || 0);
+        overhaulSettings.endDay = Number(data.overhaulSettings.endDay || 0);
+        overhaulSettings.overrides = data.overhaulSettings.overrides && typeof data.overhaulSettings.overrides === "object" ? JSON.parse(JSON.stringify(data.overhaulSettings.overrides)) : {};
+      }
+      return collectLeaveDetailEntriesFromDays(buildDays(), category, rocYear, month);
+    } catch (err) {
+      console.warn("年度請假明細讀取失敗", err);
+      return [];
+    } finally {
+      document.getElementById("rocYear").value = backup.rocYear;
+      document.getElementById("month").value = backup.month;
+      document.getElementById("shiftGroup").value = backup.shiftGroup;
+      clearObject(manualRecords);
+      Object.assign(manualRecords, backup.manualRecords);
+      specialDates.closure = backup.specialDates.closure;
+      specialDates.election = backup.specialDates.election;
+      specialDates.training = backup.specialDates.training;
+      overhaulSettings.startDay = backup.overhaulSettings.startDay;
+      overhaulSettings.endDay = backup.overhaulSettings.endDay;
+      overhaulSettings.overrides = backup.overhaulSettings.overrides || {};
+    }
+  }
+  function collectLeaveDetailEntriesForPairs(pairs, shiftGroup, category) {
+    const rows = [];
+    (pairs || []).forEach(function (pair) {
+      rows.push.apply(rows, collectLeaveDetailEntriesForMonth(pair.rocYear, pair.month, shiftGroup, category));
+    });
+    return rows.sort(function (a, b) { return a.ordinal - b.ordinal; });
+  }
+  function groupLeaveDetailEntries(rows) {
+    const groups = [];
+    (rows || []).forEach(function (row) {
+      const last = groups[groups.length - 1];
+      if (last && row.ordinal === last.end.ordinal + 1) {
+        last.end = row;
+        last.hours = leaveDetailRoundHours(last.hours + row.hours);
+      } else {
+        groups.push({ start: row, end: row, hours: leaveDetailRoundHours(row.hours) });
+      }
+    });
+    return groups;
+  }
+  function leaveDetailPad2(value) { return String(Number(value) || 0).padStart(2, "0"); }
+  function formatLeaveDetailDate(row) {
+    return `${row.rocYear}/${leaveDetailPad2(row.month)}/${leaveDetailPad2(row.day)}`;
+  }
+  function formatLeaveDetailRange(group) {
+    const start = formatLeaveDetailDate(group.start);
+    if (group.start.ordinal === group.end.ordinal) return start;
+    if (group.start.rocYear === group.end.rocYear && group.start.month === group.end.month) return `${start} ～ ${leaveDetailPad2(group.end.day)}`;
+    return `${start} ～ ${formatLeaveDetailDate(group.end)}`;
+  }
+  function closeLeaveDetailModal() {
+    const modal = document.getElementById("leaveDetailModal");
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = leaveDetailPreviousBodyOverflow;
+  }
+  function openLeaveDetailModal(config) {
+    const rocYear = Number(document.getElementById("rocYear").value);
+    const month = Number(document.getElementById("month").value);
+    const shiftGroup = document.getElementById("shiftGroup").value;
+    const targetYear = config.yearType === "attendance" ? (month >= 11 ? rocYear + 1 : rocYear) : rocYear;
+    const pairs = config.yearType === "attendance" ? getAttendanceYearMonthPairs(targetYear) : getAccountingYearMonthPairs(targetYear);
+    const entries = collectLeaveDetailEntriesForPairs(pairs, shiftGroup, config.category);
+    const groups = groupLeaveDetailEntries(entries);
+    const detailTotal = leaveDetailRoundHours(entries.reduce(function (sum, row) { return sum + row.hours; }, 0));
+    const checkedStats = collectLeaveStatsForPairs(pairs, shiftGroup, null);
+    const cardTotal = leaveDetailRoundHours(checkedStats[config.category] || 0);
+    const yearLabel = config.yearType === "attendance" ? "考勤年度" : "會計年度";
+    document.getElementById("leaveDetailYear").textContent = `${targetYear}年${yearLabel}｜${shiftGroup}班`;
+    document.getElementById("leaveDetailTitle").textContent = `${config.name}請假明細`;
+    document.getElementById("leaveDetailTotal").textContent = `年度合計：${formatLeaveStatValue(cardTotal)}｜共 ${groups.length} 筆`;
+    const body = document.getElementById("leaveDetailBody");
+    if (groups.length === 0) {
+      body.innerHTML = `<div class="leave-detail-empty">本年度尚無${config.name}紀錄</div>`;
+    } else {
+      body.innerHTML = groups.map(function (group) {
+        return `<div class="leave-detail-entry"><div class="leave-detail-date">${formatLeaveDetailRange(group)}</div><div class="leave-detail-entry-info"><div class="leave-detail-name">${config.name}</div><div class="leave-detail-hours">${formatLeaveStatValue(group.hours)}</div></div></div>`;
+      }).join("");
+      if (detailTotal !== cardTotal) {
+        body.insertAdjacentHTML("afterbegin", `<div class="leave-detail-warning">資料核對提醒：日期明細合計 ${formatLeaveStatValue(detailTotal)}，年度統計為 ${formatLeaveStatValue(cardTotal)}。請檢查該年度是否有異常或未完整儲存的月份資料。</div>`);
+      }
+    }
+    const modal = document.getElementById("leaveDetailModal");
+    leaveDetailPreviousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.getElementById("leaveDetailCloseBtn").focus();
+  }
+  function bindLeaveDetailTriggers() {
+    Object.keys(leaveDetailConfig).forEach(function (id) {
+      const valueElement = document.getElementById(id);
+      const card = valueElement ? valueElement.closest(".leave-stat-item") : null;
+      if (!card || card.dataset.leaveDetailBound === "true") return;
+      card.dataset.leaveDetailBound = "true";
+      card.classList.add("leave-detail-trigger");
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", `查看${leaveDetailConfig[id].name}年度請假明細`);
+      card.addEventListener("click", function () { openLeaveDetailModal(leaveDetailConfig[id]); });
+      card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLeaveDetailModal(leaveDetailConfig[id]);
+        }
+      });
+    });
+  }
+  function initLeaveDetailFeature() {
+    bindLeaveDetailTriggers();
+    const modal = document.getElementById("leaveDetailModal");
+    const closeBtn = document.getElementById("leaveDetailCloseBtn");
+    if (closeBtn) closeBtn.addEventListener("click", closeLeaveDetailModal);
+    if (modal) modal.addEventListener("click", function (event) { if (event.target === modal) closeLeaveDetailModal(); });
+    document.addEventListener("keydown", function (event) { if (event.key === "Escape" && modal && modal.classList.contains("open")) closeLeaveDetailModal(); });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initLeaveDetailFeature);
+  else initLeaveDetailFeature();
+})();
+/* === 年度請假明細查詢：功能結束 === */
+</script>
+
 </body>
 </html>
