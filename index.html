@@ -4134,6 +4134,55 @@
 }
 /* === 年度請假明細查詢：樣式結束 === */
 
+
+/* === 薪資總覽 2x2 欄寬與加班費組成微調開始 === */
+.annual-leave-info-panel .leave-stat-item.leave-detail-trigger::after { content: none !important; display: none !important; }
+.salary-overview-grid { grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr) !important; }
+.salary-overview-item:nth-child(2),
+.salary-overview-item:nth-child(4) { border-right: none !important; }
+.salary-overtime-overview-item { min-width: 0; }
+.salary-overtime-overview-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(104px, .88fr);
+  gap: 12px;
+  align-items: stretch;
+  min-width: 0;
+}
+.salary-overtime-overview-main { min-width: 0; }
+.salary-overtime-overview-main .salary-overview-value { white-space: nowrap; }
+.salary-overtime-overview-breakdown {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(246,196,83,.24);
+}
+.salary-overtime-overview-breakdown-row {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 3px;
+  align-items: baseline;
+  min-width: 0;
+  white-space: nowrap;
+}
+.salary-overtime-overview-key { color: #a7f3d0; font-size: 14px; font-weight: 950; text-shadow: 0 0 8px rgba(110,231,183,.30); }
+.salary-overtime-overview-breakdown-value { color: #f6c453; font-size: 16px; font-weight: 950; text-align: right; white-space: nowrap; text-shadow: 0 0 8px rgba(246,196,83,.36); }
+.salary-overview-grid.has-special-leave-subsidy { grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr) !important; }
+@media (max-width: 760px) {
+  .salary-overview-grid,
+  .salary-overview-grid.has-special-leave-subsidy { grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr) !important; }
+  .salary-overview-item { min-width: 0 !important; padding: 12px 8px !important; }
+  .salary-overtime-overview-layout { grid-template-columns: minmax(0, 1.08fr) minmax(88px, .92fr) !important; gap: 7px !important; }
+  .salary-overtime-overview-main .salary-overview-label { font-size: clamp(12px, 3.45vw, 15px) !important; white-space: nowrap !important; }
+  .salary-overtime-overview-main .salary-overview-value { font-size: clamp(19px, 5.2vw, 25px) !important; }
+  .salary-overtime-overview-breakdown { gap: 7px !important; padding-left: 7px !important; }
+  .salary-overtime-overview-key { font-size: clamp(11px, 3.05vw, 13px) !important; }
+  .salary-overtime-overview-breakdown-value { font-size: clamp(11px, 3.2vw, 14px) !important; }
+  .salary-overview-grid.has-special-leave-subsidy .salary-overview-item:nth-child(5) { grid-column: 1 / -1; }
+}
+/* === 薪資總覽 2x2 欄寬與加班費組成微調結束 === */
+
 </style>
 </head>
 <body>
@@ -4177,9 +4226,17 @@
             <div class="salary-overview-label">基本薪給</div>
             <div class="salary-overview-value"><input id="salaryBasePay" class="salary-overview-input" type="text" inputmode="numeric" placeholder="請輸入薪水" /></div>
           </div>
-          <div class="salary-overview-item">
-            <div id="topSalaryMonthLabel" class="salary-overview-label">加班費</div>
-            <div id="topSalaryTotalAmount" class="salary-overview-value money-finance">$0</div>
+          <div class="salary-overview-item salary-overtime-overview-item">
+            <div class="salary-overtime-overview-layout">
+              <div class="salary-overtime-overview-main">
+                <div id="topSalaryMonthLabel" class="salary-overview-label">加班費</div>
+                <div id="topSalaryTotalAmount" class="salary-overview-value money-finance">$0</div>
+              </div>
+              <div class="salary-overtime-overview-breakdown" aria-label="當月加班費組成">
+                <div class="salary-overtime-overview-breakdown-row"><span class="salary-overtime-overview-key">加：</span><span id="topSalaryOvertimeAmount" class="salary-overtime-overview-breakdown-value">$0</span></div>
+                <div class="salary-overtime-overview-breakdown-row"><span class="salary-overtime-overview-key">假：</span><span id="topSalaryHolidayWorkAmount" class="salary-overtime-overview-breakdown-value">$0</span></div>
+              </div>
+            </div>
           </div>
           <div class="salary-overview-item">
             <div class="salary-overview-label">12切總工時</div>
@@ -7852,6 +7909,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       setSalaryAmountText("salaryOtherBonusAmount", otherBonusAmount);
       const topSalaryTotalAmount = document.getElementById("topSalaryTotalAmount");
       if (topSalaryTotalAmount) topSalaryTotalAmount.textContent = fmtDisplayMoney(totalSalaryAmount);
+      const topSalaryOvertimeAmount = document.getElementById("topSalaryOvertimeAmount");
+      if (topSalaryOvertimeAmount) topSalaryOvertimeAmount.textContent = fmtDisplayMoney(overtimeAmount);
+      const topSalaryHolidayWorkAmount = document.getElementById("topSalaryHolidayWorkAmount");
+      if (topSalaryHolidayWorkAmount) topSalaryHolidayWorkAmount.textContent = fmtDisplayMoney(holidayWorkAmount);
       const holidayBox = document.getElementById("salaryHolidayBox");
       const mealBox = document.getElementById("salaryMealBox");
       const otherBox = document.getElementById("salaryOtherBonusBox");
