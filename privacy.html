@@ -31,15 +31,17 @@ p { margin: 0 0 12px; color: #d1d5db; }
       </header>
       <section class="content">
 <h2>隱私權政策</h2>
- <p>本工具為個人加班費與考勤輔助計算網頁，主要資料儲存在使用者目前瀏覽器的 localStorage。使用者主動使用「G備份/還原」時，本工具才會透過 Google Drive appDataFolder 儲存或讀取備份檔 overtime-backup.json。</p>
+ <p>本工具為個人加班費與考勤輔助計算網頁，考勤、薪資、假別及參數資料儲存在使用者目前瀏覽器的 localStorage，並鏡像保存於 IndexedDB。使用者主動使用「G備份/還原」時，本工具才會透過 Google Drive appDataFolder 儲存或讀取備份檔 overtime-backup.json。</p>
  <h3>Google 資料存取範圍</h3>
  <p>本工具僅使用 https://www.googleapis.com/auth/drive.appdata 權限，用於查看、建立、更新、下載與刪除本工具在 Google Drive 應用程式資料夾中的備份檔。本工具不會讀取使用者 Google Drive 其他一般檔案。</p>
  <h3>資料使用方式</h3>
  <p>備份內容僅用於使用者本人跨裝置備份與還原加班費計算資料，包含本工具產生的 personalOvertimeState、假別我的最愛與週起始日設定等本機資料。</p>
+ <h3>外部資料來源</h3>
+ <p>本工具可能連線讀取台灣行事曆、行政院人事行政總處停止辦公告、本工具同源公開資料檔及必要的公開讀取轉接服務，也會載入 Google 登入元件。這些請求用於取得公開行事曆、公告或執行使用者主動授權的備份功能；本工具不會把使用者輸入的考勤、薪資或假別內容附加到公開資料查詢請求。</p>
  <h3>資料保存與刪除</h3>
  <p>使用者可在「G備份/還原」中下載本機備份、匯入本機備份、下載 G 備份或刪除 G 備份。按下「登出 G」會清除本機授權記憶；按下「刪除 G 備份」並完成二次確認後，會刪除 Google Drive appDataFolder 中的 overtime-backup.json。</p>
  <h3>第三方分享</h3>
- <p>本工具不會將使用者資料出售、出租或分享給第三方。Google Drive 備份僅儲存在使用者授權的 Google 帳戶 appDataFolder。</p>
+ <p>本工具不會出售或出租使用者資料。只有在使用者主動執行 G 備份時，備份內容才會傳送至使用者授權的 Google 帳戶 appDataFolder；外部公開資料查詢服務仍可能依其服務規則取得一般網路連線資訊，例如 IP 位址、瀏覽器資訊與請求時間。</p>
  <h3>聯絡方式</h3>
  <p>如需協助，請透過本工具發布頁面的維護者聯絡管道處理。</p>
         <a class="back-link" href="index.html">返回加班費計算工具</a>
