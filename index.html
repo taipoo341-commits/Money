@@ -11256,10 +11256,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const DGPA_DEFAULT_REGION = "高雄市";
   const DGPA_REGION_STORAGE_KEY = "personalOvertimeClosureOfficialRegion";
   const DGPA_AUTO_CHECK_KEY = "personalOvertimeClosureOfficialLastCheck";
+  const DGPA_CURRENT_MONTH_RECHECK_MS = 15 * 60 * 1000;
   const closureOfficialSessionChecked = new Set();
   const closureOfficialResultCache = new Map();
   let closureOfficialQuerySequence = 0;
   let closureOfficialAutoTimer = 0;
+  let closureOfficialPeriodicTimer = 0;
   function getClosureOfficialRegion() {
     const select = document.getElementById("closureOfficialRegionSelect");
     const value = select ? select.value : localStorage.getItem(DGPA_REGION_STORAGE_KEY);
@@ -11314,6 +11316,20 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       maxOrdinal = maxOrdinal === null ? updatedOrdinal : Math.max(maxOrdinal, updatedOrdinal);
     }
     const historyComplete = payload.historyComplete === true;
+    const current = targetOrdinal === currentOrdinal;
+    const dailyStatus = payload.dailyStatus && typeof payload.dailyStatus === "object" ? payload.dailyStatus : null;
+    const dailySourceDate = dailyStatus && dailyStatus.sourceDate && typeof dailyStatus.sourceDate === "object" ? dailyStatus.sourceDate : null;
+    const dailySourceIsToday = Boolean(dailySourceDate)
+      && Number(dailySourceDate.rocYear) === currentRocYear
+      && Number(dailySourceDate.month) === currentMonth
+      && Number(dailySourceDate.day) === now.getDate();
+    const dailyError = current && (!dailyStatus || dailyStatus.ok !== true || !dailySourceIsToday);
+    const reviewItems = Array.isArray(payload.reviewItems) ? payload.reviewItems.filter(function (item) {
+      return Number(item.rocYear) === Number(targetRocYear)
+        && Number(item.month) === Number(targetMonth)
+        && item.region === targetRegion
+        && item.reason === "manual-closure-type";
+    }) : [];
     const coverage = payload.coverage && payload.coverage.minRocYear && payload.coverage.minMonth && payload.coverage.maxRocYear && payload.coverage.maxMonth ? {
       minRocYear: Number(payload.coverage.minRocYear),
       minMonth: Number(payload.coverage.minMonth),
@@ -11324,7 +11340,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     const events = payload.events.filter(function (event) {
       return Number(event.rocYear) === Number(targetRocYear) && Number(event.month) === Number(targetMonth) && event.region === targetRegion;
     });
-    return { events:events, covered:covered, historyComplete:historyComplete, coverage:coverage, pagesScanned:Number(payload.pagesScanned || 0), source:"same-origin", updatedAt:payload.updatedAt || "", current:targetOrdinal === currentOrdinal };
+    return { events:events, covered:covered, historyComplete:historyComplete, coverage:coverage, pagesScanned:Number(payload.pagesScanned || 0), source:"same-origin", updatedAt:payload.updatedAt || "", current:current, dailyError:dailyError, reviewItems:reviewItems };
 
   }
   async function closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken) {
@@ -11351,7 +11367,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       source: sameOriginResult ? sameOriginResult.source : "same-origin-unavailable",
       offline: true,
       loadFailed: !sameOriginResult,
-      updatedAt: sameOriginResult ? (sameOriginResult.updatedAt || "") : ""
+      updatedAt: sameOriginResult ? (sameOriginResult.updatedAt || "") : "",
+      dailyError: sameOriginResult ? sameOriginResult.dailyError === true : false,
+      reviewItems: sameOriginResult && Array.isArray(sameOriginResult.reviewItems) ? sameOriginResult.reviewItems : []
     };
   }
   function closureOfficialSyncRecords(events) {
@@ -11394,6 +11412,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     });
     return { added:added, unchanged:unchanged, protectedCount:protectedCount, removed:removed, reviewCount:reviewCount };
   }
+  function closureOfficialRememberCheck(targetRocYear, targetMonth, targetRegion, pagesScanned) {
+    localStorage.setItem(DGPA_AUTO_CHECK_KEY, JSON.stringify({ date:localIsoDate(new Date()), rocYear:targetRocYear, month:targetMonth, region:targetRegion, checkedAt:new Date().toISOString(), pagesScanned:Number(pagesScanned || 0) }));
+  }
   async function queryOfficialClosure(options) {
     const opts = options || {};
     const queryToken = ++closureOfficialQuerySequence;
@@ -11404,16 +11425,23 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const targetMonth = Number(document.getElementById("month").value);
       const targetRegion = getClosureOfficialRegion();
       const queryKey = targetRocYear + "-" + targetMonth + "-" + targetRegion;
-      let searchResult = !opts.manual ? closureOfficialResultCache.get(queryKey) : null;
+      const now = new Date();
+      const targetIsCurrentMonth = targetRocYear === now.getFullYear() - 1911 && targetMonth === now.getMonth() + 1;
+      let searchResult = !opts.manual && !targetIsCurrentMonth ? closureOfficialResultCache.get(queryKey) : null;
       if (!searchResult) {
         searchResult = await closureOfficialSearchTargetMonth(targetRocYear, targetMonth, queryToken);
         if (queryToken !== closureOfficialQuerySequence) return;
-        if (searchResult.covered) closureOfficialResultCache.set(queryKey, searchResult);
+        if (searchResult.covered && !targetIsCurrentMonth) closureOfficialResultCache.set(queryKey, searchResult);
       }
       if (queryToken !== closureOfficialQuerySequence) return;
       const unique = Array.from(new Map((searchResult.events || []).map(function (event) {
         return [event.rocYear + "-" + event.month + "-" + event.day + "-" + event.region, event];
       })).values());
+      if (searchResult.dailyError) {
+        closureOfficialRememberCheck(targetRocYear, targetMonth, targetRegion, searchResult.pagesScanned);
+        closureOfficialSetStatus("網頁異常，請改手動輸入", "error");
+        return;
+      }
       if (!searchResult.covered) {
         if (searchResult.loadFailed) {
           const lastUpdated = closureOfficialFormatUpdatedAt(searchResult.updatedAt);
@@ -11433,9 +11461,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       saveCurrentMonthState();
       renderAll(false);
       closureOfficialSessionChecked.add(queryKey);
-      localStorage.setItem(DGPA_AUTO_CHECK_KEY, JSON.stringify({ date:localIsoDate(new Date()), rocYear:targetRocYear, month:targetMonth, region:targetRegion, checkedAt:new Date().toISOString(), pagesScanned:searchResult.pagesScanned }));
+      closureOfficialRememberCheck(targetRocYear, targetMonth, targetRegion, searchResult.pagesScanned);
+      if (Array.isArray(searchResult.reviewItems) && searchResult.reviewItems.length) {
+        const officialTexts = Array.from(new Set(searchResult.reviewItems.map(function (item) { return String(item.officialText || "").trim(); }).filter(Boolean)));
+        closureOfficialSetStatus("請手動選擇停止辦公日類別" + (officialTexts.length ? "；官方原文：" + officialTexts.join("、") : ""), "warn");
+        return;
+      }
       if (!unique.length) {
-        const now = new Date();
         const currentOrdinal = closureOfficialMonthOrdinal(now.getFullYear() - 1911, now.getMonth() + 1);
         const targetOrdinal = closureOfficialMonthOrdinal(targetRocYear, targetMonth);
         const reconciliation = result.removed || result.reviewCount ? `；移除失效 ${result.removed} 筆、人工待確認 ${result.reviewCount} 筆` : "";
@@ -11462,8 +11494,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const month = Number(document.getElementById("month").value);
       const region = getClosureOfficialRegion();
       const queryKey = rocYear + "-" + month + "-" + region;
-      if (closureOfficialSessionChecked.has(queryKey)) return false;
-      return !saved || saved.date !== today || Number(saved.rocYear) !== rocYear || Number(saved.month) !== month || saved.region !== region;
+      const now = new Date();
+      const isCurrentMonth = rocYear === now.getFullYear() - 1911 && month === now.getMonth() + 1;
+      if (closureOfficialSessionChecked.has(queryKey) && !isCurrentMonth) return false;
+      if (!saved || saved.date !== today || Number(saved.rocYear) !== rocYear || Number(saved.month) !== month || saved.region !== region) return true;
+      if (!isCurrentMonth) return false;
+      const checkedAt = saved.checkedAt ? new Date(saved.checkedAt).getTime() : NaN;
+      return !Number.isFinite(checkedAt) || Date.now() - checkedAt >= DGPA_CURRENT_MONTH_RECHECK_MS;
     } catch (error) { return true; }
   }
   function requestClosureOfficialAutoQuery() {
@@ -11490,6 +11527,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       });
     }
     if (button) button.addEventListener("click", function () { clearTimeout(closureOfficialAutoTimer); queryOfficialClosure({ manual:true }); });
+    clearInterval(closureOfficialPeriodicTimer);
+    closureOfficialPeriodicTimer = setInterval(function () {
+      if (document.visibilityState === "hidden" || (button && button.disabled) || !shouldAutoQueryOfficialClosure()) return;
+      queryOfficialClosure({ auto:true });
+    }, 60 * 1000);
     setTimeout(requestClosureOfficialAutoQuery, 1400);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initOfficialClosureQuery);

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 2,
-  "updatedAt": "2026-08-24T09:51:01+08:00",
+  "schemaVersion": 3,
+  "updatedAt": "2026-08-24T20:56:19+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 50,
   "historyComplete": true,
@@ -13,18 +13,53 @@
   "lastEvent": {
     "rocYear": 115,
     "month": 8,
-    "day": 23
+    "day": 24
   },
+  "dailyStatus": {
+    "ok": true,
+    "sourceDate": {
+      "rocYear": 115,
+      "month": 8,
+      "day": 24
+    },
+    "officialUpdatedAt": "2026/08/24 20:47:15",
+    "checkedAt": "2026-08-24T20:56:19+08:00",
+    "message": ""
+  },
+  "reviewItems": [],
   "events": [
     {
       "rocYear": 115,
       "month": 8,
+      "day": 24,
+      "region": "高雄市",
+      "officialText": "今天停止上班、停止上課。",
+      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "pid": "",
+      "sourceKind": "daily"
+    },
+    {
+      "rocYear": 115,
+      "month": 8,
+      "day": 24,
+      "region": "臺南市",
+      "officialText": "今天停止上班、停止上課。明天照常上班、照常上課。",
+      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "pid": "",
+      "sourceKind": "daily"
+    },
+    {
+      "rocYear": 115,
+      "month": 8,
       "day": 23,
       "region": "高雄市",
       "officialText": "今天已達停止上班及上課標準。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13083",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/b15418cf-49e3-4dcf-9bd4-15ada9ebf998.html&nfix=&name=nds.html",
-      "pid": "13083"
+      "pid": "13083",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
@@ -34,7 +69,8 @@
       "officialText": "今天已達停止上班及上課標準。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13083",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/b15418cf-49e3-4dcf-9bd4-15ada9ebf998.html&nfix=&name=nds.html",
-      "pid": "13083"
+      "pid": "13083",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
@@ -44,7 +80,8 @@
       "officialText": "今天已達停止上班及上課標準。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13036",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202607/d5273a33-062f-478f-ad37-4289fd5fd871.html&nfix=&name=nds.html",
-      "pid": "13036"
+      "pid": "13036",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
@@ -54,7 +91,8 @@
       "officialText": "今天已達停止上班及上課標準。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13036",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202607/d5273a33-062f-478f-ad37-4289fd5fd871.html&nfix=&name=nds.html",
-      "pid": "13036"
+      "pid": "13036",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
@@ -64,7 +102,8 @@
       "officialText": "今天停止上班、停止上課。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13020",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202606/85a2538e-fb7a-479c-ad39-700fb6936927.html&nfix=&name=nds.html",
-      "pid": "13020"
+      "pid": "13020",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
@@ -74,7 +113,8 @@
       "officialText": "今天停止上班、停止上課。",
       "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13020",
       "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202606/85a2538e-fb7a-479c-ad39-700fb6936927.html&nfix=&name=nds.html",
-      "pid": "13020"
+      "pid": "13020",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 114,
