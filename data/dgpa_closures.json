@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-09T13:25:23+08:00",
+  "updatedAt": "2026-08-24T09:51:01+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 50,
   "historyComplete": true,
@@ -12,10 +12,30 @@
   },
   "lastEvent": {
     "rocYear": 115,
-    "month": 7,
-    "day": 11
+    "month": 8,
+    "day": 23
   },
   "events": [
+    {
+      "rocYear": 115,
+      "month": 8,
+      "day": 23,
+      "region": "高雄市",
+      "officialText": "今天已達停止上班及上課標準。",
+      "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13083",
+      "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/b15418cf-49e3-4dcf-9bd4-15ada9ebf998.html&nfix=&name=nds.html",
+      "pid": "13083"
+    },
+    {
+      "rocYear": 115,
+      "month": 8,
+      "day": 23,
+      "region": "臺南市",
+      "officialText": "今天已達停止上班及上課標準。",
+      "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13083",
+      "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/b15418cf-49e3-4dcf-9bd4-15ada9ebf998.html&nfix=&name=nds.html",
+      "pid": "13083"
+    },
     {
       "rocYear": 115,
       "month": 7,
