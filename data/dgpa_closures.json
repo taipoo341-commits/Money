@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-25T00:17:44+08:00",
+  "updatedAt": "2026-08-25T09:45:29+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 50,
   "historyComplete": true,
@@ -22,8 +22,8 @@
       "month": 8,
       "day": 25
     },
-    "officialUpdatedAt": "2026/08/25 00:14:15",
-    "checkedAt": "2026-08-25T00:17:44+08:00",
+    "officialUpdatedAt": "2026/08/25 09:38:16",
+    "checkedAt": "2026-08-25T09:45:29+08:00",
     "message": ""
   },
   "reviewItems": [],
@@ -34,21 +34,21 @@
       "day": 24,
       "region": "高雄市",
       "officialText": "今天停止上班、停止上課。",
-      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
-      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
-      "pid": "",
-      "sourceKind": "daily"
+      "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13085",
+      "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/d71842c2-21e7-41bb-a9f6-e1899867d0b5.html&nfix=&name=nds.html",
+      "pid": "13085",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
       "month": 8,
       "day": 24,
       "region": "臺南市",
-      "officialText": "今天停止上班、停止上課。明天照常上班、照常上課。",
-      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
-      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
-      "pid": "",
-      "sourceKind": "daily"
+      "officialText": "今天停止上班、停止上課。",
+      "officialUrl": "https://www.dgpa.gov.tw/information?uid=374&pid=13085",
+      "ndsUrl": "https://www.dgpa.gov.tw/FileConversion?filename=dgpa/files/202608/d71842c2-21e7-41bb-a9f6-e1899867d0b5.html&nfix=&name=nds.html",
+      "pid": "13085",
+      "sourceKind": "archive"
     },
     {
       "rocYear": 115,
