@@ -4653,40 +4653,6 @@
         </div>
       </section>
 
-      <!-- === 2026-09-15 升等$$補發試算 V2：區塊開始 === -->
-      <section id="partialMonthPanel" class="panel partial-month-panel">
-        <button id="partialMonthToggle" class="partial-month-toggle" type="button" aria-expanded="false" aria-controls="partialMonthContent"><div><div class="partial-month-title">升等$$補發試算</div><div id="partialMonthSummary" class="partial-month-summary">本月未啟用升等補發試算</div></div><div class="partial-month-icon">＋</div></button>
-        <div id="partialMonthContent" class="partial-month-content">
-          <div class="partial-month-enable-row"><div><div class="partial-month-enable-label">啟用本月升等補發試算</div><div class="partial-month-enable-note">基本薪給補發差額固定以30天計算；加班費與假日出勤為待薪資單核對的預估值。</div></div><button id="partialMonthEnableBtn" class="partial-month-switch-btn" type="button">未啟用</button></div>
-          <div id="partialMonthForm" class="partial-month-form is-disabled">
-            <label class="partial-month-field"><span>調薪生效日</span><button id="partialMonthEffectiveDateBtn" class="partial-month-picker-btn" type="button">請選擇日期</button></label>
-            <label class="partial-month-field"><span>調薪前基本薪給</span><div class="partial-month-money-wrap"><input id="partialMonthOldSalary" class="partial-month-input money" type="text" inputmode="numeric" enterkeyhint="next" placeholder="$0" /></div></label>
-            <label class="partial-month-field"><span>調薪後基本薪給</span><div class="partial-month-money-wrap"><input id="partialMonthNewSalary" class="partial-month-input money" type="text" inputmode="numeric" enterkeyhint="done" placeholder="$0" /></div></label>
-          </div>
-          <div id="partialMonthWarning" class="partial-month-warning"></div>
-          <div class="partial-month-block"><div class="partial-month-block-title">基本薪給補發</div><div class="partial-month-grid">
-            <div class="partial-month-result"><div class="partial-month-result-label">調薪前區段</div><div id="partialMonthOldDays" class="partial-month-result-value">0天</div><div id="partialMonthOldRange" class="partial-month-formula">-</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">調薪後適用區段</div><div id="partialMonthNewDays" class="partial-month-result-value">0天</div><div id="partialMonthNewRange" class="partial-month-formula">-</div></div>
-            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">基本薪給補發差額</div><div id="partialMonthBaseDiff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthBaseFormula" class="partial-month-formula">（新薪－舊薪）÷30×新薪日數</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">含補發的基本薪給參考值</div><div id="partialMonthBaseWithDiff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthBaseWithDiffFormula" class="partial-month-formula">新薪＋基本薪給補發差額</div></div>
-          </div></div>
-          <div class="partial-month-block"><div class="partial-month-block-title">加班費差額<span class="partial-month-estimate-tag">預估，待薪資單核對</span></div><div class="partial-month-grid overtime-grid">
-            <div class="partial-month-result"><div class="partial-month-result-label">破月加班費薪給基礎</div><div id="partialMonthOvertimeBase" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">各薪資區段固定除以30</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">1.33倍差額</div><div id="partialMonthCode7Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode7Hours" class="partial-month-formula">0HR</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">1.67倍差額</div><div id="partialMonthCode8Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode8Hours" class="partial-month-formula">0HR</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">2.66倍差額</div><div id="partialMonthCode6Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode6Hours" class="partial-month-formula">0HR</div></div>
-            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">加班費補發差額</div><div id="partialMonthOvertimeDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">各倍率差額合計</div></div>
-          </div></div>
-          <div class="partial-month-block"><div class="partial-month-block-title">假日出勤與補發總覽<span class="partial-month-estimate-tag">預估，待薪資單核對</span></div><div class="partial-month-grid">
-            <div class="partial-month-result"><div class="partial-month-result-label">假日實際出勤時數</div><div id="partialMonthHolidayHours" class="partial-month-result-value">0HR</div><div class="partial-month-formula">國定假日＋額外假日出勤</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">假日出勤補發差額</div><div id="partialMonthHolidayDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">依實際出勤時數計算</div></div>
-            <div class="partial-month-result"><div class="partial-month-result-label">異動資訊</div><div id="partialMonthChangeInfo" class="partial-month-result-value partial-change-info"><span class="partial-change-main">未設定</span><span class="partial-change-sub">尚未啟用</span></div><div class="partial-month-formula">生效日計入新薪資區段</div></div>
-            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">預估補發合計</div><div id="partialMonthGrandDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">基本薪給＋加班費＋假日出勤差額</div></div>
-          </div></div>
-        </div>
-      </section>
-      <div id="partialMonthDateModal" class="partial-picker-modal" role="dialog" aria-modal="true" aria-labelledby="partialMonthDateTitle"><div class="partial-picker-dialog"><div class="partial-picker-head"><div><div id="partialMonthDateTitle" class="partial-picker-title">選擇調薪生效日</div><div id="partialMonthDateSubtitle" class="partial-picker-subtitle"></div></div><button class="partial-picker-close" type="button" data-partial-close="date">關閉</button></div><div class="partial-picker-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div id="partialMonthDateGrid" class="partial-picker-calendar"></div></div></div>
-      <!-- === 2026-09-15 升等$$補發試算 V2：區塊結束 === -->
       <section class="panel substitute-top-panel">
         <div class="substitute-top-label">代班資訊</div>
         <div id="substituteInfoTop" class="substitute-top-value">-</div>
@@ -4878,6 +4844,41 @@
           </div>
         </div>
       </details>
+
+      <!-- === 2026-09-15 升等$$補發試算 V2：區塊開始 === -->
+      <section id="partialMonthPanel" class="panel partial-month-panel">
+        <button id="partialMonthToggle" class="partial-month-toggle" type="button" aria-expanded="false" aria-controls="partialMonthContent"><div><div class="partial-month-title">升等$$補發試算</div><div id="partialMonthSummary" class="partial-month-summary">本月未啟用升等補發試算</div></div><div class="partial-month-icon">＋</div></button>
+        <div id="partialMonthContent" class="partial-month-content">
+          <div class="partial-month-enable-row"><div><div class="partial-month-enable-label">啟用本月升等補發試算</div><div class="partial-month-enable-note">基本薪給補發差額固定以30天計算；加班費與假日出勤為待薪資單核對的預估值。</div></div><button id="partialMonthEnableBtn" class="partial-month-switch-btn" type="button">未啟用</button></div>
+          <div id="partialMonthForm" class="partial-month-form is-disabled">
+            <label class="partial-month-field"><span>調薪生效日</span><button id="partialMonthEffectiveDateBtn" class="partial-month-picker-btn" type="button">請選擇日期</button></label>
+            <label class="partial-month-field"><span>調薪前基本薪給</span><div class="partial-month-money-wrap"><input id="partialMonthOldSalary" class="partial-month-input money" type="text" inputmode="numeric" enterkeyhint="next" placeholder="$0" /></div></label>
+            <label class="partial-month-field"><span>調薪後基本薪給</span><div class="partial-month-money-wrap"><input id="partialMonthNewSalary" class="partial-month-input money" type="text" inputmode="numeric" enterkeyhint="done" placeholder="$0" /></div></label>
+          </div>
+          <div id="partialMonthWarning" class="partial-month-warning"></div>
+          <div class="partial-month-block"><div class="partial-month-block-title">基本薪給補發</div><div class="partial-month-grid">
+            <div class="partial-month-result"><div class="partial-month-result-label">調薪前區段</div><div id="partialMonthOldDays" class="partial-month-result-value">0天</div><div id="partialMonthOldRange" class="partial-month-formula">-</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">調薪後適用區段</div><div id="partialMonthNewDays" class="partial-month-result-value">0天</div><div id="partialMonthNewRange" class="partial-month-formula">-</div></div>
+            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">基本薪給補發差額</div><div id="partialMonthBaseDiff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthBaseFormula" class="partial-month-formula">（新薪－舊薪）÷30×新薪日數</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">含補發的基本薪給參考值</div><div id="partialMonthBaseWithDiff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthBaseWithDiffFormula" class="partial-month-formula">新薪＋基本薪給補發差額</div></div>
+          </div></div>
+          <div class="partial-month-block"><div class="partial-month-block-title">加班費差額<span class="partial-month-estimate-tag">預估，待薪資單核對</span></div><div class="partial-month-grid overtime-grid">
+            <div class="partial-month-result"><div class="partial-month-result-label">破月加班費薪給基礎</div><div id="partialMonthOvertimeBase" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">各薪資區段固定除以30</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">1.33倍差額</div><div id="partialMonthCode7Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode7Hours" class="partial-month-formula">0HR</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">1.67倍差額</div><div id="partialMonthCode8Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode8Hours" class="partial-month-formula">0HR</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">2.66倍差額</div><div id="partialMonthCode6Diff" class="partial-month-result-value">NT$ 0</div><div id="partialMonthCode6Hours" class="partial-month-formula">0HR</div></div>
+            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">加班費補發差額</div><div id="partialMonthOvertimeDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">各倍率差額合計</div></div>
+          </div></div>
+          <div class="partial-month-block"><div class="partial-month-block-title">假日出勤與補發總覽<span class="partial-month-estimate-tag">預估，待薪資單核對</span></div><div class="partial-month-grid">
+            <div class="partial-month-result"><div class="partial-month-result-label">假日實際出勤時數</div><div id="partialMonthHolidayHours" class="partial-month-result-value">0HR</div><div class="partial-month-formula">國定假日＋額外假日出勤</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">假日出勤補發差額</div><div id="partialMonthHolidayDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">依實際出勤時數計算</div></div>
+            <div class="partial-month-result"><div class="partial-month-result-label">異動資訊</div><div id="partialMonthChangeInfo" class="partial-month-result-value partial-change-info"><span class="partial-change-main">未設定</span><span class="partial-change-sub">尚未啟用</span></div><div class="partial-month-formula">生效日計入新薪資區段</div></div>
+            <div class="partial-month-result partial-month-total"><div class="partial-month-result-label">預估補發合計</div><div id="partialMonthGrandDiff" class="partial-month-result-value">NT$ 0</div><div class="partial-month-formula">基本薪給＋加班費＋假日出勤差額</div></div>
+          </div></div>
+        </div>
+      </section>
+      <div id="partialMonthDateModal" class="partial-picker-modal" role="dialog" aria-modal="true" aria-labelledby="partialMonthDateTitle"><div class="partial-picker-dialog"><div class="partial-picker-head"><div><div id="partialMonthDateTitle" class="partial-picker-title">選擇調薪生效日</div><div id="partialMonthDateSubtitle" class="partial-picker-subtitle"></div></div><button class="partial-picker-close" type="button" data-partial-close="date">關閉</button></div><div class="partial-picker-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div id="partialMonthDateGrid" class="partial-picker-calendar"></div></div></div>
+      <!-- === 2026-09-15 升等$$補發試算 V2：區塊結束 === -->
 
       <section class="panel leave-stats-panel">
         <button id="leaveStatsToggle" class="section-header-toggle" type="button" aria-expanded="false" aria-controls="leaveStatsContent">
