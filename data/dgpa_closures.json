@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-20T01:09:52+08:00",
+  "updatedAt": "2026-09-21T02:10:09+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 50,
   "historyComplete": true,
@@ -20,10 +20,10 @@
     "sourceDate": {
       "rocYear": 115,
       "month": 9,
-      "day": 20
+      "day": 21
     },
-    "officialUpdatedAt": "2026/09/20 01:05:14",
-    "checkedAt": "2026-09-20T01:09:52+08:00",
+    "officialUpdatedAt": "2026/09/21 02:08:14",
+    "checkedAt": "2026-09-21T02:10:09+08:00",
     "message": ""
   },
   "reviewItems": [],
