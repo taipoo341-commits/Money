@@ -4479,6 +4479,7 @@
 .training-hour-unit{color:#94a3b8;font-size:10px;font-weight:900}
 .training-hour-error{min-height:12px;color:#fda4af;font-size:9px;line-height:1.25;text-align:center}
 .training-hour-error:empty{display:none}
+.training-hour-hint{margin:0 0 10px;color:#94a3b8;font-size:11px;line-height:1.5}
 .special-record.with-delete-space:has(.training-hour-control){grid-template-columns:minmax(110px,1.1fr) minmax(150px,1fr) 72px 48px!important;gap:8px!important;align-items:center!important}
 .special-record.with-delete-space:has(.training-hour-control):has(.placeholder-delete){grid-template-columns:minmax(110px,1.1fr) minmax(150px,1fr) 72px!important}
 .special-record.with-delete-space:has(.training-hour-control) .special-date-row{display:contents!important}
@@ -4772,6 +4773,7 @@
                 <div class="special-title">額外加班</div>
                 <button id="trainingAddBtn" class="special-add-btn" type="button">新增</button>
               </div>
+              <p class="training-hour-hint">額外加班計入 D11；當日 D11 合計上限 12HR，超過部分不計。</p>
               <div id="trainingRecordList" class="special-record-list"></div>
             </div>
           </div>
@@ -5892,7 +5894,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (data.specialDates && typeof data.specialDates === "object") {
           specialDates.closure = Array.isArray(data.specialDates.closure) ? data.specialDates.closure : specialDates.closure;
           specialDates.election = Array.isArray(data.specialDates.election) ? data.specialDates.election : specialDates.election;
-          specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training : specialDates.training;
+          specialDates.training = Array.isArray(data.specialDates.training) ? normalizeTrainingRecords(data.specialDates.training) : specialDates.training;
           while (specialDates.training.length < 1) specialDates.training.push({ day: 0, hours: 3 });
         }
         if (Array.isArray(data.batchRangeRecords)) {
@@ -6924,7 +6926,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       return (specialDates.training || []).filter(item => Number(item.day) === Number(day) && Number(item.hours || 0) > 0);
     }
     function calcTrainingMinutes(day) {
-      return getTrainingRecordsForDay(day).reduce((sum, item) => sum + Math.round(Number(item.hours || 0) * 60), 0);
+      return getTrainingRecordsForDay(day).reduce((sum, item) => sum + Math.round(normalizeTrainingHourValue(item.hours, 3) * 60), 0);
     }
     function isOverhaulActiveDay(day) {
       const startDay = Number(overhaulSettings.startDay || 0);
@@ -7103,28 +7105,26 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function calcD10OvertimeMinutes(dayInfo) {
       const code = Number(dayInfo.actualCode);
       const baseCode = Number(dayInfo.baseCode);
-      const trainingMinutes = calcTrainingMinutes(dayInfo.day);
       if (dayInfo.changeText === "錯誤登錄") return 0;
       if (dayInfo.noteText === "錯誤登錄") return 0;
       if (dayInfo.changeText === "違規") return 0;
       if (isWeekendTrainingClass(dayInfo)) return 0;
       if (code === 4 && isRestTextForD11(dayInfo.changeText)) return 0;
-      if (isSubstituteCode(code)) return getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes;
+      if (isSubstituteCode(code)) return getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day);
       const overhaulOverrideMinutes = getOverhaulOverrideMinutes(dayInfo.day, dayInfo.year, dayInfo.month);
       if (overhaulOverrideMinutes !== null) return overhaulOverrideMinutes;
       if (isOverhaulActiveDay(dayInfo.day)) return 0;
-      if (code === 0 || code === 9 || code === 10) return trainingMinutes;
+      if (code === 0 || code === 9 || code === 10) return 0;
       if (isLeaveCode(code)) {
         if (isCompoundLeaveCodeForDay(code, dayInfo.day) && hasCompoundSplitInput(dayInfo)) {
-          return isCompoundSplitPartialLeave(dayInfo) ? getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes : trainingMinutes;
+          return isCompoundSplitPartialLeave(dayInfo) ? getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) : 0;
         }
-        if (isWorkCode(baseCode) && hasPartialLeaveHrText(dayInfo)) return getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes;
-        return trainingMinutes;
+        if (isWorkCode(baseCode) && hasPartialLeaveHrText(dayInfo)) return getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day);
+        return 0;
       }
       let minutes = 0;
       if (isWorkCode(code)) minutes = getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day);
       minutes += calcElectionD10AdjustmentMinutes(dayInfo);
-      minutes += trainingMinutes;
       return Math.max(0, minutes);
     }
     function isRestTextForD11(text) {
@@ -7942,18 +7942,21 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     function normalizeTrainingHourValue(value, fallback = 3) {
       const numeric = Number(value);
       if (!Number.isFinite(numeric)) return fallback;
-      return Math.min(24, Math.max(0.5, Math.round(numeric * 2) / 2));
+      return Math.min(12, Math.max(0.5, Math.round(numeric * 2) / 2));
+    }
+    function normalizeTrainingRecords(records) {
+      return records.map(record => ({ ...record, hours: normalizeTrainingHourValue(record && record.hours, 3) }));
     }
     function parseTrainingHourInput(value) {
       const text = String(value ?? "").trim().replace(",", ".");
       if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text)) return null;
       const numeric = Number(text);
-      if (!Number.isFinite(numeric) || numeric < 0.5 || numeric > 24 || Math.abs(numeric * 2 - Math.round(numeric * 2)) > 0.0001) return null;
+      if (!Number.isFinite(numeric) || numeric < 0.5 || numeric > 12 || Math.abs(numeric * 2 - Math.round(numeric * 2)) > 0.0001) return null;
       return Math.round(numeric * 2) / 2;
     }
     function buildTrainingHourControl(record, index) {
       const value = normalizeTrainingHourValue(record && record.hours, 3);
-      return `<div class="training-hour-control"><div class="training-hour-stepper"><button class="training-hour-step-btn" type="button" data-training-hour-step="-0.5" data-index="${index}" aria-label="減少額外加班時數" ${value <= 0.5 ? "disabled" : ""}>－</button><label class="training-hour-input-wrap"><input class="training-hour-input" type="text" inputmode="decimal" maxlength="4" value="${fmtHour(value)}" data-training-hours-input="1" data-index="${index}" aria-label="第 ${index + 1} 筆額外加班時數"><span class="training-hour-unit">HR</span></label><button class="training-hour-step-btn" type="button" data-training-hour-step="0.5" data-index="${index}" aria-label="增加額外加班時數" ${value >= 24 ? "disabled" : ""}>＋</button></div><div class="training-hour-error" data-training-hour-error="${index}" aria-live="polite"></div></div>`;
+      return `<div class="training-hour-control"><div class="training-hour-stepper"><button class="training-hour-step-btn" type="button" data-training-hour-step="-0.5" data-index="${index}" aria-label="減少額外加班時數" ${value <= 0.5 ? "disabled" : ""}>－</button><label class="training-hour-input-wrap"><input class="training-hour-input" type="text" inputmode="decimal" maxlength="4" value="${fmtHour(value)}" data-training-hours-input="1" data-index="${index}" aria-label="第 ${index + 1} 筆額外加班時數"><span class="training-hour-unit">HR</span></label><button class="training-hour-step-btn" type="button" data-training-hour-step="0.5" data-index="${index}" aria-label="增加額外加班時數" ${value >= 12 ? "disabled" : ""}>＋</button></div><div class="training-hour-error" data-training-hour-error="${index}" aria-live="polite"></div></div>`;
     }
     function commitTrainingHourInput(input) {
       const index = Number(input && input.dataset.index);
@@ -7961,7 +7964,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const error = document.querySelector(`[data-training-hour-error="${index}"]`);
       if (parsed === null) {
         input.setAttribute("aria-invalid", "true");
-        if (error) error.textContent = "請輸入 0.5～24，並以 0.5 小時為單位";
+        if (error) error.textContent = "請輸入 0.5～12，並以 0.5 小時為單位";
         return false;
       }
       if (!specialDates.training[index]) return false;
@@ -9164,7 +9167,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         if (data.specialDates && typeof data.specialDates === "object") {
           specialDates.closure = Array.isArray(data.specialDates.closure) ? data.specialDates.closure : specialDates.closure;
           specialDates.election = Array.isArray(data.specialDates.election) ? data.specialDates.election : specialDates.election;
-          specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training : specialDates.training;
+          specialDates.training = Array.isArray(data.specialDates.training) ? normalizeTrainingRecords(data.specialDates.training) : specialDates.training;
         }
         resetOverhaulSettingsToDefault();
         if (data.overhaulSettings && typeof data.overhaulSettings === "object") {
@@ -11126,7 +11129,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (data.specialDates && typeof data.specialDates === "object") {
         specialDates.closure = Array.isArray(data.specialDates.closure) ? data.specialDates.closure : specialDates.closure;
         specialDates.election = Array.isArray(data.specialDates.election) ? data.specialDates.election : specialDates.election;
-        specialDates.training = Array.isArray(data.specialDates.training) ? data.specialDates.training : specialDates.training;
+        specialDates.training = Array.isArray(data.specialDates.training) ? normalizeTrainingRecords(data.specialDates.training) : specialDates.training;
       }
       resetOverhaulSettingsToDefault();
       if (data.overhaulSettings && typeof data.overhaulSettings === "object") {
@@ -12699,21 +12702,20 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   };
   calcD10OvertimeMinutes = function (dayInfo) {
     const code = Number(dayInfo.actualCode);
-    const trainingMinutes = calcTrainingMinutes(dayInfo.day);
     if (dayInfo.changeText === "錯誤登錄" || dayInfo.noteText === "錯誤登錄" || dayInfo.changeText === "違規") return 0;
     if (isWeekendTrainingClass(dayInfo)) return 0;
     if (code === 4 && isRestTextForD11(dayInfo.changeText)) return 0;
     const overhaulOverrideMinutes = getOverhaulOverrideMinutes(dayInfo.day, dayInfo.year, dayInfo.month);
     if (isOverhaulActiveDay(dayInfo.day)) return overhaulOverrideMinutes !== null ? overhaulOverrideMinutes : 0;
-    if (isSubstituteCode(code)) return getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes;
-    if (code === 0 || code === 9 || code === 10) return trainingMinutes;
+    if (isSubstituteCode(code)) return getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day);
+    if (code === 0 || code === 9 || code === 10) return 0;
     if (isLeaveCode(code)) {
-      if (isCompoundLeaveCodeForDay(code, dayInfo.day) && hasCompoundSplitInput(dayInfo)) return isCompoundSplitPartialLeave(dayInfo) ? getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes : trainingMinutes;
-      if (getPlannedValueV13(dayInfo) > 0 && hasPartialLeaveHrText(dayInfo)) return getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) + trainingMinutes;
-      return trainingMinutes;
+      if (isCompoundLeaveCodeForDay(code, dayInfo.day) && hasCompoundSplitInput(dayInfo)) return isCompoundSplitPartialLeave(dayInfo) ? getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) : 0;
+      if (getPlannedValueV13(dayInfo) > 0 && hasPartialLeaveHrText(dayInfo)) return getParameterPartialHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day);
+      return 0;
     }
     let minutes = isWorkCode(code) ? getParameterHandoverMinutes(dayInfo.year, dayInfo.month, dayInfo.day) : 0;
-    return Math.max(0, minutes + calcElectionD10AdjustmentMinutes(dayInfo) + trainingMinutes);
+    return Math.max(0, minutes + calcElectionD10AdjustmentMinutes(dayInfo));
   };
   calcD11AttendanceHours = function (dayInfo) {
     const code = Number(dayInfo.actualCode);
@@ -12732,6 +12734,16 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       return Math.max(0, configuredBase + calcD11PositiveAdjustment(dayInfo) - calcD11BackDeduct(dayInfo));
     }
     return 0;
+  };
+  const calcD11AttendanceHoursBeforeExtraOvertime = calcD11AttendanceHours;
+  calcD11AttendanceHours = function (dayInfo) {
+    const hours = calcD11AttendanceHoursBeforeExtraOvertime(dayInfo);
+    if (typeof hours !== "number") return hours;
+    if (isWeekendTrainingClass(dayInfo) ||
+        (Number(dayInfo.actualCode) === 4 && isRestTextForD11(dayInfo.changeText)) ||
+        isOverhaulActiveDay(dayInfo.day)) return hours;
+    const extraHours = calcTrainingMinutes(dayInfo.day) / 60;
+    return extraHours > 0 ? Math.min(12, hours + extraHours) : hours;
   };
   getEffectiveValueForCalendarClosure = function (dayInfo) {
     if (!canUseDayInfoForCalendarClosure(dayInfo)) return 0;
