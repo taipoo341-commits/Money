@@ -193,6 +193,14 @@
       margin-top: 3px;
     }
     .calendar-panel { overflow: visible; }
+    .calendar-panel .calendar-body {
+      touch-action: pan-y;
+      transition: opacity var(--calendar-month-fade-duration, 130ms) ease-out;
+    }
+    .calendar-panel .calendar-body.month-content-faded { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .calendar-panel .calendar-body { transition-duration: 1ms; }
+    }
     .calendar-head {
       display: flex;
       justify-content: space-between;
@@ -5784,15 +5792,17 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     let handoverExceptionEditingId = "";
     let handoverExceptionPreviousBodyOverflow = "";
     function getHandoverExceptions(){return Array.isArray(parameterSettings.calc?.handoverExceptions)?parameterSettings.calc.handoverExceptions:[];}
+    function getDisplayedHandoverExceptionBounds(){const year=Number(document.getElementById("rocYear")?.value||0)+1911,month=Math.min(12,Math.max(1,Number(document.getElementById("month")?.value||1)));return{start:ymdToParameterIso(year,month,1),end:ymdToParameterIso(year,month,new Date(year,month,0).getDate())};}
+    function getDisplayedHandoverExceptions(){const bounds=getDisplayedHandoverExceptionBounds();return getHandoverExceptions().filter(item=>item.startDate<=bounds.end&&item.endDate>=bounds.start);}
     function getDisplayedMonthDefaultIso(){const year=Number(document.getElementById("rocYear")?.value||toRocYear(new Date()))+1911;const month=Number(document.getElementById("month")?.value||new Date().getMonth()+1);const now=new Date();const day=now.getFullYear()===year&&now.getMonth()+1===month?now.getDate():1;return ymdToParameterIso(year,month,day);}
     function formatHandoverExceptionRocDate(iso){const parts=String(iso||"").split("-").map(Number);if(parts.length!==3||!parts[0])return iso||"";return `民國 ${parts[0]-1911}/${String(parts[1]).padStart(2,"0")}/${String(parts[2]).padStart(2,"0")}`;}
     function formatHandoverExceptionShortDate(iso){const parts=String(iso||"").split("-").map(Number);if(parts.length!==3||!parts[0])return "選日期";return `${parts[0]-1911}/${String(parts[1]).padStart(2,"0")}/${String(parts[2]).padStart(2,"0")}`;}
     function setHandoverExceptionDateButtonValue(id,iso){const btn=document.getElementById(id);if(!btn)return;const value=normalizeIsoDateText(iso);btn.value=value;btn.textContent=formatHandoverExceptionShortDate(value);btn.classList.toggle("has-date",Boolean(value));btn.setAttribute("aria-label",`${id==="handoverExceptionStartDate"?"起始日":"結束日"}：${value?formatHandoverExceptionRocDate(value):"尚未選擇"}`);}
     function formatHandoverExceptionRange(item){const start=formatHandoverExceptionRocDate(item.startDate);const end=formatHandoverExceptionRocDate(item.endDate);return item.startDate===item.endDate?start:`${start}～${end.replace(/^民國\s*/,"")}`;}
     function setHandoverExceptionMessage(message,isError){const el=document.getElementById("handoverExceptionMessage");if(!el)return;el.textContent=message||"";el.style.color=isError?"#fda4af":"#fde68a";}
-    function updateHandoverExceptionQuickButton(){const list=getHandoverExceptions().filter(x=>x.enabled!==false);const btn=document.getElementById("handoverExceptionQuickBtn");const badge=document.getElementById("handoverExceptionBadge");if(!btn||!badge)return;badge.textContent=String(list.length);btn.classList.toggle("is-active",list.length>0);const year=Number(document.getElementById("rocYear")?.value||0)+1911;const month=Number(document.getElementById("month")?.value||0);const monthStart=ymdToParameterIso(year,month,1);const monthEnd=ymdToParameterIso(year,month,new Date(year,month,0).getDate());const monthCount=list.filter(x=>x.startDate<=monthEnd&&x.endDate>=monthStart).length;btn.title=list.length?`已設定 ${list.length} 筆交接班例外，本月 ${monthCount} 筆`:`設定不定期的交接班期間例外`;}
+    function updateHandoverExceptionQuickButton(){const list=getHandoverExceptions().filter(x=>x.enabled!==false);const monthBounds=getDisplayedHandoverExceptionBounds();const monthCount=list.filter(x=>x.startDate<=monthBounds.end&&x.endDate>=monthBounds.start).length;const btn=document.getElementById("handoverExceptionQuickBtn");const badge=document.getElementById("handoverExceptionBadge");if(!btn||!badge)return;badge.textContent=String(monthCount);btn.classList.toggle("is-active",monthCount>0);btn.title=monthCount?`本月 ${monthCount} 筆交接班例外（全部 ${list.length} 筆）`:list.length?`本月無交接班例外；其他月份共 ${list.length} 筆`:`設定不定期的交接班期間例外`;}
     function resetHandoverExceptionForm(){handoverExceptionEditingId="";const minutes=document.getElementById("handoverExceptionMinutes"),note=document.getElementById("handoverExceptionNote"),save=document.getElementById("handoverExceptionSaveBtn");setHandoverExceptionDateButtonValue("handoverExceptionStartDate","");setHandoverExceptionDateButtonValue("handoverExceptionEndDate","");if(minutes)minutes.value="30";if(note)note.value="";if(save)save.textContent="儲存例外";setHandoverExceptionMessage("",false);}
-    function renderHandoverExceptionList(){const listEl=document.getElementById("handoverExceptionList");if(!listEl)return;const list=getHandoverExceptions().slice().sort((a,b)=>a.startDate.localeCompare(b.startDate)||a.endDate.localeCompare(b.endDate));if(!list.length){listEl.innerHTML='<div class="handover-exception-empty">尚未設定交接班期間例外。</div>';return;}listEl.innerHTML=list.map(item=>`<div class="handover-exception-item"><div class="handover-exception-range">${parameterSettingsEscapeHtml(formatHandoverExceptionRange(item))}</div><div class="handover-exception-minutes">${Number(item.minutes)||0} 分</div><div class="handover-exception-note">${parameterSettingsEscapeHtml(item.note||"未填備註")}</div><div class="handover-exception-item-actions"><button class="handover-exception-small-btn" type="button" data-handover-exception-edit="${parameterSettingsEscapeHtml(item.id)}">編輯</button><button class="handover-exception-small-btn danger" type="button" data-handover-exception-delete="${parameterSettingsEscapeHtml(item.id)}">刪除</button></div></div>`).join("");}
+    function renderHandoverExceptionList(){const listEl=document.getElementById("handoverExceptionList");if(!listEl)return;const list=getDisplayedHandoverExceptions().slice().sort((a,b)=>a.startDate.localeCompare(b.startDate)||a.endDate.localeCompare(b.endDate));if(!list.length){const hasOtherMonthSettings=getHandoverExceptions().length>0;listEl.innerHTML=`<div class="handover-exception-empty">${hasOtherMonthSettings?"本月尚無交接班期間例外；其他月份的設定請切換月份查看。":"尚未設定交接班期間例外。"}</div>`;return;}listEl.innerHTML=list.map(item=>`<div class="handover-exception-item"><div class="handover-exception-range">${parameterSettingsEscapeHtml(formatHandoverExceptionRange(item))}</div><div class="handover-exception-minutes">${Number(item.minutes)||0} 分</div><div class="handover-exception-note">${parameterSettingsEscapeHtml(item.note||"未填備註")}</div><div class="handover-exception-item-actions"><button class="handover-exception-small-btn" type="button" data-handover-exception-edit="${parameterSettingsEscapeHtml(item.id)}">編輯</button><button class="handover-exception-small-btn danger" type="button" data-handover-exception-delete="${parameterSettingsEscapeHtml(item.id)}">刪除</button></div></div>`).join("");}
     function openHandoverExceptionModal(){loadParameterSettings();renderHandoverExceptionList();resetHandoverExceptionForm();const modal=document.getElementById("handoverExceptionModal");if(!modal)return;handoverExceptionPreviousBodyOverflow=document.body.style.overflow;document.body.style.overflow="hidden";modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.getElementById("handoverExceptionStartDate")?.focus();}
     function closeHandoverExceptionModal(){const modal=document.getElementById("handoverExceptionModal");if(!modal)return;closeParameterDatePicker();modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow=handoverExceptionPreviousBodyOverflow;handoverExceptionEditingId="";}
     function handoverExceptionFormIsDirty(){const start=normalizeIsoDateText(document.getElementById("handoverExceptionStartDate")?.value),end=normalizeIsoDateText(document.getElementById("handoverExceptionEndDate")?.value),minutes=String(document.getElementById("handoverExceptionMinutes")?.value||"").trim(),note=String(document.getElementById("handoverExceptionNote")?.value||"").trim();return Boolean(handoverExceptionEditingId||start||end||note||minutes!=="30");}
@@ -6042,7 +6052,40 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       renderAll(false);
     }
     window.resetCurrentYearState = resetCurrentYearState;
-    function switchMonthState(needLoadCalendar) {
+    function animateCalendarBodyFade(body, fadeOut, duration) {
+      if (!body) return Promise.resolve();
+      return new Promise(resolve => {
+        let finished = false;
+        let timeout = 0;
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          window.clearTimeout(timeout);
+          body.removeEventListener("transitionend", onTransitionEnd);
+          body.style.removeProperty("--calendar-month-fade-duration");
+          resolve();
+        };
+        const onTransitionEnd = event => {
+          if (event.target === body && event.propertyName === "opacity") finish();
+        };
+        body.addEventListener("transitionend", onTransitionEnd);
+        body.style.setProperty("--calendar-month-fade-duration", `${duration}ms`);
+        body.classList.toggle("month-content-faded", Boolean(fadeOut));
+        timeout = window.setTimeout(finish, duration + 100);
+      });
+    }
+    async function renderMonthStateWithFade(needLoadCalendar) {
+      if (needLoadCalendar) await loadCalendar();
+      const calendarBody = document.querySelector(".calendar-panel .calendar-body");
+      if (!calendarBody) return renderAll(false);
+      await animateCalendarBodyFade(calendarBody, true, 70);
+      try {
+        await renderAll(false);
+      } finally {
+        await animateCalendarBodyFade(calendarBody, false, 130);
+      }
+    }
+    function switchMonthState(needLoadCalendar, options = {}) {
       saveCurrentMonthState({ passive: true });
       try {
         const savedWeekStartMode = localStorage.getItem("personalOvertimeWeekStartMode");
@@ -6056,10 +6099,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       updateCalculationInfoToggleUI();
       activeStorageKey = getCurrentStorageKey();
       loadStateByKey(activeStorageKey);
-      renderAll(needLoadCalendar);
+      const renderPromise = options.fadeCalendar
+        ? renderMonthStateWithFade(needLoadCalendar)
+        : renderAll(needLoadCalendar);
       if (typeof window.requestClosureOfficialAutoQuery === "function") {
         setTimeout(function() { window.requestClosureOfficialAutoQuery(); }, 220);
       }
+      return renderPromise;
     }
     function updateShiftSelectStyle() {
       const shiftGroup = document.getElementById("shiftGroup");
@@ -8666,7 +8712,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (topSalaryMonthLabel) topSalaryMonthLabel.textContent = `${month}月加班費`;
       updateWeekStartToggleUI();
       updateCalculationInfoToggleUI();
-      document.getElementById("weekGrid").innerHTML = getCalendarWeekLabels().map((x, index) => {
+      const weekGrid = document.getElementById("weekGrid");
+      weekGrid.innerHTML = getCalendarWeekLabels().map((x, index) => {
         const weekClass = weekStartMode === "sunday"
           ? (index === 0 ? "sunday-cell" : (index === 6 ? "saturday-cell" : "weekday-cell"))
           : (index < 5 ? "weekday-cell" : (index === 5 ? "saturday-cell" : "sunday-cell"));
@@ -9622,6 +9669,12 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       showCalendarImportPrompt("無法讀取行事曆資料，已套用本機參數覆寫");
       console.warn("行事曆遠端與快取來源皆失敗", failLogs);
     }
+    function getMonthSwipeContext(rocYear, month, delta) {
+      const date = new Date(Number(rocYear) + 1911, Number(month) - 1 + Number(delta || 0), 1);
+      const nextRocYear = date.getFullYear() - 1911;
+      if (nextRocYear < 1) return null;
+      return { rocYear: nextRocYear, month: date.getMonth() + 1 };
+    }
     async function renderAll(needLoadCalendar) {
       if (needLoadCalendar) await loadCalendar();
       syncMonthControlUI();
@@ -9677,7 +9730,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       if (openButton) openButton.setAttribute("aria-expanded", "true");
     }
-    function selectDisplayedMonth(targetMonth) {
+    function selectDisplayedMonth(targetMonth, options = {}) {
       const monthSelect = document.getElementById("month");
       const rocYearInput = document.getElementById("rocYear");
       if (!monthSelect || !rocYearInput) return;
@@ -9695,8 +9748,104 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       rocYearInput.value = nextRocYear;
       monthSelect.value = nextMonth;
-      syncMonthControlUI();
-      switchMonthState(nextRocYear !== currentRocYear);
+      if (!options.fadeCalendar) syncMonthControlUI();
+      return switchMonthState(nextRocYear !== currentRocYear, { fadeCalendar: Boolean(options.fadeCalendar) });
+    }
+    function bindCalendarMonthSwipe() {
+      const calendarBody = document.querySelector(".calendar-panel .calendar-body");
+      if (!calendarBody || calendarBody.dataset.monthSwipeBound === "true") return;
+      calendarBody.dataset.monthSwipeBound = "true";
+      let swipeStart = null;
+      let monthSwipeBusy = false;
+      let suppressClick = false;
+      let suppressClickTimer = 0;
+      const interactiveSelector = "a, input, select, textarea, [contenteditable='true']";
+      calendarBody.addEventListener("pointerdown", event => {
+        if (event.pointerType !== "touch" || !event.isPrimary || monthSwipeBusy) return;
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target || target.closest(interactiveSelector)) return;
+        swipeStart = {
+          x: event.clientX,
+          y: event.clientY,
+          pointerId: event.pointerId,
+          width: Math.max(1, calendarBody.getBoundingClientRect().width),
+          axis: "",
+          lastX: event.clientX,
+          lastMoveAt: event.timeStamp,
+          velocityX: 0,
+          moved: false
+        };
+      }, { passive: true });
+      document.addEventListener("pointermove", event => {
+        if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
+        const start = swipeStart;
+        const deltaX = event.clientX - start.x;
+        const deltaY = event.clientY - start.y;
+        if (!start.axis) {
+          if (Math.abs(deltaY) > 12 && Math.abs(deltaY) > Math.abs(deltaX) * 1.1) {
+            swipeStart = null;
+            return;
+          }
+          if (Math.abs(deltaX) > 12 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1) {
+            start.axis = "x";
+          }
+        }
+        const elapsed = Math.max(1, event.timeStamp - start.lastMoveAt);
+        start.velocityX = (event.clientX - start.lastX) / elapsed;
+        start.lastX = event.clientX;
+        start.lastMoveAt = event.timeStamp;
+        if (start.axis !== "x") return;
+        start.moved = true;
+      }, { passive: true });
+      document.addEventListener("pointerup", event => {
+        if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
+        const start = swipeStart;
+        swipeStart = null;
+        const deltaX = event.clientX - start.x;
+        const deltaY = event.clientY - start.y;
+        if (!start.axis && Math.abs(deltaX) > 12 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1) start.axis = "x";
+        if (start.axis !== "x") return;
+        const finalMove = event.clientX - start.lastX;
+        const finalMoveTime = Math.max(1, event.timeStamp - start.lastMoveAt);
+        if (Math.abs(finalMove) > 0 && finalMoveTime <= 120) start.velocityX = finalMove / finalMoveTime;
+        if (Math.abs(deltaX) > 8) start.moved = true;
+        if (start.moved) {
+          suppressClick = true;
+          window.clearTimeout(suppressClickTimer);
+          suppressClickTimer = window.setTimeout(() => { suppressClick = false; }, 0);
+        }
+        const absDeltaX = Math.abs(deltaX);
+        const threshold = Math.max(58, Math.min(128, start.width * 0.2));
+        const velocityMatchesDirection = Math.sign(start.velocityX) === Math.sign(deltaX);
+        const fastEnough = absDeltaX >= 28 && velocityMatchesDirection && Math.abs(start.velocityX) >= 0.52;
+        const direction = deltaX < 0 ? "next" : "previous";
+        const changeDelta = direction === "next" ? 1 : -1;
+        const rocYear = Number(document.getElementById("rocYear")?.value || 0);
+        const month = Number(document.getElementById("month")?.value || 0);
+        const canChangeMonth = Boolean(getMonthSwipeContext(rocYear, month, changeDelta));
+        if (!canChangeMonth || (absDeltaX < threshold && !fastEnough)) return;
+        monthSwipeBusy = true;
+        const monthChange = selectDisplayedMonth(month + changeDelta, { fadeCalendar: true });
+        Promise.resolve(monthChange).then(() => {
+          monthSwipeBusy = false;
+        }, error => {
+          monthSwipeBusy = false;
+          console.warn("月份滑動後更新月曆失敗", error);
+        });
+      }, { passive: true });
+      document.addEventListener("pointercancel", event => {
+        if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
+        swipeStart = null;
+      }, { passive: true });
+      document.addEventListener("click", event => {
+        if (!suppressClick) return;
+        suppressClick = false;
+        window.clearTimeout(suppressClickTimer);
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target || !calendarBody.contains(target)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }, true);
     }
     function returnToTodayMonth() {
       saveCurrentMonthState({ passive: true });
@@ -9750,6 +9899,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const returnTodayBtn = document.getElementById("returnTodayBtn");
       if (returnTodayBtn) returnTodayBtn.addEventListener("click", () => returnToTodayMonth());
       document.getElementById("monthPickerOpenBtn")?.addEventListener("click", () => openMonthPickerModal());
+      bindCalendarMonthSwipe();
       document.getElementById("monthPickerCloseBtn")?.addEventListener("click", () => closeMonthPickerModal(true));
       document.querySelectorAll("[data-month-picker-value]").forEach(button => {
         button.addEventListener("click", () => selectDisplayedMonth(Number(button.dataset.monthPickerValue)));
