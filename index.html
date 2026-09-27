@@ -4589,6 +4589,17 @@
 .custom-leave-catalog-row-v15.has-timed-leave{grid-template-columns:42px minmax(0,1fr) auto 36px auto}
 .annual-leave-stats-year-grid .leave-stats-year-box.other-timed-leave-year{grid-column:1/-1}.other-timed-leave-year[hidden]{display:none!important}.other-timed-leave-year .leave-stats-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 @media(max-width:760px){.annual-policy-modal{align-items:flex-end;padding:0}.annual-policy-card{width:100%;max-height:94vh;border-radius:18px 18px 0 0}.annual-policy-modal-header{padding:14px 15px}.annual-policy-hub-btn{grid-template-columns:1fr}.annual-policy-hub-status{text-align:left}.timed-leave-manager-row{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.timed-leave-manager-row>div:first-child{grid-column:1/-1}.timed-leave-action{width:100%;padding:0 6px}.other-timed-leave-year .leave-stats-grid{grid-template-columns:repeat(auto-fit,minmax(100px,1fr))!important}.custom-leave-catalog-row-v15.has-timed-leave{grid-template-columns:38px minmax(0,1fr) auto 34px}.custom-leave-catalog-row-v15.has-timed-leave .custom-delete-v15{grid-column:2/-1}}
+.timed-leave-body,.annual-policy-modal-body{min-height:0}
+.timed-leave-footer,.annual-policy-modal-footer{flex-shrink:0;padding:12px 18px 16px;border-top:1px solid rgba(148,163,184,.2)}
+.timed-leave-footer .timed-leave-close-btn,.annual-policy-modal-footer .salary-detail-close-btn{width:100%;min-height:44px;height:auto;font-size:15px}
+@media(max-width:760px){
+  .timed-leave-modal,.annual-policy-modal{align-items:center;padding:12px}
+  .timed-leave-card,.annual-policy-card{max-height:calc(100vh - 24px);border-radius:18px}
+  .timed-leave-footer,.annual-policy-modal-footer{padding:10px 15px 14px}
+}
+@supports(height:100dvh){
+  @media(max-width:760px){.timed-leave-card,.annual-policy-card{max-height:calc(100dvh - 24px)}}
+}
 /* === V27 功能樣式結束 === */
 </style>
 </head>
@@ -11092,7 +11103,6 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   <div class="annual-policy-card" role="dialog" aria-modal="true" aria-labelledby="annualPolicyModalTitle">
     <div class="annual-policy-modal-header">
       <div><div id="annualPolicyModalTitle" class="annual-policy-modal-title">獎金與考核資訊</div><div class="annual-policy-modal-subtitle">需要時再查看工作獎金與考核門檻。</div></div>
-      <button id="annualPolicyModalCloseBtn" class="salary-detail-close-btn" type="button">關閉</button>
     </div>
     <div class="annual-policy-modal-body">
       <div class="annual-policy-grid">
@@ -11112,6 +11122,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         </div>
       </div>
     </div>
+    <div class="annual-policy-modal-footer"><button id="annualPolicyModalCloseBtn" class="salary-detail-close-btn" type="button">關閉</button></div>
   </div>
 </div>
 <!-- 獎金與考核資訊：浮動視窗結束 -->
@@ -11135,7 +11146,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
 <!-- 期限假別資格：浮動視窗開始 -->
 <div id="timedLeaveModal" class="timed-leave-modal" aria-hidden="true">
   <div class="timed-leave-card" role="dialog" aria-modal="true" aria-labelledby="timedLeaveTitle">
-    <div class="timed-leave-header"><div id="timedLeaveTitle" class="timed-leave-title">新增期限假別</div><button id="timedLeaveCloseBtn" class="timed-leave-close-btn icon-only" type="button" aria-label="關閉新增期限假別">×</button></div>
+    <div class="timed-leave-header"><div id="timedLeaveTitle" class="timed-leave-title">新增期限假別</div></div>
     <div class="timed-leave-body">
       <div id="timedLeaveToolbar" class="timed-leave-toolbar"><button id="timedLeaveAddBtn" class="timed-leave-add-btn" type="button">新增假別</button></div>
       <div id="timedLeaveForm" class="timed-leave-form" hidden>
@@ -11157,6 +11168,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       </div>
       <div id="timedLeaveManagerList" class="timed-leave-manager-list"></div>
     </div>
+    <div class="timed-leave-footer"><button id="timedLeaveCloseBtn" class="timed-leave-close-btn" type="button">關閉</button></div>
   </div>
 </div>
 <!-- 期限假別資格：浮動視窗結束 -->
