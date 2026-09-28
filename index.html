@@ -1089,6 +1089,12 @@
         border-radius: 6px;
         letter-spacing: 0;
       }
+      .shift-pill .calendar-pill-line {
+        display: block;
+        font-size: clamp(7px, 2.3vw, 10px);
+        line-height: 1.2;
+      }
+      .shift-pill .calendar-pill-nowrap { white-space: nowrap; }
       .daily-detail {
         font-size: 8px;
         line-height: 1.35;
@@ -6253,6 +6259,17 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       if (Number(code) === 8.9) return getOtherCodeLabelForDayInfo(dayInfo);
       return getLabel(code);
     }
+    const CALENDAR_SHORT_CODE_LABELS = {
+      "8.4": "停止辦", "8.5": "家庭", "8.6": "身心", "9": "調整"
+    };
+    function getCalendarShortLabel(code, day, compoundItems) {
+      const items = Array.isArray(compoundItems) ? compoundItems : (manualRecords[day] || {}).compoundItems;
+      if (Array.isArray(items) && items.length >= 2) {
+        const initials = items.map(item => Array.from(String(item && item.label || "").trim())[0] || "");
+        if (initials.every(Boolean)) return initials.join("");
+      }
+      return CALENDAR_SHORT_CODE_LABELS[keyOf(code)] || getLabelForDay(code, day);
+    }
     function saveOtherCodeLabelForDay(day, value) {
       if (!manualRecords[day]) manualRecords[day] = {};
       manualRecords[day].otherLabel = normalizeOtherCodeLabel(value);
@@ -6523,7 +6540,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       `;
     }
     function buildCodePickerHtml(day, selectedCode) {
-      return `<div class="code-picker" data-code-picker="${day}"><button class="code-picker-button" type="button" data-code-picker-button="${day}">${selectedCode} ${getLabelForDay(selectedCode, day)}</button></div>`;
+      return `<div class="code-picker" data-code-picker="${day}"><button class="code-picker-button" type="button" data-code-picker-button="${day}">${selectedCode} ${escapeHtml(getCalendarShortLabel(selectedCode, day))}</button></div>`;
     }
     function ensureCodePickerPortal() {
       let portal = document.getElementById("codePickerPortal");
@@ -7525,6 +7542,32 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         return valueName;
       }
       return dayInfo.changeText || getLabelForDayInfo(code, dayInfo);
+    }
+    function buildCalendarPillHtml(dayInfo, fullLabel) {
+      const code = Number(dayInfo.actualCode);
+      let label = String(fullLabel || "");
+      if (code === 9 && label === getLabel(9)) label = CALENDAR_SHORT_CODE_LABELS["9"];
+      else if (isLeaveCode(code)) {
+        const fullLeaveName = getLabelForDayInfo(code, dayInfo);
+        if (fullLeaveName && label.startsWith(fullLeaveName)) {
+          label = getCalendarShortLabel(code, dayInfo.day, dayInfo.compoundItems) + label.slice(fullLeaveName.length);
+        }
+      }
+      const suffixMatch = isLeaveCode(code) ? /^(.*)(\([^()]+\))$/.exec(label) : null;
+      if (suffixMatch) {
+        const baseSuffix = `(${getBaseDisplayName(dayInfo)})`;
+        const adjustedSuffix = dayInfo.adjustedCode == null ? "" : `(${getLabel(dayInfo.adjustedCode)})`;
+        if (suffixMatch[2] === baseSuffix || suffixMatch[2] === adjustedSuffix) {
+          const mainClass = Array.from(suffixMatch[1]).length <= 3 ? " calendar-pill-nowrap" : "";
+          const suffixClass = Array.from(suffixMatch[2]).length <= 4 ? " calendar-pill-nowrap" : "";
+          return `<span class="calendar-pill-line${mainClass}">${escapeHtml(suffixMatch[1])}</span><span class="calendar-pill-line${suffixClass}">${escapeHtml(suffixMatch[2])}</span>`;
+        }
+      }
+      const adjustMatch = /^調班([一二三]值)$/.exec(label);
+      if (adjustMatch) {
+        return `<span class="calendar-pill-line calendar-pill-nowrap">調班</span><span class="calendar-pill-line calendar-pill-nowrap">${escapeHtml(adjustMatch[1])}</span>`;
+      }
+      return escapeHtml(label);
     }
 
     function getNextDayInfoForCalendarClosure(dayInfo, allDays) {
@@ -8749,6 +8792,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const cardClass = `day-card ${weekdayColorClass} ${d.isWeekend ? "weekend" : ""} ${d.holidayName ? "holiday" : ""} ${d.isViolation ? "violation" : ""} ${isToday ? "today-card" : ""}`;
         const pillClass = d.changeText === "錯誤登錄" || d.noteText === "錯誤登錄" || d.attendanceHours === "錯誤登錄" || d.changeText === "違規" ? "pill-alert" : getPillClass(d.actualCode);
         const displayLabel = getDisplayLabel(d);
+        const calendarPillHtml = buildCalendarPillHtml(d, displayLabel);
         const codePickerHtml = buildCodePickerHtml(d.day, d.actualCode);
         const hourDisabled = isLeaveCode(d.actualCode) ? "" : "disabled";
         const allowWeekendTrainingClass = Number(d.actualCode) === 4 && Boolean(d.isWeekend);
@@ -8799,7 +8843,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
             <div class="card-center">
               <div>${holidayHtml}${closureHtml}${trainingHtml}${electionHtml}${overhaulMainHtml}</div>
             </div>
-            <div class="shift-pill ${pillClass}">${displayLabel}</div>
+            <div class="shift-pill ${pillClass}" title="${escapeHtml(displayLabel)}">${calendarPillHtml}</div>
             ${detailHtml}
           </div>
         `;
