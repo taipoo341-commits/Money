@@ -7441,7 +7441,48 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       return carry;
     }
-    function getContinuousWorkDaysAroundIndex(days, index, previousMonthCarry) {
+    function getNextMonthCarryForLastDay(days) {
+      if (!days.length || !isWorkForContinuousWorkBlock(days[days.length - 1])) return 0;
+      const nextDate = new Date(Number(days[0].year), Number(days[0].month), 1);
+      const nextYear = nextDate.getFullYear();
+      const nextMonth = nextDate.getMonth() + 1;
+      const shiftGroup = document.getElementById("shiftGroup")?.value || "D";
+      const nextStorageKey = `personalOvertimeState:${shiftGroup}:${nextYear - 1911}:${nextMonth}`;
+      let nextManualRecords = {};
+      try {
+        const data = JSON.parse(localStorage.getItem(nextStorageKey) || "null");
+        if (data && data.manualRecords && typeof data.manualRecords === "object") nextManualRecords = data.manualRecords;
+      } catch (err) {
+        nextManualRecords = {};
+      }
+      let carry = 0;
+      const nextDaysInMonth = new Date(nextYear, nextMonth, 0).getDate();
+      for (let day = 1; day <= nextDaysInMonth; day++) {
+        const current = new Date(nextYear, nextMonth - 1, day);
+        const base = calcBaseShift(nextYear, nextMonth, day, shiftGroup);
+        const record = nextManualRecords[day] || {};
+        const adjustedCode = [10, 11, 12, 13].includes(Number(record.adjustedCode)) ? Number(record.adjustedCode) : null;
+        const plannedCode = adjustedCode !== null ? adjustedCode : base.baseCode;
+        const plannedHours = base.baseHours;
+        const compoundItems = Array.isArray(record.compoundItems) ? record.compoundItems : [];
+        const nextDayInfo = enrichDayInfo({
+          day, month: nextMonth, year: nextYear, date: current,
+          weekIndex: getMondayFirstIndex(current), weekday: WEEK_LABELS[getMondayFirstIndex(current)],
+          baseCode: base.baseCode, baseHours: base.baseHours, cycleIndex: base.cycleIndex,
+          adjustedCode, plannedCode, plannedHours,
+          actualCode: record.code !== undefined ? Number(record.code) : plannedCode,
+          leaveHours: record.leaveHours !== undefined ? Number(record.leaveHours) : 0,
+          customLeaveId: record.customLeaveId || "", otherLabel: record.otherLabel || "", compoundItems,
+          compoundSplit: record.compoundSplit || null,
+          holidayName: calendarData.holidayMap.get(dateKey(nextYear, nextMonth, day)) || "",
+          isWeekend: current.getDay() === 0 || current.getDay() === 6
+        });
+        if (!isWorkForContinuousWorkBlock(nextDayInfo)) break;
+        carry++;
+      }
+      return carry;
+    }
+    function getContinuousWorkDaysAroundIndex(days, index, previousMonthCarry, nextMonthCarry) {
       let leftWorkDays = 0;
       let noRestFoundBeforeMonthStart = true;
       for (let i = index - 1; i >= 0; i--) {
@@ -7456,19 +7497,23 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         leftWorkDays += previousMonthCarry;
       }
       let rightWorkDaysIncludingToday = 0;
+      let reachesMonthEnd = true;
       for (let i = index; i < days.length; i++) {
         if (isWorkForContinuousWorkBlock(days[i])) {
           rightWorkDaysIncludingToday += 1;
         } else {
+          reachesMonthEnd = false;
           break;
         }
       }
+      if (reachesMonthEnd) rightWorkDaysIncludingToday += nextMonthCarry;
       return leftWorkDays + rightWorkDaysIncludingToday;
     }
     function applySevenDayViolation(days) {
       const previousMonthCarry = getPreviousMonthCarryForFirstDay(days);
+      const nextMonthCarry = getNextMonthCarryForLastDay(days);
       return days.map((dayInfo, index) => {
-        const continuousWorkDays = getContinuousWorkDaysAroundIndex(days, index, previousMonthCarry);
+        const continuousWorkDays = getContinuousWorkDaysAroundIndex(days, index, previousMonthCarry, nextMonthCarry);
         const code = Number(dayInfo.actualCode);
         if (isViolationCandidate(dayInfo) && (continuousWorkDays > 6 || code === 32)) {
           return {
@@ -7563,9 +7608,13 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
           return `<span class="calendar-pill-line${mainClass}">${escapeHtml(suffixMatch[1])}</span><span class="calendar-pill-line${suffixClass}">${escapeHtml(suffixMatch[2])}</span>`;
         }
       }
-      const adjustMatch = /^調班([一二三]值)$/.exec(label);
-      if (adjustMatch) {
-        return `<span class="calendar-pill-line calendar-pill-nowrap">調班</span><span class="calendar-pill-line calendar-pill-nowrap">${escapeHtml(adjustMatch[1])}</span>`;
+      const shiftMatch = /^(調班|代班)(空班|[一二三]值)$/.exec(label);
+      if (shiftMatch) {
+        return `<span class="calendar-pill-line calendar-pill-nowrap">${escapeHtml(shiftMatch[1])}</span><span class="calendar-pill-line calendar-pill-nowrap">${escapeHtml(shiftMatch[2])}</span>`;
+      }
+      const registrationMatch = /^(錯誤|違規)(登錄)$/.exec(label);
+      if (registrationMatch) {
+        return `<span class="calendar-pill-line calendar-pill-nowrap">${escapeHtml(registrationMatch[1])}</span><span class="calendar-pill-line calendar-pill-nowrap">登錄</span>`;
       }
       return escapeHtml(label);
     }
