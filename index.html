@@ -519,6 +519,10 @@
       font-weight: 950;
       margin-bottom: 4px;
     }
+    .special-badge.extra-overtime-badge span {
+      display: block;
+      white-space: nowrap;
+    }
     .election-badge {
       border-color: rgba(196, 181, 253, 0.55);
       background: rgba(139, 92, 246, 0.18);
@@ -2206,6 +2210,22 @@
       font-size: 12px;
       font-weight: 950;
       cursor: pointer;
+    }
+    .code-picker-portal-sheet.has-bottom-close {
+      grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+    .code-picker-portal-sheet.has-bottom-close-actions {
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+    }
+    .code-picker-portal-footer {
+      padding: 10px 14px max(10px, env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(246, 196, 83, 0.18);
+      background: rgba(5, 10, 18, 0.96);
+    }
+    .code-picker-portal-footer .code-picker-portal-close {
+      width: 100%;
+      min-height: 46px;
+      font-size: 15px;
     }
     .code-picker-portal-actions {
       padding: 10px 12px;
@@ -6552,6 +6572,19 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       }
       return portal;
     }
+    function moveCodePickerCloseToBottom(portal) {
+      const sheet = portal.querySelector(".code-picker-portal-sheet");
+      const closeButton = sheet?.querySelector(".code-picker-portal-header .code-picker-portal-close");
+      if (!sheet || !closeButton) return;
+      const footer = document.createElement("div");
+      footer.className = "code-picker-portal-footer";
+      footer.appendChild(closeButton);
+      sheet.appendChild(footer);
+      sheet.classList.add("has-bottom-close");
+      if (sheet.querySelector(".code-picker-portal-actions, .code-picker-v13-actions, .batch-code-picker-actions-v18")) {
+        sheet.classList.add("has-bottom-close-actions");
+      }
+    }
     function codePickerLockBodyScroll() {
       if (codePickerBodyScrollLocked) return;
       codePickerBodyScrollY = window.scrollY || document.documentElement.scrollTop || 0;
@@ -6629,6 +6662,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const selectedCode = Number(dayInfo.actualCode);
       activeCodePickerPortalState = { day: Number(day), allOpen: Boolean(allOpen), selectedCode };
       portal.innerHTML = buildCodePickerPortalHtml(day, selectedCode, Boolean(allOpen));
+      moveCodePickerCloseToBottom(portal);
       portal.classList.add("open");
       portal.classList.toggle("all-open", Boolean(allOpen));
       const picker = document.querySelector(`.code-picker[data-code-picker="${day}"]`);
@@ -8157,7 +8191,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const optionHtml = getBatchEligibleSystemLeaveCodes().map(code => buildBatchCodeOptionRow(code, record.code, index)).join("");
       return `<div class="code-picker-portal-backdrop" data-batch-code-portal-close="1"></div><div class="code-picker-portal-sheet" role="dialog" aria-modal="true" aria-label="批次假別選單" data-batch-code-portal-index="${index}"><div class="code-picker-portal-header"><div><div class="code-picker-portal-title">第 ${index + 1} 筆假別</div><div class="code-picker-portal-subtitle">點選假別即可套用，8.9 名稱為本批次專用</div></div><button class="code-picker-portal-close" type="button" data-batch-code-portal-close="1">關閉</button></div><div class="code-picker-portal-scroll"><div class="code-picker-portal-section-title">全部假別</div><div class="batch-code-option-list">${optionHtml}</div></div></div>`;
     }
-    function renderBatchCodePickerPortal(index, restoreScrollTop = 0) { const portal = ensureBatchCodePickerPortal(); portal.innerHTML = buildBatchCodePickerPortalHtml(index); portal.classList.add("open"); portal.classList.toggle("all-open", batchCodePickerAllOpen); portal.setAttribute("aria-hidden", "false"); bindBatchCodePickerPortalEvents(portal, index); const scroll = portal.querySelector(".code-picker-portal-scroll"); if (scroll && restoreScrollTop > 0) scroll.scrollTop = restoreScrollTop; }
+    function renderBatchCodePickerPortal(index, restoreScrollTop = 0) { const portal = ensureBatchCodePickerPortal(); portal.innerHTML = buildBatchCodePickerPortalHtml(index); moveCodePickerCloseToBottom(portal); portal.classList.add("open"); portal.classList.toggle("all-open", batchCodePickerAllOpen); portal.setAttribute("aria-hidden", "false"); bindBatchCodePickerPortalEvents(portal, index); const scroll = portal.querySelector(".code-picker-portal-scroll"); if (scroll && restoreScrollTop > 0) scroll.scrollTop = restoreScrollTop; }
     function openBatchCodePicker(index) { batchCodePickerAllOpen = false; closeCodePickerPortal(); renderBatchCodePickerPortal(index); }
     function selectBatchCode(index, code) { if (!batchRangeRecords[index]) batchRangeRecords[index] = { startDay: 0, endDay: 0, code: 5, leaveHours: 0, mode: "workOnly", otherLabel: "其他", lastApplied: null }; batchRangeRecords[index].code = Number(code); if (Number(code) === 8.9) batchRangeRecords[index].otherLabel = normalizeOtherCodeLabel(batchRangeRecords[index].otherLabel || "其他"); if (Number(code) === 4) batchRangeRecords[index].mode = "all"; saveCurrentMonthState(); closeBatchCodePickerPortal(); renderAll(false); }
     function bindBatchCodePickerPortalEvents(portal, index) {
@@ -8853,10 +8887,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const closureHtml = getClosureRecordsForDay(d.day).map(record => {
           const interval = getClosureInterval(record);
           const label = record.type === "custom" && interval ? `自訂(${normalizeClosureTime(record.startTime, "01:00")}–${normalizeClosureTime(record.endTime, "24:00")})` : CLOSURE_TYPE_LABELS[record.type];
-          return `<div class="special-badge">停止辦公${label || ""}</div>`;
+          return `<div class="special-badge" title="${escapeHtml(`停止辦公${label || ""}`)}">停辦公</div>`;
         }).join("");
         const trainingHtml = getTrainingRecordsForDay(d.day).map(record => {
-          return `<div class="special-badge">額外加班${fmtHour(record.hours)}HR</div>`;
+          const hours = fmtHour(record.hours);
+          return `<div class="special-badge extra-overtime-badge" title="額外加班${hours}HR"><span>加班</span><span>(${hours}HR)</span></div>`;
         }).join("");
         const electionHtml = isElectionDay(d.day) ? `<div class="special-badge election-badge">選舉日</div>` : "";
         const proxyMinutes = getOverhaulOverrideMinutes(d.day, rocYear + 1911, month);
