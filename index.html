@@ -4724,6 +4724,21 @@
                 <div class="leave-stat-item"><div id="leaveAttendanceMindLabel" class="leave-stat-label">身心(3天)</div><div id="leaveAttendanceMind" class="leave-stat-value empty">0HR</div></div>
                 <div class="leave-stat-item"><div id="leaveAttendanceFamilyLabel" class="leave-stat-label">家庭(7天)</div><div id="leaveAttendanceFamily" class="leave-stat-value empty">0HR</div></div>
               </div>
+              <details id="annualSpecialSettlement" class="annual-special-settlement" hidden>
+                <summary><div class="annual-special-heading"><span><strong>特休結算</strong><small>遞延及不休假獎金</small></span><span class="annual-special-expand">展開</span></div><div class="annual-special-summary"><span id="annualSpecialSummaryCash">未休：待設定</span><span id="annualSpecialSummaryCarry">遞延：待設定</span></div><div class="annual-special-row"><span>本次結算合計（試算）</span><strong id="annualSpecialSummaryTotal">待設定</strong></div></summary>
+                <div class="annual-special-body">
+                  <div id="annualSpecialSettlementPeriod" class="annual-special-note"></div>
+                  <div class="annual-special-usage"><div class="annual-special-table-head"><span>特休來源</span><span>已休</span><span>剩餘</span></div><div><span id="annualSpecialOldSource"></span><strong id="annualSpecialOldUsed"></strong><strong id="annualSpecialOldLeft"></strong></div><div><span id="annualSpecialCurrentSource"></span><strong id="annualSpecialCurrentUsed"></strong><strong id="annualSpecialCurrentLeft"></strong></div></div>
+                  <button id="annualSpecialEditQuota" class="annual-special-link" type="button">設定年度額度</button>
+                  <fieldset class="annual-special-choices"><legend id="annualSpecialCarryLegend">本年度遞延方式</legend><div class="annual-special-row"><span>可遞延上限</span><strong id="annualSpecialCarryMax">待設定</strong></div><div class="annual-special-choice-row"><label><input type="radio" name="annualSpecialCarryChoice" value="all"><span>全部遞延</span></label><label><input type="radio" name="annualSpecialCarryChoice" value="partial"><span>部分遞延</span></label><label><input type="radio" name="annualSpecialCarryChoice" value="none"><span>不遞延</span></label></div><div id="annualSpecialPartialFields" class="annual-special-time" hidden><input id="annualSpecialPartialDays" class="annual-special-input" type="text" inputmode="numeric" autocomplete="off" aria-label="部分遞延天數"><span>天</span><select id="annualSpecialPartialHours" class="annual-special-input" aria-label="部分遞延小時"></select><span>HR</span></div></fieldset>
+                  <div id="annualSpecialSettlementError" class="annual-special-error" role="alert" hidden></div>
+                  <details class="annual-special-audit"><summary>零散特休補助明細</summary><div id="annualSpecialMonthlyAudit" class="annual-special-usage"></div><div class="annual-special-row"><span>各月已計列</span><strong id="annualSpecialMonthlySubsidy"></strong></div><div class="annual-special-row"><span>零散補助補發</span><strong id="annualSpecialSupplement"></strong></div></details>
+                  <div id="annualSpecialOldSalaryWrap" class="annual-special-field"><label id="annualSpecialOldSalaryLabel" for="annualSpecialOldSalary">上年度10月基本薪給</label><input id="annualSpecialOldSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入基本薪給"><div class="annual-special-salary-source"><span id="annualSpecialOldSalarySource" class="annual-special-note"></span><button id="annualSpecialOldSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
+                  <div id="annualSpecialCurrentSalaryWrap" class="annual-special-field"><label id="annualSpecialCurrentSalaryLabel" for="annualSpecialCurrentSalary">本年度10月基本薪給</label><input id="annualSpecialCurrentSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入基本薪給"><div class="annual-special-salary-source"><span id="annualSpecialCurrentSalarySource" class="annual-special-note"></span><button id="annualSpecialCurrentSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
+                  <div id="annualSpecialSaveError" class="annual-special-error" role="alert" hidden></div>
+                  <div class="annual-special-results" aria-live="polite"><div class="annual-special-row"><span>上年度未休轉獎金</span><strong id="annualSpecialOldCash"></strong></div><div class="annual-special-row"><span>本年度未休轉獎金</span><strong id="annualSpecialCurrentCash"></strong></div><div class="annual-special-row"><span id="annualSpecialNextCarryLabel">遞延至下一年度</span><strong id="annualSpecialNextCarry"></strong></div><div class="annual-special-row"><span>不休假獎金 · 未休折算</span><strong id="annualSpecialUnusedBonus"></strong></div><div class="annual-special-row"><span>零散特休補助補發</span><strong id="annualSpecialSupplementAmount"></strong></div><div class="annual-special-total"><span>本次結算合計（試算）</span><strong id="annualSpecialTotal"></strong></div></div>
+                </div>
+              </details>
             </div>
             <div class="leave-stats-year-box accounting-year">
               <div id="leaveStatsAccountingTitle" class="leave-stats-year-title">會計年度</div>
@@ -4737,11 +4752,22 @@
               <div id="otherTimedLeaveStatsGrid" class="leave-stats-grid"></div>
             </div>
           </div>
-          <div class="annual-policy-hub">
+          <div class="annual-policy-hub annual-special-hub-row">
             <button id="annualPolicyHubBtn" class="annual-policy-hub-btn" type="button" aria-haspopup="dialog" aria-controls="annualPolicyModal">
               <span class="annual-policy-hub-copy"><span class="annual-policy-hub-title">獎金與考核資訊</span><span id="annualPolicyHubSummary" class="annual-policy-hub-summary"><span class="annual-policy-hub-summary-row"><span>工作獎金：</span><strong id="annualPolicyBonusSummary">符合核發資格</strong></span><span class="annual-policy-hub-summary-row"><span>考核　　：</span><strong id="annualPolicyAssessmentSummary">有機會考甲</strong></span></span></span>
               <span id="annualPolicyHubStatus" class="annual-policy-hub-status">查看專區</span>
             </button>
+            <button id="annualSpecialQuotaToggle" class="annual-special-quota-card" type="button" aria-expanded="false" aria-controls="annualSpecialQuotaEditor"><span id="annualSpecialQuotaTitle">年度考勤特休</span><strong id="annualSpecialQuotaTotal">待設定</strong><span id="annualSpecialQuotaHint">設定額度</span></button>
+            <section id="annualSpecialQuotaEditor" class="annual-special-editor" hidden aria-label="年度特休額度設定">
+              <div class="annual-special-heading"><strong id="annualSpecialQuotaEditorTitle">年度額度設定</strong><button id="annualSpecialQuotaClose" class="annual-special-button" type="button">完成</button></div>
+              <div id="annualSpecialQuotaPeriod" class="annual-special-note"></div>
+              <div id="annualSpecialOpeningReadonly" class="annual-special-row"><span id="annualSpecialOpeningLabel">上年度遞延額度</span><strong id="annualSpecialOpeningValue">待設定</strong></div>
+              <div id="annualSpecialOpeningFields" class="annual-special-field"><label id="annualSpecialOpeningInputLabel" for="annualSpecialOpeningDays">上年度初始轉入額度</label><div class="annual-special-time"><input id="annualSpecialOpeningDays" class="annual-special-input" type="text" inputmode="numeric" autocomplete="off" placeholder="待填"><span>天</span><select id="annualSpecialOpeningHours" class="annual-special-input" aria-label="初始轉入小時"></select><span>HR</span></div></div>
+              <div class="annual-special-field"><label id="annualSpecialGrantLabel" for="annualSpecialGrantDays">本年度核給天數</label><div class="annual-special-time"><input id="annualSpecialGrantDays" class="annual-special-input" type="text" inputmode="numeric" autocomplete="off" placeholder="待填"><span>天</span></div></div>
+              <div id="annualSpecialQuotaError" class="annual-special-error" role="alert" hidden></div>
+              <div id="annualSpecialQuotaSaveError" class="annual-special-error" role="alert" hidden></div>
+              <div class="annual-special-results" aria-live="polite"><div class="annual-special-row"><span>年度總額</span><strong id="annualSpecialQuotaSplit">待設定</strong></div><div class="annual-special-row"><span>已休</span><strong id="annualSpecialQuotaUsed">0HR</strong></div><div class="annual-special-row"><span>剩餘</span><strong id="annualSpecialQuotaLeft">待設定</strong></div></div>
+            </section>
           </div>
           <div id="timedLeaveSummarySection" class="timed-leave-section" hidden>
             <div class="timed-leave-section-head"><div><div class="timed-leave-section-title">新增期限假別</div><div class="timed-leave-section-note">資格額度以 8HR 折算一日；只有目前有效且仍有額度的資格會顯示。</div></div></div>
@@ -9484,6 +9510,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       setLeaveStatText("leaveAccountingSick", accountingStats.sick);
       renderLeavePolicySummary(attendanceStats, accountingStats, attendanceYear, accountingYear);
       if (typeof window.renderTimedLeaveSummaryV25 === "function") window.renderTimedLeaveSummaryV25();
+      if (typeof window.renderAnnualSpecialLeaveV37 === "function") window.renderAnnualSpecialLeaveV37(days);
     }
     function formatPolicyDays(value) { const rounded = Math.round((Number(value) || 0) * 100) / 100; return `${rounded.toLocaleString("zh-TW")}日`; }
     function setPolicyValue(id, text, alert) { const el=document.getElementById(id); if(!el)return; el.textContent=text; el.classList.toggle("policy-alert",alert===true); el.classList.toggle("policy-ok",alert===false); }
@@ -10113,11 +10140,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const salaryBasePayInput = document.getElementById("salaryBasePay");
       if (salaryBasePayInput) {
         let salaryRenderTimer = 0;
-        salaryBasePayInput.addEventListener("focus", function() { this.select(); });
-        salaryBasePayInput.addEventListener("click", function() { this.select(); });
+        bindAnnualSpecialFirstSelectV37(salaryBasePayInput);
         salaryBasePayInput.addEventListener("input", function() {
-          const digits = String(this.value || "").replace(/[^0-9]/g, "");
-          this.value = fmtInputAccountingMoney(Number(digits || 0));
+          formatAnnualSpecialSalaryInputV37(this);
           salaryBasePaySource = "manual";
           saveCurrentMonthState({ coalesceGroup: "salary-base-pay" });
           clearTimeout(salaryRenderTimer);
@@ -10211,7 +10236,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  const G_BACKUP_CLIENT_ID = "107200643244-6m7b52c3ho8nofgqf2m1v87eu60hssl8.apps.googleusercontent.com";
  const G_BACKUP_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
  const G_BACKUP_FILE_NAME = "overtime-backup.json";
- const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode", "personalOvertimeParameterSettings", "personalOvertimeShiftGroupPreference", "personalOvertimeTimedLeaveEntitlements"]);
+ const G_BACKUP_ALLOWED_EXACT_KEYS = new Set(["personalOvertimeCodeFavorites", "personalOvertimeWeekStartMode", "personalOvertimeParameterSettings", "personalOvertimeShiftGroupPreference", "personalOvertimeTimedLeaveEntitlements", "personalOvertimeAnnualSpecialLeave"]);
  const G_BACKUP_BEFORE_RESTORE_KEY = "personalOvertimeBackupBeforeGoogleRestore";
  const G_BACKUP_BEFORE_IMPORT_KEY = "personalOvertimeBackupBeforeLocalImport";
  const G_BACKUP_AUTH_REMEMBER_KEY = "personalOvertimeGoogleAuthRemembered";
@@ -10424,7 +10449,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   return {
    backupName: G_BACKUP_FILE_NAME,
    backupType: "personalOvertimeIndexedDbSubset",
-   version: 3,
+   version: 4,
    savedAt: new Date().toISOString(),
    keys: data
   };
@@ -10638,7 +10663,9 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
      if (state.manualRecords !== undefined && (!state.manualRecords || typeof state.manualRecords !== "object" || Array.isArray(state.manualRecords))) throw new Error("月份每日資料格式錯誤：" + key);
      if (state.specialDates !== undefined && (!state.specialDates || typeof state.specialDates !== "object" || Array.isArray(state.specialDates))) throw new Error("月份特殊日期格式錯誤：" + key);
      if (state.salaryBasePay !== undefined && (!Number.isFinite(Number(state.salaryBasePay)) || Number(state.salaryBasePay) < 0)) throw new Error("月份基本薪給格式錯誤：" + key);
-    } else if (key === "personalOvertimeCodeFavorites") {
+     } else if (key === "personalOvertimeAnnualSpecialLeave") {
+      validateAnnualSpecialLeaveLedgerV37(JSON.parse(value));
+     } else if (key === "personalOvertimeCodeFavorites") {
      let favorites;
      try { favorites = JSON.parse(value); } catch (error) { throw new Error("我的最愛格式錯誤。"); }
      if (!Array.isArray(favorites)) throw new Error("我的最愛必須是陣列。");
@@ -10663,6 +10690,11 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
  function gBackupApplyPayload(payload) {
   const clean = gBackupValidatePayload(payload);
+   const annualKey = "personalOvertimeAnnualSpecialLeave";
+   if (Number(payload && payload.version || 0) < 4 && !(annualKey in clean) && localStorage.getItem(annualKey)) {
+    const ledger = validateAnnualSpecialLeaveLedgerV37(JSON.parse(localStorage.getItem(annualKey)));
+    clean[annualKey] = JSON.stringify(ledger);
+   }
   const existingKeys = Object.keys(localStorage).filter(function(key) { return /^personalOvertimeState:[ABCD]:\d{1,3}:(?:[1-9]|1[0-2])$/.test(key) || G_BACKUP_ALLOWED_EXACT_KEYS.has(key); });
   const replaceExactKeys = Number(payload && payload.version || 0) >= 3;
   const keysToRemove = existingKeys.filter(function(key) { return !(key in clean) && (key.indexOf("personalOvertimeState:") === 0 || replaceExactKeys); });
@@ -10675,6 +10707,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     if (clean[key] === null || clean[key] === undefined) localStorage.removeItem(key);
     else localStorage.setItem(key, String(clean[key]));
    });
+    suppressPassiveStateSaveForLocalClear = true;
   } catch (error) {
    affectedKeys.forEach(function(key) {
     if (rollback[key] === null) localStorage.removeItem(key);
@@ -10688,10 +10721,10 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   try { indexedKeys = await overtimeIndexedDb.listManagedKeys(); }
   catch (err) { console.warn("無法讀取 IndexedDB 待刪除項目", err); }
   const targets = new Set(indexedKeys.filter(function(key) {
-   return key.indexOf("personalOvertimeState:") === 0 || key === "personalOvertimeTimedLeaveEntitlements";
+    return key.indexOf("personalOvertimeState:") === 0 || key === "personalOvertimeTimedLeaveEntitlements" || key === "personalOvertimeAnnualSpecialLeave";
   }));
   Object.keys(localStorage).forEach(function(key) {
-   if (key.indexOf("personalOvertimeState:") === 0 || key === "personalOvertimeTimedLeaveEntitlements") targets.add(key);
+    if (key.indexOf("personalOvertimeState:") === 0 || key === "personalOvertimeTimedLeaveEntitlements" || key === "personalOvertimeAnnualSpecialLeave") targets.add(key);
   });
   targets.forEach(function(key) { localStorage.removeItem(key); });
   try { await overtimeIndexedDb.removeMany(Array.from(targets)); }
@@ -10699,7 +10732,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
  }
 
  async function clearLocalOvertimeStorageRecords() {
-  const confirmed = await gBackupShowConfirm("刪除本機紀錄", "確定要刪除本機的加班費計算紀錄嗎？", "此動作會刪除本機瀏覽器內所有 personalOvertimeState: 開頭的月份紀錄，以及期限假別資料；包含基本薪給、天災與選舉日設定、大修日期設定、請假／受訓批次設定與主月曆資料。此動作不會刪除 Google Drive 備份、不會登出 G、不會刪除我的最愛。", "danger", "確認刪除", "取消");
+  const confirmed = await gBackupShowConfirm("刪除本機紀錄", "確定要刪除本機的加班費計算紀錄嗎？", "此動作會刪除本機瀏覽器內所有 personalOvertimeState: 開頭的月份紀錄、期限假別，以及特休年度額度、遞延設定與試算薪給；包含基本薪給、天災與選舉日設定、大修日期設定、請假／受訓批次設定與主月曆資料。此動作不會刪除 Google Drive 備份、不會登出 G、不會刪除我的最愛。", "danger", "確認刪除", "取消");
   if (!confirmed) return;
   loadCodeFavorites();
   const favoriteJsonBeforeClear = JSON.stringify(Array.from(codeFavoriteSet));
@@ -10713,8 +10746,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
    console.warn("刪除本機紀錄後無法回寫我的最愛代碼", err);
   }
   gBackupRenderLocalStatus();
-  gBackupSetMessage("已刪除本機加班費計算紀錄與期限假別資料，並已保留我的最愛代碼，頁面即將重新載入。");
-  await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄與期限假別資料。Google Drive 備份、G 登入狀態與我的最愛代碼不受影響。", "success");
+  gBackupSetMessage("已刪除本機加班費計算紀錄、期限假別與特休年度帳本，並已保留我的最愛代碼，頁面即將重新載入。");
+  await gBackupShowNotice("刪除完成", "已刪除本機加班費計算紀錄、期限假別與特休年度帳本。Google Drive 備份、G 登入狀態與我的最愛代碼不受影響。", "success");
   suppressPassiveStateSaveForLocalClear = true;
   await removeLocalOvertimeCalculationRecords();
   window.location.reload();
@@ -13648,5 +13681,353 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
 /* === 2026-09-15 升等$$補發試算 V2：功能結束 === */
 </script>
 
+<script>
+// 特休年度帳本 V37：計算與格式驗證共用於畫面、備份及回歸測試。
+function calculateAnnualSpecialLeaveV37(input) {
+  const dayHours = input.dayHours ?? 8, divisor = input.divisor ?? 240, cap = input.cap ?? 14, perDay = input.perDay ?? 1333;
+  const openingHours = input.openingHours, grantHours = input.grantHours, usedHours = input.usedHours;
+  const result = { oldUsed: 0, currentUsed: 0, oldLeft: null, currentLeft: null, carryHours: null, currentCashHours: null, monthlySubsidyDays: 0, supplementDays: 0, unusedBonus: null, total: null, error: "" };
+  if (![openingHours, grantHours].every(value => Number.isFinite(value) && value >= 0)) { result.error = "請先設定上年度轉入額度與本年度核給天數。"; return result; }
+  if (!Number.isFinite(usedHours) || usedHours < 0 || !Number.isFinite(dayHours) || dayHours <= 0 || !Number.isFinite(divisor) || divisor <= 0 || !Number.isInteger(cap) || cap < 0 || !Number.isFinite(perDay) || perDay < 0) { result.error = "特休時數或計算參數格式錯誤。"; return result; }
+  result.oldUsed = Math.min(openingHours, usedHours);
+  result.currentUsed = Math.max(0, usedHours - openingHours);
+  result.oldLeft = openingHours - result.oldUsed;
+  result.currentLeft = grantHours - result.currentUsed;
+  if (usedHours > openingHours + grantHours) { result.error = "已休時數超過年度總額，請核對額度及請假紀錄。"; return result; }
+  if (!["all", "partial", "none"].includes(input.choice)) { result.error = "請選擇有效的遞延方式。"; return result; }
+  result.carryHours = input.choice === "all" ? result.currentLeft : input.choice === "none" ? 0 : input.partialCarryHours;
+  if (!Number.isFinite(result.carryHours) || result.carryHours < 0 || result.carryHours > result.currentLeft) { result.error = "部分遞延額度超過本年度剩餘額度。"; return result; }
+  result.currentCashHours = result.currentLeft - result.carryHours;
+  const months = Array.isArray(input.monthlyHours) ? input.monthlyHours : [usedHours];
+  if (!months.every(hours => Number.isFinite(hours) && hours >= 0) || Math.abs(months.reduce((sum, hours) => sum + hours, 0) - usedHours) > 0.001) { result.error = "年度與各月特休時數不一致，請核對紀錄。"; return result; }
+  let priorHours = 0;
+  for (const hours of months) {
+    result.monthlySubsidyDays += Math.min(Math.floor(hours / dayHours), Math.max(0, cap - Math.floor(priorHours / dayHours)));
+    priorHours += hours;
+  }
+  result.supplementDays = Math.max(0, Math.min(cap, Math.floor(usedHours / dayHours)) - result.monthlySubsidyDays);
+  const oldReady = result.oldLeft === 0 || Number.isFinite(input.salaryOld) && input.salaryOld > 0;
+  const currentReady = result.currentCashHours === 0 || Number.isFinite(input.salaryCurrent) && input.salaryCurrent > 0;
+  if (oldReady && currentReady) {
+    result.unusedBonus = (result.oldLeft > 0 ? Math.ceil(input.salaryOld * result.oldLeft / divisor) : 0) + (result.currentCashHours > 0 ? Math.ceil(input.salaryCurrent * result.currentCashHours / divisor) : 0);
+    result.total = result.unusedBonus + result.supplementDays * perDay;
+  }
+  return result;
+}
+function annualSpecialFingerprintV37(input, result) {
+  const params = { dayHours: input.dayHours, divisor: input.divisor, cap: input.cap, perDay: input.perDay };
+  return JSON.stringify([input.openingHours, input.grantHours, input.usedHours, input.choice, input.choice === "partial" ? input.partialCarryHours : 0, params, result.oldLeft > 0 ? input.salaryOld : null, result.currentCashHours > 0 ? input.salaryCurrent : null, input.monthlyHours]);
+}
+function validateAnnualSpecialLeaveLedgerV37(ledger) {
+  const object = value => value && typeof value === "object" && !Array.isArray(value);
+  const hours = value => Number.isFinite(value) && value >= 0 && value <= 17520 && Number.isInteger(value * 2);
+  const year = value => /^[1-9]\d{0,2}$/.test(String(value));
+  const salary = value => value === null || Number.isSafeInteger(value) && value >= 0;
+  if (!object(ledger) || ledger.version !== 1 || !object(ledger.groups)) throw new Error("特休年度帳本格式或版本錯誤。");
+  for (const [groupName, group] of Object.entries(ledger.groups)) {
+    if (!["A", "B", "C", "D"].includes(groupName) || !object(group) || !object(group.years) || !object(group.salaries)) throw new Error("特休年度帳本班別格式錯誤。");
+    for (const [sourceYear, amount] of Object.entries(group.salaries)) if (!year(sourceYear) || !salary(amount)) throw new Error("特休薪給基準格式錯誤。");
+    for (const [attendanceYear, entry] of Object.entries(group.years)) {
+      if (!year(attendanceYear) || !object(entry) || !(entry.grantDays === null || Number.isInteger(entry.grantDays) && entry.grantDays >= 0 && entry.grantDays <= 365) || !(entry.openingHours === null || hours(entry.openingHours)) || !hours(entry.partialCarryHours) || !["all", "partial", "none"].includes(entry.choice) || typeof entry.needsReview !== "boolean" || !Array.isArray(entry.revisions)) throw new Error("特休年度額度或遞延資料格式錯誤。");
+      for (const revision of entry.revisions) {
+        if (!object(revision) || typeof revision.fingerprint !== "string" || revision.fingerprint.length > 10000 || typeof revision.confirmedAt !== "string" || !Number.isFinite(Date.parse(revision.confirmedAt))) throw new Error("特休結算歷史格式錯誤。");
+        if (!["openingHours", "grantHours", "usedHours", "carryHours", "oldCashHours", "currentCashHours"].every(key => hours(revision[key])) || revision.carryHours > revision.grantHours || !["unusedBonus", "total", "supplementDays"].every(key => Number.isFinite(revision[key]) && revision[key] >= 0) || !salary(revision.salaryOld) || !salary(revision.salaryCurrent)) throw new Error("特休結算歷史數值錯誤。");
+        let values;
+        try { values = JSON.parse(revision.fingerprint); } catch (error) { throw new Error("特休結算歷史計算基準錯誤。"); }
+        if (!Array.isArray(values) || values.length !== 9 || !object(values[5]) || !Array.isArray(values[8])) throw new Error("特休結算歷史計算基準錯誤。");
+        const input = { openingHours: values[0], grantHours: values[1], usedHours: values[2], choice: values[3], partialCarryHours: values[4], ...values[5], salaryOld: values[6], salaryCurrent: values[7], monthlyHours: values[8] };
+        const computed = calculateAnnualSpecialLeaveV37(input);
+        if (computed.error || computed.total === null || annualSpecialFingerprintV37(input, computed) !== revision.fingerprint || revision.openingHours !== input.openingHours || revision.grantHours !== input.grantHours || revision.usedHours !== input.usedHours || revision.carryHours !== computed.carryHours || revision.oldCashHours !== computed.oldLeft || revision.currentCashHours !== computed.currentCashHours || revision.unusedBonus !== computed.unusedBonus || revision.total !== computed.total || revision.supplementDays !== computed.supplementDays || computed.oldLeft > 0 && revision.salaryOld !== input.salaryOld || computed.currentCashHours > 0 && revision.salaryCurrent !== input.salaryCurrent) throw new Error("特休結算歷史與計算結果不一致。");
+      }
+    }
+  }
+  return ledger;
+}
+function bindAnnualSpecialFirstSelectV37(input) {
+  if (!input || input.dataset.annualFirstSelectBound === "true") return;
+  input.dataset.annualFirstSelectBound = "true";
+  let selectOnClick = false, pointerFocus = false;
+  input.addEventListener("pointerdown", () => { pointerFocus = document.activeElement !== input; selectOnClick = pointerFocus; });
+  input.addEventListener("focus", () => { if (!pointerFocus) requestAnimationFrame(() => { if (document.activeElement === input) input.select(); }); });
+  input.addEventListener("click", () => { if (selectOnClick) input.select(); selectOnClick = false; pointerFocus = false; });
+  input.addEventListener("keydown", () => { selectOnClick = false; pointerFocus = false; });
+  input.addEventListener("blur", () => { selectOnClick = false; pointerFocus = false; });
+}
+function formatAnnualSpecialSalaryInputV37(input) {
+  const before = input.value, start = input.selectionStart ?? before.length, end = input.selectionEnd ?? start;
+  const count = position => before.slice(0, position).replace(/[^0-9]/g, "").length;
+  const startDigits = count(start), endDigits = count(end), digits = before.replace(/[^0-9]/g, "");
+  input.value = fmtInputAccountingMoney(Number(digits || 0));
+  const caret = needed => { if (needed <= 0) return input.value.startsWith("$") ? 1 : 0; let seen = 0; for (let i = 0; i < input.value.length; i++) { if (/[0-9]/.test(input.value[i])) seen++; if (seen === needed) return i + 1; } return input.value.length; };
+  if (document.activeElement === input) input.setSelectionRange(caret(startDigits), caret(endDigits));
+}
+</script>
+<style>
+.annual-special-hub-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,24%);gap:10px;align-items:stretch}
+.annual-special-hub-row .annual-policy-hub-btn{min-width:0}
+.annual-special-quota-card{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;min-height:110px;padding:14px 10px;border:1px solid rgba(103,232,249,.28);border-radius:14px;background:linear-gradient(135deg,rgba(14,116,144,.12),rgba(3,7,18,.5));color:#a5f3fc;font:inherit;cursor:pointer}
+.annual-special-quota-card>span:first-child{font-size:14px;font-weight:900;white-space:normal;text-align:center;line-height:1.4;text-wrap:balance}
+.annual-special-quota-card>strong{font-size:26px;color:#facc65;font-weight:950;max-width:100%;overflow-wrap:anywhere;text-align:center;font-variant-numeric:tabular-nums}
+.annual-special-quota-card>span:last-child{font-size:11px;color:#b8c8d5}
+.annual-special-quota-card[aria-expanded="true"]{border-color:#5ee0ba}
+.annual-special-editor{grid-column:1/-1;display:grid;gap:14px;padding:16px;border:1px solid rgba(103,232,249,.28);border-radius:14px;background:linear-gradient(150deg,#101d2b,#080f18);color:#e2e8f0}
+.annual-special-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#a5f3fc;font-size:16px}
+.annual-special-heading small{display:block;margin-top:4px;font-size:11px;color:#b8c8d5}
+.annual-special-field{display:grid;gap:8px;font-size:14px;min-width:0}
+.annual-special-time{display:flex;align-items:center;flex-wrap:wrap;gap:7px;font-size:14px}
+.annual-special-input{min-width:0;min-height:44px;width:86px;padding:8px 10px;border:1px solid #42617b;border-radius:9px;background:#09131f;color:#e2e8f0;font-size:16px;font-weight:750;text-align:center}
+select.annual-special-input{width:76px}
+.annual-special-button{min-height:44px;padding:8px 14px;border:1px solid #42617b;border-radius:9px;background:#13263b;color:#e2e8f0;font-size:14px;font-weight:800;cursor:pointer}
+.annual-special-button:disabled{opacity:.6;cursor:default}
+.annual-special-link{border:0;padding:8px 0;min-height:44px;background:transparent;color:#79e6bf;font-size:12px;text-align:left;cursor:pointer}
+.annual-special-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+.annual-special-row>span{min-width:0}
+.annual-special-row>strong{text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.annual-special-results{display:grid;gap:12px;border-top:1px solid #324557;padding-top:14px}
+.annual-special-note{color:#b8c8d5;font-size:11px;line-height:1.6;overflow-wrap:anywhere}
+.annual-special-error{color:#fda4af;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.annual-special-settlement{margin-top:12px;border:1px solid #324557;border-radius:12px;background:#0a1421;color:#e2e8f0}
+.annual-special-settlement>summary{display:grid;gap:12px;padding:14px 12px;list-style:none;cursor:pointer}
+.annual-special-settlement>summary::-webkit-details-marker{display:none}
+.annual-special-expand{font-size:12px;color:#79e6bf}
+.annual-special-settlement[open] .annual-special-expand{font-size:0}
+.annual-special-settlement[open] .annual-special-expand::after{content:"收合";font-size:12px}
+.annual-special-summary{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:#facc65}
+.annual-special-body{display:grid;gap:14px;padding:0 12px 14px}
+.annual-special-body>.annual-special-note:first-child{padding-top:12px;border-top:1px solid #324557}
+.annual-special-usage{display:grid;gap:9px}
+.annual-special-usage>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);align-items:center;gap:5px;font-size:13px}
+.annual-special-usage>div>:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.annual-special-table-head{color:#b8c8d5;font-size:11px!important}
+.annual-special-choices{padding:0;border:0;margin:0;min-width:0;display:grid;gap:10px}
+.annual-special-choices legend{font-size:14px;font-weight:850;margin-bottom:10px;padding:0}
+.annual-special-choice-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.annual-special-choice-row label{display:flex;justify-content:center;align-items:center;gap:3px;min-height:44px;padding:7px 3px;border:1px solid #42617b;border-radius:9px;background:#0e1a29;font-size:14px;cursor:pointer}
+.annual-special-choice-row label>span{white-space:nowrap}
+.annual-special-choice-row input{margin:0;accent-color:#63dcb0}
+.annual-special-choice-row label:has(input:checked){background:#b8efdc;color:#092c22;border-color:transparent}
+.annual-special-audit{display:grid;gap:10px}
+.annual-special-audit>summary{min-height:44px;padding:8px 0;color:#79e6bf;font-size:13px;cursor:pointer}
+.annual-special-money-input{width:100%;border:2px solid #347cff;color:#facc65;font-size:24px;font-weight:950}
+.annual-special-money-input::placeholder{font-size:15px;font-weight:500;color:#b8c8d5}
+.annual-special-salary-source{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.annual-special-salary-source .annual-special-link{min-height:30px;padding:4px 0}
+.annual-special-total{display:grid;gap:8px;border-top:1px solid #324557;padding-top:12px;font-size:14px}
+.annual-special-total strong{font-size:26px;color:#facc65;font-variant-numeric:tabular-nums}
+#annualSpecialQuotaLeft{font-size:20px;color:#facc65}
+#annualSpecialSettlement[hidden],#annualSpecialQuotaEditor[hidden],.annual-special-settlement [hidden],.annual-special-editor [hidden]{display:none!important}
+@media(max-width:760px){.annual-special-hub-row{grid-template-columns:minmax(0,1fr) minmax(100px,38%);gap:8px}.annual-special-hub-row .annual-policy-hub-summary-row{display:flex;flex-wrap:wrap;gap:3px}.annual-special-editor{padding:14px 12px}.annual-special-quota-card>strong{font-size:24px}.annual-special-quota-card>span:first-child{font-size:13px}.annual-special-usage>div{font-size:12px}}
+@media(max-width:350px){.annual-special-choice-row label{font-size:12px;padding-left:2px;padding-right:2px}.annual-special-hub-row .annual-policy-hub-btn{padding:12px 10px}.annual-special-quota-card{padding:12px 6px}.annual-special-quota-card>strong{font-size:21px}.annual-special-hub-row .annual-policy-hub-title{font-size:12px}}
+</style>
+<script>
+/* 特休遞延及不休假獎金 V37：年度資料獨立保存，不附加到月份快照。 */
+(() => {
+  const STORAGE_KEY = "personalOvertimeAnnualSpecialLeave";
+  const el = id => document.getElementById(id);
+  const emptyEntry = () => ({ grantDays: null, openingHours: null, choice: "all", partialCarryHours: 0, needsReview: false, revisions: [] });
+  let view = null, storageError = "";
+  const fieldErrors = new Map(), monthCache = new Map();
+  const money = value => value === null ? "待填薪給" : "$" + Number(value).toLocaleString("zh-TW");
+  const time = value => value === null || !Number.isFinite(value) ? "待設定" : formatLeaveStatValue(value);
+  const text = (id, value) => { el(id).textContent = value; };
+  function readLedger() {
+    try { storageError = ""; const raw = localStorage.getItem(STORAGE_KEY); return raw ? validateAnnualSpecialLeaveLedgerV37(JSON.parse(raw)) : { version: 1, groups: {} }; }
+    catch (error) { storageError = "特休帳本無法讀取，原始資料未覆寫：" + error.message; return null; }
+  }
+  function write(edit) {
+    if (!view) return false;
+    try {
+      const ledger = readLedger(); if (!ledger) throw new Error(storageError);
+      const group = ledger.groups[view.group] || (ledger.groups[view.group] = { years: {}, salaries: {} });
+      const entry = group.years[view.year] || (group.years[view.year] = emptyEntry());
+      edit(entry, group);
+      validateAnnualSpecialLeaveLedgerV37(ledger);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(ledger));
+      el("annualSpecialSaveError").hidden = true; el("annualSpecialQuotaSaveError").hidden = true;
+      return true;
+    } catch (error) { ["annualSpecialSaveError", "annualSpecialQuotaSaveError"].forEach(id => { el(id).hidden = false; text(id, "無法儲存特休資料：" + error.message); }); return false; }
+  }
+  function parameters() {
+    return { dayHours: Math.max(.5, getLeavePolicyNumber("hoursPerDay")), divisor: Math.max(.01, getParameterCoreNumber("salaryHourDivisor")), cap: Math.max(0, Math.round(getParameterCoreNumber("specialLeaveSubsidyMaxDays"))), perDay: Math.max(0, getParameterCoreNumber("specialLeaveSubsidyPerDay")) };
+  }
+  function salaryFor(group, sourceYear) {
+    if (Object.prototype.hasOwnProperty.call(group.salaries, sourceYear)) return { amount: group.salaries[sourceYear] > 0 ? group.salaries[sourceYear] : null, manual: true };
+    const key = "personalOvertimeState:" + view.group + ":" + sourceYear + ":10";
+    try {
+      const currentKey = typeof activeStorageKey === "string" ? activeStorageKey : "";
+      if (currentKey === key && getCurrentStorageKey() === key) {
+        const amount = getSalaryBasePay();
+        return { amount: Number.isSafeInteger(amount) && amount > 0 ? amount : null, manual: false };
+      }
+      const raw = localStorage.getItem(key);
+      if (!raw) return { amount: null, manual: false };
+      const stored = JSON.parse(raw);
+      const amount = Number(stored.salaryBasePay);
+      return { amount: Number.isSafeInteger(amount) && amount > 0 ? amount : null, manual: false };
+    } catch (error) { return { amount: null, manual: false }; }
+  }
+  function monthly(year) {
+    return getAttendanceYearMonthPairs(year).map(pair => {
+      const key = "personalOvertimeState:" + view.group + ":" + pair.rocYear + ":" + pair.month;
+      const raw = localStorage.getItem(key), current = pair.rocYear === view.rocYear && pair.month === view.month;
+      let hours;
+      if (current) hours = collectLeaveStatsFromDays(view.days).special;
+      else {
+        const cached = monthCache.get(key);
+        if (cached && cached.raw === raw) hours = cached.hours;
+        else { hours = applyLeaveStatsSnapshotForMonth(pair.rocYear, pair.month, view.group, null).special; monthCache.set(key, { raw, hours }); }
+      }
+      return { ...pair, hours: roundLeaveStatHours(hours || 0), stored: !!raw };
+    });
+  }
+  function modelFor(ledger, year, cache = new Map()) {
+    if (cache.has(year)) return cache.get(year);
+    const group = ledger.groups[view.group] || { years: {}, salaries: {} }, entry = group.years[year] || emptyEntry(), params = parameters();
+    let opening = entry.openingHours, inherited = false, parentError = "";
+    const previousEntry = group.years[year - 1];
+    if (previousEntry && year > 1) {
+      // 舊版確認歷史僅保留供備份相容；額度直接沿用前年度目前有效的遞延試算。
+      const previous = modelFor(ledger, year - 1, cache);
+      if (!previous.result.error && previous.result.carryHours !== null) {
+        inherited = true; opening = previous.result.carryHours;
+      } else if (previous.parentError || previous.opening !== null && previous.entry.grantDays !== null) {
+        inherited = true; opening = null; parentError = "上年度遞延資料待修正，請先修正上年度遞延設定。";
+      }
+    }
+    const rows = monthly(year), usedHours = roundLeaveStatHours(rows.reduce((sum, row) => sum + row.hours, 0));
+    const oldSalary = salaryFor(group, year - 1), currentSalary = salaryFor(group, year);
+    const input = { openingHours: opening, grantHours: entry.grantDays === null ? null : entry.grantDays * params.dayHours, usedHours, choice: entry.choice, partialCarryHours: entry.partialCarryHours, ...params, salaryOld: oldSalary.amount, salaryCurrent: currentSalary.amount, monthlyHours: rows.map(row => row.hours) };
+    const result = calculateAnnualSpecialLeaveV37(input);
+    if (parentError) result.error = parentError;
+    const model = { year, entry, rows, usedHours, opening, inherited, parentError, oldSalary, currentSalary, input, result, params };
+    cache.set(year, model); return model;
+  }
+  function setInput(id, value) { const input = el(id); if (document.activeElement !== input && !fieldErrors.has(id)) input.value = value; }
+  function hourOptions(id, dayHours) {
+    const select = el(id); if (select.dataset.dayHours === String(dayHours)) return;
+    select.dataset.dayHours = String(dayHours); select.replaceChildren();
+    for (let hours = 0; hours < dayHours; hours += .5) { const option = document.createElement("option"); option.value = String(hours); option.textContent = String(hours); select.appendChild(option); }
+  }
+  function salaryField(prefix, sourceYear, salary, cashHours) {
+    el("annualSpecial" + prefix + "SalaryWrap").hidden = cashHours === 0;
+    text("annualSpecial" + prefix + "SalaryLabel", sourceYear + "年10月基本薪給");
+    setInput("annualSpecial" + prefix + "Salary", salary.amount === null ? "" : fmtInputAccountingMoney(salary.amount));
+    text("annualSpecial" + prefix + "SalarySource", salary.manual ? "手動輸入" : salary.amount === null ? sourceYear + "年10月沒有薪給紀錄，請自行輸入。" : "已帶入" + sourceYear + "年10月主畫面薪給。");
+    el("annualSpecial" + prefix + "SalaryReset").hidden = !salary.manual;
+  }
+  function audit(model) {
+    const table = el("annualSpecialMonthlyAudit"); table.replaceChildren();
+    const header = document.createElement("div"); header.className = "annual-special-table-head";
+    ["月份", "月補助天數", "零散時數"].forEach(value => { const span = document.createElement("span"); span.textContent = value; header.appendChild(span); }); table.appendChild(header);
+    let prior = 0, counted = 0;
+    model.rows.forEach(row => {
+      const days = Math.min(Math.floor(row.hours / model.params.dayHours), Math.max(0, model.params.cap - Math.floor(prior / model.params.dayHours))); prior += row.hours; counted += days;
+      if (!row.hours) return;
+      const line = document.createElement("div");
+      [row.rocYear + "/" + row.month, days + "天", fmtHour(row.hours % model.params.dayHours) + "HR"].forEach((value, index) => { const node = document.createElement(index ? "strong" : "span"); node.textContent = value; line.appendChild(node); }); table.appendChild(line);
+    });
+    const supplementary = Math.max(0, Math.min(model.params.cap, Math.floor(model.usedHours / model.params.dayHours)) - counted);
+    text("annualSpecialMonthlySubsidy", counted + "天／上限" + model.params.cap + "天");
+    text("annualSpecialSupplement", supplementary + "天");
+    text("annualSpecialSupplementAmount", supplementary + "天 · " + money(supplementary * model.params.perDay));
+  }
+  function render() {
+    if (!view) return;
+    el("annualSpecialSettlement").hidden = view.month !== 10;
+    text("annualSpecialQuotaTitle", view.year + "年度考勤特休"); text("annualSpecialQuotaEditorTitle", view.year + "年度額度設定");
+    const ledger = readLedger();
+    const controls = document.querySelectorAll(".annual-special-body input, .annual-special-body select, .annual-special-body button, #annualSpecialQuotaEditor input, #annualSpecialQuotaEditor select");
+    controls.forEach(control => { control.disabled = !ledger; });
+    if (!ledger) {
+      ["annualSpecialQuotaTotal", "annualSpecialQuotaHint", "annualSpecialQuotaPeriod", "annualSpecialQuotaSplit", "annualSpecialQuotaUsed", "annualSpecialQuotaLeft", "annualSpecialOpeningValue", "annualSpecialSettlementPeriod", "annualSpecialOldUsed", "annualSpecialCurrentUsed", "annualSpecialOldLeft", "annualSpecialCurrentLeft", "annualSpecialCarryMax", "annualSpecialOldCash", "annualSpecialCurrentCash", "annualSpecialNextCarry", "annualSpecialSummaryCash", "annualSpecialSummaryCarry", "annualSpecialUnusedBonus", "annualSpecialTotal", "annualSpecialSummaryTotal", "annualSpecialMonthlySubsidy", "annualSpecialSupplement", "annualSpecialSupplementAmount"].forEach(id => text(id, "待修復"));
+      ["annualSpecialQuotaError", "annualSpecialSettlementError"].forEach(id => { el(id).hidden = false; text(id, storageError); });
+      ["annualSpecialOpeningDays", "annualSpecialGrantDays", "annualSpecialPartialDays", "annualSpecialOldSalary", "annualSpecialCurrentSalary"].forEach(id => { el(id).value = ""; });
+      document.querySelectorAll('input[name="annualSpecialCarryChoice"]').forEach(radio => { radio.checked = false; });
+      el("annualSpecialMonthlyAudit").replaceChildren();
+      text("annualSpecialOldSource", view.year - 1 + "遞延"); text("annualSpecialCurrentSource", view.year + "核給");
+      text("annualSpecialOpeningLabel", view.year - 1 + "年度遞延額度"); text("annualSpecialOpeningInputLabel", view.year - 1 + "年度初始轉入額度"); text("annualSpecialGrantLabel", view.year + "年度核給天數"); text("annualSpecialCarryLegend", view.year + "年度遞延方式"); text("annualSpecialNextCarryLabel", "遞延至" + (view.year + 1) + "年度");
+      ["Old", "Current"].forEach(prefix => { text("annualSpecial" + prefix + "SalaryLabel", view.year - (prefix === "Old" ? 1 : 0) + "年10月基本薪給"); text("annualSpecial" + prefix + "SalarySource", "帳本待修復"); });
+      return;
+    }
+    const model = modelFor(ledger, view.year), result = model.result;
+    const validFields = ["annualSpecialOpeningDays", "annualSpecialGrantDays"].every(id => !fieldErrors.has(id));
+    const editError = !validFields ? "天數請填入0～365的整數。" : model.entry.choice === "partial" && fieldErrors.has("annualSpecialPartialDays") ? "部分遞延天數格式錯誤。" : "";
+    const quotaReady = model.opening !== null && model.entry.grantDays !== null;
+    const quotaHours = quotaReady ? model.opening + model.entry.grantDays * model.params.dayHours : null;
+    const quotaError = editError || model.parentError || (quotaReady ? result.error : "");
+    text("annualSpecialQuotaTitle", view.year + "年度考勤特休");
+    text("annualSpecialQuotaTotal", quotaError ? "待確認" : quotaHours === null ? "待設定" : "(" + time(quotaHours) + ")");
+    text("annualSpecialQuotaHint", el("annualSpecialQuotaEditor").hidden ? "設定額度" : "收合設定");
+    text("annualSpecialQuotaEditorTitle", view.year + "年度額度設定");
+    const first = model.rows[0], end = model.rows.at(-1), lastDay = new Date(end.rocYear + 1911, end.month, 0).getDate();
+    const period = first.rocYear + "/" + first.month + "/1～" + end.rocYear + "/" + end.month + "/" + lastDay;
+    text("annualSpecialQuotaPeriod", period); text("annualSpecialSettlementPeriod", view.year + "考勤年度 · " + period);
+    text("annualSpecialOpeningLabel", view.year - 1 + "年度遞延額度"); text("annualSpecialOpeningValue", time(model.opening));
+    el("annualSpecialOpeningReadonly").hidden = !model.inherited; el("annualSpecialOpeningFields").hidden = model.inherited;
+    text("annualSpecialOpeningInputLabel", view.year - 1 + "年度初始轉入額度（無遞延請填0）");
+    text("annualSpecialGrantLabel", view.year + "年度核給天數");
+    ["annualSpecialOpeningHours", "annualSpecialPartialHours"].forEach(id => hourOptions(id, model.params.dayHours));
+    setInput("annualSpecialOpeningDays", model.entry.openingHours === null ? "" : String(Math.floor(model.entry.openingHours / model.params.dayHours)));
+    el("annualSpecialOpeningHours").value = String((model.entry.openingHours || 0) % model.params.dayHours);
+    setInput("annualSpecialGrantDays", model.entry.grantDays === null ? "" : String(model.entry.grantDays));
+    setInput("annualSpecialPartialDays", String(Math.floor(model.entry.partialCarryHours / model.params.dayHours))); el("annualSpecialPartialHours").value = String(model.entry.partialCarryHours % model.params.dayHours);
+    el("annualSpecialQuotaError").hidden = !quotaError; text("annualSpecialQuotaError", quotaError);
+    text("annualSpecialQuotaSplit", quotaReady ? time(model.opening) + "＋" + time(model.entry.grantDays * model.params.dayHours) + "＝" + time(quotaHours) : "請填入年度額度");
+    text("annualSpecialQuotaUsed", time(model.usedHours)); text("annualSpecialQuotaLeft", quotaError ? "待確認" : quotaReady ? time(quotaHours - model.usedHours) : "待設定");
+    el("annualSpecialQuotaToggle").setAttribute("aria-expanded", String(!el("annualSpecialQuotaEditor").hidden));
+    el("annualSpecialSettlement").hidden = view.month !== 10;
+    text("annualSpecialOldSource", view.year - 1 + "遞延"); text("annualSpecialCurrentSource", view.year + "核給");
+    text("annualSpecialOldUsed", time(result.oldUsed)); text("annualSpecialCurrentUsed", time(result.currentUsed)); text("annualSpecialOldLeft", time(result.oldLeft)); text("annualSpecialCurrentLeft", time(result.currentLeft));
+    text("annualSpecialCarryLegend", view.year + "年度遞延方式"); text("annualSpecialCarryMax", time(result.currentLeft));
+    document.querySelectorAll('input[name="annualSpecialCarryChoice"]').forEach(radio => { radio.checked = radio.value === model.entry.choice; });
+    el("annualSpecialPartialFields").hidden = model.entry.choice !== "partial";
+    const error = editError || result.error; el("annualSpecialSettlementError").hidden = !error; text("annualSpecialSettlementError", error);
+    const quantity = value => error ? "待確認" : time(value);
+    text("annualSpecialOldCash", quantity(result.oldLeft)); text("annualSpecialCurrentCash", quantity(result.currentCashHours)); text("annualSpecialNextCarry", quantity(result.carryHours)); text("annualSpecialNextCarryLabel", "遞延至" + (view.year + 1) + "年度");
+    text("annualSpecialSummaryCash", "未休：" + quantity(result.oldLeft === null || result.currentCashHours === null ? null : result.oldLeft + result.currentCashHours)); text("annualSpecialSummaryCarry", "遞延：" + quantity(result.carryHours));
+    text("annualSpecialUnusedBonus", error ? "待確認" : money(result.unusedBonus)); text("annualSpecialTotal", error ? "待確認" : money(result.total)); text("annualSpecialSummaryTotal", error ? "待確認" : money(result.total));
+    salaryField("Old", view.year - 1, model.oldSalary, result.oldLeft); salaryField("Current", view.year, model.currentSalary, result.currentCashHours); audit(model);
+  }
+  function edited() { render(); }
+  function daysInput(id, apply) {
+    el(id).addEventListener("input", () => {
+      const value = el(id).value;
+      if (!/^\d+$/.test(value) || Number(value) > 365) { fieldErrors.set(id, true); edited(); return; }
+      fieldErrors.delete(id); if (write((entry, group) => apply(entry, group, Number(value)))) edited();
+    });
+  }
+  function saveTime(kind) {
+    const dayId = kind === "opening" ? "annualSpecialOpeningDays" : "annualSpecialPartialDays", hourId = kind === "opening" ? "annualSpecialOpeningHours" : "annualSpecialPartialHours";
+    const days = el(dayId).value; if (!/^\d+$/.test(days) || Number(days) > 365) { fieldErrors.set(dayId, true); edited(); return; }
+    const hours = Number(days) * parameters().dayHours + Number(el(hourId).value); fieldErrors.delete(dayId);
+    if (write(entry => { entry[kind === "opening" ? "openingHours" : "partialCarryHours"] = hours; })) edited();
+  }
+  function bind() {
+    ["annualSpecialOpeningDays", "annualSpecialGrantDays", "annualSpecialPartialDays", "annualSpecialOldSalary", "annualSpecialCurrentSalary"].forEach(id => bindAnnualSpecialFirstSelectV37(el(id)));
+    daysInput("annualSpecialGrantDays", (entry, group, days) => { entry.grantDays = days; });
+    el("annualSpecialOpeningDays").addEventListener("input", () => saveTime("opening")); el("annualSpecialOpeningHours").addEventListener("change", () => saveTime("opening"));
+    el("annualSpecialPartialDays").addEventListener("input", () => saveTime("partial")); el("annualSpecialPartialHours").addEventListener("change", () => saveTime("partial"));
+    document.querySelectorAll('input[name="annualSpecialCarryChoice"]').forEach(radio => radio.addEventListener("change", () => { if (radio.checked && write(entry => { entry.choice = radio.value; })) edited(); }));
+    ["Old", "Current"].forEach(prefix => {
+      el("annualSpecial" + prefix + "Salary").addEventListener("input", event => {
+        formatAnnualSpecialSalaryInputV37(event.target); const amount = Number(event.target.value.replace(/[^0-9]/g, ""));
+        if (write((entry, group) => { group.salaries[view.year - (prefix === "Old" ? 1 : 0)] = amount; })) edited();
+      });
+      el("annualSpecial" + prefix + "SalaryReset").addEventListener("click", () => { if (write((entry, group) => { delete group.salaries[view.year - (prefix === "Old" ? 1 : 0)]; })) edited(); });
+    });
+    el("annualSpecialQuotaToggle").addEventListener("click", () => { el("annualSpecialQuotaEditor").hidden = !el("annualSpecialQuotaEditor").hidden; render(); });
+    el("annualSpecialQuotaClose").addEventListener("click", () => { if (!el("annualSpecialQuotaError").hidden) return; el("annualSpecialQuotaEditor").hidden = true; render(); el("annualSpecialQuotaToggle").focus(); });
+    el("annualSpecialEditQuota").addEventListener("click", () => { el("annualSpecialQuotaEditor").hidden = false; render(); el("annualSpecialQuotaEditor").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
+  }
+  window.renderAnnualSpecialLeaveV37 = days => {
+    const rocYear = Number(el("rocYear").value), month = Number(el("month").value), group = el("shiftGroup").value;
+    const year = getLeaveYearForMonth(rocYear, month, getParameterCoreNumber("attendanceYearStartMonth"));
+    if (!Number.isInteger(year) || year < 1 || year > 999 || !month || !["A", "B", "C", "D"].includes(group)) return;
+    if (!view || view.year !== year || view.group !== group || view.month !== month || view.rocYear !== rocYear) { fieldErrors.clear(); el("annualSpecialSaveError").hidden = true; }
+    view = { rocYear, month, group, year, days: Array.isArray(days) ? days : [] }; monthCache.clear(); render();
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind); else bind();
+})();
+</script>
 </body>
 </html>
