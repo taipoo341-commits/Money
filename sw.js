@@ -1,7 +1,7 @@
 const APP_ROOT = new URL("./", self.location.href);
 // 避開舊 Worker 的 personal-overtime-shell- 清理範圍，並依部署路徑隔離。
 const CACHE_PREFIX = "personal-overtime-app-" + encodeURIComponent(APP_ROOT.pathname) + "-";
-const CACHE_NAME = CACHE_PREFIX + "v45";
+const CACHE_NAME = CACHE_PREFIX + "v46";
 const APP_SHELL = [
   "./index.html",
   "./manifest.json",
@@ -37,11 +37,32 @@ self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys()
       .then(function (keys) { return Promise.all(keys.filter(function (key) { return key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME; }).map(function (key) { return caches.delete(key); })); })
+      .catch(function (error) { console.warn("舊離線快取清理失敗，將繼續接管頁面。", error); })
       .then(function () { return self.clients.claim(); })
   );
 });
 
+async function openAppCache() {
+  try {
+    return await caches.open(CACHE_NAME);
+  } catch (error) {
+    console.warn("離線快取無法開啟，將繼續使用網路。", error);
+    return null;
+  }
+}
+
+async function matchCachedResponse(cache, key) {
+  if (!cache || !key) return null;
+  try {
+    return (await cache.match(key)) || null;
+  } catch (error) {
+    console.warn("離線快取讀取失敗。", error);
+    return null;
+  }
+}
+
 async function putCachedResponse(cache, key, response) {
+  if (!cache) return;
   try {
     await cache.put(key, response.clone());
   } catch (error) {
@@ -50,7 +71,7 @@ async function putCachedResponse(cache, key, response) {
 }
 
 async function networkFirst(request, fallbackUrl, cacheUrl, bypassHttpCache) {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await openAppCache();
   const cacheKey = cacheUrl || request;
   try {
     const response = await fetch(request, bypassHttpCache ? { cache: "no-store" } : undefined);
@@ -58,15 +79,15 @@ async function networkFirst(request, fallbackUrl, cacheUrl, bypassHttpCache) {
       await putCachedResponse(cache, cacheKey, response);
       return response;
     }
-    return (await cache.match(cacheKey)) || (fallbackUrl ? await cache.match(fallbackUrl) : null) || response;
+    return (await matchCachedResponse(cache, cacheKey)) || (await matchCachedResponse(cache, fallbackUrl)) || response;
   } catch (error) {
-    return (await cache.match(cacheKey)) || (fallbackUrl ? await cache.match(fallbackUrl) : null) || Response.error();
+    return (await matchCachedResponse(cache, cacheKey)) || (await matchCachedResponse(cache, fallbackUrl)) || Response.error();
   }
 }
 
 async function cacheFirst(request) {
-  const cache = await caches.open(CACHE_NAME);
-  const cached = await cache.match(request);
+  const cache = await openAppCache();
+  const cached = await matchCachedResponse(cache, request);
   if (cached) return cached;
   try {
     const response = await fetch(request);

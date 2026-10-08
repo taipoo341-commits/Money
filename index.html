@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>加班費計算</title>
   
-  <link id="pwaManifestLink" rel="manifest" href="./manifest.json?v=43">
-  <link rel="icon" type="image/png" href="./icon-192.png?v=43">
-  <link rel="apple-touch-icon" href="./icon-192.png?v=43">
+  <link id="pwaManifestLink" rel="manifest" href="./manifest.json?v=46">
+  <link rel="icon" type="image/png" href="./icon-192.png?v=46">
+  <link rel="apple-touch-icon" href="./icon-192.png?v=46">
   <meta name="theme-color" content="#00F0FF">
 <style>
     @font-face {
@@ -4691,8 +4691,8 @@
                   <fieldset class="annual-special-choices"><legend id="annualSpecialCarryLegend">本年度遞延方式</legend><div class="annual-special-row"><span>可遞延上限</span><strong id="annualSpecialCarryMax">待設定</strong></div><div class="annual-special-choice-row"><label><input type="radio" name="annualSpecialCarryChoice" value="all"><span>全部遞延</span></label><label><input type="radio" name="annualSpecialCarryChoice" value="partial"><span>部分遞延</span></label><label><input type="radio" name="annualSpecialCarryChoice" value="none"><span>不遞延</span></label></div><div id="annualSpecialPartialFields" class="annual-special-time" hidden><input id="annualSpecialPartialDays" class="annual-special-input" type="text" inputmode="numeric" autocomplete="off" aria-label="部分遞延天數"><span>天</span><select id="annualSpecialPartialHours" class="annual-special-input" aria-label="部分遞延小時"></select><span>HR</span></div></fieldset>
                   <div id="annualSpecialSettlementError" class="annual-special-error" role="alert" hidden></div>
                   <details class="annual-special-audit"><summary>零散特休補助明細</summary><div id="annualSpecialMonthlyAudit" class="annual-special-usage"></div><div class="annual-special-row"><span>各月已計列</span><strong id="annualSpecialMonthlySubsidy"></strong></div><div class="annual-special-row"><span>零散補助補發</span><strong id="annualSpecialSupplement"></strong></div></details>
-                  <div id="annualSpecialOldSalaryWrap" class="annual-special-field"><label id="annualSpecialOldSalaryLabel" for="annualSpecialOldSalary">上年度10月基本薪給</label><input id="annualSpecialOldSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入基本薪給"><div class="annual-special-salary-source"><span id="annualSpecialOldSalarySource" class="annual-special-note"></span><button id="annualSpecialOldSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
-                  <div id="annualSpecialCurrentSalaryWrap" class="annual-special-field"><label id="annualSpecialCurrentSalaryLabel" for="annualSpecialCurrentSalary">本年度10月基本薪給</label><input id="annualSpecialCurrentSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入基本薪給"><div class="annual-special-salary-source"><span id="annualSpecialCurrentSalarySource" class="annual-special-note"></span><button id="annualSpecialCurrentSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
+                  <div id="annualSpecialOldSalaryWrap" class="annual-special-field"><label id="annualSpecialOldSalaryLabel" for="annualSpecialOldSalary">上年度10月31日之職等薪給</label><input id="annualSpecialOldSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入10月31日之職等薪給"><div class="annual-special-salary-source"><span id="annualSpecialOldSalarySource" class="annual-special-note"></span><button id="annualSpecialOldSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
+                  <div id="annualSpecialCurrentSalaryWrap" class="annual-special-field"><label id="annualSpecialCurrentSalaryLabel" for="annualSpecialCurrentSalary">本年度10月31日之職等薪給</label><input id="annualSpecialCurrentSalary" class="annual-special-input annual-special-money-input" type="text" inputmode="numeric" autocomplete="off" placeholder="請輸入10月31日之職等薪給"><div class="annual-special-salary-source"><span id="annualSpecialCurrentSalarySource" class="annual-special-note"></span><button id="annualSpecialCurrentSalaryReset" type="button" class="annual-special-link" hidden>使用主畫面資料</button></div></div>
                   <div id="annualSpecialSaveError" class="annual-special-error" role="alert" hidden></div>
                   <div class="annual-special-results" aria-live="polite"><div class="annual-special-row"><span>上年度未休 天/時</span><strong id="annualSpecialOldCash"></strong></div><div class="annual-special-row"><span>本年度未休 天/時</span><strong id="annualSpecialCurrentCash"></strong></div><div class="annual-special-row"><span id="annualSpecialNextCarryLabel">遞延至下一年度</span><strong id="annualSpecialNextCarry"></strong></div><div class="annual-special-row"><span>不休假獎金折算</span><strong id="annualSpecialUnusedBonus"></strong></div><div class="annual-special-row"><span>零散特休補助補發</span><strong id="annualSpecialSupplementAmount"></strong></div><div class="annual-special-total"><span>本次結算合計（試算）</span><strong id="annualSpecialTotal"></strong></div></div>
                 </div>
@@ -14127,7 +14127,7 @@ select.annual-special-input{width:76px}
   }
   function salaryField(prefix, sourceYear, salary, cashHours) {
     el("annualSpecial" + prefix + "SalaryWrap").hidden = cashHours === 0;
-    text("annualSpecial" + prefix + "SalaryLabel", sourceYear + "年10月基本薪給");
+    text("annualSpecial" + prefix + "SalaryLabel", sourceYear + "年10月31日之職等薪給");
     setInput("annualSpecial" + prefix + "Salary", salary.amount === null ? "" : fmtInputAccountingMoney(salary.amount));
     text("annualSpecial" + prefix + "SalarySource", salary.manual ? "手動輸入" : salary.amount === null ? sourceYear + "年10月沒有薪給紀錄，請自行輸入。" : "已帶入" + sourceYear + "年10月主畫面薪給。");
     el("annualSpecial" + prefix + "SalaryReset").hidden = !salary.manual;
@@ -14164,7 +14164,7 @@ select.annual-special-input{width:76px}
       el("annualSpecialMonthlyAudit").replaceChildren();
       text("annualSpecialOldSource", view.year - 1 + "遞延"); text("annualSpecialCurrentSource", view.year + "核給");
       text("annualSpecialOpeningLabel", view.year - 1 + "年度遞延額度"); text("annualSpecialOpeningInputLabel", view.year - 1 + "年度初始轉入額度"); text("annualSpecialGrantLabel", view.year + "年度核給天數"); text("annualSpecialCarryLegend", view.year + "年度遞延方式"); text("annualSpecialNextCarryLabel", "遞延至" + (view.year + 1) + "年度");
-      ["Old", "Current"].forEach(prefix => { text("annualSpecial" + prefix + "SalaryLabel", view.year - (prefix === "Old" ? 1 : 0) + "年10月基本薪給"); text("annualSpecial" + prefix + "SalarySource", "帳本待修復"); });
+      ["Old", "Current"].forEach(prefix => { text("annualSpecial" + prefix + "SalaryLabel", view.year - (prefix === "Old" ? 1 : 0) + "年10月31日之職等薪給"); text("annualSpecial" + prefix + "SalarySource", "帳本待修復"); });
       return;
     }
     const model = modelFor(ledger, view.year), result = model.result;
