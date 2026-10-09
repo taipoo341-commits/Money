@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>加班費計算</title>
   
-  <link id="pwaManifestLink" rel="manifest" href="./manifest.json?v=46">
-  <link rel="icon" type="image/png" href="./icon-192.png?v=46">
-  <link rel="apple-touch-icon" href="./icon-192.png?v=46">
+  <link id="pwaManifestLink" rel="manifest" href="./manifest.json?v=47">
+  <link rel="icon" type="image/png" href="./icon-192.png?v=47">
+  <link rel="apple-touch-icon" href="./icon-192.png?v=47">
   <meta name="theme-color" content="#00F0FF">
 <style>
     @font-face {
@@ -4563,6 +4563,61 @@
 }
 /* === V27 功能樣式結束 === */
 </style>
+<style>
+/* === v47：本月合計、特殊日按鈕對齊與複合假別欄位內選取 === */
+.salary-overview-grid > .salary-month-total-item { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-right: 0 !important; border-top: 1px solid rgba(0,240,255,.14) !important; background: linear-gradient(90deg,rgba(16,185,129,.12),rgba(246,196,83,.06)); }
+.salary-month-total-item .salary-overview-label { color: #a7f3d0; }
+.salary-month-total-item .salary-overview-value { margin-top: 0; white-space: nowrap; }
+.salary-overview-grid.has-special-leave-subsidy > .special-leave-subsidy-item { grid-column: 1 / -1; }
+#closureRecordList .special-record.with-delete-space,
+#trainingRecordList.special-record-list .special-record.with-delete-space { grid-template-columns: minmax(110px,.8fr) minmax(0,1.2fr) 72px 48px !important; gap: 8px !important; align-items: center !important; }
+#electionRecordList .special-record.election-with-delete-space { grid-template-columns: minmax(0,1fr) 72px 48px !important; gap: 8px !important; align-items: center !important; }
+#closureRecordList .special-date-row,
+#closureRecordList .closure-type-control { display: contents !important; }
+#closureRecordList .special-date-btn { grid-column: 1 !important; grid-row: 1 !important; order: initial !important; }
+#closureRecordList .special-type-select { grid-column: 2 !important; grid-row: 1 !important; width: 100% !important; min-width: 0 !important; order: initial !important; }
+#closureRecordList .special-date-reset-btn,
+#trainingRecordList .special-date-reset-btn { grid-column: 3 !important; grid-row: 1 !important; order: initial !important; }
+#closureRecordList .special-delete-btn,
+#trainingRecordList .special-delete-btn { grid-column: 4 !important; grid-row: 1 !important; display: block !important; width: 100% !important; min-width: 0 !important; order: initial !important; }
+#electionRecordList .special-date-btn { grid-column: 1 !important; grid-row: 1 !important; }
+#electionRecordList .special-date-reset-btn { grid-column: 2 !important; grid-row: 1 !important; }
+#electionRecordList .special-delete-btn { grid-column: 3 !important; grid-row: 1 !important; display: block !important; width: 100% !important; min-width: 0 !important; }
+#closureRecordList .closure-custom-times { display: grid !important; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) !important; grid-column: 1 / 3 !important; grid-row: 2 !important; }
+#closureRecordList .closure-custom-time-input,
+#closureRecordList .closure-custom-times span { grid-column: auto !important; grid-row: auto !important; }
+#closureRecordList .closure-source-badge { grid-column: 1 / -1 !important; }
+.compound-choice-trigger-v47 { display: flex; align-items: center; justify-content: space-between; gap: 7px; text-align: left; cursor: pointer; }
+.compound-choice-trigger-v47 span { min-width: 0; overflow-wrap: anywhere; }
+.compound-choice-trigger-v47::after { content: "⌄"; flex: 0 0 auto; color: #a5c4c8; }
+.compound-choice-trigger-v47[aria-expanded="true"] { border-color: rgba(110,231,183,.7); }
+.compound-inline-picker-v47 { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; padding: 2px 0 4px; }
+.compound-inline-picker-v47[hidden] { display: none; }
+.compound-inline-choice-v47 { min-height: 40px; min-width: 0; border: 1px solid rgba(103,232,249,.34); border-radius: 10px; background: #0c171c; color: #d8eded; padding: 7px; font-size: 12px; font-weight: 900; line-height: 1.35; overflow-wrap: anywhere; cursor: pointer; }
+.compound-inline-choice-v47[aria-pressed="true"] { border-color: #6ee7b7; background: #154335; color: #d1fae5; }
+.compound-inline-choice-v47:disabled { opacity: .38; cursor: not-allowed; }
+.compound-choice-trigger-v47:focus-visible,
+.compound-inline-choice-v47:focus-visible { outline: 2px solid #6ee7b7; outline-offset: 2px; }
+@media(max-width:760px) {
+  .salary-month-total-item .salary-overview-label { font-size: clamp(12px,3.45vw,15px); }
+  .salary-month-total-item .salary-overview-value { font-size: clamp(20px,6.2vw,27px); }
+  #closureRecordList .special-record.with-delete-space { grid-template-columns: 54px minmax(0,1fr) 50px 36px !important; gap: 5px !important; }
+  #trainingRecordList.special-record-list .special-record.with-delete-space { grid-template-columns: 52px minmax(0,1fr) 50px 36px !important; gap: 5px !important; }
+  #electionRecordList .special-record.election-with-delete-space { grid-template-columns: minmax(0,1fr) 50px 36px !important; gap: 5px !important; }
+  #closureRecordList .special-date-btn,#closureRecordList .special-type-select,#closureRecordList .special-date-reset-btn,#closureRecordList .special-delete-btn,#electionRecordList .special-date-btn,#electionRecordList .special-date-reset-btn,#electionRecordList .special-delete-btn { height: 40px !important; min-height: 40px !important; padding: 0 3px !important; letter-spacing: 0 !important; }
+  #trainingRecordList.special-record-list .special-date-btn,#trainingRecordList.special-record-list .special-date-reset-btn,#trainingRecordList.special-record-list .special-delete-btn { height: 40px !important; min-height: 40px !important; padding: 0 3px !important; font-size: 12px !important; letter-spacing: 0 !important; }
+  #trainingRecordList.special-record-list .training-hour-stepper { grid-template-columns: 40px minmax(0,1fr) 40px !important; }
+  #trainingRecordList .training-hour-step-btn { display: flex; align-items: center; justify-content: center; min-width: 0; padding: 0; box-sizing: border-box; }
+  .compound-choice-trigger-v47 { min-height: 40px; height: auto; padding: 8px 6px; }
+}
+@media(max-width:380px) {
+  #specialContent { padding-left: 4px; padding-right: 4px; }
+  #specialContent .special-card { padding-left: 7px; padding-right: 7px; }
+  #closureRecordList .special-record.with-delete-space,
+  #trainingRecordList.special-record-list .special-record.with-delete-space { grid-template-columns: 44px minmax(0,1fr) 38px 28px !important; gap: 3px !important; }
+  #electionRecordList .special-record.election-with-delete-space { grid-template-columns: minmax(0,1fr) 38px 28px !important; gap: 3px !important; }
+}
+</style>
 </head>
 <body>
   <div class="app">
@@ -4642,6 +4697,10 @@
             <div class="salary-overview-label special-leave-subsidy-label">特休補助</div>
             <div id="topSpecialLeaveSubsidyAmount" class="salary-overview-value special-leave-subsidy-value">0<span class="stat-suffix">元</span></div>
           </div>
+          <div class="salary-overview-item salary-month-total-item" aria-live="polite" aria-atomic="true">
+            <div id="topMonthlyTotalLabelV47" class="salary-overview-label">本月合計金額</div>
+            <div id="topMonthlyTotalAmountV47" class="salary-overview-value money-finance">$0</div>
+          </div>
         </div>
       </section>
 
@@ -4702,8 +4761,8 @@
               <div id="leaveStatsAccountingTitle" class="leave-stats-year-title">會計年度</div>
               <div id="leaveStatsAccountingPeriodV39" class="ux-year-period-v39"></div>
               <div class="leave-stats-grid">
-                <div class="leave-stat-item"><div id="leaveAccountingPersonalLabel" class="leave-stat-label">事假</div><div id="leaveAccountingPersonal" class="leave-stat-value empty">0HR</div><div id="leaveAccountingPersonalSafety" class="leave-stat-safety safety-danger">距扣發 7.5HR</div></div>
-                <div class="leave-stat-item"><div id="leaveAccountingSickLabel" class="leave-stat-label">病假</div><div id="leaveAccountingSick" class="leave-stat-value empty">0HR</div><div id="leaveAccountingSickSafety" class="leave-stat-safety safety-caution">距扣發 10天7.5HR</div></div>
+                <div class="leave-stat-item"><div id="leaveAccountingPersonalLabel" class="leave-stat-label">事假已休</div><div id="leaveAccountingPersonal" class="leave-stat-value empty">0HR</div><div id="leaveAccountingPersonalSafety" class="leave-stat-safety safety-danger">距扣發 7.5HR</div></div>
+                <div class="leave-stat-item"><div id="leaveAccountingSickLabel" class="leave-stat-label">病假已休</div><div id="leaveAccountingSick" class="leave-stat-value empty">0HR</div><div id="leaveAccountingSickSafety" class="leave-stat-safety safety-caution">距扣發 10天7.5HR</div></div>
               </div>
             </div>
             <div id="otherTimedLeaveYearBox" class="leave-stats-year-box other-timed-leave-year" hidden>
@@ -8714,7 +8773,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         btn.onclick = function() { setSpecialDateValue(this.dataset.specialResetGroup, Number(this.dataset.index), 0); };
       });
     }
-    function getSpecialDateLabel(day, group) { return Number(day) > 0 ? `${Number(day)} 日` : (group === "training" || group === "overhaulStart" || group === "overhaulEnd" ? "選日期" : "選擇日期"); }
+    function getSpecialDateLabel(day, group) { return Number(day) > 0 ? `${Number(day)} 日` : (["closure", "election", "training", "overhaulStart", "overhaulEnd"].includes(group) ? "選日期" : "選擇日期"); }
     function buildSpecialDateButton(group, index, day) {
       const clearDateLabels = { closure: "停止辦公", election: "選舉日設定", training: "額外加班" };
       const clearDateLabel = clearDateLabels[group] || "";
@@ -9251,6 +9310,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const el = document.getElementById(id);
       if (el) el.textContent = fmtAccountingMoney(value);
     }
+    let monthlyOverviewAmountsV47 = { allowance: 0, nightFee: 0 };
+    function updateMonthlyTotalDisplayV47(subsidyAmount) {
+      const label = document.getElementById("topMonthlyTotalLabelV47");
+      const amount = document.getElementById("topMonthlyTotalAmountV47");
+      const month = Number(document.getElementById("month")?.value || 0);
+      if (label) label.textContent = `${month}月合計金額`;
+      if (amount) amount.textContent = fmtDisplayMoney(getSalaryBasePay() + monthlyOverviewAmountsV47.allowance + monthlyOverviewAmountsV47.nightFee + (Number(subsidyAmount) || 0));
+    }
     function updateSalaryDetails(metrics) {
       const basePay = getSalaryBasePay();
       const salaryHourDivisor = Math.max(0.01, getParameterCoreNumber("salaryHourDivisor"));
@@ -9272,6 +9339,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const currentMonth = Number(document.getElementById("month")?.value || 0);
       const remoteAllowanceAmount = getRemoteAllowanceForMonth(currentRocYear, currentMonth);
       const totalSalaryAmount = holidayWorkAmount + mealAmount + overtimeAmount + otherBonusAmount + remoteAllowanceAmount;
+      monthlyOverviewAmountsV47 = { allowance: totalSalaryAmount, nightFee: Number(metrics.nightFee || 0) };
       const salaryBasePayDetailValue = document.getElementById("salaryBasePayDetailValue");
       if (salaryBasePayDetailValue) salaryBasePayDetailValue.textContent = fmtDisplayMoney(basePay);
       setSalaryAmountText("salaryHolidayWorkAmount", holidayWorkAmount);
@@ -9461,8 +9529,8 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const mindLimit = document.getElementById("leaveAttendanceMindLimitV39"), familyLimit = document.getElementById("leaveAttendanceFamilyLimitV39");
       if (mindLimit) mindLimit.textContent = `上限${fmtHour(mindDays)}天`;
       if (familyLimit) familyLimit.textContent = `上限${fmtHour(familyDays)}天`;
-      setAnnualLeaveLimitLabel("leaveAccountingPersonalLabel", "事假", false);
-      setAnnualLeaveLimitLabel("leaveAccountingSickLabel", "病假", false);
+      setAnnualLeaveLimitLabel("leaveAccountingPersonalLabel", "事假已休", false);
+      setAnnualLeaveLimitLabel("leaveAccountingSickLabel", "病假已休", false);
     }
     function classifyLeaveStatByCode(code, dayInfo) {
       const n = Number(code);
@@ -9652,6 +9720,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const amountEl = document.getElementById("topSpecialLeaveSubsidyAmount");
       const grid = item ? item.closest(".salary-overview-grid") : document.querySelector(".salary-overview-grid");
       const amount = Number((subsidy || {}).amount || 0);
+      updateMonthlyTotalDisplayV47(amount);
       if (!item || !amountEl || !grid) return;
       if (amount > 0) {
         item.classList.remove("special-leave-subsidy-hidden");
@@ -12152,6 +12221,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   const COMPOUND_COMPONENT_CODES = [4, 4.1, 4.2, 4.3, 5, 6, 6.3, 7, 8, 8.3, 8.4, 8.5, 8.6];
   let customLeaveFormOpenV13 = false;
   let compoundCreatorOpenV13 = false;
+  let compoundPickerIndexV47 = -1;
   let compoundEditorOpenV13 = false;
   let compoundDraftV13 = [];
   let compoundMessageV13 = "";
@@ -12792,6 +12862,7 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
     return Math.max(0, getPlannedHoursV13(dayInfo));
   }
   function initCompoundCreatorDraftV13(day) {
+    compoundPickerIndexV47 = -1;
     compoundDraftV13 = [itemFromComponentKeyV13("code:5", day, 0), itemFromComponentKeyV13("code:6", day, 0)].filter(Boolean);
     compoundMessageV13 = "";
   }
@@ -12824,11 +12895,22 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
   }
   function buildCompoundCreatorHtmlV13(day) {
     if (!compoundCreatorOpenV13) return "";
-    const rows = compoundDraftV13.map((item, index) => `
+    const rows = compoundDraftV13.map((item, index) => {
+      const selectedKey = componentKeyV13(item);
+      const optionsHtml = getComponentOptionsHtmlV13(selectedKey, day);
+      const expanded = compoundPickerIndexV47 === index;
+      const optionSelect = document.createElement("select");
+      optionSelect.innerHTML = optionsHtml;
+      const usedKeys = new Set(compoundDraftV13.filter((_, otherIndex) => otherIndex !== index).map(componentKeyV13));
+      const choicesHtml = expanded ? Array.from(optionSelect.options).map(option => `<button class="compound-inline-choice-v47" type="button" data-compound-choice-key-v47="${escapeHtml(option.value)}" data-compound-choice-index-v47="${index}" aria-pressed="${option.value === selectedKey}" ${usedKeys.has(option.value) ? "disabled" : ""}>${escapeHtml(option.textContent)}</button>`).join("") : "";
+      return `
       <div class="compound-item-row-v13" data-compound-item-row-v13="${index}">
-        <select class="compound-item-select-v13" data-compound-item-key-v13="1">${getComponentOptionsHtmlV13(componentKeyV13(item), day)}</select>
+        <select hidden data-compound-item-key-v13="1">${optionsHtml}</select>
+        <button class="compound-item-select-v13 compound-choice-trigger-v47" type="button" data-compound-picker-toggle-v47="${index}" aria-expanded="${expanded}" aria-controls="compound-inline-picker-v47-${index}" aria-label="第 ${index + 1} 個假別：${escapeHtml(item.label)}"><span>${escapeHtml(item.label)}</span></button>
         <button class="compound-item-remove-v13" data-compound-remove-v13="${index}" type="button">移除</button>
-      </div>`).join("");
+        <div id="compound-inline-picker-v47-${index}" class="compound-inline-picker-v47" ${expanded ? "" : "hidden"} aria-label="選擇第 ${index + 1} 個假別">${choicesHtml}</div>
+      </div>`;
+    }).join("");
     return `<div class="compound-editor-v13 compound-creator-v14">
       <div class="compound-editor-v13-title">新增複合假別</div>
       <div class="compound-items-v13">${rows}</div>
@@ -13070,6 +13152,39 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
       const input = portal.querySelector("[data-limited-leave-hours-input-v21]");
       await applyLimitedLeaveHoursV21(activeCodePickerPortalState.day, limitedLeaveEditorCodeV21, Number(input && input.value));
     }));
+    function refreshCompoundPickerV47(index, focusTrigger = true) {
+      const day = activeCodePickerPortalState.day;
+      const scrollTop = portal.querySelector(".code-picker-portal-scroll")?.scrollTop || 0;
+      compoundPickerIndexV47 = index;
+      renderCodePickerPortal(day, activeCodePickerPortalState.allOpen, scrollTop);
+      if (focusTrigger) document.querySelector(`#codePickerPortal [data-compound-picker-toggle-v47="${index >= 0 ? index : 0}"]`)?.focus({ preventScroll: true });
+    }
+    portal.querySelectorAll("[data-compound-picker-toggle-v47]").forEach(btn => btn.addEventListener("click", event => {
+      event.preventDefault(); event.stopPropagation(); if (!activeCodePickerPortalState) return;
+      captureCompoundCreatorDraftV13(portal, activeCodePickerPortalState.day);
+      const index = Number(btn.dataset.compoundPickerToggleV47);
+      const expanded = compoundPickerIndexV47 === index;
+      refreshCompoundPickerV47(expanded ? -1 : index, false);
+      document.querySelector(`#codePickerPortal [data-compound-picker-toggle-v47="${index}"]`)?.focus({ preventScroll: true });
+    }));
+    portal.querySelectorAll("[data-compound-choice-key-v47]").forEach(btn => btn.addEventListener("click", event => {
+      event.preventDefault(); event.stopPropagation(); if (!activeCodePickerPortalState || btn.disabled) return;
+      const day = activeCodePickerPortalState.day, index = Number(btn.dataset.compoundChoiceIndexV47), key = btn.dataset.compoundChoiceKeyV47;
+      captureCompoundCreatorDraftV13(portal, day);
+      const item = itemFromComponentKeyV13(key, day, 0);
+      if (!item || !compoundDraftV13[index] || compoundDraftV13.some((other, otherIndex) => otherIndex !== index && componentKeyV13(other) === key)) return;
+      compoundDraftV13[index] = item;
+      compoundMessageV13 = "";
+      refreshCompoundPickerV47(-1, false);
+      document.querySelector(`#codePickerPortal [data-compound-picker-toggle-v47="${index}"]`)?.focus({ preventScroll: true });
+    }));
+    portal.querySelectorAll(".compound-inline-picker-v47").forEach(picker => picker.addEventListener("keydown", event => {
+      if (event.key !== "Escape" || !activeCodePickerPortalState) return;
+      event.preventDefault(); event.stopPropagation();
+      const index = compoundPickerIndexV47;
+      refreshCompoundPickerV47(-1, false);
+      document.querySelector(`#codePickerPortal [data-compound-picker-toggle-v47="${index}"]`)?.focus({ preventScroll: true });
+    }));
     portal.querySelectorAll("[data-compound-add-v13]").forEach(btn => btn.addEventListener("click", event => {
       event.preventDefault(); event.stopPropagation(); if (!activeCodePickerPortalState) return;
       captureCompoundCreatorDraftV13(portal, activeCodePickerPortalState.day);
@@ -13079,12 +13194,14 @@ const CODE_FAVORITES_STORAGE_KEY = "personalOvertimeCodeFavorites";
         const item = itemFromComponentKeyV13(candidate || "code:5", activeCodePickerPortalState.day, 0);
         if (item) compoundDraftV13.push(item);
       }
+      compoundPickerIndexV47 = -1;
       renderCodePickerPortal(activeCodePickerPortalState.day, activeCodePickerPortalState.allOpen, 0);
     }));
     portal.querySelectorAll("[data-compound-remove-v13]").forEach(btn => btn.addEventListener("click", event => {
       event.preventDefault(); event.stopPropagation(); if (!activeCodePickerPortalState) return;
       captureCompoundCreatorDraftV13(portal, activeCodePickerPortalState.day);
       compoundDraftV13.splice(Number(btn.dataset.compoundRemoveV13), 1);
+      compoundPickerIndexV47 = -1;
       renderCodePickerPortal(activeCodePickerPortalState.day, activeCodePickerPortalState.allOpen, 0);
     }));
     portal.querySelectorAll("[data-compound-create-save-v14]").forEach(btn => btn.addEventListener("click", event => {

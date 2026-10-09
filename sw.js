@@ -1,7 +1,7 @@
 const APP_ROOT = new URL("./", self.location.href);
 // 避開舊 Worker 的 personal-overtime-shell- 清理範圍，並依部署路徑隔離。
 const CACHE_PREFIX = "personal-overtime-app-" + encodeURIComponent(APP_ROOT.pathname) + "-";
-const CACHE_NAME = CACHE_PREFIX + "v46";
+const CACHE_NAME = CACHE_PREFIX + "v47";
 const APP_SHELL = [
   "./index.html",
   "./manifest.json",
