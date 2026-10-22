@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-22T02:52:39+08:00",
+  "updatedAt": "2026-10-23T03:23:30+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 50,
   "historyComplete": true,
@@ -12,22 +12,44 @@
   },
   "lastEvent": {
     "rocYear": 115,
-    "month": 8,
-    "day": 24
+    "month": 10,
+    "day": 23
   },
   "dailyStatus": {
     "ok": true,
     "sourceDate": {
       "rocYear": 115,
       "month": 10,
-      "day": 22
+      "day": 23
     },
-    "officialUpdatedAt": "2026/10/22 02:50:14",
-    "checkedAt": "2026-10-22T02:52:39+08:00",
+    "officialUpdatedAt": "2026/10/23 03:14:03",
+    "checkedAt": "2026-10-23T03:23:30+08:00",
     "message": ""
   },
   "reviewItems": [],
   "events": [
+    {
+      "rocYear": 115,
+      "month": 10,
+      "day": 23,
+      "region": "高雄市",
+      "officialText": "今天停止上班、停止上課。",
+      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "pid": "",
+      "sourceKind": "daily"
+    },
+    {
+      "rocYear": 115,
+      "month": 10,
+      "day": 23,
+      "region": "臺南市",
+      "officialText": "今天停止上班、停止上課。",
+      "officialUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "ndsUrl": "https://www.dgpa.gov.tw/typh/daily/nds.html",
+      "pid": "",
+      "sourceKind": "daily"
+    },
     {
       "rocYear": 115,
       "month": 8,
