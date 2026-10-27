@@ -3,7 +3,7 @@ name: Update DGPA closure data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "27 * * * *"
 
 permissions:
   contents: write
