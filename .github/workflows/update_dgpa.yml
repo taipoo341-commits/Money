@@ -4,22 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "incremental: 更新最新資料並接續審核 / full: 開始或接續全量審核 / resume: 接續審核"
+        description: "掃描模式 (incremental: 增量最新頁 / full: 全量回溯重刷)"
         required: true
         default: "incremental"
         type: choice
         options:
           - incremental
           - full
-          - resume
       pages:
-        description: "每輪最新公告掃描頁數"
+        description: "增量掃描頁數 (僅 incremental 模式生效)"
         required: false
         default: "2"
-      batch_size:
-        description: "每輪最多審核的歷史公告數；未完成部分會由下次排程接續"
-        required: false
-        default: "50"
   schedule:
     - cron: "27 * * * *"
 
@@ -28,113 +23,30 @@ permissions:
 
 concurrency:
   group: update-dgpa-closure-data
-  cancel-in-progress: false
-  queue: max
+  cancel-in-progress: true
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-        with:
-          # 排隊後讀取最新分支，避免拿觸發當下的舊 SHA 覆蓋前一輪進度。
-          ref: ${{ github.event.repository.default_branch }}
-          fetch-depth: 0
       - uses: actions/setup-python@v5
-        id: setup_python
         with:
           python-version: "3.12"
       - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
-      - name: Configure checkpoint commits
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Run update_dgpa.py
-        id: update
-        continue-on-error: true
         env:
           DGPA_MODE: ${{ inputs.mode || 'incremental' }}
           DGPA_INCREMENTAL_PAGES: ${{ inputs.pages || '2' }}
-          DGPA_REVIEW_BATCH_SIZE: ${{ inputs.batch_size || '50' }}
-          DGPA_REVIEW_BUDGET_SECONDS: "240"
-          DGPA_CHECKPOINT_EVERY: "10"
-          DGPA_CHECKPOINT_GIT: "1"
-          DGPA_BRANCH: ${{ github.event.repository.default_branch }}
         run: python scripts/update_dgpa.py
-      - name: Preserve latest data and review progress
-        if: ${{ always() && steps.update.outcome != '' && steps.update.outcome != 'skipped' }}
-        env:
-          DGPA_BRANCH: ${{ github.event.repository.default_branch }}
+      - name: Commit updated public data
         run: |
-          paths=()
-          for path in data/dgpa_closures.json data/dgpa_review_state.json data/dgpa_review_report.json; do
-            if [[ -f "$path" ]]; then
-              paths+=("$path")
-            fi
-          done
-          if (( ${#paths[@]} == 0 )); then
-            echo "No data or review files to preserve"
+          if git diff --quiet -- data/dgpa_closures.json; then
+            echo "No data change"
             exit 0
           fi
-          git add -- "${paths[@]}"
-          if git diff --cached --quiet -- "${paths[@]}"; then
-            echo "No uncommitted data or review progress"
-            exit 0
-          fi
-          git commit --only -m "chore: preserve DGPA data and review progress" -- "${paths[@]}"
-          if ! git push origin "HEAD:${DGPA_BRANCH}"; then
-            echo "::error::Cannot save DGPA progress to the current branch. No force push was attempted; recover the files from this run's artifact."
-            exit 1
-          fi
-      - name: Write review summary
-        if: ${{ always() && steps.setup_python.outcome == 'success' }}
-        run: |
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          lines = ["## DGPA 更新與歷史審核", ""]
-          snapshot_path = Path("data/dgpa_closures.json")
-          report_path = Path("data/dgpa_review_report.json")
-          if snapshot_path.is_file():
-              snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
-              lines.extend([
-                  f"- 正式快照更新時間：`{snapshot.get('updatedAt', '')}`",
-                  f"- 正式快照歷史旗標：`{snapshot.get('historyComplete', False)}`",
-                  f"- 正式事件筆數：{len(snapshot.get('events', []))}",
-              ])
-          if report_path.is_file():
-              report = json.loads(report_path.read_text(encoding="utf-8"))
-              lines.extend([
-                  f"- 審核狀態：`{report.get('status', '')}`",
-                  f"- 審核階段：`{report.get('phase', '')}`",
-                  f"- 審核批次：`{report.get('reviewId', report.get('batchId', ''))}`",
-                  "",
-                  "```json",
-                  json.dumps(report.get("counts", report.get("summary", {})), ensure_ascii=False, indent=2),
-                  "```",
-              ])
-          else:
-              lines.append("- 尚未產生本輪審核報告，請查看更新步驟結果。")
-          lines.extend(["", "未完成的全量審核會由後續排程或 resume 接續；本輪失敗仍會保留已提交進度。", ""])
-          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as output:
-              output.write("\n".join(lines))
-          PY
-      - name: Upload data and review recovery files
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: dgpa-review-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            data/dgpa_closures.json
-            data/dgpa_review_state.json
-            data/dgpa_review_report.json
-          if-no-files-found: warn
-          retention-days: 14
-      - name: Report update failure after saving progress
-        if: ${{ always() && steps.update.outcome == 'failure' }}
-        run: |
-          echo "::error::DGPA update or review failed. Completed checkpoints were retained; inspect the review report and resume after resolving the listed errors."
-          exit 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dgpa_closures.json
+          git commit -m "chore: update DGPA closure data"
+          git push
