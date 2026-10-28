@@ -2,27 +2,3046 @@
   "schemaVersion": 1,
   "reviewId": "20261028T101034-67a802a8",
   "status": "in-progress",
-  "phase": "discover",
+  "phase": "review",
   "parserVersion": "4-eca37b4bf5578172",
   "startedAt": "2026-10-28T18:10:34.513717+08:00",
-  "updatedAt": "2026-10-28T18:11:46.960126+08:00",
+  "updatedAt": "2026-10-28T18:11:48.812408+08:00",
   "completedAt": null,
   "counts": {
-    "total": 0,
+    "total": 503,
     "completed": 0,
     "failed": 0,
-    "pending": 0,
+    "pending": 503,
     "manualItems": 0
   },
   "scan": {
-    "nextPage": 51,
-    "expectedCount": 503,
-    "expectedPages": 51,
+    "nextPage": 1,
+    "expectedCount": null,
+    "expectedPages": null,
     "complete": false,
     "lastError": ""
   },
   "incrementalErrors": [],
   "verificationPasses": 0,
   "changes": null,
-  "announcements": []
+  "announcements": [
+    {
+      "pid": "13130",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13130",
+      "title": "115.10.27 115年10月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13129",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13129",
+      "title": "115.10.27 115年10月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13128",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13128",
+      "title": "115.10.27 115年10月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13097",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13097",
+      "title": "115.09.03 115年9月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13095",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13095",
+      "title": "115.09.02 115年9月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13093",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13093",
+      "title": "115.09.01 115年8月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13090",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13090",
+      "title": "115.08.27 115年8月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13086",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13086",
+      "title": "115.08.26 115年8月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13085",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13085",
+      "title": "115.08.25 115年8月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13083",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13083",
+      "title": "115.08.24 115年8月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13082",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13082",
+      "title": "115.08.24 115年8月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13074",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13074",
+      "title": "115.08.10 115年8月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13047",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13047",
+      "title": "115.07.21 115年7月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13046",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13046",
+      "title": "115.07.20 115年7月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13045",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13045",
+      "title": "115.07.20 115年7月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13044",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13044",
+      "title": "115.07.20 115年7月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13043",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13043",
+      "title": "115.07.17 115年7月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13041",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13041",
+      "title": "115.07.15 115年7月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13040",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13040",
+      "title": "115.07.14 115年7月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13037",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13037",
+      "title": "115.07.13 115年7月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13036",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13036",
+      "title": "115.07.13 115年7月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13035",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13035",
+      "title": "115.07.13 115年7月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13022",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13022",
+      "title": "115.06.29 115年6月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13021",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13021",
+      "title": "115.06.29 115年6月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13020",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13020",
+      "title": "115.06.29 115年6月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13019",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13019",
+      "title": "115.06.26 115年6月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13009",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13009",
+      "title": "115.06.16 115年6月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13007",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13007",
+      "title": "115.06.11 115年6月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "13005",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=13005",
+      "title": "115.06.10 115年6月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12928",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12928",
+      "title": "115.04.07 115年4月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12750",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12750",
+      "title": "114.11.18 114年11月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12746",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12746",
+      "title": "114.11.14 114年11月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12744",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12744",
+      "title": "114.11.13 114年11月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12740",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12740",
+      "title": "114.11.12 114年11月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12739",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12739",
+      "title": "114.11.12 114年11月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12724",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12724",
+      "title": "114.10.29 114年10月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12722",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12722",
+      "title": "114.10.28 114年10月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12720",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12720",
+      "title": "114.10.27 114年10月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12719",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12719",
+      "title": "114.10.27 114年10月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12718",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12718",
+      "title": "114.10.27 114年10月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12717",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12717",
+      "title": "114.10.27 114年10月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12716",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12716",
+      "title": "114.10.23 114年10月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12714",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12714",
+      "title": "114.10.22 114年10月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12713",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12713",
+      "title": "114.10.21 114年10月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12709",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12709",
+      "title": "114.10.20 114年10月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12708",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12708",
+      "title": "114.10.20 114年10月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12692",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12692",
+      "title": "114.10.07 114年10月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12691",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12691",
+      "title": "114.10.07 114年10月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12690",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12690",
+      "title": "114.10.07 114年10月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12689",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12689",
+      "title": "114.10.07 114年10月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12687",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12687",
+      "title": "114.10.03 114年10月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12684",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12684",
+      "title": "114.10.02 114年10月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12682",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12682",
+      "title": "114.10.01 114年9月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12681",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12681",
+      "title": "114.09.30 114年9月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12680",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12680",
+      "title": "114.09.30 114年9月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12679",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12679",
+      "title": "114.09.30 114年9月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12678",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12678",
+      "title": "114.09.30 114年9月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12676",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12676",
+      "title": "114.09.26 114年9月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12673",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12673",
+      "title": "114.09.25 114年9月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12672",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12672",
+      "title": "114.09.24 114年9月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12670",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12670",
+      "title": "114.09.23 114年9月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12669",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12669",
+      "title": "114.09.22 114年9月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12652",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12652",
+      "title": "114.08.25 114年8月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12651",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12651",
+      "title": "114.08.25 114年8月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12650",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12650",
+      "title": "114.08.22 114年8月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12647",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12647",
+      "title": "114.08.15 114年8月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12646",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12646",
+      "title": "114.08.14 114年8月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12637",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12637",
+      "title": "114.08.13 114年8月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12632",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12632",
+      "title": "114.08.08 114年8月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12631",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12631",
+      "title": "114.08.07 114年8月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12630",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12630",
+      "title": "114.08.06 114年8月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12628",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12628",
+      "title": "114.08.05 114年8月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12627",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12627",
+      "title": "114.08.04 114年8月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12626",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12626",
+      "title": "114.08.04 114年8月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12625",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12625",
+      "title": "114.08.04 114年8月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12624",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12624",
+      "title": "114.08.01 114年7月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12622",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12622",
+      "title": "114.07.31 114年7月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12620",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12620",
+      "title": "114.07.30 114年7月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12619",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12619",
+      "title": "114.07.29 114年7月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12612",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12612",
+      "title": "114.07.22 114年7月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12611",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12611",
+      "title": "114.07.22 114年7月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12609",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12609",
+      "title": "114.07.15 114年7月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12607",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12607",
+      "title": "114.07.14 114年7月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12606",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12606",
+      "title": "114.07.14 114年7月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12602",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12602",
+      "title": "114.07.11 114年7月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12600",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12600",
+      "title": "114.07.10 114年7月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12597",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12597",
+      "title": "114.07.09 114年7月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12594",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12594",
+      "title": "114.07.08 114年7月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12593",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12593",
+      "title": "114.07.07 114年7月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12592",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12592",
+      "title": "114.07.07 114年7月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12577",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12577",
+      "title": "114.06.16 114年6月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12458",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12458",
+      "title": "114.05.22 114年5月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12449",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12449",
+      "title": "114.05.20 114年5月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12333",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12333",
+      "title": "114.03.18 114年3月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12275",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12275",
+      "title": "114.01.22 114年1月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12189",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12189",
+      "title": "113.11.18 113年11月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12188",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12188",
+      "title": "113.11.18 113年11月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12185",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12185",
+      "title": "113.11.15 113年11月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12182",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12182",
+      "title": "113.11.13 113年11月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12177",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12177",
+      "title": "113.11.06 113年11月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12176",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12176",
+      "title": "113.11.05 113年11月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12175",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12175",
+      "title": "113.11.04 113年11月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12174",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12174",
+      "title": "113.11.04 113年11月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12173",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12173",
+      "title": "113.11.04 113年11月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12171",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12171",
+      "title": "113.11.01 113年10月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12170",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12170",
+      "title": "113.11.01 113年10月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12169",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12169",
+      "title": "113.11.01 113年10月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12164",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12164",
+      "title": "113.10.28 113年10月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12162",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12162",
+      "title": "113.10.25 113年10月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12149",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12149",
+      "title": "113.10.07 113年10月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12148",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12148",
+      "title": "113.10.07 113年10月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12147",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12147",
+      "title": "113.10.04 113年10月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12146",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12146",
+      "title": "113.10.04 113年10月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12145",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12145",
+      "title": "113.10.04 113年10月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12144",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12144",
+      "title": "113.10.01 113年9月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12142",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12142",
+      "title": "113.09.30 113年9月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12031",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12031",
+      "title": "113.09.10 113年9月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12029",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12029",
+      "title": "113.09.09 113年9月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12007",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12007",
+      "title": "113.08.09 113年8月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12003",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12003",
+      "title": "113.08.06 113年8月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12002",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12002",
+      "title": "113.08.05 113年8月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12001",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12001",
+      "title": "113.08.05 113年8月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "12000",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=12000",
+      "title": "113.08.05 113年8月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11999",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11999",
+      "title": "113.08.05 113年8月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11997",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11997",
+      "title": "113.08.01 113年7月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11996",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11996",
+      "title": "113.07.31 113年7月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11993",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11993",
+      "title": "113.07.30 113年7月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11992",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11992",
+      "title": "113.07.29 113年7月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11991",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11991",
+      "title": "113.07.29 113年7月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11990",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11990",
+      "title": "113.07.29 113年7月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11989",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11989",
+      "title": "113.07.26 113年7月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11988",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11988",
+      "title": "113.07.26 113年7月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11987",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11987",
+      "title": "113.07.26 113年7月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11975",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11975",
+      "title": "113.07.04 113年7月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11932",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11932",
+      "title": "113.04.29 113年4月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11929",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11929",
+      "title": "113.04.26 113年4月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11914",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11914",
+      "title": "113.04.25 113年4月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11913",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11913",
+      "title": "113.04.24 113年4月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11910",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11910",
+      "title": "113.04.23 113年4月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11909",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11909",
+      "title": "113.04.22 113年4月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11908",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11908",
+      "title": "113.04.22 113年4月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11907",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11907",
+      "title": "113.04.22 113年4月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11906",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11906",
+      "title": "113.04.22 113年4月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11901",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11901",
+      "title": "113.04.18 113年4月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11899",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11899",
+      "title": "113.04.17 113年4月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11897",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11897",
+      "title": "113.04.16 113年4月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11894",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11894",
+      "title": "113.04.15 113年4月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11893",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11893",
+      "title": "113.04.15 113年4月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11892",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11892",
+      "title": "113.04.15 113年4月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11891",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11891",
+      "title": "113.04.15 113年4月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11890",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11890",
+      "title": "113.04.15 113年4月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11889",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11889",
+      "title": "113.04.15 113年4月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11882",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11882",
+      "title": "113.04.09 113年4月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11880",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11880",
+      "title": "113.04.08 113年4月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11879",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11879",
+      "title": "113.04.08 113年4月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11878",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11878",
+      "title": "113.04.08 113年4月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11877",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11877",
+      "title": "113.04.08 113年4月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11876",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11876",
+      "title": "113.04.08 113年4月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11781",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11781",
+      "title": "113.01.25 113年1月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11780",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11780",
+      "title": "113.01.24 113年1月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11779",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11779",
+      "title": "113.01.23 113年1月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11594",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11594",
+      "title": "112.10.25 112年10月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11547",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11547",
+      "title": "112.10.06 112年10月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11545",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11545",
+      "title": "112.10.05 112年10月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11528",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11528",
+      "title": "112.09.13 112年9月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11526",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11526",
+      "title": "112.09.11 112年9月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11525",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11525",
+      "title": "112.09.08 112年9月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11522",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11522",
+      "title": "112.09.07 112年9月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11521",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11521",
+      "title": "112.09.06 112年9月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11520",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11520",
+      "title": "112.09.05 112年9月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11518",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11518",
+      "title": "112.09.04 112年9月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11517",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11517",
+      "title": "112.09.04 112年9月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11513",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11513",
+      "title": "112.09.01 112年8月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11512",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11512",
+      "title": "112.08.31 112年8月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11509",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11509",
+      "title": "112.08.30 112年8月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11497",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11497",
+      "title": "112.08.28 112年8月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11493",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11493",
+      "title": "112.08.18 112年8月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11489",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11489",
+      "title": "112.08.14 112年8月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11488",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11488",
+      "title": "112.08.14 112年8月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11487",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11487",
+      "title": "112.08.14 112年8月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11485",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11485",
+      "title": "112.08.11 112年8月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11478",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11478",
+      "title": "112.08.10 112年8月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11477",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11477",
+      "title": "112.08.10 112年8月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11476",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11476",
+      "title": "112.08.08 112年8月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11474",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11474",
+      "title": "112.08.07 112年8月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11473",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11473",
+      "title": "112.08.07 112年8月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11472",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11472",
+      "title": "112.08.07 112年8月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11469",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11469",
+      "title": "112.08.04 112年8月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11468",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11468",
+      "title": "112.08.04 112年8月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11466",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11466",
+      "title": "112.07.31 112年7月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11465",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11465",
+      "title": "112.07.28 112年7月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11463",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11463",
+      "title": "112.07.27 112年7月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11462",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11462",
+      "title": "112.07.25 112年7月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11405",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11405",
+      "title": "112.06.01 112年5月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11403",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11403",
+      "title": "112.05.31 112年5月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11394",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11394",
+      "title": "112.05.19 112年5月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11391",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11391",
+      "title": "112.04.20 112年4月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11154",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11154",
+      "title": "111.11.01 111年10月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11130",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11130",
+      "title": "111.10.17 111年10月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11125",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11125",
+      "title": "111.10.11 111年10月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11124",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11124",
+      "title": "111.10.11 111年10月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11110",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11110",
+      "title": "111.09.20 111年9月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11109",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11109",
+      "title": "111.09.19 111年9月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11099",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11099",
+      "title": "111.09.14 111年9月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11097",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11097",
+      "title": "111.09.13 111年9月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11091",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11091",
+      "title": "111.09.12 111年9月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11087",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11087",
+      "title": "111.09.06 111年9月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11086",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11086",
+      "title": "111.09.05 111年9月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11085",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11085",
+      "title": "111.09.05 111年9月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "11084",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=11084",
+      "title": "111.09.05 111年9月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10767",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10767",
+      "title": "110.10.15 110年10月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10765",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10765",
+      "title": "110.10.14 110年10月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10763",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10763",
+      "title": "110.10.13 110年10月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10762",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10762",
+      "title": "110.10.12 110年10月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10744",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10744",
+      "title": "110.09.16 110年9月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10742",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10742",
+      "title": "110.09.14 110年9月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10738",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10738",
+      "title": "110.09.13 110年9月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10737",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10737",
+      "title": "110.09.13 110年9月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10735",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10735",
+      "title": "110.09.11 110年9月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10709",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10709",
+      "title": "110.08.12 110年8月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10708",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10708",
+      "title": "110.08.11 110年8月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10707",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10707",
+      "title": "110.08.10 110年8月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10706",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10706",
+      "title": "110.08.09 110年8月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10705",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10705",
+      "title": "110.08.09 110年8月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10704",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10704",
+      "title": "110.08.09 110年8月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10703",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10703",
+      "title": "110.08.06 110年8月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10701",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10701",
+      "title": "110.08.03 110年8月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10700",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10700",
+      "title": "110.08.02 110年8月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10699",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10699",
+      "title": "110.08.02 110年7月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10697",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10697",
+      "title": "110.07.26 110年7月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10696",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10696",
+      "title": "110.07.26 110年7月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10695",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10695",
+      "title": "110.07.23 110年7月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10677",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10677",
+      "title": "110.06.25 110年6月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10672",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10672",
+      "title": "110.06.23 110年6月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10670",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10670",
+      "title": "110.06.22 110年6月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10658",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10658",
+      "title": "110.06.07 110年6月4日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10657",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10657",
+      "title": "110.06.04 110年6月3日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10640",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10640",
+      "title": "110.05.06 110年4月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10537",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10537",
+      "title": "110.01.13 110年1月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10536",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10536",
+      "title": "110.01.13 110年1月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10525",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10525",
+      "title": "110.01.04 109年12月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10524",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10524",
+      "title": "109.12.31 109年12月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10307",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10307",
+      "title": "109.11.09 109年11月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10304",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10304",
+      "title": "109.11.06 109年11月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10303",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10303",
+      "title": "109.11.06 109年11月5日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10261",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10261",
+      "title": "109.08.28 109年8月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10259",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10259",
+      "title": "109.08.27 109年8月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10247",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10247",
+      "title": "109.08.12 109年8月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10246",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10246",
+      "title": "109.08.11 109年8月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10162",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10162",
+      "title": "109.05.25 109年5月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "10161",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=10161",
+      "title": "109.05.25 109年5月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9921",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9921",
+      "title": "108.11.01 108年10月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9894",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9894",
+      "title": "108.10.02 108年10月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9889",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9889",
+      "title": "108.10.01 108年9月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9821",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9821",
+      "title": "108.08.26 108年8月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9820",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9820",
+      "title": "108.08.26 108年8月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9819",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9819",
+      "title": "108.08.26 108年8月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9815",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9815",
+      "title": "108.08.19 108年8月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9814",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9814",
+      "title": "108.08.16 108年8月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9812",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9812",
+      "title": "108.08.14 108年8月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9807",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9807",
+      "title": "108.08.13 108年8月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9805",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9805",
+      "title": "108.08.12 108年8月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9804",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9804",
+      "title": "108.08.12 108年8月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9803",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9803",
+      "title": "108.08.12 108年8月9日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9802",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9802",
+      "title": "108.08.12 108年8月8日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9793",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9793",
+      "title": "108.07.18 108年7月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9765",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9765",
+      "title": "108.06.17 108年6月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9727",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9727",
+      "title": "108.05.21 108年5月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9725",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9725",
+      "title": "108.05.20 108年5月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9679",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9679",
+      "title": "108.03.22 108年3月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9547",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9547",
+      "title": "108.01.19 108年1月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9273",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9273",
+      "title": "107.11.02 107年11月1日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9234",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9234",
+      "title": "107.09.17 107年9月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9233",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9233",
+      "title": "107.09.17 107年9月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9232",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9232",
+      "title": "107.09.17 107年9月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9224",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9224",
+      "title": "107.09.11 107年9月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9208",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9208",
+      "title": "107.08.29 107年8月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9207",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9207",
+      "title": "107.08.28 107年8月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9205",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9205",
+      "title": "107.08.27 107年8月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9204",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9204",
+      "title": "107.08.27 107年8月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9203",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9203",
+      "title": "107.08.27 107年8月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "9201",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=9201",
+      "title": "107.08.24 107年8月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8169",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8169",
+      "title": "107.07.11 107年7月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8162",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8162",
+      "title": "107.07.10 107年7月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8152",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8152",
+      "title": "107.07.03 107年7月2日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8133",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8133",
+      "title": "107.06.21 107年6月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8130",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8130",
+      "title": "107.06.19 107年6月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8129",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8129",
+      "title": "107.06.15 107年6月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8085",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8085",
+      "title": "107.05.01 107年4月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "8072",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=8072",
+      "title": "107.04.25 107年4月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7995",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7995",
+      "title": "107.02.08 107年2月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7839",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7839",
+      "title": "106.10.18 106年10月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7838",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7838",
+      "title": "106.10.18 106年10月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7833",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7833",
+      "title": "106.10.16 106年10月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7832",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7832",
+      "title": "106.10.16 106年10月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7831",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7831",
+      "title": "106.10.16 106年10月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7790",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7790",
+      "title": "106.09.14 106年09月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7753",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7753",
+      "title": "106.08.23 106年08月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7719",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7719",
+      "title": "106.08.01 106年07月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7712",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7712",
+      "title": "106.07.31 106年07月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7711",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7711",
+      "title": "106.07.31 106年07月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7710",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7710",
+      "title": "106.07.31 106年07月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7677",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7677",
+      "title": "106.06.27 106年06月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7672",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7672",
+      "title": "106.06.23 106年06月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7671",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7671",
+      "title": "106.06.23 106年06月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7511",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7511",
+      "title": "106.06.16 106年06月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7510",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7510",
+      "title": "106.06.16 106年06月05日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7483",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7483",
+      "title": "106.06.05 106年06月04日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7482",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7482",
+      "title": "106.06.05 106年06月03日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7460",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7460",
+      "title": "106.06.03 106年06月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7459",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7459",
+      "title": "106.06.03 106年05月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7041",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7041",
+      "title": "105.10.14 105年10月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7040",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7040",
+      "title": "105.10.12 105年10月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7039",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7039",
+      "title": "105.10.11 105年10月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7038",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7038",
+      "title": "105.10.07 105年10月07日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7037",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7037",
+      "title": "105.10.04 105年09月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7036",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7036",
+      "title": "105.10.04 105年09月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7035",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7035",
+      "title": "105.09.29 105年09月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7033",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7033",
+      "title": "105.09.28 105年09月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7034",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7034",
+      "title": "105.09.28 105年09月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7032",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7032",
+      "title": "105.09.19 105年09月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7031",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7031",
+      "title": "105.09.19 105年09月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7030",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7030",
+      "title": "105.09.19 105年09月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7029",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7029",
+      "title": "105.09.19 105年09月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7028",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7028",
+      "title": "105.09.19 105年09月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7027",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7027",
+      "title": "105.09.14 105年09月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7351",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7351",
+      "title": "105.07.12 105年07月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7350",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7350",
+      "title": "105.07.11 105年07月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7026",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7026",
+      "title": "105.07.09 105年07月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7025",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7025",
+      "title": "105.07.08 105年07月08日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7024",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7024",
+      "title": "105.07.07 105年07月07日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7349",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7349",
+      "title": "105.06.16 105年06月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7348",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7348",
+      "title": "105.06.15 105年06月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7347",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7347",
+      "title": "105.06.14 105年06月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7023",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7023",
+      "title": "105.06.13 105年06月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7129",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7129",
+      "title": "105.05.16 105年05月16日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7128",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7128",
+      "title": "105.03.14 105年03月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7127",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7127",
+      "title": "105.01.27 105年01月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7126",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7126",
+      "title": "105.01.27 105年01月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7125",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7125",
+      "title": "104.10.05 104年10月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7124",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7124",
+      "title": "104.10.02 104年10月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7123",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7123",
+      "title": "104.10.01 104年09月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7122",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7122",
+      "title": "104.09.29 104年09月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7121",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7121",
+      "title": "104.09.29 104年09月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7120",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7120",
+      "title": "104.09.29 104年09月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7119",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7119",
+      "title": "104.08.26 104年08月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7118",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7118",
+      "title": "104.08.22 104年08月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7117",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7117",
+      "title": "104.08.21 104年08月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7116",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7116",
+      "title": "104.08.17 104年08月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7115",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7115",
+      "title": "104.08.17 104年08月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7114",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7114",
+      "title": "104.08.17 104年08月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7113",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7113",
+      "title": "104.08.12 104年08月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7112",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7112",
+      "title": "104.08.11 104年08月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7111",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7111",
+      "title": "104.08.10 104年08月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7110",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7110",
+      "title": "104.08.10 104年08月08日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7109",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7109",
+      "title": "104.08.10 104年08月07日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7107",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7107",
+      "title": "104.07.13 104年07月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7108",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7108",
+      "title": "104.07.13 104年07月08日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7106",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7106",
+      "title": "104.05.28 104年05月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7105",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7105",
+      "title": "104.05.27 104年05月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7104",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7104",
+      "title": "104.05.26 104年05月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7103",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7103",
+      "title": "104.05.25 104年05月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7102",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7102",
+      "title": "104.05.12 104年05月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7099",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7099",
+      "title": "103.09.22 103年09月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7098",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7098",
+      "title": "103.09.21 103年09月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7097",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7097",
+      "title": "103.09.21 103年09月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7096",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7096",
+      "title": "103.08.13 103年08月13日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7095",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7095",
+      "title": "103.08.12 103年08月12日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7094",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7094",
+      "title": "103.07.25 103年07月25日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7093",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7093",
+      "title": "103.07.24 103年07月24日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7092",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7092",
+      "title": "103.07.23 103年07月23日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7091",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7091",
+      "title": "103.07.23 103年07月22日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7065",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7065",
+      "title": "102.10.07 102年10月07日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7064",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7064",
+      "title": "102.10.07 102年10月06日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7063",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7063",
+      "title": "102.10.07 102年10月05日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7066",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7066",
+      "title": "102.09.27 102年09月27日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7067",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7067",
+      "title": "102.09.26 102年09月26日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7068",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7068",
+      "title": "102.09.25 102年09月25日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7069",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7069",
+      "title": "102.09.24 102年09月24日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7070",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7070",
+      "title": "102.09.23 102年09月23日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7062",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7062",
+      "title": "102.09.23 102年09月22日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7061",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7061",
+      "title": "102.09.23 102年09月21日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7060",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7060",
+      "title": "102.09.23 102年09月20日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7071",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7071",
+      "title": "102.09.06 102年09月06日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7072",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7072",
+      "title": "102.09.05 102年09月05日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7073",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7073",
+      "title": "102.09.04 102年09月04日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7074",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7074",
+      "title": "102.09.03 102年09月03日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7075",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7075",
+      "title": "102.09.02 102年09月02日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7076",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7076",
+      "title": "102.08.31 102年08月31日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7132",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7132",
+      "title": "102.08.30 102年08月30日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7131",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7131",
+      "title": "102.08.29 102年08月29日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7130",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7130",
+      "title": "102.08.28 102年08月28日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7077",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7077",
+      "title": "102.08.23 102年08月23日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7059",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7059",
+      "title": "102.08.22 102年08月22日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7058",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7058",
+      "title": "102.08.21 102年08月21日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7078",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7078",
+      "title": "102.07.15 102年07月15日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7079",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7079",
+      "title": "102.07.14 102年07月14日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7057",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7057",
+      "title": "102.07.13 102年07月13日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7056",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7056",
+      "title": "102.07.12 102年07月12日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7080",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7080",
+      "title": "102.06.21 102年06月21日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7081",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7081",
+      "title": "102.06.03 102年06月03日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7082",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7082",
+      "title": "102.05.24 102年05月24日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7083",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7083",
+      "title": "102.05.23 102年05月23日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7084",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7084",
+      "title": "102.05.22 102年05月22日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7085",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7085",
+      "title": "102.05.21 102年05月21日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7086",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7086",
+      "title": "102.05.20 102年05月20日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7087",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7087",
+      "title": "102.05.19 102年05月19日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7088",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7088",
+      "title": "102.05.18 102年05月18日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7089",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7089",
+      "title": "102.05.17 102年05月17日天然災害停止上班及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7054",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7054",
+      "title": "101.08.29 101年08月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7053",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7053",
+      "title": "101.08.28 101年08月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7052",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7052",
+      "title": "101.08.27 101年08月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7051",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7051",
+      "title": "101.08.24 101年08月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7050",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7050",
+      "title": "101.08.23 101年08月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7049",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7049",
+      "title": "101.08.03 101年08月03日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7048",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7048",
+      "title": "101.08.03 101年08月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7047",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7047",
+      "title": "101.08.03 101年08月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7046",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7046",
+      "title": "101.06.22 101年06月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7045",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7045",
+      "title": "101.06.22 101年06月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7044",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7044",
+      "title": "101.06.14 101年06月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7043",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7043",
+      "title": "101.06.14 101年06月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7042",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7042",
+      "title": "101.06.14 101年06月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7021",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7021",
+      "title": "100.08.31 100年08月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7020",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7020",
+      "title": "100.08.30 100年08月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7019",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7019",
+      "title": "100.08.30 100年08月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7018",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7018",
+      "title": "100.08.30 100年08月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7100",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7100",
+      "title": "100.03.11 100年03月11日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7017",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7017",
+      "title": "99.10.25 99年10月23日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7016",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7016",
+      "title": "99.10.25 99年10月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7015",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7015",
+      "title": "99.10.25 99年10月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7013",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7013",
+      "title": "99.09.20 99年09月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7012",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7012",
+      "title": "99.09.20 99年09月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7011",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7011",
+      "title": "99.09.20 99年09月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7014",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7014",
+      "title": "99.09.10 99年09月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7010",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7010",
+      "title": "99.09.10 99年09月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7009",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7009",
+      "title": "99.09.02 99年09月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7008",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7008",
+      "title": "99.09.02 99年09月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7007",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7007",
+      "title": "99.09.02 99年08月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6948",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6948",
+      "title": "98.10.06 98年10月06日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6947",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6947",
+      "title": "98.10.06 98年10月05日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6946",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6946",
+      "title": "98.10.06 98年10月04日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6945",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6945",
+      "title": "98.08.10 98年08月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6944",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6944",
+      "title": "98.08.10 98年08月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6943",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6943",
+      "title": "98.08.10 98年08月08日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6942",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6942",
+      "title": "98.08.10 98年08月07日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7006",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7006",
+      "title": "98.06.22 98年06月22日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7005",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7005",
+      "title": "98.06.22 98年06月21日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6949",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6949",
+      "title": "97.09.29 97年09月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6950",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6950",
+      "title": "97.09.28 97年09月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6951",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6951",
+      "title": "97.09.15 97年09月15日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6952",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6952",
+      "title": "97.09.14 97年09月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6953",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6953",
+      "title": "97.09.13 97年09月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6954",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6954",
+      "title": "97.09.12 97年09月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6955",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6955",
+      "title": "97.07.29 97年07月29日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6956",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6956",
+      "title": "97.07.28 97年07月28日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6957",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6957",
+      "title": "97.07.27 97年07月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6958",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6958",
+      "title": "97.07.19 97年07月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6959",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6959",
+      "title": "97.07.18 97年07月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6960",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6960",
+      "title": "97.07.17 97年07月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6961",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6961",
+      "title": "96.10.07 96年10月7日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6962",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6962",
+      "title": "96.10.06 96年10月6日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6963",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6963",
+      "title": "96.09.18 96年09月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6964",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6964",
+      "title": "96.08.19 96年08月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6965",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6965",
+      "title": "96.08.18 96年08月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6966",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6966",
+      "title": "96.08.17 96年08月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6967",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6967",
+      "title": "96.08.09 96年08月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6968",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6968",
+      "title": "96.08.08 96年08月08日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6969",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6969",
+      "title": "95.08.09 95年08月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6970",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6970",
+      "title": "95.07.25 95年07月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6971",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6971",
+      "title": "95.07.24 95年07月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6972",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6972",
+      "title": "95.07.14 95年07月14日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6973",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6973",
+      "title": "95.07.13 95年07月13日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6974",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6974",
+      "title": "95.05.18 95年05月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6975",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6975",
+      "title": "94.09.01 94年09月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6976",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6976",
+      "title": "94.08.31 94年08月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6977",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6977",
+      "title": "94.08.05 94年08月05日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6978",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6978",
+      "title": "94.07.19 94年07月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6979",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6979",
+      "title": "94.07.18 94年07月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6980",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6980",
+      "title": "93.12.03 93年12月03日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6981",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6981",
+      "title": "93.10.25 93年10月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6982",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6982",
+      "title": "93.08.26 93年08月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6983",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6983",
+      "title": "93.08.25 93年08月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6984",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6984",
+      "title": "93.08.24 93年08月24日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6985",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6985",
+      "title": "93.08.12 93年08月12日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6986",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6986",
+      "title": "93.07.02 93年07月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6987",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6987",
+      "title": "93.07.01 93年07月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6988",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6988",
+      "title": "93.06.09 93年06月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6989",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6989",
+      "title": "92.11.03 92年11月03日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6990",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6990",
+      "title": "92.09.02 92年09月02日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6991",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6991",
+      "title": "92.09.01 92年09月01日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6992",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6992",
+      "title": "92.08.20 92年08月20日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6993",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6993",
+      "title": "92.08.04 92年08月04日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6994",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6994",
+      "title": "91.09.06 91年09月06日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6995",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6995",
+      "title": "91.07.10 91年07月10日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6996",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6996",
+      "title": "91.07.09 91年07月09日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6997",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6997",
+      "title": "90.09.27 90年09月27日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6998",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6998",
+      "title": "90.09.26 90年09月26日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "6999",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6999",
+      "title": "90.09.25 90年09月25日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7000",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7000",
+      "title": "90.09.19 90年09月19日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7001",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7001",
+      "title": "90.09.18 90年09月18日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7002",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7002",
+      "title": "90.09.17 90年09月17日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7003",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7003",
+      "title": "90.07.31 90年07月31日天然災害停止辦公及上課情形",
+      "status": "pending"
+    },
+    {
+      "pid": "7004",
+      "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7004",
+      "title": "90.07.30 90年07月30日天然災害停止辦公及上課情形",
+      "status": "pending"
+    }
+  ]
 }
