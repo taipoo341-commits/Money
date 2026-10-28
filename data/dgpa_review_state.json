@@ -5,12 +5,12 @@
   "status": "in-progress",
   "phase": "discover",
   "startedAt": "2026-10-28T18:10:34.513717+08:00",
-  "updatedAt": "2026-10-28T18:11:42.343054+08:00",
+  "updatedAt": "2026-10-28T18:11:46.941410+08:00",
   "completedAt": null,
   "announcements": {},
   "records": {},
   "scan": {
-    "nextPage": 46,
+    "nextPage": 51,
     "expectedCount": 503,
     "expectedPages": 51,
     "items": {
@@ -2263,6 +2263,256 @@
         "pid": "6951",
         "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6951",
         "title": "97.09.15 97年09月15日天然災害停止辦公及上課情形"
+      },
+      "6952": {
+        "pid": "6952",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6952",
+        "title": "97.09.14 97年09月14日天然災害停止辦公及上課情形"
+      },
+      "6953": {
+        "pid": "6953",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6953",
+        "title": "97.09.13 97年09月13日天然災害停止辦公及上課情形"
+      },
+      "6954": {
+        "pid": "6954",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6954",
+        "title": "97.09.12 97年09月12日天然災害停止辦公及上課情形"
+      },
+      "6955": {
+        "pid": "6955",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6955",
+        "title": "97.07.29 97年07月29日天然災害停止辦公及上課情形"
+      },
+      "6956": {
+        "pid": "6956",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6956",
+        "title": "97.07.28 97年07月28日天然災害停止辦公及上課情形"
+      },
+      "6957": {
+        "pid": "6957",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6957",
+        "title": "97.07.27 97年07月27日天然災害停止辦公及上課情形"
+      },
+      "6958": {
+        "pid": "6958",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6958",
+        "title": "97.07.19 97年07月19日天然災害停止辦公及上課情形"
+      },
+      "6959": {
+        "pid": "6959",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6959",
+        "title": "97.07.18 97年07月18日天然災害停止辦公及上課情形"
+      },
+      "6960": {
+        "pid": "6960",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6960",
+        "title": "97.07.17 97年07月17日天然災害停止辦公及上課情形"
+      },
+      "6961": {
+        "pid": "6961",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6961",
+        "title": "96.10.07 96年10月7日天然災害停止辦公及上課情形"
+      },
+      "6962": {
+        "pid": "6962",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6962",
+        "title": "96.10.06 96年10月6日天然災害停止辦公及上課情形"
+      },
+      "6963": {
+        "pid": "6963",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6963",
+        "title": "96.09.18 96年09月18日天然災害停止辦公及上課情形"
+      },
+      "6964": {
+        "pid": "6964",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6964",
+        "title": "96.08.19 96年08月19日天然災害停止辦公及上課情形"
+      },
+      "6965": {
+        "pid": "6965",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6965",
+        "title": "96.08.18 96年08月18日天然災害停止辦公及上課情形"
+      },
+      "6966": {
+        "pid": "6966",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6966",
+        "title": "96.08.17 96年08月17日天然災害停止辦公及上課情形"
+      },
+      "6967": {
+        "pid": "6967",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6967",
+        "title": "96.08.09 96年08月09日天然災害停止辦公及上課情形"
+      },
+      "6968": {
+        "pid": "6968",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6968",
+        "title": "96.08.08 96年08月08日天然災害停止辦公及上課情形"
+      },
+      "6969": {
+        "pid": "6969",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6969",
+        "title": "95.08.09 95年08月09日天然災害停止辦公及上課情形"
+      },
+      "6970": {
+        "pid": "6970",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6970",
+        "title": "95.07.25 95年07月25日天然災害停止辦公及上課情形"
+      },
+      "6971": {
+        "pid": "6971",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6971",
+        "title": "95.07.24 95年07月24日天然災害停止辦公及上課情形"
+      },
+      "6972": {
+        "pid": "6972",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6972",
+        "title": "95.07.14 95年07月14日天然災害停止辦公及上課情形"
+      },
+      "6973": {
+        "pid": "6973",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6973",
+        "title": "95.07.13 95年07月13日天然災害停止辦公及上課情形"
+      },
+      "6974": {
+        "pid": "6974",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6974",
+        "title": "95.05.18 95年05月18日天然災害停止辦公及上課情形"
+      },
+      "6975": {
+        "pid": "6975",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6975",
+        "title": "94.09.01 94年09月01日天然災害停止辦公及上課情形"
+      },
+      "6976": {
+        "pid": "6976",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6976",
+        "title": "94.08.31 94年08月31日天然災害停止辦公及上課情形"
+      },
+      "6977": {
+        "pid": "6977",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6977",
+        "title": "94.08.05 94年08月05日天然災害停止辦公及上課情形"
+      },
+      "6978": {
+        "pid": "6978",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6978",
+        "title": "94.07.19 94年07月19日天然災害停止辦公及上課情形"
+      },
+      "6979": {
+        "pid": "6979",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6979",
+        "title": "94.07.18 94年07月18日天然災害停止辦公及上課情形"
+      },
+      "6980": {
+        "pid": "6980",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6980",
+        "title": "93.12.03 93年12月03日天然災害停止辦公及上課情形"
+      },
+      "6981": {
+        "pid": "6981",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6981",
+        "title": "93.10.25 93年10月25日天然災害停止辦公及上課情形"
+      },
+      "6982": {
+        "pid": "6982",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6982",
+        "title": "93.08.26 93年08月26日天然災害停止辦公及上課情形"
+      },
+      "6983": {
+        "pid": "6983",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6983",
+        "title": "93.08.25 93年08月25日天然災害停止辦公及上課情形"
+      },
+      "6984": {
+        "pid": "6984",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6984",
+        "title": "93.08.24 93年08月24日天然災害停止辦公及上課情形"
+      },
+      "6985": {
+        "pid": "6985",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6985",
+        "title": "93.08.12 93年08月12日天然災害停止辦公及上課情形"
+      },
+      "6986": {
+        "pid": "6986",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6986",
+        "title": "93.07.02 93年07月02日天然災害停止辦公及上課情形"
+      },
+      "6987": {
+        "pid": "6987",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6987",
+        "title": "93.07.01 93年07月01日天然災害停止辦公及上課情形"
+      },
+      "6988": {
+        "pid": "6988",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6988",
+        "title": "93.06.09 93年06月09日天然災害停止辦公及上課情形"
+      },
+      "6989": {
+        "pid": "6989",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6989",
+        "title": "92.11.03 92年11月03日天然災害停止辦公及上課情形"
+      },
+      "6990": {
+        "pid": "6990",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6990",
+        "title": "92.09.02 92年09月02日天然災害停止辦公及上課情形"
+      },
+      "6991": {
+        "pid": "6991",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6991",
+        "title": "92.09.01 92年09月01日天然災害停止辦公及上課情形"
+      },
+      "6992": {
+        "pid": "6992",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6992",
+        "title": "92.08.20 92年08月20日天然災害停止辦公及上課情形"
+      },
+      "6993": {
+        "pid": "6993",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6993",
+        "title": "92.08.04 92年08月04日天然災害停止辦公及上課情形"
+      },
+      "6994": {
+        "pid": "6994",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6994",
+        "title": "91.09.06 91年09月06日天然災害停止辦公及上課情形"
+      },
+      "6995": {
+        "pid": "6995",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6995",
+        "title": "91.07.10 91年07月10日天然災害停止辦公及上課情形"
+      },
+      "6996": {
+        "pid": "6996",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6996",
+        "title": "91.07.09 91年07月09日天然災害停止辦公及上課情形"
+      },
+      "6997": {
+        "pid": "6997",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6997",
+        "title": "90.09.27 90年09月27日天然災害停止辦公及上課情形"
+      },
+      "6998": {
+        "pid": "6998",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6998",
+        "title": "90.09.26 90年09月26日天然災害停止辦公及上課情形"
+      },
+      "6999": {
+        "pid": "6999",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=6999",
+        "title": "90.09.25 90年09月25日天然災害停止辦公及上課情形"
+      },
+      "7000": {
+        "pid": "7000",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7000",
+        "title": "90.09.19 90年09月19日天然災害停止辦公及上課情形"
+      },
+      "7001": {
+        "pid": "7001",
+        "url": "https://www.dgpa.gov.tw/information?uid=374&pid=7001",
+        "title": "90.09.18 90年09月18日天然災害停止辦公及上課情形"
       }
     },
     "complete": false,
