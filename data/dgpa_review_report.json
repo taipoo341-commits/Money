@@ -5,7 +5,7 @@
   "phase": "discover",
   "parserVersion": "4-eca37b4bf5578172",
   "startedAt": "2026-10-28T18:10:34.513717+08:00",
-  "updatedAt": "2026-10-28T18:11:28.243262+08:00",
+  "updatedAt": "2026-10-28T18:11:32.990323+08:00",
   "completedAt": null,
   "counts": {
     "total": 0,
@@ -15,7 +15,7 @@
     "manualItems": 0
   },
   "scan": {
-    "nextPage": 31,
+    "nextPage": 36,
     "expectedCount": 503,
     "expectedPages": 51,
     "complete": false,
