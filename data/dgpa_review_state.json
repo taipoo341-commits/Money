@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "20261028T101034-67a802a8",
+  "parserVersion": "4-eca37b4bf5578172",
+  "status": "in-progress",
+  "phase": "discover",
+  "startedAt": "2026-10-28T18:10:34.513717+08:00",
+  "updatedAt": "2026-10-28T18:11:00.693878+08:00",
+  "completedAt": null,
+  "announcements": {},
+  "records": {},
+  "scan": {
+    "nextPage": 1,
+    "expectedCount": null,
+    "expectedPages": null,
+    "items": {},
+    "complete": false,
+    "lastError": ""
+  },
+  "pagesScanned": 0,
+  "verificationPasses": 0,
+  "incrementalErrors": []
+}
