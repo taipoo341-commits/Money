@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-31T02:42:53+08:00",
+  "updatedAt": "2026-11-01T04:09:50+08:00",
   "source": "https://www.dgpa.gov.tw",
   "pagesScanned": 51,
   "historyComplete": true,
@@ -8,7 +8,7 @@
     "minRocYear": 107,
     "minMonth": 4,
     "maxRocYear": 115,
-    "maxMonth": 10
+    "maxMonth": 11
   },
   "lastEvent": {
     "rocYear": 115,
@@ -19,11 +19,11 @@
     "ok": true,
     "sourceDate": {
       "rocYear": 115,
-      "month": 10,
-      "day": 31
+      "month": 11,
+      "day": 1
     },
-    "officialUpdatedAt": "2026/10/31 02:41:24",
-    "checkedAt": "2026-10-31T02:42:53+08:00",
+    "officialUpdatedAt": "2026/11/01 04:07:43",
+    "checkedAt": "2026-11-01T04:09:50+08:00",
     "message": ""
   },
   "reviewItems": [],
